@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Wall : MonoBehaviour {
 
-    public GameObject UpCollider;
-    public int Floorcheck;
+
+    public int FloorCheck = 0;
 
     
 	// Use this for initialization
@@ -16,16 +16,24 @@ public class Wall : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         
-        if (UpCollider.GetComponent<Up>().UpCheck == 1)
-        {
-            GetComponent<MeshCollider>().enabled = false;
-            Debug.Log(UpCollider.GetComponent<Up>().UpCheck);
-        }
-        else
-        {
-            GetComponent<MeshCollider>().enabled = true;
-            Debug.Log(UpCollider.GetComponent<Up>().UpCheck);
-        }
+      
         
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Floor")
+        {
+            FloorCheck = 1;
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if(!(other.gameObject.tag == "Player"))
+        {
+            FloorCheck = 0;
+        }
+       
     }
 }
