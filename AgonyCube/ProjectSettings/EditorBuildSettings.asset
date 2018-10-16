@@ -5,19 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Cube.unity
-    guid: 59ecb67a48ef8b24a8ee341eab85b36d
-  - enabled: 1
-    path: Assets/Scenes/Option.issei.unity
-    guid: b5f5075240d257346a2513891743da4b
-  - enabled: 1
-    path: Assets/Scenes/Option.takara.unity
-    guid: f26c21b30d92d184fb27a12336ecf793
-  - enabled: 1
-    path: Assets/Scenes/Tittle_Loli.unity
-    guid: b74d4a9418330694ba1da4cd463c155a
   - enabled: 1
     path: Assets/Scenes/Tittle_Mitani.unity
     guid: 5c2bc5c253e72c440aec44904cd12a8c
+  - enabled: 0
+    path: Assets/Scenes/Tittle_Loli.unity
+    guid: b74d4a9418330694ba1da4cd463c155a
+  - enabled: 0
+    path: Assets/Scenes/Option.takara.unity
+    guid: f26c21b30d92d184fb27a12336ecf793
+  - enabled: 0
+    path: Assets/Scenes/Option.issei.unity
+    guid: b5f5075240d257346a2513891743da4b
+  - enabled: 1
+    path: Assets/Scenes/Select_mitani.unity
+    guid: 6bf3a913a6dbadd4ab4fd6b07aacd77b
   m_configObjects: {}
