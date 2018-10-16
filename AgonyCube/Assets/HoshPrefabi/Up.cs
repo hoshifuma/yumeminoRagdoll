@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Up : MonoBehaviour {
     public int UpCheck = 0;
+
     public GameObject Wall;
 	// Use this for initialization
 	void Start () {

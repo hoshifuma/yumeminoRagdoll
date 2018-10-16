@@ -6,11 +6,10 @@ public class CubeController : MonoBehaviour {
 
     public GameObject[] Wall;
     public GameObject Floor;
-    public GameObject NowFloor;
-    public GameObject CenterCollider;
 
-    public int l;
     private int i;
+
+
 	// Use this for initialization
 	void Start () {
 		
@@ -19,25 +18,36 @@ public class CubeController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+
+        
+    }
+
+     public bool MoveCheck()
+    {
+
         if (transform.position.y > Floor.transform.position.y)
         {
-            NowFloor = Floor;
+            return true;
         }
         else
         {
-            for (i = 0; i <= 5; i++)
+            for (i = 0; i < 5; i++)
             {
                 if (transform.position.y > Wall[i].transform.position.y)
                 {
-                    NowFloor = Wall[i];
-                    
+                    if(Wall[i].GetComponent<Wall>().FloorCheck == 1)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
-               
             }
-
-
         }
 
+        return false;
         
     }
 }

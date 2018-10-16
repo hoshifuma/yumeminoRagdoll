@@ -74,5 +74,54 @@ public class Swap : MonoBehaviour {
                 }
             }
         }
+
+        if(Input.GetKey(KeyCode.S))
+        {
+            PlayerMove();
+        }
+       
+
 	}
+
+
+    private void PlayerMove()
+    {
+        
+
+        if (!(Choice1 == null))
+        {
+            if (Choice1.GetComponent<CubeController>().MoveCheck())
+            {
+
+                Vector3 pos1 = Choice1.transform.position;
+                Vector3 pos2 = Player.transform.position;
+
+             
+
+                float ybalance = pos2.y - pos1.y;
+                if (-1 <= ybalance && ybalance <= 1)
+                {
+                    float dis = Vector3.Distance(pos1, pos2);
+
+                  
+
+                    if (dis <= 3)
+                    {
+                        Vector3 Newposi;
+                        Newposi.x = pos1.x;
+                        Newposi.z = pos1.z;
+                        Newposi.y = pos2.y;
+
+                        Player.transform.position = Newposi;
+
+
+                        Choice1.GetComponent<LineRenderer>().enabled = false;
+
+                        Choice1 = null;
+                    }
+
+                }
+            }
+        }
+    }
 }

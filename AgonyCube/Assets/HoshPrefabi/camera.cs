@@ -5,7 +5,8 @@ using UnityEngine;
 public class camera : MonoBehaviour {
     
 
-    public Vector2 RotationSpeed;
+    public float RotationSpeed;
+    public float RotationRadian;
     private Vector2 LastMousePosition;
     private Vector2 InputMousePosition;
     private Vector2 NewAngle = new Vector2(10, 200);
@@ -50,9 +51,9 @@ public class camera : MonoBehaviour {
             {
                rotation = LastMousePosition.y - Input.mousePosition.y;
 
-               if (rotation > 5 || rotation < -5 )
+               if (rotation > 4 || rotation < -4 )
                 {
-                    NewAngle.x += (rotation) * RotationSpeed.x;
+                    NewAngle.x += (rotation) * RotationSpeed;
                 }
 
                 LastMousePosition = Input.mousePosition;
@@ -61,13 +62,13 @@ public class camera : MonoBehaviour {
 
                 if(InputMousePosition.x - LastMousePosition.x >= 150)
                 {
-                    NewAngle.y -= 60;
+                    NewAngle.y -= RotationRadian;
 
                     InputMousePosition.x = Input.mousePosition.x;
                 }
                 else if(InputMousePosition.x - LastMousePosition.x <= -150)
                 {
-                    NewAngle.y += 60;
+                    NewAngle.y += RotationRadian;
 
                     InputMousePosition.x = Input.mousePosition.x;
                 }

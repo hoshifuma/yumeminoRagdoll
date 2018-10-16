@@ -16,11 +16,5 @@ public class CenterCollider : MonoBehaviour {
 	void Update () {
 		
 	}
-    public void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.tag == "Floor")
-        {
-            Cube.GetComponent<CubeController>().l = 1;
-        }
-    }
+   
 }
