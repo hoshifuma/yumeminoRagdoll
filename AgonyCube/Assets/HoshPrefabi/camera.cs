@@ -25,7 +25,7 @@ public class camera : MonoBehaviour {
 	void Update () {
 		if(Input.GetMouseButtonDown(0))
         {
-          //  NewAngle = transform.localEulerAngles;
+          
             LastMousePosition = Input.mousePosition;
             InputMousePosition = Input.mousePosition;
 
