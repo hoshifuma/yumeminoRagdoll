@@ -644,12 +644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8df972d9ec8d9649bbf831f4cee1d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Wall:
-  - {fileID: 1629153966946692}
-  - {fileID: 1369943846108618}
-  - {fileID: 1942913032031136}
-  - {fileID: 1616227245581170}
-  - {fileID: 1661612730227104}
+  Ceiling: {fileID: 0}
   Floor: {fileID: 1735299235803450}
 --- !u!114 &114953290726010716
 MonoBehaviour:

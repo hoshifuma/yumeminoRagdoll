@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Wall : MonoBehaviour {
 
-
-    public int FloorCheck = 0;
+    //下が床か確認するための変数CubeControllerで引用
+    public bool FloorCheck = false;
 
     
 	// Use this for initialization
@@ -22,17 +22,19 @@ public class Wall : MonoBehaviour {
 
     public void OnTriggerEnter(Collider other)
     {
+        //床に当たった際にtrueに変更
         if(other.gameObject.tag == "Floor")
         {
-            FloorCheck = 1;
+            FloorCheck = true;
         }
     }
 
     public void OnTriggerExit(Collider other)
     {
+        //player以外から離れた際にfalseに変更
         if(!(other.gameObject.tag == "Player"))
         {
-            FloorCheck = 0;
+            FloorCheck = false;
         }
        
     }
