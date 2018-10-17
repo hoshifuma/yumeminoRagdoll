@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CubeController : MonoBehaviour {
 
-    public GameObject[] Wall;
+    public GameObject Ceiling;
     public GameObject Floor;
 
-    private int i;
+    
 
 
 	// Use this for initialization
@@ -21,33 +21,26 @@ public class CubeController : MonoBehaviour {
 
         
     }
-
+    //アタッチされているroomにキャラの移動ができるかを返す関数
      public bool MoveCheck()
     {
-
+        //下が床の場合trueを返す
         if (transform.position.y > Floor.transform.position.y)
         {
             return true;
         }
         else
         {
-            for (i = 0; i < 5; i++)
+            //下が天井の場合、天井が別のキューブの床に触れているかを確認、触れていた場合trueを返す
+            if (Ceiling.GetComponent<Wall>().FloorCheck == true)
             {
-                if (transform.position.y > Wall[i].transform.position.y)
-                {
-                    if(Wall[i].GetComponent<Wall>().FloorCheck == 1)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
-
-        return false;
         
     }
 }
