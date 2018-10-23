@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class CenterCollider : MonoBehaviour {
-
-    public GameObject Cube;
+public class PlayerCOntroller : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -16,5 +13,4 @@ public class CenterCollider : MonoBehaviour {
 	void Update () {
 		
 	}
-   
 }

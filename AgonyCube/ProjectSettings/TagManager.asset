@@ -9,6 +9,9 @@ TagManager:
   - Floor
   - DownCollider
   - Ceiling
+  - Step
+  - Block
+  - Clear
   layers:
   - Default
   - TransparentFX
@@ -19,7 +22,7 @@ TagManager:
   - 
   - 
   - Cube
-  - 
+  - ' PlayerLayer'
   - 
   - 
   - 
