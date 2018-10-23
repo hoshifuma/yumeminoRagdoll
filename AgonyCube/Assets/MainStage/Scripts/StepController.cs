@@ -6,6 +6,7 @@ public class StepController : MonoBehaviour {
 
     public GameObject Wall;
     public GameObject Floor;
+    public GameObject[] HitCheckCollider;
 
     public LayerMask PlayerLayer;
 	// Use this for initialization
@@ -51,4 +52,7 @@ public class StepController : MonoBehaviour {
             return false;
         }
     }
+
+    
+
 }

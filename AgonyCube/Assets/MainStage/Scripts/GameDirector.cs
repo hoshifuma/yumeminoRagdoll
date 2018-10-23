@@ -8,8 +8,9 @@ public class GameDirector : MonoBehaviour {
     public GameObject Choice1;
     public GameObject Choice2;
     public GameObject Player;
+    private GameObject Step;
+
     
-   
 	// Use this for initialization
 	void Start () {
 		
@@ -96,7 +97,7 @@ public class GameDirector : MonoBehaviour {
     //playerの移動用の関数
     private void PlayerMove()
     {
-        
+
 
         if (!(Choice1 == null))
         {
@@ -114,16 +115,17 @@ public class GameDirector : MonoBehaviour {
             {
                 movecheck = Choice1.GetComponent<StepController>().StepMoveCheck();
             }
-
-            if (movecheck == true)
-            {
+            if(Step == null)
+            { 
+                if (movecheck == true)
+                {
 
                     Vector3 pos1 = Choice1.transform.position;
                     Vector3 pos2 = Player.transform.position;
 
 
 
-                    float ybalance =Mathf.Abs(pos2.y - pos1.y);
+                    float ybalance = Mathf.Abs(pos2.y - pos1.y);
                     if (ybalance <= 1)
                     {
                         float dis = Vector3.Distance(pos1, pos2);
@@ -141,11 +143,19 @@ public class GameDirector : MonoBehaviour {
 
 
                             Choice1.GetComponent<LineRenderer>().enabled = false;
-
+                            if (Choice1.gameObject.tag == "Step")
+                            {
+                                Step = Choice1;
+                            }
                             Choice1 = null;
                         }
 
                     }
+                }
+            }
+            else 
+            {
+                
             }
             
            
