@@ -36,6 +36,8 @@ public class GameDirector : MonoBehaviour {
         Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hit;
+
+     
         //rayがキューブに当たった際に起動
         if (Physics.Raycast(mouseray, out hit, 10.0f, Cube))
         {
@@ -98,38 +100,56 @@ public class GameDirector : MonoBehaviour {
 
         if (!(Choice1 == null))
         {
-            if (Choice1.GetComponent<CubeController>().MoveCheck() == true)
+            bool movecheck = false;
+
+            if (Choice1.gameObject.tag == "Block")
+            {
+                movecheck = Choice1.GetComponent<CubeController>().MoveCheck();
+            }
+            else if (Choice1.gameObject.tag == "Clear")
+            {
+                movecheck = Choice1.GetComponent<ClearController>().ClearMoveCheck();
+            }
+            else if (Choice1.gameObject.tag == "Step")
+            {
+                movecheck = Choice1.GetComponent<StepController>().StepMoveCheck();
+            }
+
+            if (movecheck == true)
             {
 
-                Vector3 pos1 = Choice1.transform.position;
-                Vector3 pos2 = Player.transform.position;
+                    Vector3 pos1 = Choice1.transform.position;
+                    Vector3 pos2 = Player.transform.position;
 
-             
 
-                float ybalance = pos2.y - pos1.y;
-                if (-1 <= ybalance && ybalance <= 1)
-                {
-                    float dis = Vector3.Distance(pos1, pos2);
 
-                  
-
-                    if (dis <= 3)
+                    float ybalance =Mathf.Abs(pos2.y - pos1.y);
+                    if (ybalance <= 1)
                     {
-                        Vector3 Newposi;
-                        Newposi.x = pos1.x;
-                        Newposi.z = pos1.z;
-                        Newposi.y = pos2.y;
-
-                        Player.transform.position = Newposi;
+                        float dis = Vector3.Distance(pos1, pos2);
 
 
-                        Choice1.GetComponent<LineRenderer>().enabled = false;
 
-                        Choice1 = null;
+                        if (dis <= 2.5)
+                        {
+                            Vector3 Newposi;
+                            Newposi.x = pos1.x;
+                            Newposi.z = pos1.z;
+                            Newposi.y = pos2.y;
+
+                            Player.transform.position = Newposi;
+
+
+                            Choice1.GetComponent<LineRenderer>().enabled = false;
+
+                            Choice1 = null;
+                        }
+
                     }
-
-                }
             }
+            
+           
+            
         }
     }
 }

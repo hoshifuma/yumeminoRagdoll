@@ -22,8 +22,9 @@ public class Wall : MonoBehaviour {
 
     public void OnTriggerEnter(Collider other)
     {
+       
         //床に当たった際にtrueに変更
-        if(other.gameObject.tag == "Floor")
+        if (other.gameObject.tag == "Floor")
         {
             FloorCheck = true;
         }
