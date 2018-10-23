@@ -9,10 +9,10 @@ public class GameDirector : MonoBehaviour {
     public GameObject Choice2;
     public GameObject Player;
     private GameObject Step;
+    private GameObject HitBlock;
 
-    
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -115,6 +115,7 @@ public class GameDirector : MonoBehaviour {
             {
                 movecheck = Choice1.GetComponent<StepController>().StepMoveCheck();
             }
+
             if(Step == null)
             { 
                 if (movecheck == true)
@@ -155,7 +156,38 @@ public class GameDirector : MonoBehaviour {
             }
             else 
             {
+                GameObject[] Block;
                 
+
+                Block = Step.GetComponent<StepController>().HitCheckCollider;
+                for (int i = 0; i < 2; i++)
+                {
+                    if (Block[i].GetComponent<HitCheckCollider>().HitBlock == Choice1)
+                    {
+                        HitBlock = Block[0].GetComponent<HitCheckCollider>().HitBlock;
+                    }
+                }
+
+                if(!(HitBlock == null))
+                {
+                    if (movecheck == true)
+                    {
+                        Vector3 Newposi = HitBlock.gameObject.transform.position;
+                        Player.transform.position = Newposi;
+                        
+                        if (Choice1.gameObject.tag == "Step")
+                        {
+                            Step = Choice1;
+                        }
+                        else
+                        {
+                            Step = null;
+                        }
+
+                        Choice1.GetComponent<LineRenderer>().enabled = false;
+                        Choice1 = null;
+                    }
+                }
             }
             
            
