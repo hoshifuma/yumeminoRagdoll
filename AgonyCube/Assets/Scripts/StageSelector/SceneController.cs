@@ -10,5 +10,11 @@ namespace AgonyCube.StageSelector
         public void OnClickReturnButton() {
             SceneManager.LoadScene("Title");
         }
+
+        // 『DEF』ボタンを押したら実行されます。
+        public void OnClickDEFButton()
+        {
+            SceneManager.LoadScene("MainScene");
+        }
     }
 }
