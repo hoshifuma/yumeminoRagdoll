@@ -1,0 +1,183 @@
+fileFormatVersion: 2
+guid: 2e274a47d00a77f418fc1b3bf1cc1a5d
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: ball
+    100002: body
+    100004: head
+    100006: l_hand
+    100008: l_leg
+    100010: Mesh
+    100012: //RootNode
+    100014: r_hand
+    100016: r_leg
+    100018: root
+    100020: s_ball
+    100022: scissor_l
+    100024: scissor_r
+    100026: skeleton_body
+    100028: skeleton_head
+    100030: skeleton_head_end
+    100032: skeleton_hip
+    100034: skeleton_l_arm
+    100036: skeleton_l_arm_end
+    100038: skeleton_l_leg
+    100040: skeleton_l_leg_end
+    100042: skeleton_r_arm
+    100044: skeleton_r_arm_end
+    100046: skeleton_r_leg
+    100048: skeleton_r_leg_end
+    100050: skeleton_scissor_l
+    100052: skeleton_scissor_l_end
+    100054: skeleton_scissor_r
+    100056: skeleton_scissor_r_end
+    100058: Texture Group
+    400000: ball
+    400002: body
+    400004: head
+    400006: l_hand
+    400008: l_leg
+    400010: Mesh
+    400012: //RootNode
+    400014: r_hand
+    400016: r_leg
+    400018: root
+    400020: s_ball
+    400022: scissor_l
+    400024: scissor_r
+    400026: skeleton_body
+    400028: skeleton_head
+    400030: skeleton_head_end
+    400032: skeleton_hip
+    400034: skeleton_l_arm
+    400036: skeleton_l_arm_end
+    400038: skeleton_l_leg
+    400040: skeleton_l_leg_end
+    400042: skeleton_r_arm
+    400044: skeleton_r_arm_end
+    400046: skeleton_r_leg
+    400048: skeleton_r_leg_end
+    400050: skeleton_scissor_l
+    400052: skeleton_scissor_l_end
+    400054: skeleton_scissor_r
+    400056: skeleton_scissor_r_end
+    400058: Texture Group
+    2100000: scissors1-1
+    2100002: Default
+    2100004: scissors1-2
+    2300000: ball
+    2300002: body
+    2300004: head
+    2300006: l_hand
+    2300008: l_leg
+    2300010: Mesh
+    2300012: r_hand
+    2300014: r_leg
+    2300016: scissor_l
+    2300018: scissor_r
+    3300000: ball
+    3300002: body
+    3300004: head
+    3300006: l_hand
+    3300008: l_leg
+    3300010: Mesh
+    3300012: r_hand
+    3300014: r_leg
+    3300016: scissor_l
+    3300018: scissor_r
+    4300000: scissor_r
+    4300002: scissor_l
+    4300004: ball
+    4300006: body
+    4300008: head
+    4300010: r_hand
+    4300012: l_hand
+    4300014: l_leg
+    4300016: r_leg
+    4300018: Mesh
+    7400000: Take 001
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
