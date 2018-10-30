@@ -51,7 +51,7 @@ namespace AgonyCubeMainStage {
                         HitCheck = 1;
                     }
 
-                    Debug.Log("hitcheck" + HitCheck);
+
 
                 }
                 if (HitCheck == 1) {

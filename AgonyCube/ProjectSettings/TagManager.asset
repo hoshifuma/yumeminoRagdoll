@@ -12,6 +12,7 @@ TagManager:
   - Step
   - Block
   - Clear
+  - Collider
   layers:
   - Default
   - TransparentFX
