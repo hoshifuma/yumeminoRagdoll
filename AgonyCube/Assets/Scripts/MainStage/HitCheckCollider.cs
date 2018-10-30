@@ -18,7 +18,7 @@ namespace AgonyCubeMainStage {
 
         }
 
-        private void OnTriggerEnter(Collider other) {
+        public void OnTriggerEnter(Collider other) {
             if (other.gameObject.tag == "Player") {
                 PlayerHit = true;
             }
