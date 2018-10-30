@@ -56,7 +56,7 @@ namespace AgonyCubeMainStage {
                 }
                 if (HitCheck == 1) {
                     if (Input.GetMouseButton(0)) {
-                        if (CheckMode == false) {
+                        
                             //パズルモードの場合
                             if (LastRotation.y == NewAngle.y) {
                                 XRotation = LastMousePosition.y - Input.mousePosition.y;
@@ -73,7 +73,7 @@ namespace AgonyCubeMainStage {
                                     }
                                 }
                             }
-                        }
+                        
                         if (CheckSpin == true) {
                             if (LastRotation.x == NewAngle.x) {
                                 YRotarion = LastMousePosition.x - Input.mousePosition.x;
