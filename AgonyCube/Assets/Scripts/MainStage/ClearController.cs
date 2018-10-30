@@ -17,7 +17,7 @@ namespace AgonyCubeMainStage {
         }
 
         public bool ClearMoveCheck() {
-            Debug.Log("Clear");
+
             for (int i = 0; i < 2; i++) {
                 if (Wall[i].transform.position.y <= transform.position.y) {
                     if (Wall[i].GetComponent<Wall>().FloorCheck == true) {

@@ -8,8 +8,6 @@ namespace AgonyCubeMainStage {
         public GameObject Wall;
         public GameObject Floor;
         public GameObject[] HitCheckCollider;
-
-        public LayerMask PlayerLayer;
         // Use this for initialization
         void Start() {
 
@@ -25,12 +23,16 @@ namespace AgonyCubeMainStage {
         public bool StepMoveCheck() {
 
             if (Floor.transform.position.y <= (transform.position.y + 0.5)) {
+                //床が下にある場合
                 if (Wall.GetComponent<Wall>().FloorCheck == false) {
-                    Ray stepray = new Ray(transform.position, -transform.forward);
-                    RaycastHit hit;
+                    //Ray stepray = new Ray(transform.position, -transform.forward);
+                    //RaycastHit hit;
 
 
-                    if (Physics.Raycast(stepray, out hit, 3, PlayerLayer)) {
+                    //if (Physics.Raycast(stepray, out hit, 3, PlayerLayer)) {
+                    if(HitCheckCollider[0].GetComponent<HitCheckCollider>().PlayerHit == true || 
+                        HitCheckCollider[1].GetComponent<HitCheckCollider>().PlayerHit == true) { 
+                       
                         return true;
                     }
                     else {
@@ -47,7 +49,14 @@ namespace AgonyCubeMainStage {
             }
         }
 
-
+        public GameObject StayStepMove(int frontandbehind) {
+            if(!(HitCheckCollider[frontandbehind].GetComponent<HitCheckCollider>().HitBlock == null)) {
+                return HitCheckCollider[frontandbehind].GetComponent<HitCheckCollider>().HitBlock;
+            }
+            else {
+                return null;
+            }
+        }
 
     }
 }
