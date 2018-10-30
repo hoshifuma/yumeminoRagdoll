@@ -10,13 +10,14 @@ namespace AgonyCubeMainStage {
         public GameObject Choice1;
         public GameObject Choice2;
         public GameObject Player;
-        public GameObject[] PlayerMovecolliders;
+        public GameObject MainCamera;
+        public GameObject PlayerMovecolliders;
         private GameObject Step;
-       
+
         public bool CheckMode = false;
         // Use this for initialization
         void Start() {
-
+            
         }
 
         // Update is called once per frame
@@ -54,46 +55,22 @@ namespace AgonyCubeMainStage {
                     var vertical = CrossPlatformInputManager.GetAxis("Vertical");
 
                     if (Mathf.Abs(horizontal) > Mathf.Abs(vertical)) {
-
+                        
+                    
                         if (horizontal > 0.5f) {
-                            if (!(PlayerMovecolliders[2].GetComponent<PlayerCollider>().MoveBlock == null)) {
-                                PlayerMove(PlayerMovecolliders[2].GetComponent<PlayerCollider>().MoveBlock);
-                            }                                                        
+                            CameraRootPlayerMoveChanger(2);
                         }
                         else if (horizontal < -0.5f) {
-                            if (!(PlayerMovecolliders[3].GetComponent<PlayerCollider>().MoveBlock == null)) {
-                                PlayerMove(PlayerMovecolliders[3].GetComponent<PlayerCollider>().MoveBlock);
-                            }
+                            CameraRootPlayerMoveChanger(3);
                         }
                     }
                     else {
 
                         if (vertical > 0.5f) {
-                            if (Step == null) {
-                                if (!(PlayerMovecolliders[0].GetComponent<PlayerCollider>().MoveBlock == null)) {
-                                    PlayerMove(PlayerMovecolliders[0].GetComponent<PlayerCollider>().MoveBlock);
-                                }
-                            }
-                            else {
-                                if (!(Step.GetComponent<StepController>().StayStepMove(0) == null)) {
-                                    Player.GetComponent<PlayerController>().SetPlayerTarget(Step.GetComponent<StepController>().StayStepMove(0));
-                                    Step = null;
-                                }
-                               
-                            }
+                            CameraRootPlayerMoveChanger(0);
                         }
                         else if (vertical < -0.5f) {
-                            if (Step == null) {
-                                if (!(PlayerMovecolliders[1].GetComponent<PlayerCollider>().MoveBlock == null)) {
-                                    PlayerMove(PlayerMovecolliders[1].GetComponent<PlayerCollider>().MoveBlock);
-                                }
-                            }
-                            else {
-                                if (!(Step.GetComponent<StepController>().StayStepMove(1) == null)) {
-                                    Player.GetComponent<PlayerController>().SetPlayerTarget(Step.GetComponent<StepController>().StayStepMove(1));
-                                    Step = null;
-                                }
-                            }
+                            CameraRootPlayerMoveChanger(1);
                         }
                     }
                 }
@@ -230,6 +207,134 @@ namespace AgonyCubeMainStage {
                 Choice1 = null;
             }
             
+        }
+
+        public void CameraRootPlayerMoveChanger(int input) {
+            if (MainCamera.transform.localEulerAngles.y == 90) {
+                Debug.Log(MainCamera.transform.localEulerAngles.y);
+                if (input == 0) {
+                    Vector3 pos = Player.transform.position;
+                    pos.y += 1;
+                    pos.x += 2;
+                    PlayerMovecolliders.transform.position = pos;
+                }
+                else if (input == 1) {
+                    Vector3 pos = Player.transform.position;
+                    pos.y += 1;
+                    pos.x -= 2;
+                    PlayerMovecolliders.transform.position = pos;
+                }
+                else if (input == 2) {
+                    Vector3 pos = Player.transform.position;
+                    pos.y += 1;
+                    pos.z -= 2;
+                    PlayerMovecolliders.transform.position = pos;
+                }
+                else if (input == 3) {
+                    Vector3 pos = Player.transform.position;
+                    pos.y += 1;
+                    pos.z += 2;
+                    PlayerMovecolliders.transform.position = pos;
+                }
+            }
+            else if(MainCamera.transform.localEulerAngles.y == 270) {
+                Debug.Log("270");
+                if (input == 0) {
+                    Vector3 pos = Player.transform.position;
+                    pos.y += 1;
+                    pos.x -= 2;
+                    PlayerMovecolliders.transform.position = pos;
+                }
+                else if (input == 1) {
+                    Vector3 pos = Player.transform.position;
+                    pos.y += 1;
+                    pos.x += 2;
+                    PlayerMovecolliders.transform.position = pos;
+                }
+                else if (input == 2) {
+                    Vector3 pos = Player.transform.position;
+                    pos.y += 1;
+                    pos.z += 2;
+                    PlayerMovecolliders.transform.position = pos;
+                }
+                else if (input == 3) {
+                    Vector3 pos = Player.transform.position;
+                    pos.y += 1;
+                    pos.z -= 2;
+                    PlayerMovecolliders.transform.position = pos;
+                }
+            }
+            else if (MainCamera.transform.localEulerAngles.y == 180) {
+                Debug.Log("180");
+                if (input == 0) {
+                    Vector3 pos = Player.transform.position;
+                    pos.y += 1;
+                    pos.z -= 2;
+                    PlayerMovecolliders.transform.position = pos;
+                }
+                else if (input == 1) {
+                    Vector3 pos = Player.transform.position;
+                    pos.y += 1;
+                    pos.z += 2;
+                    PlayerMovecolliders.transform.position = pos;
+                }
+                else if (input == 2) {
+                    Vector3 pos = Player.transform.position;
+                    pos.y += 1;
+                    pos.x -= 2;
+                    PlayerMovecolliders.transform.position = pos;
+                }
+                else if (input == 3) {
+                    Vector3 pos = Player.transform.position;
+                    pos.y += 1;
+                    pos.x += 2;
+                    PlayerMovecolliders.transform.position = pos;
+                }
+            }
+            else {
+                Debug.Log(MainCamera.transform.localEulerAngles.y);
+                if (input == 0) {
+                    Vector3 pos = Player.transform.position;
+                    pos.y += 1;
+                    pos.z += 2;
+                    PlayerMovecolliders.transform.position = pos;
+                }
+                else if (input == 1) {
+                    Vector3 pos = Player.transform.position;
+                    pos.y += 1;
+                    pos.z -= 2;
+                    PlayerMovecolliders.transform.position = pos;
+                }
+                else if (input == 2) {
+                    Vector3 pos = Player.transform.position;
+                    pos.y += 1;
+                    pos.x += 2;
+                    PlayerMovecolliders.transform.position = pos;
+                }
+                else if (input == 3) {
+                    Vector3 pos = Player.transform.position;
+                    pos.y += 1;
+                    pos.x -= 2;
+                    PlayerMovecolliders.transform.position = pos;
+                }
+            }
+
+
+            
+        }
+
+        public void SetMove(GameObject moveblock) {
+            if (Step == null) {
+                if (!(moveblock == null)) {
+                    PlayerMove(moveblock);
+                }
+            }
+            else {
+                if (!(Step.GetComponent<StepController>().StayStepMove(1) == null)) {
+                    Player.GetComponent<PlayerController>().SetPlayerTarget(Step.GetComponent<StepController>().StayStepMove(1));
+                    Step = null;
+                }
+            }
         }
     }
 }

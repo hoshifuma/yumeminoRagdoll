@@ -6,7 +6,6 @@ namespace AgonyCubeMainStage {
     public class PlayerController : MonoBehaviour {
 
         CharacterController Controller;
-
         public float Speed;
         public float Gravity;
         Vector3 MoveDirection;
@@ -36,6 +35,9 @@ namespace AgonyCubeMainStage {
                 distance += Mathf.Abs(target.z - transform.position.z);
 
                 if (distance <= 0.01 ) {
+                    Vector3 pos = target;
+                    pos.y = transform.position.y;
+                    transform.position = pos;
                     checkPleyrMove = false;
                 }
             }
