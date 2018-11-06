@@ -16,5 +16,11 @@ namespace AgonyCube.StageSelector
         {
             SceneManager.LoadScene("MainScene");
         }
+
+        // 『ステージ２』ボタンを押したら実行されます。
+        public void OnClickEventButton()
+        {
+            SceneManager.LoadScene("StageEvent");
+        }
     }
 }
