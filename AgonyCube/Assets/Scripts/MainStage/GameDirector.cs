@@ -17,7 +17,7 @@ namespace AgonyCubeMainStage {
         public bool CheckMode = false;
         // Use this for initialization
         void Start() {
-            
+
         }
 
         // Update is called once per frame
@@ -55,8 +55,8 @@ namespace AgonyCubeMainStage {
                     var vertical = CrossPlatformInputManager.GetAxis("Vertical");
 
                     if (Mathf.Abs(horizontal) > Mathf.Abs(vertical)) {
-                        
-                    
+
+
                         if (horizontal > 0.5f) {
                             CameraRootPlayerMoveChanger(2);
                         }
@@ -88,18 +88,18 @@ namespace AgonyCubeMainStage {
             if (Physics.Raycast(mouseray, out hit, 10.0f, Cube)) {
                 //rayが当たったキューブがplayerのいるキューブじゃないことを確認
                 if (Vector3.Distance(Player.transform.position, hit.transform.position) >= 1.5) {
-                   
-                  
-                        Choice2 = hit.transform.gameObject;
-                        //選択されたものが同じものだった場合選択状態を解除し変数を初期状態に変更
+
+
+                    Choice2 = hit.transform.gameObject;
+                    //選択されたものが同じものだった場合選択状態を解除し変数を初期状態に変更
                     if (Choice1 == Choice2) {
-                         Choice1.GetComponent<LineRenderer>().enabled = false;
-                         Choice1 = null;
-                         Choice2 = null;
+                        Choice1.GetComponent<LineRenderer>().enabled = false;
+                        Choice1 = null;
+                        Choice2 = null;
                     }
                     else {
-                            Vector3 pos1 = Choice1.transform.position;
-                            Vector3 pos2 = Choice2.transform.position;
+                        Vector3 pos1 = Choice1.transform.position;
+                        Vector3 pos2 = Choice2.transform.position;
                         if (pos1.y == pos2.y) {
                             float dis = Vector3.Distance(pos1, pos2);
 
@@ -123,7 +123,7 @@ namespace AgonyCubeMainStage {
                             Choice2 = null;
                         }
                     }
-                    
+
 
 
                 }
@@ -131,10 +131,10 @@ namespace AgonyCubeMainStage {
         }
         //playerの移動用の関数
         private void PlayerMove(GameObject target) {
-            Debug.Log("a" + target);
-                bool movecheck = false;      
+
+            bool movecheck = false;
             if (target.gameObject.tag == "Block") {
-                    movecheck = target.GetComponent<CubeController>().MoveCheck();
+                movecheck = target.GetComponent<CubeController>().MoveCheck();
             }
             else if (target.gameObject.tag == "Clear") {
                 movecheck = target.GetComponent<ClearController>().ClearMoveCheck();
@@ -144,35 +144,35 @@ namespace AgonyCubeMainStage {
             }
 
             //if (Step == null) {
-                if (movecheck == true) {
-                        //Vector3 pos1 = target.transform.position;
-                        //Vector3 pos2 = Player.transform.position;
+            if (movecheck == true) {
+                //Vector3 pos1 = target.transform.position;
+                //Vector3 pos2 = Player.transform.position;
 
 
-                        
-                        //float ybalance = Mathf.Abs(pos2.y - pos1.y);
-                         //if (ybalance <= 1) {
-                        // float dis = Vector3.Distance(pos1, pos2);
-                        //float dis = Mathf.Abs(pos1.x - pos2.x);
-                        //dis += Mathf.Abs(pos1.z - pos2.z);
+
+                //float ybalance = Mathf.Abs(pos2.y - pos1.y);
+                //if (ybalance <= 1) {
+                // float dis = Vector3.Distance(pos1, pos2);
+                //float dis = Mathf.Abs(pos1.x - pos2.x);
+                //dis += Mathf.Abs(pos1.z - pos2.z);
 
 
-                           // if (dis <= 2.5) {
-                                /*
-                                Vector3 Newposi;
-                                Newposi.x = pos1.x;
-                                Newposi.z = pos1.z;
-                                Newposi.y = pos2.y;
+                // if (dis <= 2.5) {
+                /*
+                Vector3 Newposi;
+                Newposi.x = pos1.x;
+                Newposi.z = pos1.z;
+                Newposi.y = pos2.y;
 
-                                Player.transform.position = Newposi;
-                                */
-                                Player.GetComponent<PlayerController>().SetPlayerTarget(target.gameObject);
-                    if (target.gameObject.tag == "Step") {
-                        Step = target;
-                    }
-                    //  }
-                    //}
+                Player.transform.position = Newposi;
+                */
+                Player.GetComponent<PlayerController>().SetPlayerTarget(target.gameObject);
+                if (target.gameObject.tag == "Step") {
+                    Step = target;
                 }
+                //  }
+                //}
+            }
             /*}      
             else {
                 GameObject[] Block;
@@ -197,16 +197,16 @@ namespace AgonyCubeMainStage {
                 }
             }*/
             //target.GetComponent<LineRenderer>().enabled = false;
-           // target = null;
+            // target = null;
         }
 
         public void ChangeMode() {
             CheckMode = !CheckMode;
-            if(!(Choice1 == null)) {
+            if (!(Choice1 == null)) {
                 Choice1.GetComponent<LineRenderer>().enabled = false;
                 Choice1 = null;
             }
-            
+
         }
 
         public void CameraRootPlayerMoveChanger(int input) {
@@ -237,7 +237,7 @@ namespace AgonyCubeMainStage {
                     PlayerMovecolliders.transform.position = pos;
                 }
             }
-            else if(MainCamera.transform.localEulerAngles.y == 270) {
+            else if (MainCamera.transform.localEulerAngles.y == 270) {
                 Debug.Log("270");
                 if (input == 0) {
                     Vector3 pos = Player.transform.position;
@@ -320,7 +320,7 @@ namespace AgonyCubeMainStage {
             }
 
 
-            
+
         }
 
         public void SetMove(GameObject moveblock) {
