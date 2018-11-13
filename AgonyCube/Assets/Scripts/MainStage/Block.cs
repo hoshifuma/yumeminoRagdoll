@@ -7,8 +7,8 @@ public class Block : MonoBehaviour {
     public int BlockId = -1;
     //隣接ブロックの情報
     public Block[] adjacentBlock = new Block[4];
-
-
+    //ブロック番号
+    public int blockNumber;
 	// Use this for initialization
 	void Start () {
 		
