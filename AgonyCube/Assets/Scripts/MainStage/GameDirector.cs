@@ -13,70 +13,147 @@ namespace AgonyCubeMainStage {
         public GameObject MainCamera;
         public GameObject PlayerMovecolliders;
         private GameObject Step;
-
+        public StageController stage;
         public bool CheckMode = false;
+        float time;
+        public enum GameMode {
+            //初期演出用モード
+            None,
+            //モード選択モード
+            Idle,
+            //Blockの交換モード
+            Swap,
+            //BLockの回転モード
+            Spin,
+            //Playerの移動モード
+            PlayerMove,
+        }
+
+        public GameMode gameMode = GameMode.None;
         // Use this for initialization
         void Start() {
-
+            gameMode = GameMode.Idle;
         }
 
         // Update is called once per frame
         void Update() {
-            if (CheckMode == false) {
-                if (Input.GetMouseButtonDown(0)) {
-                    if (Choice1 == null) {
-                        Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            switch (gameMode) {
+                case GameMode.None:
+                    break;
+                case GameMode.Idle: {
+                        if (Input.GetMouseButton(0)) {
+                            if (CheckBlockClick()) {
+                                time += Time.deltaTime;
+                                if (time > 1) {
 
-                        RaycastHit hit;
-                        if (Physics.Raycast(mouseray, out hit, 10.0f, Cube)) {
-                            if (Vector3.Distance(Player.transform.position, hit.transform.gameObject.transform.position) >= 1.5) {
-                                Choice1 = hit.transform.gameObject;
 
-                                Choice1.GetComponent<LineRenderer>().enabled = true;
+                                    time = 0;
+                                    gameMode = GameMode.Spin;
+                                }
+                            }
+                            else {
+                                Choice1 = null;
                             }
                         }
+                        if (Input.GetMouseButtonUp(0)) {
+                            time = 0;
+                            if(Choice1 != null) {
+                                Choice1 = null;
+                                gameMode = GameMode.Swap;
+                            }
 
-
-                    }
-                    else {
-
-                        if (!(Choice1 == null)) {
-                            SwapCube();
                         }
-
-
+                        
                     }
-                }
+                    break;
+                case GameMode.Swap: {
+                        if (Input.GetMouseButtonDown(0)) {
+                            if (Choice1 == null) {
+                                if (CheckBlockClick()) {
+                                    Choice1.GetComponent<LineRenderer>().enabled = true;
+                                }
+                            }
+                            else {
+                                if (!(Choice1 == null)) {
+                                    SwapCube();
+                                }
+                            }
+                        }
+                    }
+                    break;
+                case GameMode.Spin:
+                    break;
+                case GameMode.PlayerMove:
+                    break;
+                default:
+                    break;
             }
+            //if (CheckMode == false) {
+            //    if (Input.GetMouseButtonDown(0)) {
+            //        if (Choice1 == null) {
+            //            Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (CheckMode == true) {
-                if (Player.GetComponent<PlayerController>().checkPleyrMove == false) {
-                    var horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
-                    var vertical = CrossPlatformInputManager.GetAxis("Vertical");
+            //            RaycastHit hit;
+            //            if (Physics.Raycast(mouseray, out hit, 10.0f, Cube)) {
+            //                if (Vector3.Distance(Player.transform.position, hit.transform.gameObject.transform.position) >= 1.5) {
+            //                    Choice1 = hit.transform.gameObject;
 
-                    if (Mathf.Abs(horizontal) > Mathf.Abs(vertical)) {
+            //                    Choice1.GetComponent<LineRenderer>().enabled = true;
+            //                }
+            //            }
+            //        }
+            //        else {
+            //            if (!(Choice1 == null)) {
+            //                SwapCube();
+            //            }
+            //        }
+            //    }
+            //}
+            //if (CheckMode == true) {
+            //    if (Player.GetComponent<PlayerController>().checkPleyrMove == false) {
+            //        var horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
+            //        var vertical = CrossPlatformInputManager.GetAxis("Vertical");
 
-
-                        if (horizontal > 0.5f) {
-                            CameraRootPlayerMoveChanger(2);
-                        }
-                        else if (horizontal < -0.5f) {
-                            CameraRootPlayerMoveChanger(3);
-                        }
-                    }
-                    else {
-
-                        if (vertical > 0.5f) {
-                            CameraRootPlayerMoveChanger(0);
-                        }
-                        else if (vertical < -0.5f) {
-                            CameraRootPlayerMoveChanger(1);
-                        }
-                    }
-                }
-            }
+            //        if (Mathf.Abs(horizontal) > Mathf.Abs(vertical)) {
+            //            if (horizontal > 0.5f) {
+            //                CameraRootPlayerMoveChanger(2);
+            //            }
+            //            else if (horizontal < -0.5f) {
+            //                CameraRootPlayerMoveChanger(3);
+            //            }
+            //        }
+            //        else {
+            //            if (vertical > 0.5f) {
+            //                CameraRootPlayerMoveChanger(0);
+            //            }
+            //            else if (vertical < -0.5f) {
+            //                CameraRootPlayerMoveChanger(1);
+            //            }
+            //        }
+            //    }
+            //}
 
         }
+        //クリックされたものがBlockか判定
+        private bool CheckBlockClick() {
+            Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            RaycastHit hit;
+            if (Physics.Raycast(mouseray, out hit, 10.0f, Cube)) {
+                if (Vector3.Distance(Player.transform.position, hit.transform.gameObject.transform.position) >= 1.5) {
+                    //Blockの場合choice1に格納
+                    Choice1 = hit.transform.gameObject;
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                return false;
+            }
+        }
+
         //キューブのSwap機能用の関数
         private void SwapCube() {
             Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -88,8 +165,6 @@ namespace AgonyCubeMainStage {
             if (Physics.Raycast(mouseray, out hit, 10.0f, Cube)) {
                 //rayが当たったキューブがplayerのいるキューブじゃないことを確認
                 if (Vector3.Distance(Player.transform.position, hit.transform.position) >= 1.5) {
-
-
                     Choice2 = hit.transform.gameObject;
                     //選択されたものが同じものだった場合選択状態を解除し変数を初期状態に変更
                     if (Choice1 == Choice2) {
@@ -98,30 +173,30 @@ namespace AgonyCubeMainStage {
                         Choice2 = null;
                     }
                     else {
-                        Vector3 pos1 = Choice1.transform.position;
-                        Vector3 pos2 = Choice2.transform.position;
-                        if (pos1.y == pos2.y) {
-                            float dis = Vector3.Distance(pos1, pos2);
+                        //選択された2つのキューブが隣り合っていた場合positionの交換をし選択状態の解除、変数の初期化
+                        for (int index = 0; index < 4; index++) {
+                            if (Choice1.GetComponent<Block>().adjacentBlock[index] != null) {
 
-                            Debug.Log(dis);
-                            //選択された2つのキューブが隣り合っていた場合positionの交換をし選択状態の解除、変数の初期化
-                            if (dis <= 2.5) {
-                                Choice1.transform.position = pos2;
-                                Choice2.transform.position = pos1;
+                                if (Choice1.GetComponent<Block>().adjacentBlock[index].blockNumber == Choice2.GetComponent<Block>().blockNumber) {
+                                    Vector3 pos1 = Choice1.transform.position;
+                                    Vector3 pos2 = Choice2.transform.position;
 
-                                Choice1.GetComponent<LineRenderer>().enabled = false;
+                                    Choice1.transform.position = pos2;
+                                    Choice2.transform.position = pos1;
 
-                                Choice1 = null;
-                                Choice2 = null;
-                            }
-                            else {
-                                //選択されたキューブが遠い場合choice2のみ初期化
-                                Choice2 = null;
+                                    Choice1.GetComponent<LineRenderer>().enabled = false;
+
+                                    Choice1 = null;
+                                    Choice2 = null;
+
+                                    stage.UpdateGridData();
+                                    stage.CalcurateAdgency();
+
+                                    index = 10;
+                                }
                             }
                         }
-                        else {
-                            Choice2 = null;
-                        }
+                        Choice2 = null;
                     }
 
 

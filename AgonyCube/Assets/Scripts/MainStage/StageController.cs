@@ -4,8 +4,6 @@ using UnityEngine;
 
 namespace AgonyCubeMainStage {
     public class StageController : MonoBehaviour {
-        //ブロックの種類
-        public GameObject[] brockPrefabs;
         //グリッドのX軸のサイズ
         int gridWidth = 0;
         //グリッドのZ軸のサイズ   
@@ -37,9 +35,9 @@ namespace AgonyCubeMainStage {
         //指定したブロックの情報を取得
         public Block GetGrid(Vector3Int gridPoint) {
             //指定した場所がgridDataの範囲外の場合NULLを返却
-            if(gridPoint.x < 0 || gridPoint.x > gridWidth ||
-                gridPoint.y < 0 || gridPoint.y > gridHeight ||
-                gridPoint.z < 0 || gridPoint.z > gridLength) {
+            if(gridPoint.x < 0 || gridPoint.x >= gridWidth ||
+                gridPoint.y < 0 || gridPoint.y >= gridHeight ||
+                gridPoint.z < 0 || gridPoint.z >= gridLength) {
                 return null;
             }
             else {
@@ -49,9 +47,9 @@ namespace AgonyCubeMainStage {
         //指定したブロックの情報を取得
         public Block GetGrid(int gridX, int gridY, int gridZ) {
             //指定した場所がgridDataの範囲外の場合NULLを返却
-            if (gridX < 0 || gridX > gridWidth ||
-                gridY < 0 || gridY > gridHeight ||
-                gridZ < 0 || gridZ > gridLength) {
+            if (gridX < 0 || gridX >= gridWidth ||
+                gridY < 0 || gridY >= gridHeight ||
+                gridZ < 0 || gridZ >= gridLength) {
                 return null;
             }
             else {
@@ -67,10 +65,20 @@ namespace AgonyCubeMainStage {
         // Use this for initialization
         void Start() {
             GenerateGridData();
+            CreateBlockNumber();
             CalcurateAdgency();
         }
 
-        private void CalcurateAdgency() {
+        private void CreateBlockNumber() {
+            var index = 0;
+            foreach(Transform child in transform) {
+                child.GetComponent<Block>().blockNumber = index;
+                index++;
+            }
+        }
+
+        public void CalcurateAdgency() {
+            Debug.Log("a");
             //gridDataのすべてのグリッドをループ
             for (var gridY = 0; gridY < gridHeight; gridY++) {
                 for (var gridZ = 0; gridZ < gridLength; gridZ++) {
@@ -81,25 +89,25 @@ namespace AgonyCubeMainStage {
                         var eastBlock = GetGrid(gridX + 1, gridY, gridZ);//東
                         var southBlock = GetGrid(gridX, gridY, gridZ - 1);//南
                         var westBlock = GetGrid(gridX - 1, gridY, gridZ);//西
-
-                        if (northBock != null || northBock.BlockId > 0) {
+                        Debug.Log(southBlock);
+                        if (northBock != null && northBock.BlockId > 0) {
                             block.adjacentBlock[0] = northBock;
                         }
-                        if (eastBlock != null || eastBlock.BlockId > 0) {
+                        if (eastBlock != null && eastBlock.BlockId > 0) {
                             block.adjacentBlock[1] = eastBlock;
                         }
-                        if (southBlock != null || southBlock.BlockId > 0) {
-                            block.adjacentBlock[0] = southBlock;
+                        if (southBlock != null && southBlock.BlockId > 0) {
+                            block.adjacentBlock[2] = southBlock;
                         }
-                        if (westBlock != null || westBlock.BlockId > 0) {
-                            block.adjacentBlock[0] = westBlock;
+                        if (westBlock != null && westBlock.BlockId > 0) {
+                            block.adjacentBlock[3] = westBlock;
                         }
                     }
                 }
             }
         }
 
-        private void GenerateGridData() {
+        public void GenerateGridData() {
             int maxGridX = 0;
             int maxGridZ = 0;
             int maxGridY = 0;
@@ -131,6 +139,13 @@ namespace AgonyCubeMainStage {
             }
         }
 
+        public void UpdateGridData() {
+            foreach (Transform child in transform) {
+                var gridPoint = WorldPointToGrid(child.position);
+
+                SetGrid(gridPoint, child.GetComponent<Block>());
+            }
+        }
         // Update is called once per frame
         void Update() {
 
