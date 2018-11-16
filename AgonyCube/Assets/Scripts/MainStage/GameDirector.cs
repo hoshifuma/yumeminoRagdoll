@@ -16,77 +16,112 @@ namespace AgonyCubeMainStage {
         public StageController stage;
         public bool CheckMode = false;
         float time;
-        public enum GameMode {
-            //初期演出用モード
-            None,
-            //モード選択モード
-            Idle,
-            //Blockの交換モード
-            Swap,
-            //BLockの回転モード
-            Spin,
-            //Playerの移動モード
-            PlayerMove,
+
+        GameState currentState = null;
+
+
+        private class MainScene : GameState {
+            protected GameDirector gameDirector;
+
+            public MainScene(GameDirector gameDirector) {
+                this.gameDirector = gameDirector;
+            }
         }
 
-        public GameMode gameMode = GameMode.None;
+        private class IdleState : MainScene {
+
+            public IdleState(GameDirector gameDirector) : base(gameDirector) {
+
+            }
+            public override void Start() {
+
+            }
+
+            public override void Update() {
+                if (Input.GetMouseButtonDown(0)) {
+                    gameDirector.Choice1 = gameDirector.CheckBlockClick();
+
+
+                }
+                if (Input.GetMouseButton(0)) {
+                    if (gameDirector.Choice1 != null) {
+                        gameDirector.time += Time.deltaTime;
+                        if (gameDirector.time > 1) {
+
+
+                            gameDirector.time = 0;
+                            gameDirector.ChangeState(new SpinState(gameDirector));
+                        }
+                    }
+
+                }
+                if (Input.GetMouseButtonUp(0)) {
+                    gameDirector.time = 0;
+                    if (gameDirector.Choice1 != null) {
+                        gameDirector.Choice1 = null;
+                        gameDirector.ChangeState(new SwapState(gameDirector));
+                    }
+
+                }
+            }
+        }
+
+        private class SwapState : MainScene {
+            public SwapState(GameDirector gameDirector) : base(gameDirector) {
+
+            }
+
+            public override void Update() {
+                if (Input.GetMouseButtonDown(0)) {
+                    if (gameDirector.Choice1 == null) {
+                        gameDirector.Choice1 = gameDirector.CheckBlockClick();
+                        if (gameDirector.Choice1 != null) {
+                            gameDirector.Choice1.GetComponent<LineRenderer>().enabled = true;
+                        }
+                    }
+                    else {
+                        if (!(gameDirector.Choice1 == null)) {
+                            gameDirector.SwapCube();
+                        }
+                    }
+                }
+            }
+        }
+
+        private class SpinState : MainScene {
+
+            public SpinState(GameDirector gameDirector) : base(gameDirector) {
+
+            }
+
+        }
+
+        private class PlayerMoveState : MainScene {
+            public PlayerMoveState(GameDirector gameDirector) : base(gameDirector) {
+
+            }
+
+        }
+
+        void ChangeState(GameState newState) {
+            if (currentState != null) {
+                currentState.Exsit();
+            }
+            currentState = newState;
+            currentState.Start();
+        }
+
         // Use this for initialization
         void Start() {
-            gameMode = GameMode.Idle;
+            ChangeState(new IdleState(this));
         }
+
+
 
         // Update is called once per frame
         void Update() {
-            switch (gameMode) {
-                case GameMode.None:
-                    break;
-                case GameMode.Idle: {
-                        if (Input.GetMouseButton(0)) {
-                            if (CheckBlockClick()) {
-                                time += Time.deltaTime;
-                                if (time > 1) {
-
-
-                                    time = 0;
-                                    gameMode = GameMode.Spin;
-                                }
-                            }
-                            else {
-                                Choice1 = null;
-                            }
-                        }
-                        if (Input.GetMouseButtonUp(0)) {
-                            time = 0;
-                            if(Choice1 != null) {
-                                Choice1 = null;
-                                gameMode = GameMode.Swap;
-                            }
-
-                        }
-                        
-                    }
-                    break;
-                case GameMode.Swap: {
-                        if (Input.GetMouseButtonDown(0)) {
-                            if (Choice1 == null) {
-                                if (CheckBlockClick()) {
-                                    Choice1.GetComponent<LineRenderer>().enabled = true;
-                                }
-                            }
-                            else {
-                                if (!(Choice1 == null)) {
-                                    SwapCube();
-                                }
-                            }
-                        }
-                    }
-                    break;
-                case GameMode.Spin:
-                    break;
-                case GameMode.PlayerMove:
-                    break;
-                default:
-                    break;
+            if (currentState != null) {
+                currentState.Update();
             }
             //if (CheckMode == false) {
             //    if (Input.GetMouseButtonDown(0)) {
@@ -134,23 +169,23 @@ namespace AgonyCubeMainStage {
             //}
 
         }
-        //クリックされたものがBlockか判定
-        private bool CheckBlockClick() {
+        //クリックされたものがBlockの場合クリックされたGameObjectを返す
+        private GameObject CheckBlockClick() {
             Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             RaycastHit hit;
             if (Physics.Raycast(mouseray, out hit, 10.0f, Cube)) {
                 if (Vector3.Distance(Player.transform.position, hit.transform.gameObject.transform.position) >= 1.5) {
                     //Blockの場合choice1に格納
-                    Choice1 = hit.transform.gameObject;
-                    return true;
+
+                    return hit.transform.gameObject;
                 }
                 else {
-                    return false;
+                    return null;
                 }
             }
             else {
-                return false;
+                return null;
             }
         }
 
@@ -218,61 +253,15 @@ namespace AgonyCubeMainStage {
                 movecheck = target.GetComponent<StepController>().StepMoveCheck();
             }
 
-            //if (Step == null) {
             if (movecheck == true) {
-                //Vector3 pos1 = target.transform.position;
-                //Vector3 pos2 = Player.transform.position;
 
-
-
-                //float ybalance = Mathf.Abs(pos2.y - pos1.y);
-                //if (ybalance <= 1) {
-                // float dis = Vector3.Distance(pos1, pos2);
-                //float dis = Mathf.Abs(pos1.x - pos2.x);
-                //dis += Mathf.Abs(pos1.z - pos2.z);
-
-
-                // if (dis <= 2.5) {
-                /*
-                Vector3 Newposi;
-                Newposi.x = pos1.x;
-                Newposi.z = pos1.z;
-                Newposi.y = pos2.y;
-
-                Player.transform.position = Newposi;
-                */
                 Player.GetComponent<PlayerController>().SetPlayerTarget(target.gameObject);
                 if (target.gameObject.tag == "Step") {
                     Step = target;
                 }
-                //  }
-                //}
+
             }
-            /*}      
-            else {
-                GameObject[] Block;
-                Block = Step.GetComponent<StepController>().HitCheckCollider;
-                for (int i = 0; i < 2; i++) {
-                    if (Block[i].GetComponent<HitCheckCollider>().HitBlock == target) {
-                        HitBlock = Block[i].GetComponent<HitCheckCollider>().HitBlock;
-                    }
-                }
-                if (!(HitBlock == null)) {
-                    if (movecheck == true) {
-                        /*Vector3 Newposi = HitBlock.gameObject.transform.position;                        
-                        Player.transform.position = Newposi;
-                        Player.GetComponent<PlayerController>().SetPlayerTarget(HitBlock.gameObject);
-                        if (target.gameObject.tag == "Step") {
-                            Step = target;
-                        }
-                        else {
-                            Step = null;
-                        }
-                    }
-                }
-            }*/
-            //target.GetComponent<LineRenderer>().enabled = false;
-            // target = null;
+
         }
 
         public void ChangeMode() {
