@@ -35,7 +35,7 @@ namespace AgonyCubeMainStage {
         //指定したブロックの情報を取得
         public Block GetGrid(Vector3Int gridPoint) {
             //指定した場所がgridDataの範囲外の場合NULLを返却
-            if(gridPoint.x < 0 || gridPoint.x >= gridWidth ||
+            if (gridPoint.x < 0 || gridPoint.x >= gridWidth ||
                 gridPoint.y < 0 || gridPoint.y >= gridHeight ||
                 gridPoint.z < 0 || gridPoint.z >= gridLength) {
                 return null;
@@ -68,15 +68,15 @@ namespace AgonyCubeMainStage {
             CreateBlockNumber();
             CalcurateAdgency();
         }
-
+        //起動時にBlockにナンバーを付与
         private void CreateBlockNumber() {
             var index = 0;
-            foreach(Transform child in transform) {
+            foreach (Transform child in transform) {
                 child.GetComponent<Block>().blockNumber = index;
                 index++;
             }
         }
-
+        //Blockに隣接情報を付与
         public void CalcurateAdgency() {
             Debug.Log("a");
             //gridDataのすべてのグリッドをループ
@@ -106,7 +106,7 @@ namespace AgonyCubeMainStage {
                 }
             }
         }
-
+        //gridDataの作成
         public void GenerateGridData() {
             int maxGridX = 0;
             int maxGridZ = 0;
@@ -132,23 +132,57 @@ namespace AgonyCubeMainStage {
 
             gridData = new Block[gridWidth * gridLength * gridHeight];
 
-            foreach (Transform child in transform) {
-                var gridPoint = WorldPointToGrid(child.position);
-
-                SetGrid(gridPoint, child.GetComponent<Block>());
-            }
+            UpdateGridData();
         }
-
+        //gridDataの更新
         public void UpdateGridData() {
             foreach (Transform child in transform) {
                 var gridPoint = WorldPointToGrid(child.position);
 
                 SetGrid(gridPoint, child.GetComponent<Block>());
             }
+            CalcurateAdgency();
         }
-        // Update is called once per frame
-        void Update() {
 
+        public void InvisibleBlock(GameObject Block) {
+            var posi = WorldPointToGrid(Block.transform.position);
+
+            for (var gridY = 0; gridY < gridHeight; gridY++) {
+                for (var gridZ = 0; gridZ < gridLength; gridZ++) {
+                    for (var gridX = 0; gridX < gridWidth; gridX++) {
+                        if (gridY != posi.y) {
+                            GetGrid(gridX, gridY, gridZ).block.SetActive(false);
+                        }
+                    }
+                }
+            }
+        }
+
+        public void UnInvisibleBlock(GameObject block) {
+            var posi = WorldPointToGrid(block.transform.position);
+
+            for (var gridY = 0; gridY < gridHeight; gridY++) {
+                for (var gridZ = 0; gridZ < gridLength; gridZ++) {
+                    for (var gridX = 0; gridX < gridWidth; gridX++) {
+                        if (gridY != posi.y) {
+                            GetGrid(gridX, gridY, gridZ).block.SetActive(true);
+                        }
+                    }
+                }
+            }
+        }
+
+        public void VerticalRotationBlock(GameObject block, int code) {
+            var posi = WorldPointToGrid(block.transform.position);
+            
+
+            for (var gridY = 0; gridY < gridHeight; gridY++) {
+                for (var gridZ = 0; gridZ < gridLength; gridZ++) {
+                    GetGrid(posi.x, gridY, gridZ).block.transform.RotateAround(new Vector3(posi.x, gridHeight / 2, gridLength / 2), Vector3.right, code * 180);
+                }
+            }
+
+            
         }
     }
 }
