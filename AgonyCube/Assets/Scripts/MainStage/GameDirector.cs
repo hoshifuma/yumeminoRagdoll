@@ -107,11 +107,14 @@ namespace AgonyCubeMainStage {
             }
 
             public override void Start() {
+                //初期のマウスポジションを保存
                 startMousePosi = Input.mousePosition;
+                startMousePosi = Camera.main.ScreenToViewportPoint(startMousePosi);
             }
 
             public override void Update() {
                 if (Input.GetMouseButton(0)) {
+                    //最新のマウスポジションを保存
                     lastMousePosi = Input.mousePosition;
                     
                     lastMousePosi = Camera.main.ScreenToViewportPoint(lastMousePosi);
@@ -119,32 +122,30 @@ namespace AgonyCubeMainStage {
                 }
 
                 if (Input.GetMouseButtonUp(0)) {
-
-                    startMousePosi = Camera.main.ScreenToViewportPoint(startMousePosi);
-                    
-
+                    //マウス入力の差を求める
                     var mousePosi = lastMousePosi - startMousePosi;
+
                     mousePosi = new Vector2(Mathf.Abs(mousePosi.x), Mathf.Abs(mousePosi.y));
                     Debug.Log("b" + mousePosi);
                     if (mousePosi.x > 0.1 || mousePosi.y > 0.1) {
-                        
-                        
+                        //マウス入力の差が上下の場合
                         if (mousePosi.x < mousePosi.y) {
                             Debug.Log("y");
-                            gameDirector.stage.VerticalSpinBlock(gameDirector.Choice1);
+                            gameDirector.stage.XSpinBlock(gameDirector.Choice1);
                         }
                         else if (mousePosi.x > mousePosi.y) {
+                            //マウス入力の差が左右の場合
                             Debug.Log("x");
-                            gameDirector.stage.HorizontallySpinBlock(gameDirector.Choice1);
+                            gameDirector.stage.YSpinBlock(gameDirector.Choice1);
                         }
-                        gameDirector.ChangeState(new IdleState(gameDirector));
-                        gameDirector.stage.UpdateGridData();
                     }
+                    gameDirector.ChangeState(new IdleState(gameDirector));
                 }
             }
 
             public override void Exsit() {
                 gameDirector.Choice1 = null;
+                gameDirector.stage.UpdateGridData();
             }
         }
 
