@@ -172,17 +172,32 @@ namespace AgonyCubeMainStage {
             }
         }
 
-        public void VerticalRotationBlock(GameObject block, int code) {
-            var posi = WorldPointToGrid(block.transform.position);
+        public void VerticalSpinBlock(GameObject block) {
+            var grid = WorldPointToGrid(block.transform.position);
+
             
 
             for (var gridY = 0; gridY < gridHeight; gridY++) {
                 for (var gridZ = 0; gridZ < gridLength; gridZ++) {
-                    GetGrid(posi.x, gridY, gridZ).block.transform.RotateAround(new Vector3(posi.x, gridHeight / 2, gridLength / 2), Vector3.right, code * 180);
+                    GetGrid(grid.x, gridY, gridZ).block.transform.RotateAround
+                        (new Vector3(block.transform.position.x, (gridHeight * gridSize / 2) - 1, (gridLength * gridSize / 2) - 1),
+                        Vector3.right, 180);
                 }
             }
+        }
 
-            
+        public void HorizontallySpinBlock(GameObject block) {
+            var grid = WorldPointToGrid(block.transform.position);
+
+          
+
+            for (var gridZ = 0; gridZ < gridLength; gridZ++) {
+                for (var gridX = 0; gridX < gridWidth; gridX++) {
+                    GetGrid(gridX, grid.y, gridZ).block.transform.RotateAround
+                        (new Vector3((gridWidth * gridSize / 2) - 1, block.transform.position.y, (gridLength * gridSize / 2) - 1), 
+                        Vector3.up, 180);
+                }
+            }
         }
     }
 }
