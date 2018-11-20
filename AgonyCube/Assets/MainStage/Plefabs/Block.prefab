@@ -61,8 +61,8 @@ GameObject:
   - component: {fileID: 114529847212922416}
   - component: {fileID: 65534550621190734}
   - component: {fileID: 120772889000256886}
-  - component: {fileID: 114167771135799296}
-  m_Layer: 8
+  - component: {fileID: 114391146918836626}
+  m_Layer: 10
   m_Name: Block
   m_TagString: Block
   m_Icon: {fileID: 0}
@@ -203,8 +203,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1431694011599718}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4, y: 0, z: 0}
+  m_LocalRotation: {x: 1, y: -0, z: -0, w: 0}
+  m_LocalPosition: {x: 4, y: 2, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4842354984811982}
@@ -215,7 +215,7 @@ Transform:
   - {fileID: 4628167123254562}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 180, y: 0, z: 0}
 --- !u!4 &4842354984811982
 Transform:
   m_ObjectHideFlags: 1
@@ -663,23 +663,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FloorCheck: 0
---- !u!114 &114167771135799296
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1431694011599718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 201d510308cad4443b0e37fec7275984, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BlockId: 1
-  adjacentBlock:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &114253210382342902
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -692,6 +675,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FloorCheck: 0
+--- !u!114 &114391146918836626
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1431694011599718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d34be7d9d929b0a4196ee6385ece1634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BlockId: 1
+  adjacentBlock:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  blockNumber: 0
+  block: {fileID: 0}
 --- !u!114 &114529847212922416
 MonoBehaviour:
   m_ObjectHideFlags: 1

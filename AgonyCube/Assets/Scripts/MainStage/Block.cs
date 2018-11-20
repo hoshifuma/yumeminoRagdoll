@@ -9,13 +9,12 @@ public class Block : MonoBehaviour {
     public Block[] adjacentBlock = new Block[4];
     //ブロック番号
     public int blockNumber;
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    public GameObject block;
+
+    private void Start() {
+        block = transform.gameObject;
+    }
+
+
 }

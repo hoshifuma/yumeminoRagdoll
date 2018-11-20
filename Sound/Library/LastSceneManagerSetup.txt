@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/SampleScene.unity
+- path: C:/Users/human/source/repos/AgonyCube/AgonyCube/Assets/Scenes/Title.unity
   isLoaded: 1
   isActive: 1
