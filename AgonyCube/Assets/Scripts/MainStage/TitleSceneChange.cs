@@ -14,7 +14,7 @@ public class TitleSceneChange : MonoBehaviour {
 	public void OnClickButton () {
 		
  //シーンを変える
-            SceneManager.LoadScene("Title");
+            SceneManager.LoadScene("StageSelector");
         
 	}
 }
