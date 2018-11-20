@@ -15,7 +15,7 @@ namespace AgonyCubeMainStage {
         private Vector2 LastRotation;
         private Vector2 LastMousePosition;
         private Vector2 InputMousePosition;
-        private Vector2 NewAngle = new Vector2(0, 0);
+        private Vector2 NewAngle = new Vector2(0, 180);
         private float XRotation = 0;
         private float YRotarion = 0;
 

@@ -15,7 +15,7 @@ namespace AgonyCubeMainStage {
         private GameObject Step;
         public StageController stage;
         public bool CheckMode = false;
-        float tapTime;
+        float time;
 
         GameState currentState = null;
 
@@ -40,36 +40,35 @@ namespace AgonyCubeMainStage {
             public override void Update() {
                 if (Input.GetMouseButtonDown(0)) {
                     gameDirector.Choice1 = gameDirector.CheckBlockClick();
-                }
 
+
+                }
                 if (Input.GetMouseButton(0)) {
                     if (gameDirector.Choice1 != null) {
-                        gameDirector.tapTime += Time.deltaTime;
-                        if (gameDirector.tapTime > 1) {
+                        gameDirector.time += Time.deltaTime;
+                        if (gameDirector.time > 1) {
 
 
-                            gameDirector.tapTime = 0;
+                            gameDirector.time = 0;
                             gameDirector.ChangeState(new SpinState(gameDirector));
                         }
                     }
-                }
 
+                }
                 if (Input.GetMouseButtonUp(0)) {
-                    gameDirector.tapTime = 0;
+                    gameDirector.time = 0;
                     if (gameDirector.Choice1 != null) {
+                        gameDirector.Choice1 = null;
                         gameDirector.ChangeState(new SwapState(gameDirector));
                     }
+
                 }
             }
         }
 
         private class SwapState : MainScene {
             public SwapState(GameDirector gameDirector) : base(gameDirector) {
-                
-            }
-            public override void Start() {
-                gameDirector.stage.InvisibleBlock(gameDirector.Choice1);
-                gameDirector.Choice1 = null;
+
             }
 
             public override void Update() {
@@ -82,18 +81,10 @@ namespace AgonyCubeMainStage {
                     }
                     else {
                         if (!(gameDirector.Choice1 == null)) {
-                            if (gameDirector.SwapCube()) {
-                                gameDirector.ChangeState(new IdleState(gameDirector));
-                            }
+                            gameDirector.SwapCube();
                         }
                     }
                 }
-            }
-
-            public override void Exsit() {
-                gameDirector.stage.UnInvisibleBlock(gameDirector.Choice1);
-                gameDirector.Choice1 = null;
-                
             }
         }
 
@@ -178,22 +169,28 @@ namespace AgonyCubeMainStage {
             //}
 
         }
-        //クリックされたものがBlockの場合クリックされたBlockを返す
+        //クリックされたものがBlockの場合クリックされたGameObjectを返す
         private GameObject CheckBlockClick() {
             Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             RaycastHit hit;
             if (Physics.Raycast(mouseray, out hit, 10.0f, Cube)) {
                 if (Vector3.Distance(Player.transform.position, hit.transform.gameObject.transform.position) >= 1.5) {
-                    //PlayerがいないBlockのBlockを返す
+                    //Blockの場合choice1に格納
+
                     return hit.transform.gameObject;
                 }
+                else {
+                    return null;
+                }
             }
-            return null;
+            else {
+                return null;
+            }
         }
 
-        //キューブのSwap機能用の関数 Swapできた場合trueを返す
-        private bool SwapCube() {
+        //キューブのSwap機能用の関数
+        private void SwapCube() {
             Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             RaycastHit hit;
@@ -224,19 +221,23 @@ namespace AgonyCubeMainStage {
 
                                     Choice1.GetComponent<LineRenderer>().enabled = false;
 
-                                    
+                                    Choice1 = null;
                                     Choice2 = null;
 
                                     stage.UpdateGridData();
-                                    return true;
+                                    stage.CalcurateAdgency();
+
+                                    index = 10;
                                 }
                             }
                         }
                         Choice2 = null;
                     }
+
+
+
                 }
             }
-            return false;
         }
         //playerの移動用の関数
         private void PlayerMove(GameObject target) {
