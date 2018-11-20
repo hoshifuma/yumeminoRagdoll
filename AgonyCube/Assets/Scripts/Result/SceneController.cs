@@ -18,6 +18,15 @@ namespace AgonyCube.Result
         // Use this for initialization
         void Start()
         {
+            //Mainシーンから読み込むスワップ数
+            //int swap_num = (MainSceneのスクリプトのクラス名).swap;
+
+            //Mainシーンから読み込むスピン数
+            //int spin_num = (MainSceneのスクリプトのクラス名).spin;
+
+            //Mainシーンから読み込む文字列（ステージ名）
+            //char stagename[] = (MainSceneのスクリプトのクラス名).etc
+
             swap = 6;
             swapmin = 3;
             spin = 2;
@@ -33,30 +42,17 @@ namespace AgonyCube.Result
             for (int index = 0; index < starValue; index++)
             {
                 stars[index].SetActive(true);
-                //swapの判定
-                if (swapmin + 2 < swap)
+                //swapとspinの判定
+                if (swapmin + 2 < swap || spinmin + 2 < spin)
                 {
                     stars[0].SetActive(true);
 
                 }
-                else if (swapmin < swap)
+                else if (swapmin < swap || spinmin < swap)
                 {
                     stars[1].SetActive(true);
                 }
-                else if (swapmin == swap)
-                {
-                    stars[2].SetActive(true);
-                }
-                //spinの判定
-                if (spinmin + 2 < spin)
-                {
-                    stars[0].SetActive(true);
-                }
-                else if (spinmin < swap)
-                {
-                    stars[1].SetActive(true);
-                }
-                else if (spinmin == spin)
+                else if (swapmin == swap || spinmin == spin)
                 {
                     stars[2].SetActive(true);
                 }
