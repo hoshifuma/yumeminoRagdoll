@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Vol : MonoBehaviour {
+public class Volume : MonoBehaviour {
 
 
     public UnityEngine.Audio.AudioMixer mixer;
 
     public void BGMVol(Slider slider)
     {
-        mixer.SetFloat("BGM", slider.value);
+        mixer.SetFloat("BGMVol", slider.value);
     }
 }

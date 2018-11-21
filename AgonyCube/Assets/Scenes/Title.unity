@@ -309,6 +309,7 @@ GameObject:
   m_Component:
   - component: {fileID: 206402033}
   - component: {fileID: 206402034}
+  - component: {fileID: 206402035}
   m_Layer: 5
   m_Name: BGM Slider
   m_TagString: Untagged
@@ -376,15 +377,38 @@ MonoBehaviour:
   m_FillRect: {fileID: 1344200315}
   m_HandleRect: {fileID: 631139019}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -80
+  m_MaxValue: 20
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: -10
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 206402035}
+        m_MethodName: BGMVol
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 206402034}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Slider, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &206402035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 206402032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 865e850dc74db884cb31ab9dc70a1f50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: 3cdced1b0e1ef274a9f983ec16b156d5, type: 2}
 --- !u!1 &303383773
 GameObject:
   m_ObjectHideFlags: 0
