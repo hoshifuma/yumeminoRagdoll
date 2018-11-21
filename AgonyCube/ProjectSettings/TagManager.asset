@@ -15,6 +15,9 @@ TagManager:
   - Collider
   - Enemy
   - Laser
+  - UpAndDown
+  - RightAndLeft
+  - FrontAndBehind
   layers:
   - Default
   - TransparentFX
@@ -27,7 +30,7 @@ TagManager:
   - heart
   - player
   - Cube
-  - 
+  - Wall
   - 
   - 
   - 
