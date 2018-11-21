@@ -1,14 +1,36 @@
 fileFormatVersion: 2
-guid: 98b618cd714cc114b938b72c9ddba56d
+guid: f0f4968bb05141c4f9c65ca1203b3de4
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
+    100000: boor_r
+    100002: door_l
+    100004: 'door_l '
+    100006: door_l_end
+    100008: door_r
+    100010: door_r_end
+    100012: //RootNode
+    100014: root
+    100016: Texture Group
+    400000: boor_r
+    400002: door_l
+    400004: 'door_l '
+    400006: door_l_end
+    400008: door_r
+    400010: door_r_end
+    400012: //RootNode
+    400014: root
+    400016: Texture Group
     2100000: Default
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: boor
+    2100002: dutton
+    2300000: boor_r
+    2300002: 'door_l '
+    3300000: boor_r
+    3300002: 'door_l '
+    4300000: 'door_l '
+    4300002: boor_r
+    7400000: Take 001
+    9500000: //RootNode
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -60,8 +82,8 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -86,7 +108,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
