@@ -68,6 +68,66 @@ namespace AgonyCubeMainStage {
             CreateBlockNumber();
             CalcurateAdgency();
         }
+
+        //起動時に外側の壁にtagを付与
+        private void GrantTagWall(int gridX, int gridY, int gridZ, Block block) {
+            //Y軸で端の壁にtag,layer,colliderを付与
+            if (gridY == gridHeight) {
+                
+                foreach (Transform child in block.block.transform) {
+                    if (child.transform.position.y > block.transform.position.y) {
+                        child.tag = "UpAndDown";
+                        child.GetComponent<MeshCollider>().enabled = true;
+                        child.gameObject.layer = LayerMask.NameToLayer("Wall");
+                    }
+                }
+            }
+            else if (gridY == 0) {
+               
+                foreach (Transform child in block.block.transform) {
+                    if (child.transform.position.y < block.transform.position.y) {
+                        child.tag = "UpAndDown";
+                        child.gameObject.layer = LayerMask.NameToLayer("Wall");
+                    }
+                }
+            }
+            //X軸で端の壁にtag,layer,colliderを付与
+            if(gridX == gridWidth) {
+               
+                foreach (Transform child in block.block.transform) {
+                    if (child.transform.position.x > block.transform.position.x) {
+                        child.tag = "RightAndLeft";
+                        child.gameObject.layer = LayerMask.NameToLayer("Wall");
+                    }
+                }
+            }
+            else if(gridX == 0) {
+                foreach (Transform child in block.block.transform) {
+                    if (child.transform.position.x < block.transform.position.x) {
+                        child.tag = "RightAndLeft";
+                        child.gameObject.layer = LayerMask.NameToLayer("Wall");
+                    }
+                }
+            }
+            //Z軸で端の壁にtag,layer,colliderを付与
+            if (gridZ == gridLength) {
+                foreach (Transform child in block.block.transform) {
+                    if (child.transform.position.z > block.transform.position.z) {
+                        child.tag = "FrontAndBehind";
+                        child.gameObject.layer = LayerMask.NameToLayer("Wall");
+                    }
+                }
+            }
+            else if(gridZ == 0) {
+                foreach (Transform child in block.block.transform) {
+                    if (child.transform.position.z < block.transform.position.z) {
+                        child.tag = "FrontAndBehind";
+                        child.gameObject.layer = LayerMask.NameToLayer("Wall");
+                    }
+                }
+            }
+        }
+
         //起動時にBlockにナンバーを付与
         private void CreateBlockNumber() {
             var index = 0;
@@ -78,12 +138,13 @@ namespace AgonyCubeMainStage {
         }
         //Blockに隣接情報を付与
         public void CalcurateAdgency() {
-            Debug.Log("a");
             //gridDataのすべてのグリッドをループ
             for (var gridY = 0; gridY < gridHeight; gridY++) {
                 for (var gridZ = 0; gridZ < gridLength; gridZ++) {
                     for (var gridX = 0; gridX < gridWidth; gridX++) {
                         var block = GetGrid(gridX, gridY, gridZ);
+
+                        GrantTagWall(gridX, gridY, gridZ, block);
 
                         var northBock = GetGrid(gridX, gridY, gridZ + 1);//北
                         var eastBlock = GetGrid(gridX + 1, gridY, gridZ);//東
@@ -171,8 +232,8 @@ namespace AgonyCubeMainStage {
                 }
             }
         }
-
-        public void VerticalSpinBlock(GameObject block) {
+        //X軸の回転
+        public void XSpinBlock(GameObject block) {
             var grid = WorldPointToGrid(block.transform.position);
 
             
@@ -185,16 +246,26 @@ namespace AgonyCubeMainStage {
                 }
             }
         }
-
-        public void HorizontallySpinBlock(GameObject block) {
+        //Y軸の回転
+        public void YSpinBlock(GameObject block) {
             var grid = WorldPointToGrid(block.transform.position);
-
-          
 
             for (var gridZ = 0; gridZ < gridLength; gridZ++) {
                 for (var gridX = 0; gridX < gridWidth; gridX++) {
                     GetGrid(gridX, grid.y, gridZ).block.transform.RotateAround
                         (new Vector3((gridWidth * gridSize / 2) - 1, block.transform.position.y, (gridLength * gridSize / 2) - 1), 
+                        Vector3.up, 180);
+                }
+            }
+        }
+        //Z軸の回転
+        public void ZSpinBlock(GameObject block) {
+            var grid = WorldPointToGrid(block.transform.position);
+
+            for (var gridZ = 0; gridZ < gridLength; gridZ++) {
+                for (var gridX = 0; gridX < gridWidth; gridX++) {
+                    GetGrid(gridX, grid.y, gridZ).block.transform.RotateAround
+                        (new Vector3((gridWidth * gridSize / 2) - 1, block.transform.position.y, (gridLength * gridSize / 2) - 1),
                         Vector3.up, 180);
                 }
             }
