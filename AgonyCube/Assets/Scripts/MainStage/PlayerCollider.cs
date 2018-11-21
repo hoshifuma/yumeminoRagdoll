@@ -16,25 +16,25 @@ namespace AgonyCubeMainStage {
 
         }
 
-        private void OnTriggerEnter(Collider other) {
-            if (other.gameObject.tag == "Step") {
-                MoveBlock = other.gameObject;
-                GameDirector.GetComponent<GameDirector>().SetMove(MoveBlock);
-            }
-            else if (other.gameObject.tag == "Block") {
-                MoveBlock = other.gameObject;
-                GameDirector.GetComponent<GameDirector>().SetMove(MoveBlock);
-            }
-            else if (other.gameObject.tag == "Clear") {
-                MoveBlock = other.gameObject;
-                GameDirector.GetComponent<GameDirector>().SetMove(MoveBlock);
-            }
-        }
-        private void OnTriggerExit(Collider other) {
-            if (!(other.gameObject.tag == "Collider")) {
-                MoveBlock = null;
+        //private void OnTriggerEnter(Collider other) {
+        //    if (other.gameObject.tag == "Step") {
+        //        MoveBlock = other.gameObject;
+        //        GameDirector.GetComponent<GameDirector>().SetMove(MoveBlock);
+        //    }
+        //    else if (other.gameObject.tag == "Block") {
+        //        MoveBlock = other.gameObject;
+        //        GameDirector.GetComponent<GameDirector>().SetMove(MoveBlock);
+        //    }
+        //    else if (other.gameObject.tag == "Clear") {
+        //        MoveBlock = other.gameObject;
+        //        GameDirector.GetComponent<GameDirector>().SetMove(MoveBlock);
+        //    }
+        //}
+        //private void OnTriggerExit(Collider other) {
+        //    if (!(other.gameObject.tag == "Collider")) {
+        //        MoveBlock = null;
 
-            }
-        }
+        //    }
+        //}
     }
 }
