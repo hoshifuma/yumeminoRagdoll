@@ -18,13 +18,13 @@ EditorBuildSettings:
     path: Assets/Scenes/MainScene.unity
     guid: dc5a0b9b29befa04f81b6e6232c34c53
   - enabled: 1
-    path: Assets/Scenes/Tutorial01.unity
+    path: Assets/Scenes/Story folder/Tutorial01.unity
     guid: a5114564cfc042248b6e403eae08a679
   - enabled: 1
-    path: Assets/Scenes/Tutorial02.unity
+    path: Assets/Scenes/Story folder/Tutorial02.unity
     guid: a502fbdbc2801424d8d01fe7bf24fa49
   - enabled: 1
-    path: Assets/Scenes/Tutorial03.unity
+    path: Assets/Scenes/Story folder/Tutorial03.unity
     guid: b35f3c1e3efc77f41a23a89dcc4da8f7
   - enabled: 1
     path: Assets/Scenes/Stage2.unity
@@ -33,6 +33,21 @@ EditorBuildSettings:
     path: Assets/Scenes/Stage3.unity
     guid: 8f468beddb1fbc34797b3c8113b92afa
   - enabled: 1
-    path: Assets/Result/TestResult.unity
+    path: Assets/Result/Result.unity
     guid: e8f5b7cfb94657740b03ae340df38fe9
+  - enabled: 1
+    path: Assets/Scenes/Story folder/Story1-1.unity
+    guid: d099cd8f598d708429af60d14f9af173
+  - enabled: 1
+    path: Assets/Scenes/Story folder/Story1-2.unity
+    guid: 03296ce365d237940bcc3c640716b64c
+  - enabled: 1
+    path: Assets/Scenes/Story folder/Story2-1.unity
+    guid: c6b68aa42d7e39f41b1411c6b4cb6185
+  - enabled: 1
+    path: Assets/Scenes/Story folder/Story2-2.unity
+    guid: 3b1073002bd8ade4293e331535212979
+  - enabled: 1
+    path: Assets/Scenes/Story folder/Story2-3.unity
+    guid: b14096231743c2c4aa1926a1b1e2f6fe
   m_configObjects: {}
