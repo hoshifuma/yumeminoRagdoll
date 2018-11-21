@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
 namespace AgonyCubeMainStage {
-    public class camera : MonoBehaviour {
+    public class CameraController : MonoBehaviour {
 
         //マウスの入力に応じた回転させる速度
         public Vector2 RotationSpeed;

@@ -72,12 +72,12 @@ namespace AgonyCubeMainStage {
         //起動時に外側の壁にtagを付与
         private void GrantTagWall(int gridX, int gridY, int gridZ, Block block) {
             //Y軸で端の壁にtag,layer,colliderを付与
-            if (gridY == gridHeight) {
+            if (gridY == gridHeight - 1) {
                 
                 foreach (Transform child in block.block.transform) {
                     if (child.transform.position.y > block.transform.position.y) {
                         child.tag = "UpAndDown";
-                        child.GetComponent<MeshCollider>().enabled = true;
+                        child.GetComponent<BoxCollider>().enabled = true;
                         child.gameObject.layer = LayerMask.NameToLayer("Wall");
                     }
                 }
@@ -87,16 +87,18 @@ namespace AgonyCubeMainStage {
                 foreach (Transform child in block.block.transform) {
                     if (child.transform.position.y < block.transform.position.y) {
                         child.tag = "UpAndDown";
+                        child.GetComponent<BoxCollider>().enabled = true;
                         child.gameObject.layer = LayerMask.NameToLayer("Wall");
                     }
                 }
             }
             //X軸で端の壁にtag,layer,colliderを付与
-            if(gridX == gridWidth) {
+            if(gridX == gridWidth -1) {
                
                 foreach (Transform child in block.block.transform) {
                     if (child.transform.position.x > block.transform.position.x) {
                         child.tag = "RightAndLeft";
+                        child.GetComponent<BoxCollider>().enabled = true;
                         child.gameObject.layer = LayerMask.NameToLayer("Wall");
                     }
                 }
@@ -105,15 +107,17 @@ namespace AgonyCubeMainStage {
                 foreach (Transform child in block.block.transform) {
                     if (child.transform.position.x < block.transform.position.x) {
                         child.tag = "RightAndLeft";
+                        child.GetComponent<BoxCollider>().enabled = true;
                         child.gameObject.layer = LayerMask.NameToLayer("Wall");
                     }
                 }
             }
             //Z軸で端の壁にtag,layer,colliderを付与
-            if (gridZ == gridLength) {
+            if (gridZ == gridLength -1) {
                 foreach (Transform child in block.block.transform) {
                     if (child.transform.position.z > block.transform.position.z) {
                         child.tag = "FrontAndBehind";
+                        child.GetComponent<BoxCollider>().enabled = true;
                         child.gameObject.layer = LayerMask.NameToLayer("Wall");
                     }
                 }
@@ -122,6 +126,7 @@ namespace AgonyCubeMainStage {
                 foreach (Transform child in block.block.transform) {
                     if (child.transform.position.z < block.transform.position.z) {
                         child.tag = "FrontAndBehind";
+                        child.GetComponent<BoxCollider>().enabled = true;
                         child.gameObject.layer = LayerMask.NameToLayer("Wall");
                     }
                 }
@@ -199,8 +204,13 @@ namespace AgonyCubeMainStage {
         public void UpdateGridData() {
             foreach (Transform child in transform) {
                 var gridPoint = WorldPointToGrid(child.position);
+                
 
                 SetGrid(gridPoint, child.GetComponent<Block>());
+            }
+            foreach (Transform child in transform) {
+                var gridPoint = WorldPointToGrid(child.position);
+                GrantTagWall(gridPoint.x, gridPoint.y, gridPoint.z, child.GetComponent<Block>());
             }
             CalcurateAdgency();
         }
@@ -219,15 +229,12 @@ namespace AgonyCubeMainStage {
             }
         }
 
-        public void UnInvisibleBlock(GameObject block) {
-            var posi = WorldPointToGrid(block.transform.position);
+        public void UnInvisibleBlock() {
 
             for (var gridY = 0; gridY < gridHeight; gridY++) {
                 for (var gridZ = 0; gridZ < gridLength; gridZ++) {
                     for (var gridX = 0; gridX < gridWidth; gridX++) {
-                        if (gridY != posi.y) {
                             GetGrid(gridX, gridY, gridZ).block.SetActive(true);
-                        }
                     }
                 }
             }
@@ -262,11 +269,11 @@ namespace AgonyCubeMainStage {
         public void ZSpinBlock(GameObject block) {
             var grid = WorldPointToGrid(block.transform.position);
 
-            for (var gridZ = 0; gridZ < gridLength; gridZ++) {
+            for (var gridY = 0; gridY < gridHeight; gridY++) {
                 for (var gridX = 0; gridX < gridWidth; gridX++) {
-                    GetGrid(gridX, grid.y, gridZ).block.transform.RotateAround
-                        (new Vector3((gridWidth * gridSize / 2) - 1, block.transform.position.y, (gridLength * gridSize / 2) - 1),
-                        Vector3.up, 180);
+                    GetGrid(gridX, gridY, grid.z).block.transform.RotateAround
+                        (new Vector3((gridWidth * gridSize / 2) - 1, (gridHeight * gridSize / 2) - 1, block.transform.position.z),
+                        Vector3.forward, 180);
                 }
             }
         }
