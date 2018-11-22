@@ -13,7 +13,7 @@ public class DoorController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         isNear = false;
-        animator = transform.parent.GetComponent<Animator>();
+       // animator = transform.parent.GetComponent<Animator>();
 		
 	}
 	
