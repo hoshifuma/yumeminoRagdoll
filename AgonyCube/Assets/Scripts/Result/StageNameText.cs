@@ -20,10 +20,15 @@ public class StageNameText : MonoBehaviour {
     
     // Use this for initialization
     void Start () {
+        string resultSwapNum = StageState.GetSwapPlay();
         //Mainシーンから読み込む文字列（ステージ名）
-        stag();
-        
-        
+        if (resultSwapNum == "2") {
+            stag();
+        }
+        else if (resultSwapNum == "1") {
+            stag();
+        }
+
     }
 	
 	// Update is called once per frame
