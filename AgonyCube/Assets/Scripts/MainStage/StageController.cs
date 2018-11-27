@@ -14,6 +14,8 @@ namespace AgonyCubeMainStage {
         public Block[] gridData;
         //一つのグリッドの大きさ
         public int gridSize = 2;
+
+        public PlayerController player;
         //ワールド座標をグリッドポイントに変換
         public Vector3Int WorldPointToGrid(Vector3 position) {
             return new Vector3Int(
@@ -332,37 +334,41 @@ namespace AgonyCubeMainStage {
         public void XSpinBlock(GameObject block) {
             var grid = WorldPointToGrid(block.transform.position);
 
+            if(player.gridPoint.x != grid.x) {
 
-
-            for (var gridY = 0; gridY < gridHeight; gridY++) {
-                for (var gridZ = 0; gridZ < gridLength; gridZ++) {
-                    GetGrid(grid.x, gridY, gridZ).block.transform.RotateAround
-                        (new Vector3(block.transform.position.x, (gridHeight * gridSize / 2) - 1, (gridLength * gridSize / 2) - 1),
-                        Vector3.right, 180);
+                for (var gridY = 0; gridY < gridHeight; gridY++) {
+                    for (var gridZ = 0; gridZ < gridLength; gridZ++) {
+                        GetGrid(grid.x, gridY, gridZ).block.transform.RotateAround
+                            (new Vector3(block.transform.position.x, (gridHeight * gridSize / 2) - 1, (gridLength * gridSize / 2) - 1),
+                            Vector3.right, 180);
+                    }
                 }
             }
+
         }
         //Y軸の回転
         public void YSpinBlock(GameObject block) {
             var grid = WorldPointToGrid(block.transform.position);
-
-            for (var gridZ = 0; gridZ < gridLength; gridZ++) {
-                for (var gridX = 0; gridX < gridWidth; gridX++) {
-                    GetGrid(gridX, grid.y, gridZ).block.transform.RotateAround
-                        (new Vector3((gridWidth * gridSize / 2) - 1, block.transform.position.y, (gridLength * gridSize / 2) - 1),
-                        Vector3.up, 180);
+            if (player.gridPoint.y != grid.y) {
+                for (var gridZ = 0; gridZ < gridLength; gridZ++) {
+                    for (var gridX = 0; gridX < gridWidth; gridX++) {
+                        GetGrid(gridX, grid.y, gridZ).block.transform.RotateAround
+                            (new Vector3((gridWidth * gridSize / 2) - 1, block.transform.position.y, (gridLength * gridSize / 2) - 1),
+                            Vector3.up, 180);
+                    }
                 }
             }
         }
         //Z軸の回転
         public void ZSpinBlock(GameObject block) {
             var grid = WorldPointToGrid(block.transform.position);
-
-            for (var gridY = 0; gridY < gridHeight; gridY++) {
-                for (var gridX = 0; gridX < gridWidth; gridX++) {
-                    GetGrid(gridX, gridY, grid.z).block.transform.RotateAround
-                        (new Vector3((gridWidth * gridSize / 2) - 1, (gridHeight * gridSize / 2) - 1, block.transform.position.z),
-                        Vector3.forward, 180);
+            if (player.gridPoint.z != grid.z) {
+                for (var gridY = 0; gridY < gridHeight; gridY++) {
+                    for (var gridX = 0; gridX < gridWidth; gridX++) {
+                        GetGrid(gridX, gridY, grid.z).block.transform.RotateAround
+                            (new Vector3((gridWidth * gridSize / 2) - 1, (gridHeight * gridSize / 2) - 1, block.transform.position.z),
+                            Vector3.forward, 180);
+                    }
                 }
             }
         }

@@ -10,7 +10,6 @@ namespace AgonyCubeMainStage {
         public LayerMask wall;
         public GameObject choice1;
         public GameObject choice2;
-        public GameObject player;
         public GameObject mainCamera;
         //public GameObject PlayerMovecolliders;
         //private GameObject Step;
@@ -18,7 +17,7 @@ namespace AgonyCubeMainStage {
         //public bool CheckMode = false;
 
         GameState currentState = null;
-
+        public PlayerController player;
 
         private class MainScene : GameState {
             protected GameDirector gameDirector;
@@ -250,7 +249,7 @@ namespace AgonyCubeMainStage {
 
             RaycastHit hit;
             if (Physics.Raycast(mouseray, out hit, 10.0f, cube)) {
-                if (Vector3.Distance(player.transform.position, hit.transform.gameObject.transform.position) >= 1.5) {
+                if (player.gridPoint != stage.WorldPointToGrid(hit.transform.gameObject.transform.position)) {
                     //PlayerがいないblockのBlockを返す
                     return hit.transform.gameObject;
                 }
@@ -277,7 +276,7 @@ namespace AgonyCubeMainStage {
             //rayがキューブに当たった際に起動
             if (Physics.Raycast(mouseray, out hit, 10.0f, cube)) {
                 //rayが当たったキューブがplayerのいるキューブじゃないことを確認
-                if (Vector3.Distance(player.transform.position, hit.transform.position) >= 1.5) {
+                if (player.gridPoint != stage.WorldPointToGrid(hit.transform.gameObject.transform.position)) {
                     choice2 = hit.transform.gameObject;
                     //選択されたものが同じものだった場合選択状態を解除し変数を初期状態に変更
                     if (choice1 == choice2) {
