@@ -79,8 +79,10 @@ namespace AgonyCubeMainStage {
 
                 foreach (Transform child in block.block.transform) {
                     if (child.transform.position.y > block.transform.position.y) {
+                       // child.gameObject.SetActive(true);
                         child.tag = "UpAndDown";
                         child.GetComponent<BoxCollider>().enabled = true;
+                        child.GetComponent<MeshRenderer>().enabled = true;
                     }
                 }
             }
@@ -88,8 +90,10 @@ namespace AgonyCubeMainStage {
 
                 foreach (Transform child in block.block.transform) {
                     if (child.transform.position.y < block.transform.position.y) {
+                      //  child.gameObject.SetActive(true);
                         child.tag = "UpAndDown";
                         child.GetComponent<BoxCollider>().enabled = true;
+                        child.GetComponent<MeshRenderer>().enabled = true;
                     }
                 }
             }
@@ -98,16 +102,20 @@ namespace AgonyCubeMainStage {
 
                 foreach (Transform child in block.block.transform) {
                     if (child.transform.position.x > block.transform.position.x) {
+                        //child.gameObject.SetActive(true);
                         child.tag = "RightAndLeft";
-                        child.GetComponent<BoxCollider>().enabled = true;
+                       child.GetComponent<BoxCollider>().enabled = true;
+                        child.GetComponent<MeshRenderer>().enabled = true;
                     }
                 }
             }
             else if (gridX == 0) {
                 foreach (Transform child in block.block.transform) {
                     if (child.transform.position.x < block.transform.position.x) {
+                        //child.gameObject.SetActive(true);
                         child.tag = "RightAndLeft";
                         child.GetComponent<BoxCollider>().enabled = true;
+                        child.GetComponent<MeshRenderer>().enabled = true;
                     }
                 }
             }
@@ -115,16 +123,20 @@ namespace AgonyCubeMainStage {
             if (gridZ == gridLength - 1) {
                 foreach (Transform child in block.block.transform) {
                     if (child.transform.position.z > block.transform.position.z) {
+                       // child.gameObject.SetActive(true);
                         child.tag = "FrontAndBehind";
                         child.GetComponent<BoxCollider>().enabled = true;
+                        child.GetComponent<MeshRenderer>().enabled = true;
                     }
                 }
             }
             else if (gridZ == 0) {
                 foreach (Transform child in block.block.transform) {
                     if (child.transform.position.z < block.transform.position.z) {
+                       // child.gameObject.SetActive(true);
                         child.tag = "FrontAndBehind";
                         child.GetComponent<BoxCollider>().enabled = true;
+                        child.GetComponent<MeshRenderer>().enabled = true;
                     }
                 }
             }
@@ -296,9 +308,13 @@ namespace AgonyCubeMainStage {
                 grid.movableFlag = false;
                 foreach (Transform wall in child.transform) {
                     wall.GetComponent<BoxCollider>().enabled = false;
+                    wall.GetComponent<MeshRenderer>().enabled = false;
+                    //wall.gameObject.SetActive(false);
                 }
                 if (grid.floor != null) {
                     grid.floor.GetComponent<BoxCollider>().enabled = true;
+                    grid.floor.GetComponent<MeshRenderer>().enabled = true;
+                    //grid.floor.SetActive(true);
                 }
             }
 
