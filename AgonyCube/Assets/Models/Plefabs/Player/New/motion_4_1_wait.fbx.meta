@@ -1,97 +1,71 @@
 fileFormatVersion: 2
-guid: 5ca6df07b1d89f34bbd1b4836de8e84c
+guid: ab603b5bb65a7664f93e5bd680759192
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: ball
-    100002: body
-    100004: foot_L
-    100006: foot_R
-    100008: hand_L
-    100010: hand_R
-    100012: head
-    100014: //RootNode
-    100016: root
-    100018: s_ball
-    100020: scissor01
-    100022: scissor02
-    100024: skelton_arm_L
-    100026: skelton_arm_L_end
-    100028: skelton_arm_R
-    100030: skelton_arm_R_end
-    100032: skelton_body
-    100034: skelton_foot_L
-    100036: skelton_foot_L_end
-    100038: skelton_foot_R
-    100040: skelton_foot_R_end
-    100042: skelton_head
-    100044: skelton_head_end
-    100046: skelton_hip
-    100048: skelton_scissor_1
-    100050: skelton_scissor_1_end
-    100052: skelton_scissor_2
-    100054: skelton_scissor_2_end
-    100056: Texture Group
-    400000: ball
-    400002: body
-    400004: foot_L
-    400006: foot_R
-    400008: hand_L
-    400010: hand_R
-    400012: head
-    400014: //RootNode
-    400016: root
-    400018: s_ball
-    400020: scissor01
-    400022: scissor02
-    400024: skelton_arm_L
-    400026: skelton_arm_L_end
-    400028: skelton_arm_R
-    400030: skelton_arm_R_end
-    400032: skelton_body
-    400034: skelton_foot_L
-    400036: skelton_foot_L_end
-    400038: skelton_foot_R
-    400040: skelton_foot_R_end
-    400042: skelton_head
-    400044: skelton_head_end
-    400046: skelton_hip
-    400048: skelton_scissor_1
-    400050: skelton_scissor_1_end
-    400052: skelton_scissor_2
-    400054: skelton_scissor_2_end
-    400056: Texture Group
-    2100000: scissor
-    2100002: body
-    2100004: head
-    2300000: ball
-    2300002: body
-    2300004: foot_L
-    2300006: foot_R
-    2300008: hand_L
-    2300010: hand_R
-    2300012: head
-    2300014: scissor01
-    2300016: scissor02
-    3300000: ball
-    3300002: body
-    3300004: foot_L
-    3300006: foot_R
-    3300008: hand_L
-    3300010: hand_R
-    3300012: head
-    3300014: scissor01
-    3300016: scissor02
-    4300000: ball
-    4300002: scissor01
-    4300004: scissor02
-    4300006: foot_R
-    4300008: foot_L
-    4300010: body
-    4300012: hand_R
-    4300014: hand_L
-    4300016: head
-    7400000: Player_Cut
+    100000: body
+    100002: foot_L
+    100004: foot_R
+    100006: hand_L
+    100008: hand_R
+    100010: head
+    100012: //RootNode
+    100014: root
+    100016: skelton_arm_L
+    100018: skelton_arm_L_end
+    100020: skelton_arm_R
+    100022: skelton_arm_R_end
+    100024: skelton_body
+    100026: skelton_foot_L
+    100028: skelton_foot_L_end
+    100030: skelton_foot_R
+    100032: skelton_foot_R_end
+    100034: skelton_head
+    100036: skelton_head_end
+    100038: skelton_hip
+    100040: Texture Group
+    400000: body
+    400002: foot_L
+    400004: foot_R
+    400006: hand_L
+    400008: hand_R
+    400010: head
+    400012: //RootNode
+    400014: root
+    400016: skelton_arm_L
+    400018: skelton_arm_L_end
+    400020: skelton_arm_R
+    400022: skelton_arm_R_end
+    400024: skelton_body
+    400026: skelton_foot_L
+    400028: skelton_foot_L_end
+    400030: skelton_foot_R
+    400032: skelton_foot_R_end
+    400034: skelton_head
+    400036: skelton_head_end
+    400038: skelton_hip
+    400040: Texture Group
+    2100000: body
+    2100002: head
+    2300000: body
+    2300002: foot_L
+    2300004: foot_R
+    2300006: hand_L
+    2300008: hand_R
+    2300010: head
+    3300000: body
+    3300002: foot_L
+    3300004: foot_R
+    3300006: hand_L
+    3300008: hand_R
+    3300010: head
+    4300000: foot_R
+    4300002: foot_L
+    4300004: body
+    4300006: hand_R
+    4300008: hand_L
+    4300010: head
+    7400000: Player_Idle
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -122,7 +96,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Player_Cut
+      name: Player_Idle
       takeName: Take 001
       firstFrame: 0
       lastFrame: 30
@@ -132,7 +106,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
