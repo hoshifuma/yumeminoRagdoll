@@ -14,7 +14,7 @@ namespace AgonyCube.StageSelector
         {
             // 以下はデバッグ用の仮セーブ
             // ゲームクリア―した時にそのステージ番号までを保存する
-            //PlayerPrefs.SetInt("clearStageNo", 2);
+            PlayerPrefs.SetInt("clearStageNo", 2);
 
             // 現在のクリアーステージ番号をロードする。
             clearStageNo = PlayerPrefs.GetInt("clearStageNo", 0);
