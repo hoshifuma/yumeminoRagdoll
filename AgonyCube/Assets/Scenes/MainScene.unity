@@ -2114,9 +2114,9 @@ MonoBehaviour:
     m_Bits: 2048
   choice1: {fileID: 0}
   choice2: {fileID: 0}
-  player: {fileID: 0}
   mainCamera: {fileID: 1068177086}
   stage: {fileID: 1972502963}
+  player: {fileID: 1951694624}
 --- !u!4 &870156730
 Transform:
   m_ObjectHideFlags: 0
@@ -5663,6 +5663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridData: []
   gridSize: 2
+  player: {fileID: 1951694624}
 --- !u!4 &1984937876 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4736335527154670, guid: 1869220f4f54cd1438ffdb38f9896c6a,
