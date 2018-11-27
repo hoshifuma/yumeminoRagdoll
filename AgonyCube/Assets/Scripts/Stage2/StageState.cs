@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StageState : MonoBehaviour {
-    public static string stageName = "ステージ２";
-    public static string swapPlay = "1";
-    public static string spinPlay = "3";
+    public static string stageName = "ステージ１";
+    public static string swapPlay = "3";
+    public static string spinPlay = "1";
 
     // getter
     public static string GetStageName()

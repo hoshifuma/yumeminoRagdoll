@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace AgonyCube.Result
 {
@@ -54,6 +55,12 @@ namespace AgonyCube.Result
                 }
                 }
 
+        }
+
+        // 『はい』ボタンを押したら実行されます。
+        public void OnClickTAPButton()
+        {
+            SceneManager.LoadScene("NextStage");
         }
 
         // Update is called once per frame
