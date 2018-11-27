@@ -522,7 +522,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 144247307}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37df18192da616e47b4ba674af21c2d2, type: 3}
+  m_Script: {fileID: 11500000, guid: fd7123fa189eae748a816871de7b2a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &144247309
@@ -1902,7 +1902,7 @@ MonoBehaviour:
   stage: {fileID: 1910225981}
   character: {fileID: 1789598671}
   replacedCharacter: {fileID: 0}
-  portrait: {fileID: 21300000, guid: bdd6edc1fda6a4c47848efee086433fb, type: 3}
+  portrait: {fileID: 21300000, guid: 31a2713353d649a4a972e7ec43408351, type: 3}
   offset: 0
   fromPosition: {fileID: 1509687315}
   toPosition: {fileID: 201928765}
@@ -5276,7 +5276,7 @@ MonoBehaviour:
   nameColor: {r: 0.03773582, g: 0.037237275, b: 0.035065833, a: 1}
   soundEffect: {fileID: 0}
   portraits:
-  - {fileID: 21300000, guid: bdd6edc1fda6a4c47848efee086433fb, type: 3}
+  - {fileID: 21300000, guid: 31a2713353d649a4a972e7ec43408351, type: 3}
   portraitsFace: 0
   setSayDialog: {fileID: 0}
   description: 
