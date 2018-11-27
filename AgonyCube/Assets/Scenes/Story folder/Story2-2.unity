@@ -650,7 +650,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 152969523}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37df18192da616e47b4ba674af21c2d2, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ccd51cb96c70b94aa1102a034f2d3e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &152969525
@@ -1422,7 +1422,7 @@ MonoBehaviour:
   stage: {fileID: 1910225981}
   character: {fileID: 1789598671}
   replacedCharacter: {fileID: 0}
-  portrait: {fileID: 21300000, guid: bdd6edc1fda6a4c47848efee086433fb, type: 3}
+  portrait: {fileID: 21300000, guid: 31a2713353d649a4a972e7ec43408351, type: 3}
   offset: 0
   fromPosition: {fileID: 1509687315}
   toPosition: {fileID: 201928765}
@@ -1507,7 +1507,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 680938774}
   selectedCommands:
-  - {fileID: 680938783}
+  - {fileID: 680938772}
   variables: []
   description: 
   stepPause: 1
@@ -3909,7 +3909,7 @@ MonoBehaviour:
   nameColor: {r: 0.019607844, g: 0.019607844, b: 0.019607844, a: 1}
   soundEffect: {fileID: 0}
   portraits:
-  - {fileID: 21300000, guid: bdd6edc1fda6a4c47848efee086433fb, type: 3}
+  - {fileID: 21300000, guid: 31a2713353d649a4a972e7ec43408351, type: 3}
   portraitsFace: 0
   setSayDialog: {fileID: 0}
   description: 

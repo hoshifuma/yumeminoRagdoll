@@ -226,7 +226,8 @@ namespace AgonyCubeMainStage {
                         if (rad == 0) {
                             if (dz == 1) {
                                 if (currentBlock.adjacentBlock[direction] != null) {
-                                    if(stage.GetGrid(gridPoint.x, gridPoint.y + 1, gridPoint.z + 1).movableFlag) {
+                                    if(stage.GetGrid(gridPoint.x, gridPoint.y + 1, gridPoint.z + 1) != null &&
+                                        stage.GetGrid(gridPoint.x, gridPoint.y + 1, gridPoint.z + 1).movableFlag) {
                                         gridPoint.z += 1;
                                         gridPoint.y += 1;
                                         SetPlayerTarget(gridPoint);
@@ -247,7 +248,8 @@ namespace AgonyCubeMainStage {
                         else if (rad == 90) {
                             if (dx == 1) {
                                 if (currentBlock.adjacentBlock[direction] != null) {
-                                    if (stage.GetGrid(gridPoint.x + 1, gridPoint.y + 1, gridPoint.z).movableFlag) {
+                                    if (stage.GetGrid(gridPoint.x, gridPoint.y + 1, gridPoint.z + 1) != null &&
+                                        stage.GetGrid(gridPoint.x, gridPoint.y + 1, gridPoint.z + 1).movableFlag) {
                                         gridPoint.x += 1;
                                         gridPoint.y += 1;
                                         SetPlayerTarget(gridPoint);
@@ -268,7 +270,8 @@ namespace AgonyCubeMainStage {
                         else if (rad == 180) {
                             if (dz == -1) {
                                 if (currentBlock.adjacentBlock[direction] != null) {
-                                    if (stage.GetGrid(gridPoint.x, gridPoint.y + 1, gridPoint.z - 1).movableFlag) {
+                                    if (stage.GetGrid(gridPoint.x, gridPoint.y + 1, gridPoint.z + 1) != null &&
+                                        stage.GetGrid(gridPoint.x, gridPoint.y + 1, gridPoint.z + 1).movableFlag) {
                                         gridPoint.z += 1;
                                         gridPoint.y += 1;
                                         SetPlayerTarget(gridPoint);
@@ -289,7 +292,8 @@ namespace AgonyCubeMainStage {
                         else {
                             if (dx == -1) {
                                 if (currentBlock.adjacentBlock[direction] != null) {
-                                    if (stage.GetGrid(gridPoint.x - 1, gridPoint.y + 1, gridPoint.z).movableFlag) {
+                                    if (stage.GetGrid(gridPoint.x, gridPoint.y + 1, gridPoint.z + 1) != null &&
+                                         stage.GetGrid(gridPoint.x, gridPoint.y + 1, gridPoint.z + 1).movableFlag) {
                                         gridPoint.x += 1;
                                         gridPoint.y += 1;
                                         SetPlayerTarget(gridPoint);
