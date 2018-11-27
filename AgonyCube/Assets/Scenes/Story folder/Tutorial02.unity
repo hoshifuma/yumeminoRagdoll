@@ -1238,7 +1238,7 @@ MonoBehaviour:
   stage: {fileID: 1910225981}
   character: {fileID: 1789598671}
   replacedCharacter: {fileID: 0}
-  portrait: {fileID: 21300000, guid: bdd6edc1fda6a4c47848efee086433fb, type: 3}
+  portrait: {fileID: 21300000, guid: 31a2713353d649a4a972e7ec43408351, type: 3}
   offset: 0
   fromPosition: {fileID: 1509687315}
   toPosition: {fileID: 201928765}
@@ -3720,7 +3720,7 @@ MonoBehaviour:
   nameColor: {r: 0, g: 0, b: 0, a: 1}
   soundEffect: {fileID: 0}
   portraits:
-  - {fileID: 21300000, guid: bdd6edc1fda6a4c47848efee086433fb, type: 3}
+  - {fileID: 21300000, guid: 31a2713353d649a4a972e7ec43408351, type: 3}
   portraitsFace: 0
   setSayDialog: {fileID: 0}
   description: 

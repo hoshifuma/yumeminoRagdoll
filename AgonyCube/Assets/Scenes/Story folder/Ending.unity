@@ -1728,8 +1728,7 @@ MonoBehaviour:
     height: 859
   selectedBlocks:
   - {fileID: 680938774}
-  selectedCommands:
-  - {fileID: 680938783}
+  selectedCommands: []
   variables: []
   description: 
   stepPause: 1
@@ -4359,7 +4358,7 @@ MonoBehaviour:
   nameColor: {r: 0.03773582, g: 0.037237275, b: 0.035065833, a: 1}
   soundEffect: {fileID: 0}
   portraits:
-  - {fileID: 21300000, guid: bdd6edc1fda6a4c47848efee086433fb, type: 3}
+  - {fileID: 21300000, guid: 31a2713353d649a4a972e7ec43408351, type: 3}
   portraitsFace: 0
   setSayDialog: {fileID: 0}
   description: 
