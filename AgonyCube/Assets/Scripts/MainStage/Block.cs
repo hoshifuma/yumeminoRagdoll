@@ -9,8 +9,12 @@ public class Block : MonoBehaviour {
     public Block[] adjacentBlock = new Block[4];
     //ブロック番号
     public int blockNumber;
-
+    //自身
     public GameObject block;
+    //自身の床
+    public GameObject floor;
+    //このブロックに移動できるか
+    public bool movableFlag = false;
 
     private void Start() {
         block = transform.gameObject;

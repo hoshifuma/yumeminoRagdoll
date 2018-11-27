@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -403,11 +403,6 @@ Prefab:
     - target: {fileID: 1343848537176090, guid: 7c99411ac12496b4088875e00989a5ea, type: 2}
       propertyPath: m_Name
       value: clear (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 120529331329870576, guid: 7c99411ac12496b4088875e00989a5ea,
-        type: 2}
-      propertyPath: m_CastShadows
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c99411ac12496b4088875e00989a5ea, type: 2}
@@ -1081,15 +1076,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400018, guid: 77c20491e26ffa04498f7a2e5d39c8f6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.78
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400018, guid: 77c20491e26ffa04498f7a2e5d39c8f6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.995
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 400018, guid: 77c20491e26ffa04498f7a2e5d39c8f6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.3026257
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400018, guid: 77c20491e26ffa04498f7a2e5d39c8f6, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1203,7 +1198,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &477714253
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1392,9 +1387,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 1
-  Gravity: 5
+  Gravity: 9
   target: {x: 0, y: 0, z: 0}
-  checkPleyrMove: 0
+  mainCamera: {fileID: 1068177086}
+  stage: {fileID: 1972502963}
+  gridPoint: {x: 0, y: 0, z: 0}
+  locomotionSpeed: 1
+  playerState: 0
 --- !u!1 &516552162
 GameObject:
   m_ObjectHideFlags: 0
@@ -2143,19 +2142,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af935916b41fe145a810d264f2a8aea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cube:
+  cube:
     serializedVersion: 2
     m_Bits: 1024
-  Wall:
+  wall:
     serializedVersion: 2
     m_Bits: 2048
-  Choice1: {fileID: 0}
-  Choice2: {fileID: 0}
-  Player: {fileID: 502213977}
-  MainCamera: {fileID: 1068177086}
-  PlayerMovecolliders: {fileID: 502213977}
+  choice1: {fileID: 0}
+  choice2: {fileID: 0}
+  player: {fileID: 502213977}
+  mainCamera: {fileID: 1068177086}
   stage: {fileID: 1972502963}
-  CheckMode: 0
 --- !u!4 &870156730
 Transform:
   m_ObjectHideFlags: 0
@@ -2264,15 +2261,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4114887186589072, guid: ba95807c65ffc784f8f2ca12cd283ea1, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4114887186589072, guid: ba95807c65ffc784f8f2ca12cd283ea1, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4114887186589072, guid: ba95807c65ffc784f8f2ca12cd283ea1, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4114887186589072, guid: ba95807c65ffc784f8f2ca12cd283ea1, type: 2}
       propertyPath: m_LocalRotation.w
@@ -3668,7 +3665,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1343523466
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5683,7 +5680,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2061105141
 RectTransform:
   m_ObjectHideFlags: 0
