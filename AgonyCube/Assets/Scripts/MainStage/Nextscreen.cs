@@ -10,7 +10,7 @@ public class Nextscreen : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player")) {
             Debug.Log("ゴール");
-            SceneManager.LoadScene("StageSelector");
+            SceneManager.LoadScene("Story1-2");
         }
     }
 

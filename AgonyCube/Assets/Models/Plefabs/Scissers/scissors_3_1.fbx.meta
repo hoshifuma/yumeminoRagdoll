@@ -1,71 +1,41 @@
 fileFormatVersion: 2
-guid: 2670f23cba653014cac91cbda8b1e364
+guid: 3ba43fcc53f08774da5fc216cc8ffb81
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: body
-    100002: foot_L
-    100004: foot_R
-    100006: hand_L
-    100008: hand_R
-    100010: head
-    100012: //RootNode
-    100014: root
-    100016: skelton_arm_L
-    100018: skelton_arm_L_end
-    100020: skelton_arm_R
-    100022: skelton_arm_R_end
-    100024: skelton_body
-    100026: skelton_foot_L
-    100028: skelton_foot_L_end
-    100030: skelton_foot_R
-    100032: skelton_foot_R_end
-    100034: skelton_head
-    100036: skelton_head_end
-    100038: skelton_hip
-    100040: Texture Group
-    400000: body
-    400002: foot_L
-    400004: foot_R
-    400006: hand_L
-    400008: hand_R
-    400010: head
-    400012: //RootNode
-    400014: root
-    400016: skelton_arm_L
-    400018: skelton_arm_L_end
-    400020: skelton_arm_R
-    400022: skelton_arm_R_end
-    400024: skelton_body
-    400026: skelton_foot_L
-    400028: skelton_foot_L_end
-    400030: skelton_foot_R
-    400032: skelton_foot_R_end
-    400034: skelton_head
-    400036: skelton_head_end
-    400038: skelton_hip
-    400040: Texture Group
-    2100000: body
-    2100002: head
-    2300000: body
-    2300002: foot_L
-    2300004: foot_R
-    2300006: hand_L
-    2300008: hand_R
-    2300010: head
-    3300000: body
-    3300002: foot_L
-    3300004: foot_R
-    3300006: hand_L
-    3300008: hand_R
-    3300010: head
-    4300000: foot_R
-    4300002: foot_L
-    4300004: body
-    4300006: hand_R
-    4300008: hand_L
-    4300010: head
-    7400000: Take 001
+    100000: ball
+    100002: root
+    100004: s_ball
+    100006: scissor01
+    100008: scissor02
+    100010: //RootNode
+    100012: skelton_scissor_1
+    100014: skelton_scissor_1_end
+    100016: skelton_scissor_2
+    100018: skelton_scissor_2_end
+    100020: Texture Group
+    400000: ball
+    400002: root
+    400004: s_ball
+    400006: scissor01
+    400008: scissor02
+    400010: //RootNode
+    400012: skelton_scissor_1
+    400014: skelton_scissor_1_end
+    400016: skelton_scissor_2
+    400018: skelton_scissor_2_end
+    400020: Texture Group
+    2100000: scissor
+    2300000: ball
+    2300002: scissor01
+    2300004: scissor02
+    3300000: ball
+    3300002: scissor01
+    3300004: scissor02
+    4300000: ball
+    4300002: scissor01
+    4300004: scissor02
+    7400000: Scissers_Idle
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -94,7 +64,35 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Scissers_Idle
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
