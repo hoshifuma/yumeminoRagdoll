@@ -1344,8 +1344,7 @@ MonoBehaviour:
     height: 859
   selectedBlocks:
   - {fileID: 680938774}
-  selectedCommands:
-  - {fileID: 680938797}
+  selectedCommands: []
   variables: []
   description: 
   stepPause: 1
@@ -1549,7 +1548,7 @@ MonoBehaviour:
   indentLevel: 0
   _sceneName:
     stringRef: {fileID: 0}
-    stringVal: Story1-1
+    stringVal: Result
   loadingImage: {fileID: 0}
   sceneNameOLD: 
 --- !u!114 &680938784
@@ -2819,7 +2818,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1244695556}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37df18192da616e47b4ba674af21c2d2, type: 3}
+  m_Script: {fileID: 11500000, guid: b2cbd2600c61a7443a955b460d30eaf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1244695558

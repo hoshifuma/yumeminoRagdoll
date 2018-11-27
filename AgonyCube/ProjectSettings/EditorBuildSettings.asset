@@ -36,6 +36,9 @@ EditorBuildSettings:
     path: Assets/Result/Result.unity
     guid: e8f5b7cfb94657740b03ae340df38fe9
   - enabled: 1
+    path: Assets/Result/NextStage.unity
+    guid: 8ba982d7b0874ef46aebbecbec6a1592
+  - enabled: 1
     path: Assets/Scenes/Story folder/Story1-1.unity
     guid: d099cd8f598d708429af60d14f9af173
   - enabled: 1

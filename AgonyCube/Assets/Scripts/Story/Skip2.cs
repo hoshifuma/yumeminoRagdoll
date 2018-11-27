@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Skip : MonoBehaviour {
+public class Skip2 : MonoBehaviour {
 
 	void Start () {
 		
@@ -9,6 +9,6 @@ public class Skip : MonoBehaviour {
 	
 	public void SkipButton()
     {
-        SceneManager.LoadScene("Tutorial02");
+        SceneManager.LoadScene("Result");
 	}
  }

@@ -14,7 +14,7 @@ namespace AgonyCube.StageSelector
         {
             // 以下はデバッグ用の仮セーブ
             // ゲームクリア―した時にそのステージ番号までを保存する
-            PlayerPrefs.SetInt("clearStageNo", 2);
+            PlayerPrefs.SetInt("clearStageNo", 3);
 
             // 現在のクリアーステージ番号をロードする。
             clearStageNo = PlayerPrefs.GetInt("clearStageNo", 0);
@@ -40,16 +40,21 @@ namespace AgonyCube.StageSelector
             SceneManager.LoadScene("Title");
         }
 
+        // 『ABC』ボタンを押したら実行されます。
+        public void OnClickABCButton() {
+            SceneManager.LoadScene("Tutorial01");
+        }
+
         // 『DEF』ボタンを押したら実行されます。
         public void OnClickDEFButton()
         {
-            SceneManager.LoadScene("MainScene");
+            SceneManager.LoadScene("Story1-1");
         }
 
         // 『ステージ２』ボタンを押したら実行されます。
         public void OnClickEventButton()
         {
-            SceneManager.LoadScene("StageEvent");
+            SceneManager.LoadScene("Story2-1");
         }
     }
 }
