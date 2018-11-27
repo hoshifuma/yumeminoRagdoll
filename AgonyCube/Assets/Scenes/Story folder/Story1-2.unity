@@ -1401,7 +1401,7 @@ MonoBehaviour:
   stage: {fileID: 1910225981}
   character: {fileID: 1789598671}
   replacedCharacter: {fileID: 0}
-  portrait: {fileID: 21300000, guid: bdd6edc1fda6a4c47848efee086433fb, type: 3}
+  portrait: {fileID: 21300000, guid: 31a2713353d649a4a972e7ec43408351, type: 3}
   offset: 0
   fromPosition: {fileID: 1509687315}
   toPosition: {fileID: 201928765}
@@ -1504,7 +1504,8 @@ MonoBehaviour:
     height: 859
   selectedBlocks:
   - {fileID: 680938774}
-  selectedCommands: []
+  selectedCommands:
+  - {fileID: 680938783}
   variables: []
   description: 
   stepPause: 1
@@ -1710,7 +1711,7 @@ MonoBehaviour:
   indentLevel: 0
   _sceneName:
     stringRef: {fileID: 0}
-    stringVal: Story2-1
+    stringVal: Result
   loadingImage: {fileID: 0}
   sceneNameOLD: 
 --- !u!114 &680938784
@@ -1795,7 +1796,7 @@ MonoBehaviour:
   setSayDialog: {fileID: 0}
 --- !u!114 &680938787
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 680938771}
@@ -2113,7 +2114,7 @@ MonoBehaviour:
   setSayDialog: {fileID: 0}
 --- !u!114 &680938799
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 680938771}
@@ -2141,7 +2142,7 @@ MonoBehaviour:
     booleanVal: 1
 --- !u!114 &680938800
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 680938771}
@@ -4511,7 +4512,7 @@ MonoBehaviour:
   nameColor: {r: 0, g: 0, b: 0, a: 1}
   soundEffect: {fileID: 0}
   portraits:
-  - {fileID: 21300000, guid: bdd6edc1fda6a4c47848efee086433fb, type: 3}
+  - {fileID: 21300000, guid: 31a2713353d649a4a972e7ec43408351, type: 3}
   portraitsFace: 0
   setSayDialog: {fileID: 0}
   description: 
@@ -5201,7 +5202,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2133284374}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37df18192da616e47b4ba674af21c2d2, type: 3}
+  m_Script: {fileID: 11500000, guid: 85a1423671c83d44997a0408d5ebbee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &2133284376
