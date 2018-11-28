@@ -12,6 +12,7 @@ namespace AgonyCubeMainStage {
         Vector3 MoveDirection;
         private Animator animator;
         public Vector3 target;
+        private const string key_walk = "Walking";
 
         public GameObject mainCamera;
         // StageControllerを指定します。
@@ -111,6 +112,13 @@ namespace AgonyCubeMainStage {
                     break;
                 default:
                     break;
+            }
+
+            if (playerState == PlayerState.Locmotion) {
+                this.animator.SetBool(key_walk, true);
+            }
+            else if (playerState == PlayerState.Idle) {
+                this.animator.SetBool(key_walk, false);
             }
 
         }
