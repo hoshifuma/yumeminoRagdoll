@@ -19,13 +19,13 @@ namespace AgonyCubeMainStage {
         private float XRotation = 0;
         private float YRotarion = 0;
 
-        public float ErrorRange;
+        public float errorRange;
         private int HitCheck = 0;
         public LayerMask Cube;
         //現在のモードの管理　falseの場合パズルモード
-        public bool CheckMode = false;
+       // public bool CheckMode = false;
         //falseの場合９０度回転
-        public bool CheckSpin = false;
+       // public bool CheckSpin = false;
         // Use this for initialization
         void Start() {
 
@@ -60,9 +60,9 @@ namespace AgonyCubeMainStage {
                             //パズルモードの場合
                             if (LastRotation.y == NewAngle.y) {
                                 XRotation = LastMousePosition.y - Input.mousePosition.y;
-                                if (XRotation > ErrorRange || XRotation < -ErrorRange) {
+                                if (XRotation > errorRange || XRotation < -errorRange) {
                                     //マウスがy軸に一定以上の入力がある場合
-                                    NewAngle.x += XRotation * RotationSpeed.x;
+                                    NewAngle.x += (XRotation - errorRange) * RotationSpeed.x;
                                     if (NewAngle.x > MaxXRotation) {
                                         //角度が最大値より大きい場合最大値に変更
                                         NewAngle.x = MaxXRotation;
@@ -74,35 +74,20 @@ namespace AgonyCubeMainStage {
                                 }
                             }
                         
-                        if (CheckSpin == true) {
+                       // if (CheckSpin == true) {
                             if (LastRotation.x == NewAngle.x) {
                                 YRotarion = LastMousePosition.x - Input.mousePosition.x;
-                                if (YRotarion > ErrorRange || YRotarion < -ErrorRange) {
+                                if (YRotarion > errorRange || YRotarion < -errorRange) {
                                     NewAngle.y -= YRotarion * RotationSpeed.y;
                                 }
                             }
-                        }
+                      //  }
                         LastMousePosition = Input.mousePosition;
                         transform.localEulerAngles = NewAngle;
                     }
 
                     if (Input.GetMouseButtonUp(0)) {
-                        if (CheckSpin == false) {
-                            if (LastRotation.x == NewAngle.x) {
-                                //x軸の角度変更がない場合
-                                if (InputMousePosition.x - LastMousePosition.x > 0) {
-                                    NewAngle.y -= RotationRadian;
-
-                                    InputMousePosition.x = Input.mousePosition.x;
-                                }
-                                else if (InputMousePosition.x - LastMousePosition.x < 0) {
-                                    NewAngle.y += RotationRadian;
-
-                                    InputMousePosition.x = Input.mousePosition.x;
-                                }
-                            }
-                        }
-                        else {
+                        Debug.Log(NewAngle.y);
                             if (NewAngle.y <= 360) {
                                 NewAngle.y -= 360;
                             }
@@ -121,7 +106,7 @@ namespace AgonyCubeMainStage {
                             else if (315 <= NewAngle.y && NewAngle.y < 45) {
                                 NewAngle.y = 0;
                             }
-                        }
+                       // }
                         transform.localEulerAngles = NewAngle;
                     }
                 }
@@ -133,16 +118,16 @@ namespace AgonyCubeMainStage {
             }
         }
 
-        //『モードチェンジ』ボタンが押されたら実行
-        public void ChangeMode() {
-            CheckMode = !CheckMode;
-            //x軸の角度を0に戻す
-            NewAngle.x = 0;
-            transform.localEulerAngles = NewAngle;
-        }
+        ////『モードチェンジ』ボタンが押されたら実行
+        //public void ChangeMode() {
+        //    CheckMode = !CheckMode;
+        //    //x軸の角度を0に戻す
+        //    NewAngle.x = 0;
+        //    transform.localEulerAngles = NewAngle;
+        //}
 
-        public void ChangeSpin() {
-            CheckSpin = !CheckSpin;
-        }
+        //public void ChangeSpin() {
+        //    CheckSpin = !CheckSpin;
+        //}
     }
 }
