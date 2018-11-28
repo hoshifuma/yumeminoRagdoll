@@ -1227,19 +1227,19 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 79197ecfbc3a4294a89ce589dac02cf2, type: 3}
+    m_Font: {fileID: 12800000, guid: 412ed3db37826944e85729b05b19686c, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 100
-    m_Alignment: 3
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: "\u3042\u3042\u3042\u3042\u3042\u3042\u3042"
 --- !u!114 &456434223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1419,7 +1419,6 @@ GameObject:
   - component: {fileID: 680938792}
   - component: {fileID: 680938791}
   - component: {fileID: 680938798}
-  - component: {fileID: 680938799}
   - component: {fileID: 680938778}
   m_Layer: 0
   m_Name: Flowchart
@@ -1502,7 +1501,6 @@ MonoBehaviour:
   - {fileID: 680938784}
   - {fileID: 680938789}
   - {fileID: 680938798}
-  - {fileID: 680938799}
   - {fileID: 680938779}
   - {fileID: 680938785}
   - {fileID: 680938772}
@@ -1546,8 +1544,7 @@ MonoBehaviour:
     height: 859
   selectedBlocks:
   - {fileID: 680938774}
-  selectedCommands:
-  - {fileID: 680938782}
+  selectedCommands: []
   variables: []
   description: 
   stepPause: 1
@@ -1586,7 +1583,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 2
   indentLevel: 0
-  storyText: "\u2015\u2015\u2015\u2015\u2015\u2015\u3001"
+  storyText: "\u2015\u2015\u2015\u2015\u3001"
   description: 
   character: {fileID: 1080569529}
   portrait: {fileID: 0}
@@ -1721,7 +1718,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 9
   indentLevel: 0
-  storyText: "\u2015\u2015\u2015\u3068\u3042\u308B\u5C11\u5973\u306E\u62BC\u5165\u308C\u306E\u4E2D"
+  storyText: "\u2015\u2015\u2015\u3068\u3042\u308B\u5C11\u5973\u306E\u62BC\u5165\u308C\u306E\u4E2D\u2015\u2015\u2015"
   description: 
   character: {fileID: 683968348}
   portrait: {fileID: 0}
@@ -1765,7 +1762,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 11
   indentLevel: 0
-  storyText: "\u2015\u2015\u2015\u2015\u2015\u2015\u3047\u3001"
+  storyText: "\u2015\u2015\u2015\u2015\u2015\u2015\u3048\u3001"
   description: 
   character: {fileID: 1080569529}
   portrait: {fileID: 0}
@@ -2142,26 +2139,6 @@ MonoBehaviour:
   fadeColor: {r: 0, g: 0, b: 0, a: 1}
   fadeTexture: {fileID: 0}
   targetCamera: {fileID: 0}
---- !u!114 &680938799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 680938771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 437f9a4e3dbc647f9bdce95308418bff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 30
-  indentLevel: 0
-  duration: 4
-  fadeOut: 1
-  targetView: {fileID: 897349233}
-  waitUntilFinished: 1
-  fadeColor: {r: 1, g: 0.995283, b: 0.995283, a: 1}
-  fadeTexture: {fileID: 0}
-  targetCamera: {fileID: 0}
 --- !u!1 &683968347
 GameObject:
   m_ObjectHideFlags: 0
@@ -2303,6 +2280,7 @@ GameObject:
   - component: {fileID: 831745904}
   - component: {fileID: 831745901}
   - component: {fileID: 831745903}
+  - component: {fileID: 831745909}
   m_Layer: 5
   m_Name: Narration SayDialog
   m_TagString: Untagged
@@ -2576,6 +2554,24 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!95 &831745909
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 831745898}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cb77b5b25d6a55041926ac37a2e3d074, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &854910557
 GameObject:
   m_ObjectHideFlags: 0
@@ -3713,7 +3709,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 79197ecfbc3a4294a89ce589dac02cf2, type: 3}
+    m_Font: {fileID: 12800000, guid: 412ed3db37826944e85729b05b19686c, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
@@ -3725,7 +3721,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Story text
+  m_Text: "\u2015\u2015\u2015\u2015\u2015\u2015"
 --- !u!1 &1432243474
 GameObject:
   m_ObjectHideFlags: 0
@@ -3838,7 +3834,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -500, y: 350}
+  m_AnchoredPosition: {x: -750, y: 400}
   m_SizeDelta: {x: 1500, y: 335}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1440408850
