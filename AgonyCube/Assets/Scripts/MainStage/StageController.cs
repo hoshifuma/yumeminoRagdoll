@@ -82,7 +82,7 @@ namespace AgonyCubeMainStage {
                        // child.gameObject.SetActive(true);
                         child.tag = "UpAndDown";
                         child.GetComponent<BoxCollider>().enabled = true;
-                        child.GetComponent<MeshRenderer>().enabled = true;
+                        //child.GetComponent<MeshRenderer>().enabled = true;
                     }
                 }
             }
@@ -93,7 +93,7 @@ namespace AgonyCubeMainStage {
                       //  child.gameObject.SetActive(true);
                         child.tag = "UpAndDown";
                         child.GetComponent<BoxCollider>().enabled = true;
-                        child.GetComponent<MeshRenderer>().enabled = true;
+                        //child.GetComponent<MeshRenderer>().enabled = true;
                     }
                 }
             }
@@ -105,7 +105,7 @@ namespace AgonyCubeMainStage {
                         //child.gameObject.SetActive(true);
                         child.tag = "RightAndLeft";
                        child.GetComponent<BoxCollider>().enabled = true;
-                        child.GetComponent<MeshRenderer>().enabled = true;
+                       // child.GetComponent<MeshRenderer>().enabled = true;
                     }
                 }
             }
@@ -115,7 +115,7 @@ namespace AgonyCubeMainStage {
                         //child.gameObject.SetActive(true);
                         child.tag = "RightAndLeft";
                         child.GetComponent<BoxCollider>().enabled = true;
-                        child.GetComponent<MeshRenderer>().enabled = true;
+                        //child.GetComponent<MeshRenderer>().enabled = true;
                     }
                 }
             }
@@ -126,7 +126,7 @@ namespace AgonyCubeMainStage {
                        // child.gameObject.SetActive(true);
                         child.tag = "FrontAndBehind";
                         child.GetComponent<BoxCollider>().enabled = true;
-                        child.GetComponent<MeshRenderer>().enabled = true;
+                       // child.GetComponent<MeshRenderer>().enabled = true;
                     }
                 }
             }
@@ -136,7 +136,7 @@ namespace AgonyCubeMainStage {
                        // child.gameObject.SetActive(true);
                         child.tag = "FrontAndBehind";
                         child.GetComponent<BoxCollider>().enabled = true;
-                        child.GetComponent<MeshRenderer>().enabled = true;
+                        //child.GetComponent<MeshRenderer>().enabled = true;
                     }
                 }
             }
@@ -308,19 +308,19 @@ namespace AgonyCubeMainStage {
                 grid.movableFlag = false;
                 foreach (Transform wall in child.transform) {
                     wall.GetComponent<BoxCollider>().enabled = false;
-                    wall.GetComponent<MeshRenderer>().enabled = false;
+                    //wall.GetComponent<MeshRenderer>().enabled = false;
                     //wall.gameObject.SetActive(false);
                 }
                 if (grid.floor != null) {
                     grid.floor.GetComponent<BoxCollider>().enabled = true;
-                    grid.floor.GetComponent<MeshRenderer>().enabled = true;
+                   // grid.floor.GetComponent<MeshRenderer>().enabled = true;
                     //grid.floor.SetActive(true);
                 }
             }
 
             RoopBlock();
         }
-
+        
         //選択された段以外のBlockを透明化
         public void InvisibleBlock(GameObject Block) {
             var posi = WorldPointToGrid(Block.transform.position);
@@ -346,6 +346,7 @@ namespace AgonyCubeMainStage {
                 }
             }
         }
+        
         //X軸の回転
         public void XSpinBlock(GameObject block) {
             var grid = WorldPointToGrid(block.transform.position);

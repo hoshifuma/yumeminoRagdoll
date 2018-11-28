@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StageGimmick : MonoBehaviour {
+public class PlayerAnimation : MonoBehaviour {
 
-    public GameObject scissers;
-    public GameObject door;
-
+    Animator animator;
+    public GameObject ragdoll;
+    
 	// Use this for initialization
 	void Start () {
-		
-	}
 
+    }
+	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        
+
+    }
 }
