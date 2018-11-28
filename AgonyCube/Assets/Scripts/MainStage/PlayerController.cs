@@ -222,6 +222,11 @@ namespace AgonyCubeMainStage {
                     // ひとつ先のグリッドが通行可能かを判定
                     if (currentBlock.adjacentBlock[direction] != null &&
                         currentBlock.adjacentBlock[direction].GetComponent<Block>().movableFlag) {
+                        if(currentBlock.adjacentBlock[direction].BlockId == 3) {
+
+                        }else {
+
+                        }
                         // 移動を確定する
                         gridPoint.x += dx;
                         gridPoint.z += dz;
@@ -322,7 +327,10 @@ namespace AgonyCubeMainStage {
                     }
                 }
             }
-
         }
+
+        public Block[] GetStepFrontAndBack(int move, Block currentBlock) {
+            return null;
+        } 
     }
 }

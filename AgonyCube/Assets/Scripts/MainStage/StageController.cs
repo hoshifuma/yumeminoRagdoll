@@ -8,8 +8,11 @@ namespace AgonyCubeMainStage {
         int gridWidth = 0;
         //グリッドのZ軸のサイズ   
         int gridLength = 0;
-        //グリッドのY軸のサイズ
+        //キューブのY軸のサイズ
         int gridHeight = 0;
+        
+        //グリッドのY軸のサイズ
+        int blockHeight = 0;
         //グリッドの状態を保存
         public Block[] gridData;
         //一つのグリッドの大きさ
@@ -38,7 +41,7 @@ namespace AgonyCubeMainStage {
         public Block GetGrid(Vector3Int gridPoint) {
             //指定した場所がgridDataの範囲外の場合NULLを返却
             if (gridPoint.x < 0 || gridPoint.x >= gridWidth ||
-                gridPoint.y < 0 || gridPoint.y >= gridHeight ||
+                gridPoint.y < 0 || gridPoint.y >= blockHeight ||
                 gridPoint.z < 0 || gridPoint.z >= gridLength) {
                 return null;
             }
@@ -50,7 +53,7 @@ namespace AgonyCubeMainStage {
         public Block GetGrid(int gridX, int gridY, int gridZ) {
             //指定した場所がgridDataの範囲外の場合NULLを返却
             if (gridX < 0 || gridX >= gridWidth ||
-                gridY < 0 || gridY >= gridHeight ||
+                gridY < 0 || gridY >= blockHeight ||
                 gridZ < 0 || gridZ >= gridLength) {
                 return null;
             }
@@ -69,6 +72,12 @@ namespace AgonyCubeMainStage {
             CreateBlockNumber();
             GenerateGridData();
             RoopBlock();
+            for (var gridZ = 0; gridZ < gridLength; gridZ++) {
+                for (var gridX = 0; gridX < gridWidth; gridX++) {
+                    //Blockに隣接情報を付与
+                    CalcurateAdgency(gridX, blockHeight - 1, gridZ);
+                }
+            }
         }
 
         //外側の壁にtagを付与
@@ -77,7 +86,7 @@ namespace AgonyCubeMainStage {
             //Y軸で端の壁にtag,layer,colliderを付与
             if (gridY == gridHeight - 1) {
 
-                foreach (Transform child in block.block.transform) {
+                foreach (Transform child in block.transform) {
                     if (child.transform.position.y > block.transform.position.y) {
                        // child.gameObject.SetActive(true);
                         child.tag = "UpAndDown";
@@ -88,7 +97,7 @@ namespace AgonyCubeMainStage {
             }
             else if (gridY == 0) {
 
-                foreach (Transform child in block.block.transform) {
+                foreach (Transform child in block.transform) {
                     if (child.transform.position.y < block.transform.position.y) {
                       //  child.gameObject.SetActive(true);
                         child.tag = "UpAndDown";
@@ -100,7 +109,7 @@ namespace AgonyCubeMainStage {
             //X軸で端の壁にtag,layer,colliderを付与
             if (gridX == gridWidth - 1) {
 
-                foreach (Transform child in block.block.transform) {
+                foreach (Transform child in block.transform) {
                     if (child.transform.position.x > block.transform.position.x) {
                         //child.gameObject.SetActive(true);
                         child.tag = "RightAndLeft";
@@ -110,7 +119,7 @@ namespace AgonyCubeMainStage {
                 }
             }
             else if (gridX == 0) {
-                foreach (Transform child in block.block.transform) {
+                foreach (Transform child in block.transform) {
                     if (child.transform.position.x < block.transform.position.x) {
                         //child.gameObject.SetActive(true);
                         child.tag = "RightAndLeft";
@@ -121,7 +130,7 @@ namespace AgonyCubeMainStage {
             }
             //Z軸で端の壁にtag,layer,colliderを付与
             if (gridZ == gridLength - 1) {
-                foreach (Transform child in block.block.transform) {
+                foreach (Transform child in block.transform) {
                     if (child.transform.position.z > block.transform.position.z) {
                        // child.gameObject.SetActive(true);
                         child.tag = "FrontAndBehind";
@@ -131,7 +140,7 @@ namespace AgonyCubeMainStage {
                 }
             }
             else if (gridZ == 0) {
-                foreach (Transform child in block.block.transform) {
+                foreach (Transform child in block.transform) {
                     if (child.transform.position.z < block.transform.position.z) {
                        // child.gameObject.SetActive(true);
                         child.tag = "FrontAndBehind";
@@ -173,7 +182,7 @@ namespace AgonyCubeMainStage {
             if (block.BlockId == 1 || block.BlockId == 3) {
                 var higherPlaceBlock = GetGrid(gridX, gridY + 1, gridZ);
                 //床のあるBlockまたはstepの場合
-                if (block.block.transform.position.y > block.floor.transform.position.y) {
+                if (block.transform.position.y > block.floor.transform.position.y) {
                     //床が下にある場合自身のmovableFlagをtrueに変更
                     block.movableFlag = true;
                     var dawnPlaceBlock = GetGrid(gridX, gridY + 1, gridZ);
@@ -201,25 +210,25 @@ namespace AgonyCubeMainStage {
             var southBlock = GetGrid(gridX, gridY, gridZ - 1);//南
             var westBlock = GetGrid(gridX - 1, gridY, gridZ);//西
 
-            if (northBlock != null && northBlock.BlockId > 0) {
+            if (northBlock != null) {
                 block.adjacentBlock[0] = northBlock;
             }
             else {
                 block.adjacentBlock[0] = null;
             }
-            if (eastBlock != null && eastBlock.BlockId > 0) {
+            if (eastBlock != null) {
                 block.adjacentBlock[1] = eastBlock;
             }
             else {
                 block.adjacentBlock[1] = null;
             }
-            if (southBlock != null && southBlock.BlockId > 0) {
+            if (southBlock != null) {
                 block.adjacentBlock[2] = southBlock;
             }
             else {
                 block.adjacentBlock[2] = null;
             }
-            if (westBlock != null && westBlock.BlockId > 0) {
+            if (westBlock != null) {
                 block.adjacentBlock[3] = westBlock;
             }
             else {
@@ -291,9 +300,10 @@ namespace AgonyCubeMainStage {
 
             gridWidth = maxGridX + 1;
             gridLength = maxGridZ + 1;
-            gridHeight = maxGridY + 1;
+            gridHeight = maxGridY;
 
-            gridData = new Block[gridWidth * gridLength * gridHeight];
+            blockHeight = maxGridY + 1;
+            gridData = new Block[gridWidth * gridLength * blockHeight];
 
             UpdateGridData();
         }
@@ -329,7 +339,7 @@ namespace AgonyCubeMainStage {
                 for (var gridZ = 0; gridZ < gridLength; gridZ++) {
                     for (var gridX = 0; gridX < gridWidth; gridX++) {
                         if (gridY != posi.y) {
-                            GetGrid(gridX, gridY, gridZ).block.SetActive(false);
+                            GetGrid(gridX, gridY, gridZ).transform.gameObject.SetActive(false);
                         }
                     }
                 }
@@ -341,7 +351,7 @@ namespace AgonyCubeMainStage {
             for (var gridY = 0; gridY < gridHeight; gridY++) {
                 for (var gridZ = 0; gridZ < gridLength; gridZ++) {
                     for (var gridX = 0; gridX < gridWidth; gridX++) {
-                        GetGrid(gridX, gridY, gridZ).block.SetActive(true);
+                        GetGrid(gridX, gridY, gridZ).transform.gameObject.SetActive(true);
                     }
                 }
             }
@@ -355,7 +365,7 @@ namespace AgonyCubeMainStage {
 
                 for (var gridY = 0; gridY < gridHeight; gridY++) {
                     for (var gridZ = 0; gridZ < gridLength; gridZ++) {
-                        GetGrid(grid.x, gridY, gridZ).block.transform.RotateAround
+                        GetGrid(grid.x, gridY, gridZ).transform.RotateAround
                             (new Vector3(block.transform.position.x, (gridHeight * gridSize / 2) - 1, (gridLength * gridSize / 2) - 1),
                             Vector3.right, 180);
                     }
@@ -369,7 +379,7 @@ namespace AgonyCubeMainStage {
             if (player.gridPoint.y != grid.y) {
                 for (var gridZ = 0; gridZ < gridLength; gridZ++) {
                     for (var gridX = 0; gridX < gridWidth; gridX++) {
-                        GetGrid(gridX, grid.y, gridZ).block.transform.RotateAround
+                        GetGrid(gridX, grid.y, gridZ).transform.RotateAround
                             (new Vector3((gridWidth * gridSize / 2) - 1, block.transform.position.y, (gridLength * gridSize / 2) - 1),
                             Vector3.up, 180);
                     }
@@ -382,7 +392,7 @@ namespace AgonyCubeMainStage {
             if (player.gridPoint.z != grid.z) {
                 for (var gridY = 0; gridY < gridHeight; gridY++) {
                     for (var gridX = 0; gridX < gridWidth; gridX++) {
-                        GetGrid(gridX, gridY, grid.z).block.transform.RotateAround
+                        GetGrid(gridX, gridY, grid.z).transform.RotateAround
                             (new Vector3((gridWidth * gridSize / 2) - 1, (gridHeight * gridSize / 2) - 1, block.transform.position.z),
                             Vector3.forward, 180);
                     }
