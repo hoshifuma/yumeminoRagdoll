@@ -8,24 +8,35 @@ namespace AgonyCubeMainStage {
 
         //マウスの入力に応じた回転させる速度
         public Vector2 RotationSpeed;
-        //y軸の1度に回転させる角度
-        public float RotationRadian;
         //x軸の最大回転角度
         public float MaxXRotation;
+        //前回の角度を保存
         private Vector2 LastRotation;
+        //前のフレームのマウス位置を保存
         private Vector2 LastMousePosition;
+        //現在のマウス位置
         private Vector2 InputMousePosition;
-        private Vector2 NewAngle = new Vector2(0, 0);
+        //アングルの変更を保存
+        private Vector2 newAngle = new Vector2(0, 0);
+        //Y軸の次のアングル
+        private float nextAngle = 0;
+        //
+        private float angleFlame;
+        //
+        public float angleSecond;
+        //前のフレームと現在のマウスの入力差を保存
         private float XRotation = 0;
         private float YRotarion = 0;
-
+        //マウス入力の誤差
         public float errorRange;
+        //クリックされたのがBlockかを判定
         private int HitCheck = 0;
+        //Blockのレイヤー
         public LayerMask Cube;
         //現在のモードの管理　falseの場合パズルモード
-       // public bool CheckMode = false;
+        // public bool CheckMode = false;
         //falseの場合９０度回転
-       // public bool CheckSpin = false;
+        // public bool CheckSpin = false;
         // Use this for initialization
         void Start() {
 
@@ -39,7 +50,7 @@ namespace AgonyCubeMainStage {
 
             if (Mathf.Abs(horizontal) < 0.1f && Mathf.Abs(vertical) < 0.1f) {
                 if (Input.GetMouseButtonDown(0)) {
-                    LastRotation = NewAngle;
+                    LastRotation = newAngle;
                     LastMousePosition = Input.mousePosition;
                     InputMousePosition = Input.mousePosition;
                     // Cubeと交差している場合
@@ -56,59 +67,95 @@ namespace AgonyCubeMainStage {
                 }
                 if (HitCheck == 1) {
                     if (Input.GetMouseButton(0)) {
-                        
-                            //パズルモードの場合
-                            if (LastRotation.y == NewAngle.y) {
-                                XRotation = LastMousePosition.y - Input.mousePosition.y;
-                                if (XRotation > errorRange || XRotation < -errorRange) {
-                                    //マウスがy軸に一定以上の入力がある場合
-                                    NewAngle.x += (XRotation - errorRange) * RotationSpeed.x;
-                                    if (NewAngle.x > MaxXRotation) {
-                                        //角度が最大値より大きい場合最大値に変更
-                                        NewAngle.x = MaxXRotation;
-                                    }
-                                    else if (NewAngle.x < -MaxXRotation) {
-                                        //角度が最小値より小さい場合最小値に変更
-                                        NewAngle.x = -MaxXRotation;
-                                    }
+
+                        //パズルモードの場合
+                        if (LastRotation.y == newAngle.y) {
+                            //xのマウス入力がない場合
+                            //マウスのｘ入力を求める
+                            XRotation = LastMousePosition.y - Input.mousePosition.y;
+                            if (Mathf.Abs(XRotation) > errorRange) {
+                                //マウスがyに一定以上の入力がある場合
+                               
+                                newAngle.x += (XRotation - errorRange) * RotationSpeed.x;
+                                if (newAngle.x > MaxXRotation) {
+                                    //角度が最大値より大きい場合最大値に変更
+                                    newAngle.x = MaxXRotation;
+                                }
+                                else if (newAngle.x < -MaxXRotation) {
+                                    //角度が最小値より小さい場合最小値に変更
+                                    newAngle.x = -MaxXRotation;
                                 }
                             }
-                        
-                       // if (CheckSpin == true) {
-                            if (LastRotation.x == NewAngle.x) {
-                                YRotarion = LastMousePosition.x - Input.mousePosition.x;
-                                if (YRotarion > errorRange || YRotarion < -errorRange) {
-                                    NewAngle.y -= YRotarion * RotationSpeed.y;
-                                }
+                        }
+
+                        // if (CheckSpin == true) {
+                        if (LastRotation.x == newAngle.x) {
+                            //yのマウス入力がない場合
+                            //マウスのy入力を求める
+                            YRotarion = LastMousePosition.x - Input.mousePosition.x;
+                            if (Mathf.Abs(YRotarion) > errorRange) {
+                                //マウス入力が誤差より大きい場合
+                                angleFlame = 0;
+                                //newAngle.yを変更
+                                newAngle.y -= YRotarion * RotationSpeed.y;
                             }
-                      //  }
+                        }
+                        //  }
+                        
                         LastMousePosition = Input.mousePosition;
-                        transform.localEulerAngles = NewAngle;
+                      
                     }
 
                     if (Input.GetMouseButtonUp(0)) {
-                        Debug.Log(NewAngle.y);
-                            if (NewAngle.y <= 360) {
-                                NewAngle.y -= 360;
+                        
+                        if (newAngle.y > 360) {
+                            
+                            while(newAngle.y > 360) {
+                                newAngle.y -= 360;
                             }
-                            else if (NewAngle.y < 0) {
-                                NewAngle.y += 360;
+                        }
+                        else if (newAngle.y < 0) {
+                            
+                            while (newAngle.y < 0) {
+                                newAngle.y += 360;
                             }
-                            if (45 <= NewAngle.y && NewAngle.y < 135) {
-                                NewAngle.y = 90;
+                        }
+
+                        Debug.Log(newAngle.y);
+                        if (45 <= newAngle.y && newAngle.y < 135) {
+                            nextAngle = 90;
+                            angleFlame = nextAngle - newAngle.y;
+                            angleFlame /= angleSecond;
+                        }
+                        else if (135 <= newAngle.y && newAngle.y < 225) {
+                            nextAngle = 180;
+                            angleFlame = nextAngle - newAngle.y;
+                            angleFlame /= angleSecond;
+                        }
+                        else if (225 <= newAngle.y && newAngle.y < 315) {
+                            nextAngle = 270;
+                            angleFlame = nextAngle - newAngle.y;
+                            angleFlame /= angleSecond;
+                        }
+                        else {
+                            nextAngle = 0;
+                            if(newAngle.y > 45) {
+                                newAngle.y -= 360;
                             }
-                            else if (135 <= NewAngle.y && NewAngle.y < 225) {
-                                NewAngle.y = 180;
-                            }
-                            else if (225 <= NewAngle.y && NewAngle.y < 315) {
-                                NewAngle.y = 270;
-                            }
-                            else if (315 <= NewAngle.y && NewAngle.y < 45) {
-                                NewAngle.y = 0;
-                            }
-                       // }
-                        transform.localEulerAngles = NewAngle;
+                            angleFlame = nextAngle - newAngle.y;
+                            angleFlame /= angleSecond;
+                        }
+                        // }
                     }
+                    if(Mathf.Abs(newAngle.y - nextAngle) < 0.5) {
+                        newAngle.y = nextAngle;
+                        angleFlame = 0;
+                    }
+                    else {
+                        newAngle.y += angleFlame;
+                    }
+
+                    transform.localEulerAngles = newAngle;
                 }
             }
             else {
@@ -118,16 +165,6 @@ namespace AgonyCubeMainStage {
             }
         }
 
-        ////『モードチェンジ』ボタンが押されたら実行
-        //public void ChangeMode() {
-        //    CheckMode = !CheckMode;
-        //    //x軸の角度を0に戻す
-        //    NewAngle.x = 0;
-        //    transform.localEulerAngles = NewAngle;
-        //}
-
-        //public void ChangeSpin() {
-        //    CheckSpin = !CheckSpin;
-        //}
+        
     }
 }
