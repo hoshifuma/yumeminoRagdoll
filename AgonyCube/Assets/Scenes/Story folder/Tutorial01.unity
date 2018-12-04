@@ -1401,7 +1401,6 @@ GameObject:
   - component: {fileID: 680938772}
   - component: {fileID: 680938779}
   - component: {fileID: 680938783}
-  - component: {fileID: 680938782}
   - component: {fileID: 680938785}
   - component: {fileID: 680938784}
   - component: {fileID: 680938789}
@@ -1420,6 +1419,8 @@ GameObject:
   - component: {fileID: 680938791}
   - component: {fileID: 680938798}
   - component: {fileID: 680938778}
+  - component: {fileID: 680938782}
+  - component: {fileID: 680938799}
   m_Layer: 0
   m_Name: Flowchart
   m_TagString: Untagged
@@ -1497,6 +1498,7 @@ MonoBehaviour:
   commandList:
   - {fileID: 680938782}
   - {fileID: 680938778}
+  - {fileID: 680938799}
   - {fileID: 680938777}
   - {fileID: 680938784}
   - {fileID: 680938789}
@@ -1545,7 +1547,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 680938774}
   selectedCommands:
-  - {fileID: 680938778}
+  - {fileID: 680938782}
   variables: []
   description: 
   stepPause: 1
@@ -1605,24 +1607,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 680938771}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
+  m_Script: {fileID: 11500000, guid: f608b8c9fb3044200aac956492d8d586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 31
+  itemId: 30
   indentLevel: 0
-  storyText: "\u3053\u308C\u306F\u904A\u3070\u308C\u306A\u304F\u306A\u3063\u305F\u304A\u3082\u3061\u3083\u305F\u3061\u306E\u7269\u8A9E"
-  description: 
-  character: {fileID: 683968348}
-  portrait: {fileID: 0}
-  voiceOverClip: {fileID: 0}
-  showAlways: 1
-  showCount: 1
-  extendPrevious: 0
-  fadeWhenDone: 1
-  waitForClick: 1
-  stopVoiceover: 1
-  waitForVO: 0
-  setSayDialog: {fileID: 0}
+  conversationText:
+    stringRef: {fileID: 0}
+    stringVal: "Narration:{flash = 1}\u2015\u2015\u2015\u3068\u3042\u308B\u5C11\u5973\u306E\u62BC\u5165\u308C\u306E\u4E2D\u2015\u2015\u2015{duration}\n\n{size=80}\u3053\u308C\u306F\u904A\u3070\u308C\u306A\u304F\u306A\u3063\u305F\u304A\u3082\u3061\u3083\u305F\u3061\u306E{/size}{color=blue}{/b}\u7269\u8A9E"
+  clearPrevious:
+    booleanRef: {fileID: 0}
+    booleanVal: 1
+  waitForInput:
+    booleanRef: {fileID: 0}
+    booleanVal: 1
+  waitForSeconds:
+    floatRef: {fileID: 0}
+    floatVal: 0
+  fadeWhenDone:
+    booleanRef: {fileID: 0}
+    booleanVal: 1
 --- !u!114 &680938779
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -1714,24 +1718,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 680938771}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
+  m_Script: {fileID: 11500000, guid: f608b8c9fb3044200aac956492d8d586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: 9
+  itemId: 31
   indentLevel: 0
-  storyText: "\u2015\u2015\u2015\u3068\u3042\u308B\u5C11\u5973\u306E\u62BC\u5165\u308C\u306E\u4E2D\u2015\u2015\u2015"
-  description: 
-  character: {fileID: 683968348}
-  portrait: {fileID: 0}
-  voiceOverClip: {fileID: 0}
-  showAlways: 1
-  showCount: 1
-  extendPrevious: 0
-  fadeWhenDone: 1
-  waitForClick: 1
-  stopVoiceover: 1
-  waitForVO: 0
-  setSayDialog: {fileID: 0}
+  conversationText:
+    stringRef: {fileID: 0}
+    stringVal: "Narration :{w=2}{s=0}\u2015\u2015\u2015\u3068\u3042\u308B\u5C11\u5973\u306E\u62BC\u5165\u308C\u306E\u4E2D\u2015\u2015\u2015{/s}{/w}\n\n{w=2}{s=0}\u3053\u308C\u306F\u904A\u3070\u308C\u306A\u304F\u306A\u3063\u305F\u304A\u3082\u3061\u3083\u305F\u3061\u306E\u7269\u8A9E{/s}{/w}"
+  clearPrevious:
+    booleanRef: {fileID: 0}
+    booleanVal: 1
+  waitForInput:
+    booleanRef: {fileID: 0}
+    booleanVal: 1
+  waitForSeconds:
+    floatRef: {fileID: 0}
+    floatVal: 0
+  fadeWhenDone:
+    booleanRef: {fileID: 0}
+    booleanVal: 1
 --- !u!114 &680938783
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -2140,6 +2146,34 @@ MonoBehaviour:
   fadeColor: {r: 0, g: 0, b: 0, a: 1}
   fadeTexture: {fileID: 0}
   targetCamera: {fileID: 0}
+--- !u!114 &680938799
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 680938771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f608b8c9fb3044200aac956492d8d586, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 32
+  indentLevel: 0
+  conversationText:
+    stringRef: {fileID: 0}
+    stringVal: "Narration Character colorred:\u2015\u2015\u2015\u3068\u3042\u308B\u5C11\u5973\u306E\u62BC\u5165\u308C\u306E\u4E2D\u2015\u2015\u2015\n\n\u3053\u308C\u306F\u904A\u3070\u308C\u306A\u304F\u306A\u3063\u305F\u304A\u3082\u3061\u3083\u305F\u3061\u306E\u7269\u8A9E"
+  clearPrevious:
+    booleanRef: {fileID: 0}
+    booleanVal: 1
+  waitForInput:
+    booleanRef: {fileID: 0}
+    booleanVal: 1
+  waitForSeconds:
+    floatRef: {fileID: 0}
+    floatVal: 0
+  fadeWhenDone:
+    booleanRef: {fileID: 0}
+    booleanVal: 1
 --- !u!1 &683968347
 GameObject:
   m_ObjectHideFlags: 0
@@ -2300,14 +2334,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a0bbe22c246e4c78ad8e9816cbae9d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeDuration: 0.25
+  fadeDuration: 1
   continueButton: {fileID: 1380371824}
   dialogCanvas: {fileID: 831745902}
   nameText: {fileID: 0}
   storyText: {fileID: 456434222}
   characterImage: {fileID: 47130714}
   fitTextWithImage: 1
-  closeOtherDialogs: 0
+  closeOtherDialogs: 1
 --- !u!224 &831745900
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2340,7 +2374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43b85556abd314f3f870c18c013fdcef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clickMode: 1
+  clickMode: 2
   nextClickDelay: 0
   cancelEnabled: 1
   ignoreMenuClicks: 1
@@ -2497,10 +2531,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTextObject: {fileID: 456434218}
   punchObject: {fileID: 1440408848}
-  writingSpeed: 10
-  punctuationPause: 0.25
+  writingSpeed: 1
+  punctuationPause: 1
   hiddenTextColor: {r: 1, g: 1, b: 1, a: 0}
-  writeWholeWords: 0
+  writeWholeWords: 1
   forceRichText: 1
   instantComplete: 1
 --- !u!114 &831745906
@@ -2515,7 +2549,7 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
+  m_IgnoreReversedGraphics: 0
   m_BlockingObjects: 3
   m_BlockingMask:
     serializedVersion: 2
