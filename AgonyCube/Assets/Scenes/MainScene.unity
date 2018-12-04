@@ -1389,6 +1389,30 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d98057970537a24eb744c6f11fd1d1c, type: 3}
   m_IsPrefabAsset: 0
+--- !u!1 &781194855 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1427167243503556, guid: 7f1c89086e8bf5147a37df74fa102cd0,
+    type: 2}
+  m_PrefabInternal: {fileID: 1847399894}
+--- !u!114 &781194856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 781194855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac4536d82d13a9b45b64b804e6013ea7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 1
+  Gravity: 9
+  target: {x: 0, y: 0, z: 0}
+  mainCamera: {fileID: 1068177086}
+  stage: {fileID: 1972502963}
+  gridPoint: {x: 0, y: 0, z: 0}
+  locomotionSpeed: 1
+  playerState: 0
 --- !u!4 &797915399 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4736335527154670, guid: 1869220f4f54cd1438ffdb38f9896c6a,
@@ -1546,7 +1570,7 @@ MonoBehaviour:
   choice2: {fileID: 0}
   mainCamera: {fileID: 1068177086}
   stage: {fileID: 1972502963}
-  player: {fileID: 1951694624}
+  player: {fileID: 781194856}
 --- !u!4 &870156730
 Transform:
   m_ObjectHideFlags: 0
@@ -3368,9 +3392,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1840791006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91a5ddca96c12c440bc5ac22d6694a75, type: 3}
+  m_Script: {fileID: 11500000, guid: 78eed431f155a6b409eaef1a6f9086bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextScene: Story1-2
 --- !u!1001 &1847399894
 Prefab:
   m_ObjectHideFlags: 0
@@ -3437,6 +3462,7 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114237464161460478, guid: 7f1c89086e8bf5147a37df74fa102cd0, type: 2}
+    - {fileID: 114905105606287392, guid: 7f1c89086e8bf5147a37df74fa102cd0, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 7f1c89086e8bf5147a37df74fa102cd0, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &1864943066
@@ -3541,12 +3567,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4166635827563268, guid: 7f1c89086e8bf5147a37df74fa102cd0,
     type: 2}
   m_PrefabInternal: {fileID: 1847399894}
---- !u!114 &1951694624 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114905105606287392, guid: 7f1c89086e8bf5147a37df74fa102cd0,
-    type: 2}
-  m_PrefabInternal: {fileID: 1847399894}
-  m_Script: {fileID: 11500000, guid: 6322015459525b643a528d79ad7db6d5, type: 3}
 --- !u!4 &1955254912 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4736335527154670, guid: 1869220f4f54cd1438ffdb38f9896c6a,
@@ -3662,7 +3682,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridData: []
   gridSize: 2
-  player: {fileID: 1951694624}
+  player: {fileID: 781194856}
 --- !u!1001 &1982812299
 Prefab:
   m_ObjectHideFlags: 0
