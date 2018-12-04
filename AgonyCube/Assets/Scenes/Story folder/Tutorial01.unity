@@ -1252,7 +1252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_pivot: {x: 0, y: 0}
-  m_anchorPosition: 4
+  m_anchorPosition: 6
   m_rect:
     serializedVersion: 2
     x: 0
@@ -1534,7 +1534,7 @@ MonoBehaviour:
   scrollPos: {x: -19.009033, y: -0.5068481}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
-  blockViewHeight: 361
+  blockViewHeight: 568
   zoom: 1
   scrollViewRect:
     serializedVersion: 2
@@ -1544,7 +1544,8 @@ MonoBehaviour:
     height: 859
   selectedBlocks:
   - {fileID: 680938774}
-  selectedCommands: []
+  selectedCommands:
+  - {fileID: 680938778}
   variables: []
   description: 
   stepPause: 1
@@ -1598,7 +1599,7 @@ MonoBehaviour:
   setSayDialog: {fileID: 0}
 --- !u!114 &680938778
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 680938771}
@@ -2121,7 +2122,7 @@ MonoBehaviour:
     booleanVal: 1
 --- !u!114 &680938798
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 680938771}
@@ -2280,7 +2281,6 @@ GameObject:
   - component: {fileID: 831745904}
   - component: {fileID: 831745901}
   - component: {fileID: 831745903}
-  - component: {fileID: 831745909}
   m_Layer: 5
   m_Name: Narration SayDialog
   m_TagString: Untagged
@@ -2554,24 +2554,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!95 &831745909
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 831745898}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a610cf9d2ed14414c9bbb22a2f964707, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &854910557
 GameObject:
   m_ObjectHideFlags: 0
