@@ -132,7 +132,7 @@ namespace AgonyCubeMainStage {
             transform.LookAt(nexttarget);
             playerState = PlayerState.Locmotion;
         }
-
+        //カメラの向きと入力された向きに応じて移動場所を指定
         public void CameraRootPlayerMoveChanger(int input) {
             int direction = -1;
             int dx = 0;
@@ -222,115 +222,159 @@ namespace AgonyCubeMainStage {
                     // ひとつ先のグリッドが通行可能かを判定
                     if (currentBlock.adjacentBlock[direction] != null &&
                         currentBlock.adjacentBlock[direction].GetComponent<Block>().movableFlag) {
-                        if(currentBlock.adjacentBlock[direction].BlockId == 3) {
-
-                        }else {
-
+                        if (currentBlock.adjacentBlock[direction].BlockId != 3) {
+                            gridPoint.x += dx;
+                            gridPoint.z += dz;
+                            SetPlayerTarget(gridPoint);
                         }
+                        else {
+                            var block = GetStepFrontAndBack(stage.GetGrid(gridPoint.x + dx, gridPoint.y, gridPoint.z + dz));
+                            Debug.Log(block[1]);
+                                if (block[1] != null && currentBlock.blockNumber == block[1].blockNumber) {
+                                    // 移動を確定する
+                                    gridPoint.x += dx;
+                                    gridPoint.z += dz;
+                                    SetPlayerTarget(gridPoint);
+                                }
+                        }
+                        
+                    }
+                }
+                else {
+                    if (currentBlock.adjacentBlock[direction] != null) {
+                        var block = GetStepFrontAndBack(currentBlock);
+                        if(block[0] != null && block[0].blockNumber == stage.GetGrid(gridPoint.x + dx, gridPoint.y + 1, gridPoint.z + dz).blockNumber) {
+                            // 移動を確定する
+                            gridPoint.x += dx;
+                            gridPoint.z += dz;
+                            gridPoint.y += 1;
+                            SetPlayerTarget(gridPoint);
+                        }else if(block[1] != null && block[1].blockNumber == stage.GetGrid(gridPoint.x + dx, gridPoint.y, gridPoint.z + dz).blockNumber) {
+                            gridPoint.x += dx;
+                            gridPoint.z += dz;
+                            SetPlayerTarget(gridPoint);
+                        }
+                        
+                    }
+                }
+            }
+        }
+
+        private void StepFrontAndBackCheck(int direction, int dx, int dz, Block currentBlock) {
+            var rad = currentBlock.transform.localEulerAngles.y;
+            if (rad == 0) {
+                if (dz == 1) {
+
+                    if (stage.GetGrid(gridPoint.x, gridPoint.y + 1, gridPoint.z + 1) != null &&
+                        stage.GetGrid(gridPoint.x, gridPoint.y + 1, gridPoint.z + 1).movableFlag) {
+                        gridPoint.z += 1;
+                        gridPoint.y += 1;
+                        SetPlayerTarget(gridPoint);
+                    }
+                }
+                else if (dz == -1) {
+                    // ひとつ先のグリッドが通行可能かを判定
+                    if (currentBlock.adjacentBlock[direction] != null &&
+                        currentBlock.adjacentBlock[direction].GetComponent<Block>().movableFlag) {
                         // 移動を確定する
                         gridPoint.x += dx;
                         gridPoint.z += dz;
                         SetPlayerTarget(gridPoint);
                     }
                 }
-                else {
-                    if (currentBlock.adjacentBlock[direction] != null) {
-                        var rad = currentBlock.transform.localEulerAngles.y;
-                        if (rad == 0) {
-                            if (dz == 1) {
-                                if (currentBlock.adjacentBlock[direction] != null) {
-                                    if(stage.GetGrid(gridPoint.x, gridPoint.y + 1, gridPoint.z + 1) != null &&
-                                        stage.GetGrid(gridPoint.x, gridPoint.y + 1, gridPoint.z + 1).movableFlag) {
-                                        gridPoint.z += 1;
-                                        gridPoint.y += 1;
-                                        SetPlayerTarget(gridPoint);
-                                    }
-                                }
-                            }else if(dz == -1) {
-                                // ひとつ先のグリッドが通行可能かを判定
-                                if (currentBlock.adjacentBlock[direction] != null &&
-                                    currentBlock.adjacentBlock[direction].GetComponent<Block>().movableFlag) {
-                                    // 移動を確定する
-                                    gridPoint.x += dx;
-                                    gridPoint.z += dz;
-                                    SetPlayerTarget(gridPoint);
-                                }
-                            }
 
-                        }
-                        else if (rad == 90) {
-                            if (dx == 1) {
-                                if (currentBlock.adjacentBlock[direction] != null) {
-                                    if (stage.GetGrid(gridPoint.x, gridPoint.y + 1, gridPoint.z + 1) != null &&
-                                        stage.GetGrid(gridPoint.x, gridPoint.y + 1, gridPoint.z + 1).movableFlag) {
-                                        gridPoint.x += 1;
-                                        gridPoint.y += 1;
-                                        SetPlayerTarget(gridPoint);
-                                    }
-                                }
-                            }
-                            else if (dx == -1) {
-                                // ひとつ先のグリッドが通行可能かを判定
-                                if (currentBlock.adjacentBlock[direction] != null &&
-                                    currentBlock.adjacentBlock[direction].GetComponent<Block>().movableFlag) {
-                                    // 移動を確定する
-                                    gridPoint.x += dx;
-                                    gridPoint.z += dz;
-                                    SetPlayerTarget(gridPoint);
-                                }
-                            }
-                        }
-                        else if (rad == 180) {
-                            if (dz == -1) {
-                                if (currentBlock.adjacentBlock[direction] != null) {
-                                    if (stage.GetGrid(gridPoint.x, gridPoint.y + 1, gridPoint.z + 1) != null &&
-                                        stage.GetGrid(gridPoint.x, gridPoint.y + 1, gridPoint.z + 1).movableFlag) {
-                                        gridPoint.z += 1;
-                                        gridPoint.y += 1;
-                                        SetPlayerTarget(gridPoint);
-                                    }
-                                }
-                            }
-                            else if (dz == 1) {
-                                // ひとつ先のグリッドが通行可能かを判定
-                                if (currentBlock.adjacentBlock[direction] != null &&
-                                    currentBlock.adjacentBlock[direction].GetComponent<Block>().movableFlag) {
-                                    // 移動を確定する
-                                    gridPoint.x += dx;
-                                    gridPoint.z += dz;
-                                    SetPlayerTarget(gridPoint);
-                                }
-                            }
-                        }
-                        else {
-                            if (dx == -1) {
-                                if (currentBlock.adjacentBlock[direction] != null) {
-                                    if (stage.GetGrid(gridPoint.x, gridPoint.y + 1, gridPoint.z + 1) != null &&
-                                         stage.GetGrid(gridPoint.x, gridPoint.y + 1, gridPoint.z + 1).movableFlag) {
-                                        gridPoint.x += 1;
-                                        gridPoint.y += 1;
-                                        SetPlayerTarget(gridPoint);
-                                    }
-                                }
-                            }
-                            else if (dx == 1) {
-                                // ひとつ先のグリッドが通行可能かを判定
-                                if (currentBlock.adjacentBlock[direction] != null &&
-                                    currentBlock.adjacentBlock[direction].GetComponent<Block>().movableFlag) {
-                                    // 移動を確定する
-                                    gridPoint.x += dx;
-                                    gridPoint.z += dz;
-                                    SetPlayerTarget(gridPoint);
-                                }
-                            }
-                        }
+            }
+            else if (rad == 90) {
+                if (dx == 1) {
+                    if (stage.GetGrid(gridPoint.x, gridPoint.y + 1, gridPoint.z + 1) != null &&
+                        stage.GetGrid(gridPoint.x, gridPoint.y + 1, gridPoint.z + 1).movableFlag) {
+                        gridPoint.x += 1;
+                        gridPoint.y += 1;
+                        SetPlayerTarget(gridPoint);
+                    }
+                }
+                else if (dx == -1) {
+                    // ひとつ先のグリッドが通行可能かを判定
+                    if (currentBlock.adjacentBlock[direction] != null &&
+                        currentBlock.adjacentBlock[direction].GetComponent<Block>().movableFlag) {
+                        // 移動を確定する
+                        gridPoint.x += dx;
+                        gridPoint.z += dz;
+                        SetPlayerTarget(gridPoint);
+                    }
+                }
+            }
+            else if (rad == 180) {
+                if (dz == -1) {
+                    if (stage.GetGrid(gridPoint.x, gridPoint.y + 1, gridPoint.z + 1) != null &&
+                        stage.GetGrid(gridPoint.x, gridPoint.y + 1, gridPoint.z + 1).movableFlag) {
+                        gridPoint.z += 1;
+                        gridPoint.y += 1;
+                        SetPlayerTarget(gridPoint);
+                    }
+                }
+                else if (dz == 1) {
+                    // ひとつ先のグリッドが通行可能かを判定
+                    if (currentBlock.adjacentBlock[direction] != null &&
+                        currentBlock.adjacentBlock[direction].GetComponent<Block>().movableFlag) {
+                        // 移動を確定する
+                        gridPoint.x += dx;
+                        gridPoint.z += dz;
+                        SetPlayerTarget(gridPoint);
+                    }
+                }
+            }
+            else {
+                if (dx == -1) {
+                    if (stage.GetGrid(gridPoint.x, gridPoint.y + 1, gridPoint.z + 1) != null &&
+                         stage.GetGrid(gridPoint.x, gridPoint.y + 1, gridPoint.z + 1).movableFlag) {
+                        gridPoint.x += 1;
+                        gridPoint.y += 1;
+                        SetPlayerTarget(gridPoint);
+                    }
+                }
+                else if (dx == 1) {
+                    // ひとつ先のグリッドが通行可能かを判定
+                    if (currentBlock.adjacentBlock[direction] != null &&
+                        currentBlock.adjacentBlock[direction].GetComponent<Block>().movableFlag) {
+                        // 移動を確定する
+                        gridPoint.x += dx;
+                        gridPoint.z += dz;
+                        SetPlayerTarget(gridPoint);
                     }
                 }
             }
         }
 
-        public Block[] GetStepFrontAndBack(int move, Block currentBlock) {
-            return null;
-        } 
+        public Block[] GetStepFrontAndBack(Block stepBlock) {
+            var grid = stage.WorldPointToGrid(stepBlock.transform.position);
+            var rad = stepBlock.transform.localEulerAngles.y;
+            if (rad == 0) {
+                Block[] block = new Block[2];
+                block[0] = stage.GetGrid(grid.x, grid.y + 1, grid.z + 1);
+                block[1] = stage.GetGrid(grid.x, grid.y, grid.z - 1);
+                return block;
+            }
+            else if (rad == 90) {
+                Block[] block = new Block[2];
+                block[0] = stage.GetGrid(grid.x + 1, grid.y + 1, grid.z);
+                block[1] = stage.GetGrid(grid.x - 1, grid.y, grid.z);
+                return block;
+
+            }
+            else if (rad == 180) {
+                Block[] block = new Block[2];
+                block[0] = stage.GetGrid(grid.x, grid.y + 1, grid.z - 1);
+                block[1] = stage.GetGrid(grid.x, grid.y, grid.z + 1);
+                return block;
+            }
+            else {
+                Block[] block = new Block[2];
+                block[0] = stage.GetGrid(grid.x - 1, grid.y + 1, grid.z);
+                block[1] = stage.GetGrid(grid.x + 1, grid.y, grid.z);
+                return block;
+            }
+
+        }
     }
 }
