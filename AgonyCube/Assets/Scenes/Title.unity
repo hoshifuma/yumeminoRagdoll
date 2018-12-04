@@ -919,6 +919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b78dcc4e1bfbe254abbe2cf92e2f3ab7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DontDestroyEnabled: 1
 --- !u!82 &1084243938
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1566,14 +1567,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5372549, g: 0.972549, b: 0.79607844, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: a21c88b6a4541cd41a3631e3d80718d2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2114,7 +2115,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -150}
+  m_AnchoredPosition: {x: 0, y: -300}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1703825396
@@ -2367,7 +2368,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 200}
-  m_SizeDelta: {x: 1280, y: 160}
+  m_SizeDelta: {x: 868, y: 478}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1714303462
 MonoBehaviour:
@@ -2388,7 +2389,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: c8630586a08d99f479d21e002b2cd416, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a6ffb7f9354f52442a626aa9283ea383, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2837,7 +2838,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 6920a526ff0d70e4d8094f130a0b0d80, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6df7e31c58fe9324cb94f153756a036e, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
