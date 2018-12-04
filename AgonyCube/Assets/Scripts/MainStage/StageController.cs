@@ -99,9 +99,13 @@ namespace AgonyCubeMainStage {
 
                 foreach (Transform child in block.transform) {
                     if (child.transform.position.y < block.transform.position.y) {
-                      //  child.gameObject.SetActive(true);
-                        child.tag = "UpAndDown";
-                        child.GetComponent<BoxCollider>().enabled = true;
+                        //  child.gameObject.SetActive(true);
+                        if (child.transform.tag != "Step") {
+                            child.tag = "UpAndDown";
+                        
+                            child.GetComponent<BoxCollider>().enabled = true;
+                        }
+
                         //child.GetComponent<MeshRenderer>().enabled = true;
                     }
                 }
@@ -317,7 +321,10 @@ namespace AgonyCubeMainStage {
                 var grid = GetGrid(gridPoint);
                 grid.movableFlag = false;
                 foreach (Transform wall in child.transform) {
-                    wall.GetComponent<BoxCollider>().enabled = false;
+                    if(wall.transform.tag != "Step") {
+                        wall.GetComponent<BoxCollider>().enabled = false;
+                    }
+       
                     //wall.GetComponent<MeshRenderer>().enabled = false;
                     //wall.gameObject.SetActive(false);
                 }

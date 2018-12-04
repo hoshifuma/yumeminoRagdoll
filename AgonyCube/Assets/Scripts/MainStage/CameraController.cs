@@ -17,7 +17,7 @@ namespace AgonyCubeMainStage {
         //現在のマウス位置
         private Vector2 InputMousePosition;
         //アングルの変更を保存
-        private Vector2 newAngle = new Vector2(0, 0);
+        private Vector2 newAngle = new Vector2(30, 0);
         //Y軸の次のアングル
         private float nextAngle = 0;
         //
