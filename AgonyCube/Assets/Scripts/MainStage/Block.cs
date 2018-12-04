@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AgonyCubeMainStage {
+namespace AgonyCube.MainStage {
     public class Block : MonoBehaviour {
         //ブロックの状態
         public int BlockId = -1;

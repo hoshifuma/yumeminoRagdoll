@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
-namespace AgonyCubeMainStage {
+namespace AgonyCube.MainStage {
     public class GameDirector : MonoBehaviour {
 
         public LayerMask cube;
