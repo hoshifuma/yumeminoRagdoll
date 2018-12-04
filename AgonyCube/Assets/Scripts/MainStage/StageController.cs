@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AgonyCubeMainStage {
+namespace AgonyCube.MainStage {
     public class StageController : MonoBehaviour {
         //グリッドのX軸のサイズ
         int gridWidth = 0;
@@ -88,9 +88,13 @@ namespace AgonyCubeMainStage {
 
                 foreach (Transform child in block.transform) {
                     if (child.transform.position.y > block.transform.position.y) {
-                       // child.gameObject.SetActive(true);
-                        child.tag = "UpAndDown";
-                        child.GetComponent<BoxCollider>().enabled = true;
+                        // child.gameObject.SetActive(true);
+                        if (child.transform.tag != "Step") {
+                            child.tag = "UpAndDown";
+                        
+                            child.GetComponent<BoxCollider>().enabled = true;
+                        }
+                      
                         //child.GetComponent<MeshRenderer>().enabled = true;
                     }
                 }
