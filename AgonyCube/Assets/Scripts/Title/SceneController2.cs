@@ -6,11 +6,12 @@ using UnityEngine.SceneManagement;
 namespace AgonyCube.Title
 {
     // 『タイトル画面』のシーン遷移を管理します。
-    public class SceneController : MonoBehaviour
+    public class SceneController2 : MonoBehaviour
     {
-        // 画面をタップしたら実行されます。
-        public void OnClickTAPButton() {
-            SceneManager.LoadScene("NowLoading");
+        private void Start()
+        {
+            SceneManager.LoadScene("StageSelector");
         }
+
     }
 }

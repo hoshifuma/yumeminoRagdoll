@@ -13,8 +13,16 @@ namespace AgonyCube.MainStage {
         public float Gravity;
         Vector3 moveDirection;
         private Animator animator;
+
+        public Animator doorAnimator;
+
         public Vector3 target;
         private const string key_walk = "Walking";
+
+        // アニメーションID
+        static readonly int openId = Animator.StringToHash("OpenTrigger");
+
+        static readonly int cutId = Animator.StringToHash("Cut");
 
         public GameObject mainCamera;
         // StageControllerを指定
@@ -38,7 +46,7 @@ namespace AgonyCube.MainStage {
             // 移動中
             Locmotion,
             // 「ゲームオーバー演出」
-            GameOver,
+            Cut,
             // 「ステージクリアー演出」
             StageClear,
         }
@@ -109,7 +117,7 @@ namespace AgonyCube.MainStage {
                     }
 
                     break;
-                case PlayerState.GameOver:
+                case PlayerState.Cut:
                     break;
                 case PlayerState.StageClear:
                     GoalPerformance();
@@ -237,23 +245,13 @@ namespace AgonyCube.MainStage {
                         //移動先に動ける場合
                         if (currentBlock.adjacentBlock[direction].BlockId != 3) {
                             //移動先が階段ではない場合
-                            //if(stage.doorGrid != new Vector3Int(gridPoint.x + dx, gridPoint.y, gridPoint.z + dz)) {
-                                //移動を確定する
-                                gridPoint.x += dx;
-                                gridPoint.z += dz;
-                                SetPlayerTarget(gridPoint);
-                            
-                            
+                            CheckCut(dx, 0,dz);
                         }
                         else {
                             //移動先が階段の場合
                             var block = GetStepFrontAndBack(stage.GetGrid(gridPoint.x + dx, gridPoint.y, gridPoint.z + dz));
                             if (block[1] != null && currentBlock.blockNumber == block[1].blockNumber && block[1].movableFlag) {
-                                //移動先の階段の前側にいる場合
-                                // 移動を確定する
-                                gridPoint.x += dx;
-                                gridPoint.z += dz;
-                                SetPlayerTarget(gridPoint);
+                                CheckCut(dx, 0, dz);
                             }
                         }
 
@@ -270,11 +268,7 @@ namespace AgonyCube.MainStage {
                                 //移動先のしたのBlockが階段の場合
                                 var block = GetStepFrontAndBack(nextBlock);
                                 if (currentBlock.blockNumber == block[0].blockNumber) {
-                                    // 移動を確定する
-                                    gridPoint.x += dx;
-                                    gridPoint.z += dz;
-                                    gridPoint.y -= 1;
-                                    SetPlayerTarget(gridPoint);
+                                    CheckCut(dx, -1, dz);
                                 }
                             }
                         }
@@ -290,11 +284,7 @@ namespace AgonyCube.MainStage {
                                     //移動先のしたのBlockが階段の場合
                                     var block1 = GetStepFrontAndBack(nextBlock);
                                     if (currentBlock.blockNumber == block1[0].blockNumber) {
-                                        // 移動を確定する
-                                        gridPoint.x += dx;
-                                        gridPoint.z += dz;
-                                        gridPoint.y -= 1;
-                                        SetPlayerTarget(gridPoint);
+                                        CheckCut(dx, -1, dz);
                                     }
                                 }
                             }
@@ -315,11 +305,7 @@ namespace AgonyCube.MainStage {
                             //移動先に移動できる場合
                             if (block[0].BlockId != 3) {
                                 //移動先が階段ではない場合
-                                // 移動を確定する
-                                gridPoint.x += dx;
-                                gridPoint.z += dz;
-                                gridPoint.y += 1;
-                                SetPlayerTarget(gridPoint);
+                                CheckCut(dx, 1, dz);
                             }
                             else {
                                 //移動先が階段の場合
@@ -331,11 +317,7 @@ namespace AgonyCube.MainStage {
                                     grid.y -= 1;
                                     Debug.Log(stage.GetGrid(grid).blockNumber);
                                     if (currentBlock.blockNumber == stage.GetGrid(grid).blockNumber) {
-                                        // 移動を確定する
-                                        gridPoint.x += dx;
-                                        gridPoint.z += dz;
-                                        gridPoint.y += 1;
-                                        SetPlayerTarget(gridPoint);
+                                        CheckCut(dx, 1, dz);
                                     }
                                 }
 
@@ -348,20 +330,14 @@ namespace AgonyCube.MainStage {
                             //移動先に動ける場合
                             if (currentBlock.adjacentBlock[direction].BlockId != 3) {
                                 //移動先が階段ではない場合
-                                //移動を確定する
-                                gridPoint.x += dx;
-                                gridPoint.z += dz;
-                                SetPlayerTarget(gridPoint);
+                                CheckCut(dx, 0, dz);
                             }
                             else {
                                 //移動先が階段の場合
                                 var block1 = GetStepFrontAndBack(stage.GetGrid(gridPoint.x + dx, gridPoint.y, gridPoint.z + dz));
                                 if (block[1] != null && currentBlock.blockNumber == block1[1].blockNumber && block1[1].movableFlag) {
                                     //移動先の階段の前側にいる場合
-                                    // 移動を確定する
-                                    gridPoint.x += dx;
-                                    gridPoint.z += dz;
-                                    SetPlayerTarget(gridPoint);
+                                    CheckCut(dx, 0, dz);
                                 }
                             }
 
@@ -378,11 +354,7 @@ namespace AgonyCube.MainStage {
                                     //移動先のしたのBlockが階段の場合
                                     var block1 = GetStepFrontAndBack(nextBlock);
                                     if (currentBlock.blockNumber == block1[0].blockNumber) {
-                                        // 移動を確定する
-                                        gridPoint.x += dx;
-                                        gridPoint.z += dz;
-                                        gridPoint.y -= 1;
-                                        SetPlayerTarget(gridPoint);
+                                        CheckCut(dx, -1, dz);
                                     }
                                 }
                             }
@@ -398,11 +370,7 @@ namespace AgonyCube.MainStage {
                                         //移動先のしたのBlockが階段の場合
                                         var block2 = GetStepFrontAndBack(nextBlock);
                                         if (currentBlock.blockNumber == block2[0].blockNumber) {
-                                            // 移動を確定する
-                                            gridPoint.x += dx;
-                                            gridPoint.z += dz;
-                                            gridPoint.y -= 1;
-                                            SetPlayerTarget(gridPoint);
+                                            CheckCut(dx, -1, dz);
                                         }
                                     }
                                 }
@@ -415,6 +383,50 @@ namespace AgonyCube.MainStage {
             }
         }
 
+        private void CheckCut(int dx,int dy ,int dz) {
+            if (stage.doorGrid != new Vector3Int(gridPoint.x + dx, gridPoint.y + dy, gridPoint.z + dz)) {
+                //移動を確定する
+                gridPoint.x += dx;
+                gridPoint.z += dz;
+                gridPoint.y += dy;
+                SetPlayerTarget(gridPoint);
+
+            }
+            else if (director.scissors) {
+                gridPoint.x += dx;
+                gridPoint.z += dz;
+                gridPoint.y += dy;
+                target = stage.GridToWorldPoint(gridPoint);
+
+                Vector3 nexttarget;
+                nexttarget = target;
+                nexttarget.y = transform.position.y;
+                transform.LookAt(nexttarget);
+
+                StartCoroutine(OnDoorEnter());
+            }
+        }
+        private IEnumerator OnDoorEnter() {
+           
+
+            animator.SetTrigger(cutId);
+
+            doorAnimator.SetTrigger(openId);
+
+            while (true) {
+                var info = doorAnimator.GetCurrentAnimatorStateInfo(0);
+                var info1 = animator.GetCurrentAnimatorStateInfo(0);
+                if (info.normalizedTime > 1.0f && info1.normalizedTime > 1.0f) {
+                    SetPlayerTarget(gridPoint);
+                    break;
+                }
+                yield return null;
+            }
+            stage.doorGrid = new Vector3Int(10, 10, 10);
+            
+
+         
+        }
 
         //指定した階段の前と上った先を返す　0が上った先1が前
         public Block[] GetStepFrontAndBack(Block stepBlock) {

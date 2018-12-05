@@ -27,10 +27,13 @@ EditorBuildSettings:
     path: Assets/Scenes/Story folder/Tutorial03.unity
     guid: b35f3c1e3efc77f41a23a89dcc4da8f7
   - enabled: 1
-    path: Assets/Scenes/Stage2.unity
+    path: Assets/Scenes/Stage Folder/Stage2.unity
     guid: 7647ccbe81694d545915f512ee37903e
   - enabled: 1
-    path: Assets/Scenes/Stage3.unity
+    path: Assets/Scenes/NowLoading.unity
+    guid: 69016bfb34df54d4ab79f9bd7891435a
+  - enabled: 1
+    path: Assets/Scenes/Stage Folder/Stage3.unity
     guid: 8f468beddb1fbc34797b3c8113b92afa
   - enabled: 1
     path: Assets/Result/Result.unity
