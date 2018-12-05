@@ -172,6 +172,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridData: []
   gridSize: 2
+  door: {fileID: 997228588}
+  doorGrid: {x: 0, y: 0, z: 0}
   player: {fileID: 28621229}
 --- !u!4 &50675305
 Transform:
@@ -771,6 +773,7 @@ MonoBehaviour:
   choice1: {fileID: 0}
   choice2: {fileID: 0}
   mainCamera: {fileID: 1480449936}
+  menuPanel: {fileID: 0}
   stage: {fileID: 50675304}
   scissors: 0
   player: {fileID: 28621229}
@@ -1831,6 +1834,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4620081532550004, guid: 7c99411ac12496b4088875e00989a5ea,
     type: 2}
   m_PrefabInternal: {fileID: 1306531699}
+--- !u!1 &997228588 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100012, guid: c4584d8207a937a44a491cd37b6f8cc5,
+    type: 3}
+  m_PrefabInternal: {fileID: 873381706}
 --- !u!1 &1006018794
 GameObject:
   m_ObjectHideFlags: 0
@@ -2578,7 +2586,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startFov: 60
-  endFov: 25
+  endFov: 60
 --- !u!1001 &1541550341
 Prefab:
   m_ObjectHideFlags: 0
