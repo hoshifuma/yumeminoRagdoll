@@ -119,10 +119,12 @@ namespace AgonyCube.MainStage {
 
                 foreach (Transform child in block.transform) {
                     if (child.transform.position.x > block.transform.position.x) {
-                        //child.gameObject.SetActive(true);
-                        child.tag = "RightAndLeft";
-                       child.GetComponent<BoxCollider>().enabled = true;
-                       // child.GetComponent<MeshRenderer>().enabled = true;
+
+                        if (child.transform.tag != "Step") {//child.gameObject.SetActive(true);
+                            child.tag = "RightAndLeft";
+                            child.GetComponent<BoxCollider>().enabled = true;
+                            // child.GetComponent<MeshRenderer>().enabled = true;
+                        }
                     }
                 }
             }
@@ -130,9 +132,11 @@ namespace AgonyCube.MainStage {
                 foreach (Transform child in block.transform) {
                     if (child.transform.position.x < block.transform.position.x) {
                         //child.gameObject.SetActive(true);
-                        child.tag = "RightAndLeft";
-                        child.GetComponent<BoxCollider>().enabled = true;
-                        //child.GetComponent<MeshRenderer>().enabled = true;
+                        if (child.transform.tag != "Step") {
+                            child.tag = "RightAndLeft";
+                            child.GetComponent<BoxCollider>().enabled = true;
+                            //child.GetComponent<MeshRenderer>().enabled = true;
+                        }
                     }
                 }
             }
@@ -140,20 +144,24 @@ namespace AgonyCube.MainStage {
             if (gridZ == gridLength - 1) {
                 foreach (Transform child in block.transform) {
                     if (child.transform.position.z > block.transform.position.z) {
-                       // child.gameObject.SetActive(true);
-                        child.tag = "FrontAndBehind";
-                        child.GetComponent<BoxCollider>().enabled = true;
-                       // child.GetComponent<MeshRenderer>().enabled = true;
+                        // child.gameObject.SetActive(true);
+                        if (child.transform.tag != "Step") {
+                            child.tag = "FrontAndBehind";
+                            child.GetComponent<BoxCollider>().enabled = true;
+                            // child.GetComponent<MeshRenderer>().enabled = true;
+                        }
                     }
                 }
             }
             else if (gridZ == 0) {
                 foreach (Transform child in block.transform) {
                     if (child.transform.position.z < block.transform.position.z) {
-                       // child.gameObject.SetActive(true);
-                        child.tag = "FrontAndBehind";
-                        child.GetComponent<BoxCollider>().enabled = true;
-                        //child.GetComponent<MeshRenderer>().enabled = true;
+                        // child.gameObject.SetActive(true);
+                        if (child.transform.tag != "Step") {
+                            child.tag = "FrontAndBehind";
+                            child.GetComponent<BoxCollider>().enabled = true;
+                            //child.GetComponent<MeshRenderer>().enabled = true;
+                        }
                     }
                 }
             }
@@ -193,7 +201,7 @@ namespace AgonyCube.MainStage {
                 if (block.transform.position.y > block.floor.transform.position.y) {
                     //床が下にある場合自身のmovableFlagをtrueに変更
                     block.movableFlag = true;
-                    var dawnPlaceBlock = GetGrid(gridX, gridY + 1, gridZ);
+                    var dawnPlaceBlock = GetGrid(gridX, gridY - 1, gridZ);
                     if (dawnPlaceBlock != null && dawnPlaceBlock.BlockId == 3) {
                         //下にあるBlockがstepの場合下にあるstepのmovableFlagをfalseに変更
                         dawnPlaceBlock.movableFlag = false;
@@ -242,49 +250,7 @@ namespace AgonyCube.MainStage {
             else {
                 block.adjacentBlock[3] = null;
             }
-            //}
-            //else {
-            //    var rad = block.transform.localEulerAngles.y;
-            //    if (rad == 0) {
-            //        var northBlock = GetGrid(gridX, gridY + 1, gridZ + 1);//北
-            //        var southBlock = GetGrid(gridX, gridY, gridZ - 1);//南
-
-            //        if (northBlock != null && northBlock.movableFlag == true) {
-            //            block.adjacentBlock[0] = northBlock;
-            //        }
-            //        if (southBlock != null && southBlock.movableFlag == true) {
-            //            block.adjacentBlock[2] = southBlock;
-            //        }
-            //    }else if(rad == 90) {
-            //        var eastBlock = GetGrid(gridX + 1, gridY + 1, gridZ);//東
-            //        var westBlock = GetGrid(gridX - 1, gridY, gridZ);//西
-            //        if (eastBlock != null && eastBlock.movableFlag == true) {
-            //            block.adjacentBlock[1] = eastBlock;
-            //        }
-            //        if (westBlock != null && westBlock.movableFlag == true) {
-            //            block.adjacentBlock[3] = westBlock;
-            //        }
-            //    }else if(rad == 180) {
-            //        var northBlock = GetGrid(gridX, gridY, gridZ + 1);//北
-            //        var southBlock = GetGrid(gridX, gridY + 1, gridZ - 1);//南
-
-            //        if (northBlock != null && northBlock.movableFlag == true) {
-            //            block.adjacentBlock[0] = northBlock;
-            //        }
-            //        if (southBlock != null && southBlock.movableFlag == true) {
-            //            block.adjacentBlock[2] = southBlock;
-            //        }
-            //    }else if(rad == 270) {
-            //        var eastBlock = GetGrid(gridX + 1, gridY, gridZ);//東
-            //        var westBlock = GetGrid(gridX - 1, gridY + 1, gridZ);//西
-            //        if (eastBlock != null && eastBlock.movableFlag == true) {
-            //            block.adjacentBlock[1] = eastBlock;
-            //        }
-            //        if (westBlock != null && westBlock.movableFlag == true) {
-            //            block.adjacentBlock[3] = westBlock;
-            //        }
-            //    }
-            // }
+           
         }
         //gridDataの作成
         public void GenerateGridData() {
