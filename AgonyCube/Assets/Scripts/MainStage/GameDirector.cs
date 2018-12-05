@@ -18,7 +18,7 @@ namespace AgonyCube.MainStage {
         //StageControllerを指定
         public StageController stage;
         //ハサミを持っているかを判定
-        public bool scissor = false;
+        public bool scissors = false;
 
         GameState currentState = null;
         public PlayerController player;
