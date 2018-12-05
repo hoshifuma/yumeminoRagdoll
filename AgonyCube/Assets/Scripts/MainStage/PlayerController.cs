@@ -15,16 +15,16 @@ namespace AgonyCube.MainStage {
         private const string key_walk = "Walking";
 
         public GameObject mainCamera;
-        // StageControllerを指定します。
+        // StageControllerを指定
         public StageController stage;
-        // プレイヤーの現在のグリッド座標を指定します。
+        //GameDirectorを指定
+        public GameDirector director;
+        // プレイヤーの現在のグリッド座標を指定
         public Vector3Int gridPoint;
-        // 移動速度を指定します。
+        // 移動速度を指定
         public float locomotionSpeed = 1.0f;
         // 移動を開始した際のワールド座標
         Vector3 startPosition;
-        // 移動開始してからの経過時間
-        float locomotionTime = 0;
 
         // プレイヤーの状態を表します。
         public enum PlayerState {
@@ -102,7 +102,8 @@ namespace AgonyCube.MainStage {
                         Vector3 pos = target;
                         pos.y = transform.position.y;
                         transform.position = pos;
-                        playerState = PlayerState.Idle;
+                        director.ChangeIdleState();
+
                     }
 
                     break;
@@ -131,7 +132,7 @@ namespace AgonyCube.MainStage {
             nexttarget = target;
             nexttarget.y = transform.position.y;
             transform.LookAt(nexttarget);
-            playerState = PlayerState.Locmotion;
+            director.ChangeMoveState();
         }
         //カメラの向きと入力された向きに応じて移動場所を指定
         public void CameraRootPlayerMoveChanger(int input) {
@@ -196,7 +197,6 @@ namespace AgonyCube.MainStage {
                 }
             }
             else {
-                Debug.Log(mainCamera.transform.localEulerAngles.y);
                 if (input == 0) {
                     dz = 1;
                     direction = 0;
@@ -253,7 +253,7 @@ namespace AgonyCube.MainStage {
                                 var nextGrid = stage.WorldPointToGrid(currentBlock.adjacentBlock[direction].transform.position);
                                 nextGrid.y -= 1;
                                 var nextBlock = stage.GetGrid(nextGrid);
-                                if (nextBlock.BlockId == 3) {
+                                if (nextBlock != null && nextBlock.BlockId == 3) {
                                     Debug.Log(nextBlock);
                                     //移動先のしたのBlockが階段の場合
                                     var block = GetStepFrontAndBack(nextBlock);
@@ -273,7 +273,7 @@ namespace AgonyCube.MainStage {
                                     var nextGrid = stage.WorldPointToGrid(currentBlock.adjacentBlock[direction].transform.position);
                                     nextGrid.y -= 1;
                                     var nextBlock = stage.GetGrid(nextGrid);
-                                    if (nextBlock.BlockId == 3) {
+                                    if (nextBlock != null && nextBlock.BlockId == 3) {
                                         Debug.Log(nextBlock);
                                         //移動先のしたのBlockが階段の場合
                                         var block1 = GetStepFrontAndBack(nextBlock);
@@ -312,10 +312,12 @@ namespace AgonyCube.MainStage {
                                 else {
                                     //移動先が階段の場合
                                     var block1 = GetStepFrontAndBack(stage.GetGrid(gridPoint.x + dx, gridPoint.y + 1, gridPoint.z + dz));
+                                    Debug.Log(block1[1]);
                                     if (block1[1] != null) {
                                         var posi = block1[1].transform.position;
-                                        posi.y -= 1;
                                         var grid = stage.WorldPointToGrid(posi);
+                                        grid.y -= 1;
+                                        Debug.Log(stage.GetGrid(grid).blockNumber);
                                         if (currentBlock.blockNumber == stage.GetGrid(grid).blockNumber) {
                                             // 移動を確定する
                                             gridPoint.x += dx;
@@ -359,7 +361,7 @@ namespace AgonyCube.MainStage {
                                     var nextGrid = stage.WorldPointToGrid(currentBlock.adjacentBlock[direction].transform.position);
                                     nextGrid.y -= 1;
                                     var nextBlock = stage.GetGrid(nextGrid);
-                                    if (nextBlock.BlockId == 3) {
+                                    if (nextBlock != null && nextBlock.BlockId == 3) {
                                         Debug.Log(nextBlock);
                                         //移動先のしたのBlockが階段の場合
                                         var block1 = GetStepFrontAndBack(nextBlock);
@@ -379,7 +381,7 @@ namespace AgonyCube.MainStage {
                                         var nextGrid = stage.WorldPointToGrid(currentBlock.adjacentBlock[direction].transform.position);
                                         nextGrid.y -= 1;
                                         var nextBlock = stage.GetGrid(nextGrid);
-                                        if (nextBlock.BlockId == 3) {
+                                        if (nextBlock != null && nextBlock.BlockId == 3) {
                                             Debug.Log(nextBlock);
                                             //移動先のしたのBlockが階段の場合
                                             var block2 = GetStepFrontAndBack(nextBlock);
@@ -405,10 +407,14 @@ namespace AgonyCube.MainStage {
 
         //指定した階段の前と上った先を返す　0が上った先1が前
         public Block[] GetStepFrontAndBack(Block stepBlock) {
+            //階段のあるgridを保存
             var grid = stage.WorldPointToGrid(stepBlock.transform.position);
+            //階段の角度を保存
             var rad = stepBlock.transform.localEulerAngles;
             if (rad.x == 0) {
+                //階段が上向きの時
                 if (rad.y == 0) {
+                    
                     Block[] block = new Block[2];
                     block[0] = stage.GetGrid(grid.x, grid.y + 1, grid.z + 1);
                     block[1] = stage.GetGrid(grid.x, grid.y, grid.z - 1);
@@ -435,6 +441,7 @@ namespace AgonyCube.MainStage {
                 }
             }
             else {
+                //階段がひっくり返っているとき
                 if (rad.y == 0) {
                     Block[] block = new Block[2];
                     block[0] = stage.GetGrid(grid.x, grid.y + 1, grid.z - 1);
