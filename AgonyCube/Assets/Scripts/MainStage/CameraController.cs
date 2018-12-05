@@ -14,8 +14,6 @@ namespace AgonyCubeMainStage {
         private Vector2 LastRotation;
         //前のフレームのマウス位置を保存
         private Vector2 LastMousePosition;
-        //現在のマウス位置
-        private Vector2 InputMousePosition;
         //アングルの変更を保存
         private Vector2 newAngle = new Vector2(30, 0);
         //Y軸の次のアングル
@@ -52,7 +50,6 @@ namespace AgonyCubeMainStage {
                 if (Input.GetMouseButtonDown(0)) {
                     LastRotation = newAngle;
                     LastMousePosition = Input.mousePosition;
-                    InputMousePosition = Input.mousePosition;
                     // Cubeと交差している場合
                     Ray Mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
                     if (Physics.Raycast(Mouseray, 10.0f, Cube) == true) {
