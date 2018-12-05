@@ -10,7 +10,7 @@ namespace AgonyCube.Title
     {
         // 画面をタップしたら実行されます。
         public void OnClickTAPButton() {
-            SceneManager.LoadScene("StageSelector");
+            SceneManager.LoadScene("NowLoading");
         }
     }
 }
