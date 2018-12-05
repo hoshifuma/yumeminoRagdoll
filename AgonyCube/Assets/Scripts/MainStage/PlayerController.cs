@@ -5,11 +5,13 @@ using UnityStandardAssets.CrossPlatformInput;
 
 namespace AgonyCube.MainStage {
     public class PlayerController : MonoBehaviour {
-
+        //playerについているCharacterControllerを保存
         CharacterController Controller;
+        //playerの移動速度
         public float Speed;
+        //重力
         public float Gravity;
-        Vector3 MoveDirection;
+        Vector3 moveDirection;
         private Animator animator;
         public Vector3 target;
         private const string key_walk = "Walking";
@@ -88,12 +90,12 @@ namespace AgonyCube.MainStage {
                     break;
                 case PlayerState.Locmotion:
                     if (Controller.isGrounded) {
-                        MoveDirection = new Vector3(0, 0, 1);
-                        MoveDirection = transform.TransformDirection(MoveDirection);
-                        MoveDirection *= Speed;
+                        moveDirection = new Vector3(0, 0, 1);
+                        moveDirection = transform.TransformDirection(moveDirection);
+                        moveDirection *= Speed;
                     }
-                    MoveDirection.y -= Gravity * Time.deltaTime;
-                    Controller.Move(MoveDirection * Time.deltaTime);
+                    moveDirection.y -= Gravity;
+                    Controller.Move(moveDirection * Time.deltaTime);
 
                     float distance = Mathf.Abs(target.x - transform.position.x);
                     distance += Mathf.Abs(target.z - transform.position.z);
@@ -214,16 +216,134 @@ namespace AgonyCube.MainStage {
                     direction = 3;
                 }
             }
+
             if (direction > -1) {
+                CheckMovableBlock(direction, dx, dz);
+            }
+        }
+
+        private void CheckMovableBlock(int direction, int dx, int dz) {
 
 
-                // 現在のグリッド位置のブロックを取得
-                var currentBlock = stage.GetGrid(gridPoint);
-                if (currentBlock.BlockId != 3) {
-                    //現在いる場所が階段以外の場合
-                    // ひとつ先のグリッドが通行可能かを判定
-                    if (currentBlock.adjacentBlock[direction] != null) {
-                        //移動先のBlockがあった場合
+
+            // 現在のグリッド位置のブロックを取得
+            var currentBlock = stage.GetGrid(gridPoint);
+            if (currentBlock.BlockId != 3) {
+                //現在いる場所が階段以外の場合
+                // ひとつ先のグリッドがあるか判断
+                if (currentBlock.adjacentBlock[direction] != null) {
+                    //移動先のBlockがあった場合
+                    if (currentBlock.adjacentBlock[direction].movableFlag) {
+                        //移動先に動ける場合
+                        if (currentBlock.adjacentBlock[direction].BlockId != 3) {
+                            //移動先が階段ではない場合
+                            //if(stage.doorGrid != new Vector3Int(gridPoint.x + dx, gridPoint.y, gridPoint.z + dz)) {
+                                //移動を確定する
+                                gridPoint.x += dx;
+                                gridPoint.z += dz;
+                                SetPlayerTarget(gridPoint);
+                            
+                            
+                        }
+                        else {
+                            //移動先が階段の場合
+                            var block = GetStepFrontAndBack(stage.GetGrid(gridPoint.x + dx, gridPoint.y, gridPoint.z + dz));
+                            if (block[1] != null && currentBlock.blockNumber == block[1].blockNumber && block[1].movableFlag) {
+                                //移動先の階段の前側にいる場合
+                                // 移動を確定する
+                                gridPoint.x += dx;
+                                gridPoint.z += dz;
+                                SetPlayerTarget(gridPoint);
+                            }
+                        }
+
+                    }
+                    else {
+                        //移動先のBlockが移動不可の場合
+                        if (currentBlock.adjacentBlock[direction].BlockId != 3) {
+                            // 移動先のBlockが階段ではない場合
+                            var nextGrid = stage.WorldPointToGrid(currentBlock.adjacentBlock[direction].transform.position);
+                            nextGrid.y -= 1;
+                            var nextBlock = stage.GetGrid(nextGrid);
+                            if (nextBlock != null && nextBlock.BlockId == 3) {
+                                Debug.Log(nextBlock);
+                                //移動先のしたのBlockが階段の場合
+                                var block = GetStepFrontAndBack(nextBlock);
+                                if (currentBlock.blockNumber == block[0].blockNumber) {
+                                    // 移動を確定する
+                                    gridPoint.x += dx;
+                                    gridPoint.z += dz;
+                                    gridPoint.y -= 1;
+                                    SetPlayerTarget(gridPoint);
+                                }
+                            }
+                        }
+                        else {
+                            //移動先のBlockが階段の場合
+                            var block = GetStepFrontAndBack(currentBlock.adjacentBlock[direction]);
+                            if (currentBlock.blockNumber == block[1].blockNumber) {
+                                var nextGrid = stage.WorldPointToGrid(currentBlock.adjacentBlock[direction].transform.position);
+                                nextGrid.y -= 1;
+                                var nextBlock = stage.GetGrid(nextGrid);
+                                if (nextBlock != null && nextBlock.BlockId == 3) {
+                                    Debug.Log(nextBlock);
+                                    //移動先のしたのBlockが階段の場合
+                                    var block1 = GetStepFrontAndBack(nextBlock);
+                                    if (currentBlock.blockNumber == block1[0].blockNumber) {
+                                        // 移動を確定する
+                                        gridPoint.x += dx;
+                                        gridPoint.z += dz;
+                                        gridPoint.y -= 1;
+                                        SetPlayerTarget(gridPoint);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+            }
+
+            else {
+                //現在のBlockが階段の場合
+                if (currentBlock.adjacentBlock[direction] != null) {
+                    var block = GetStepFrontAndBack(currentBlock);
+                    if (block[0] != null && block[0].blockNumber == stage.GetGrid(gridPoint.x + dx, gridPoint.y + 1, gridPoint.z + dz).blockNumber) {
+                        //階段の後ろのBlockに移動する場合
+                        if (block[0].movableFlag) {
+                            //移動先に移動できる場合
+                            if (block[0].BlockId != 3) {
+                                //移動先が階段ではない場合
+                                // 移動を確定する
+                                gridPoint.x += dx;
+                                gridPoint.z += dz;
+                                gridPoint.y += 1;
+                                SetPlayerTarget(gridPoint);
+                            }
+                            else {
+                                //移動先が階段の場合
+                                var block1 = GetStepFrontAndBack(stage.GetGrid(gridPoint.x + dx, gridPoint.y + 1, gridPoint.z + dz));
+                                Debug.Log(block1[1]);
+                                if (block1[1] != null) {
+                                    var posi = block1[1].transform.position;
+                                    var grid = stage.WorldPointToGrid(posi);
+                                    grid.y -= 1;
+                                    Debug.Log(stage.GetGrid(grid).blockNumber);
+                                    if (currentBlock.blockNumber == stage.GetGrid(grid).blockNumber) {
+                                        // 移動を確定する
+                                        gridPoint.x += dx;
+                                        gridPoint.z += dz;
+                                        gridPoint.y += 1;
+                                        SetPlayerTarget(gridPoint);
+                                    }
+                                }
+
+                            }
+
+                        }
+                    }
+                    else if (block[1] != null && block[1].blockNumber == stage.GetGrid(gridPoint.x + dx, gridPoint.y, gridPoint.z + dz).blockNumber) {
                         if (currentBlock.adjacentBlock[direction].movableFlag) {
                             //移動先に動ける場合
                             if (currentBlock.adjacentBlock[direction].BlockId != 3) {
@@ -235,8 +355,8 @@ namespace AgonyCube.MainStage {
                             }
                             else {
                                 //移動先が階段の場合
-                                var block = GetStepFrontAndBack(stage.GetGrid(gridPoint.x + dx, gridPoint.y, gridPoint.z + dz));
-                                if (block[1] != null && currentBlock.blockNumber == block[1].blockNumber && block[1].movableFlag) {
+                                var block1 = GetStepFrontAndBack(stage.GetGrid(gridPoint.x + dx, gridPoint.y, gridPoint.z + dz));
+                                if (block[1] != null && currentBlock.blockNumber == block1[1].blockNumber && block1[1].movableFlag) {
                                     //移動先の階段の前側にいる場合
                                     // 移動を確定する
                                     gridPoint.x += dx;
@@ -256,8 +376,8 @@ namespace AgonyCube.MainStage {
                                 if (nextBlock != null && nextBlock.BlockId == 3) {
                                     Debug.Log(nextBlock);
                                     //移動先のしたのBlockが階段の場合
-                                    var block = GetStepFrontAndBack(nextBlock);
-                                    if (currentBlock.blockNumber == block[0].blockNumber) {
+                                    var block1 = GetStepFrontAndBack(nextBlock);
+                                    if (currentBlock.blockNumber == block1[0].blockNumber) {
                                         // 移動を確定する
                                         gridPoint.x += dx;
                                         gridPoint.z += dz;
@@ -268,16 +388,16 @@ namespace AgonyCube.MainStage {
                             }
                             else {
                                 //移動先のBlockが階段の場合
-                                var block = GetStepFrontAndBack(currentBlock.adjacentBlock[direction]);
-                                if(currentBlock.blockNumber == block[1].blockNumber) {
+                                var block1 = GetStepFrontAndBack(currentBlock.adjacentBlock[direction]);
+                                if (currentBlock.blockNumber == block1[1].blockNumber) {
                                     var nextGrid = stage.WorldPointToGrid(currentBlock.adjacentBlock[direction].transform.position);
                                     nextGrid.y -= 1;
                                     var nextBlock = stage.GetGrid(nextGrid);
                                     if (nextBlock != null && nextBlock.BlockId == 3) {
                                         Debug.Log(nextBlock);
                                         //移動先のしたのBlockが階段の場合
-                                        var block1 = GetStepFrontAndBack(nextBlock);
-                                        if (currentBlock.blockNumber == block1[0].blockNumber) {
+                                        var block2 = GetStepFrontAndBack(nextBlock);
+                                        if (currentBlock.blockNumber == block2[0].blockNumber) {
                                             // 移動を確定する
                                             gridPoint.x += dx;
                                             gridPoint.z += dz;
@@ -291,115 +411,6 @@ namespace AgonyCube.MainStage {
 
                     }
 
-                }
-
-                else {
-                    //現在のBlockが階段の場合
-                    if (currentBlock.adjacentBlock[direction] != null) {
-                        var block = GetStepFrontAndBack(currentBlock);
-                        if (block[0] != null && block[0].blockNumber == stage.GetGrid(gridPoint.x + dx, gridPoint.y + 1, gridPoint.z + dz).blockNumber) {
-                            //階段の後ろのBlockに移動する場合
-                            if (block[0].movableFlag) {
-                                //移動先に移動できる場合
-                                if (block[0].BlockId != 3) {
-                                    //移動先が階段ではない場合
-                                    // 移動を確定する
-                                    gridPoint.x += dx;
-                                    gridPoint.z += dz;
-                                    gridPoint.y += 1;
-                                    SetPlayerTarget(gridPoint);
-                                }
-                                else {
-                                    //移動先が階段の場合
-                                    var block1 = GetStepFrontAndBack(stage.GetGrid(gridPoint.x + dx, gridPoint.y + 1, gridPoint.z + dz));
-                                    Debug.Log(block1[1]);
-                                    if (block1[1] != null) {
-                                        var posi = block1[1].transform.position;
-                                        var grid = stage.WorldPointToGrid(posi);
-                                        grid.y -= 1;
-                                        Debug.Log(stage.GetGrid(grid).blockNumber);
-                                        if (currentBlock.blockNumber == stage.GetGrid(grid).blockNumber) {
-                                            // 移動を確定する
-                                            gridPoint.x += dx;
-                                            gridPoint.z += dz;
-                                            gridPoint.y += 1;
-                                            SetPlayerTarget(gridPoint);
-                                        }
-                                    }
-
-                                }
-
-                            }
-                        }
-                        else if (block[1] != null && block[1].blockNumber == stage.GetGrid(gridPoint.x + dx, gridPoint.y, gridPoint.z + dz).blockNumber) {
-                            if (currentBlock.adjacentBlock[direction].movableFlag) {
-                                //移動先に動ける場合
-                                if (currentBlock.adjacentBlock[direction].BlockId != 3) {
-                                    //移動先が階段ではない場合
-                                    //移動を確定する
-                                    gridPoint.x += dx;
-                                    gridPoint.z += dz;
-                                    SetPlayerTarget(gridPoint);
-                                }
-                                else {
-                                    //移動先が階段の場合
-                                    var block1 = GetStepFrontAndBack(stage.GetGrid(gridPoint.x + dx, gridPoint.y, gridPoint.z + dz));
-                                    if (block[1] != null && currentBlock.blockNumber == block1[1].blockNumber && block1[1].movableFlag) {
-                                        //移動先の階段の前側にいる場合
-                                        // 移動を確定する
-                                        gridPoint.x += dx;
-                                        gridPoint.z += dz;
-                                        SetPlayerTarget(gridPoint);
-                                    }
-                                }
-
-                            }
-                            else {
-                                //移動先のBlockが移動不可の場合
-                                if (currentBlock.adjacentBlock[direction].BlockId != 3) {
-                                    // 移動先のBlockが階段ではない場合
-                                    var nextGrid = stage.WorldPointToGrid(currentBlock.adjacentBlock[direction].transform.position);
-                                    nextGrid.y -= 1;
-                                    var nextBlock = stage.GetGrid(nextGrid);
-                                    if (nextBlock != null && nextBlock.BlockId == 3) {
-                                        Debug.Log(nextBlock);
-                                        //移動先のしたのBlockが階段の場合
-                                        var block1 = GetStepFrontAndBack(nextBlock);
-                                        if (currentBlock.blockNumber == block1[0].blockNumber) {
-                                            // 移動を確定する
-                                            gridPoint.x += dx;
-                                            gridPoint.z += dz;
-                                            gridPoint.y -= 1;
-                                            SetPlayerTarget(gridPoint);
-                                        }
-                                    }
-                                }
-                                else {
-                                    //移動先のBlockが階段の場合
-                                    var block1 = GetStepFrontAndBack(currentBlock.adjacentBlock[direction]);
-                                    if (currentBlock.blockNumber == block1[1].blockNumber) {
-                                        var nextGrid = stage.WorldPointToGrid(currentBlock.adjacentBlock[direction].transform.position);
-                                        nextGrid.y -= 1;
-                                        var nextBlock = stage.GetGrid(nextGrid);
-                                        if (nextBlock != null && nextBlock.BlockId == 3) {
-                                            Debug.Log(nextBlock);
-                                            //移動先のしたのBlockが階段の場合
-                                            var block2 = GetStepFrontAndBack(nextBlock);
-                                            if (currentBlock.blockNumber == block2[0].blockNumber) {
-                                                // 移動を確定する
-                                                gridPoint.x += dx;
-                                                gridPoint.z += dz;
-                                                gridPoint.y -= 1;
-                                                SetPlayerTarget(gridPoint);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                        }
-
-                    }
                 }
             }
         }
