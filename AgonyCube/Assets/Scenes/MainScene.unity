@@ -726,6 +726,11 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f30bc2a1361100f43bcbb46d67ddfb84, type: 2}
   m_IsPrefabAsset: 0
+--- !u!95 &399628181 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: c4584d8207a937a44a491cd37b6f8cc5,
+    type: 3}
+  m_PrefabInternal: {fileID: 900598042}
 --- !u!1001 &417398651
 Prefab:
   m_ObjectHideFlags: 0
@@ -804,6 +809,7 @@ Transform:
   - {fileID: 1840791007}
   - {fileID: 1951694623}
   - {fileID: 1347833143}
+  - {fileID: 1805296201}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1446,6 +1452,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 1
   Gravity: 9
+  doorAnimator: {fileID: 399628181}
   target: {x: 0, y: 0, z: 0}
   mainCamera: {fileID: 1068177086}
   stage: {fileID: 1972502963}
@@ -3215,14 +3222,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1805296200}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2, y: 2, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1570866396}
   - {fileID: 1604118767}
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 420417739}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1818053818 stripped
 Transform:
