@@ -4,37 +4,47 @@ using UnityEngine;
 
 public class ZoomCamera : MonoBehaviour
 {
+    [SerializeField]
+    float startFov;
+    [SerializeField]
+    float endFov;
 
-    private Camera cam;
-    private float zoom;
-    private float view;
-    float startTime;
-    void Start()
+    Transform goal;
+
+    private Camera mainCamera;
+
+    private void Awake()
     {
-        cam = GetComponent<Camera>();
-        view = cam.fieldOfView;
+        goal = GameObject.FindGameObjectWithTag("Finish").transform;
     }
 
-
-    void Update()
+    private void Start()
     {
-        cam.fieldOfView = view + zoom;
+        StartGoalMotion();
+    }
 
-        if (Time.time - startTime > 5f)
+    /// <summary>
+    /// ゴール時のカメラモーションを開始します。
+    /// </summary>
+    public void StartGoalMotion()
+    {
+        StartCoroutine(OnGoal());
+    }
+
+    IEnumerator OnGoal()
+    {
+        
+        float startTime = 0;
+
+        Camera.main.transform.LookAt(goal);
+
+        while (startTime <= 1.0f)
         {
+            startTime += Time.deltaTime;
+            Camera.main.fieldOfView = Mathf.Lerp(startFov, endFov, startTime);
 
-
-            //上を押すと、zoomの数値が減少
-            if (Input.GetKey(KeyCode.UpArrow))
-            {
-
-                zoom -= 0.5f;
-                //下を押すと、zoomの数値が増加
-            }
-            else if (Input.GetKey(KeyCode.DownArrow))
-            {
-                zoom += 0.5f;
-            }
+            yield return null;
         }
+
     }
 }
