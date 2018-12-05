@@ -5,16 +5,20 @@ using UnityStandardAssets.CrossPlatformInput;
 
 namespace AgonyCube.MainStage {
     public class GameDirector : MonoBehaviour {
-
+        //Blockのレイヤーマスク
         public LayerMask cube;
+        //キューブの周りにある壁に付与するレイヤーマスク
         public LayerMask wall;
+        //一つ目絵に選択されたBlockを保存する変数
         public GameObject choice1;
+        //二つ目に選択されたBlockを保存する変数 swapに使用
         public GameObject choice2;
+        //カメラを保存
         public GameObject mainCamera;
-        //public GameObject PlayerMovecolliders;
-        //private GameObject Step;
+        //StageControllerを指定
         public StageController stage;
-        //public bool CheckMode = false;
+        //ハサミを持っているかを判定
+        public bool scissor = false;
 
         GameState currentState = null;
         public PlayerController player;
@@ -34,7 +38,7 @@ namespace AgonyCube.MainStage {
 
             }
             public override void Start() {
-
+             gameDirector.player.GetComponent<PlayerController>().playerState = PlayerController.PlayerState.Idle;
             }
 
             public override void Update() {
@@ -60,13 +64,10 @@ namespace AgonyCube.MainStage {
                     if (gameDirector.choice1 != null) {
                         gameDirector.ChangeState(new SwapState(gameDirector));
                     }
-
-
                 }
             }
-
-
         }
+
         //Swapモード
         private class SwapState : MainScene {
             //クリック開始時のマウス位置を保存する変数
@@ -77,6 +78,7 @@ namespace AgonyCube.MainStage {
 
             }
             public override void Start() {
+                gameDirector.player.GetComponent<PlayerController>().playerState = PlayerController.PlayerState.None;
                 //Swapする段以外のBlockを非表示
                 gameDirector.stage.InvisibleBlock(gameDirector.choice1);
                 gameDirector.choice1 = null;
@@ -146,6 +148,7 @@ namespace AgonyCube.MainStage {
             }
 
             public override void Start() {
+                gameDirector.player.GetComponent<PlayerController>().playerState = PlayerController.PlayerState.None;
                 //初期のマウスポジションを保存
                 startMousePosi = Input.mousePosition;
                 startMousePosi = Camera.main.ScreenToViewportPoint(startMousePosi);
@@ -212,12 +215,13 @@ namespace AgonyCube.MainStage {
                 gameDirector.stage.UpdateGridData();
             }
         }
-
+        //キャラクターが動いている状態
         private class PlayerMoveState : MainScene {
             public PlayerMoveState(GameDirector gameDirector) : base(gameDirector) {
 
             }
 
+            
         }
 
         void ChangeState(GameState newState) {
@@ -306,46 +310,16 @@ namespace AgonyCube.MainStage {
             }
             return false;
         }
-        //playerの移動用の関数
-        //private void PlayerMove(GameObject target) {
 
-        //    bool movecheck = false;
-        //    if (target.gameObject.tag == "Block") {
-        //        movecheck = target.GetComponent<CubeController>().MoveCheck();
-        //    }
-        //    else if (target.gameObject.tag == "Clear") {
-        //        movecheck = target.GetComponent<ClearController>().ClearMoveCheck();
-        //    }
-        //    else if (target.gameObject.tag == "Step") {
-        //        movecheck = target.GetComponent<StepController>().StepMoveCheck();
-        //    }
+        public void ChangeMoveState() {
+            player.playerState = PlayerController.PlayerState.Locmotion;
+            ChangeState(new PlayerMoveState(this));
+        }
 
-        //    if (movecheck == true) {
-
-        //        player.GetComponent<PlayerController>().SetPlayerTarget(target.gameObject);
-        //        if (target.gameObject.tag == "Step") {
-        //            Step = target;
-        //        }
-
-        //    }
-
-        //}
-
+        public void ChangeIdleState() {
+            player.playerState = PlayerController.PlayerState.Idle;
+            ChangeState(new IdleState(this));
+        }
        
-      
-
-        //public void SetMove(GameObject moveblock) {
-        //    if (Step == null) {
-        //        if (!(moveblock == null)) {
-        //            PlayerMove(moveblock);
-        //        }
-        //    }
-        //    else {
-        //        if (!(Step.GetComponent<StepController>().StayStepMove(1) == null)) {
-        //            player.GetComponent<PlayerController>().SetPlayerTarget(Step.GetComponent<StepController>().StayStepMove(1));
-        //            Step = null;
-        //        }
-        //    }
-        //}
     }
 }
