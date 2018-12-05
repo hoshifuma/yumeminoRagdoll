@@ -17,7 +17,11 @@ namespace AgonyCube.MainStage {
         public Block[] gridData;
         //一つのグリッドの大きさ
         public int gridSize = 2;
-
+        //扉を保存
+        public GameObject door;
+        //ドアのある場所を保存
+        public Vector3Int doorGrid;
+        //playerControllerを指定
         public PlayerController player;
         //ワールド座標をグリッドポイントに変換
         public Vector3Int WorldPointToGrid(Vector3 position) {
@@ -69,6 +73,7 @@ namespace AgonyCube.MainStage {
 
         // Use this for initialization
         void Start() {
+            doorGrid = WorldPointToGrid(door.transform.position);
             CreateBlockNumber();
             GenerateGridData();
             RoopBlock();

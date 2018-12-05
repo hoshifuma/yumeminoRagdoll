@@ -10,7 +10,11 @@ namespace AgonyCube.MainStage {
         private void OnTriggerEnter(Collider other) {
             if(other.tag == "Player") {
                 director.scissors = true;
-                transform.gameObject.SetActive(false);
+                transform.parent = other.transform;
+                var mesh = GetComponentsInChildren<MeshRenderer>();
+                foreach(var child in mesh) {
+                    child.enabled = false;
+                }
                 scissorsIcon.SetActive(true);
                 invisibkeScissorsIcon.SetActive(false);
             }

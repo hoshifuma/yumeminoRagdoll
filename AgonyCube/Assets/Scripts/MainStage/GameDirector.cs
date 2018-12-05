@@ -15,6 +15,8 @@ namespace AgonyCube.MainStage {
         public GameObject choice2;
         //カメラを保存
         public GameObject mainCamera;
+
+        public GameObject menuPanel;
         //StageControllerを指定
         public StageController stage;
         //ハサミを持っているかを判定
@@ -224,6 +226,16 @@ namespace AgonyCube.MainStage {
             
         }
 
+        private class PauseState : MainScene {
+            public PauseState(GameDirector gameDirector) : base(gameDirector) {
+
+            }
+
+            public override void Start() {
+                gameDirector.player.playerState = PlayerController.PlayerState.None;
+            }
+        }
+
         void ChangeState(GameState newState) {
             if (currentState != null) {
                 currentState.Exsit();
@@ -321,5 +333,14 @@ namespace AgonyCube.MainStage {
             ChangeState(new IdleState(this));
         }
        
+        //public void ChangePauseState() {
+        //    ChangeState(new PauseState(this));
+        //    menuPanel.SetActive(true);
+        //}
+
+        //public void ExsitPausseState() {
+        //    ChangeState(new IdleState(this));
+        //    menuPanel.SetActive(false);
+        //}
     }
 }
