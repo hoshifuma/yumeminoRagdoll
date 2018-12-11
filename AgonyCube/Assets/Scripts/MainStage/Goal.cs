@@ -18,11 +18,14 @@ namespace AgonyCube.MainStage
         [SerializeField]
         string nextScene = "Story1-2";
 
+        public GameDirector gameDirector;
         //Playerタグを持つオブジェクトが衝突した際の処理を表します。
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("Player")) {
                 Debug.Log("ゴール");
+                Score.instance.spin = gameDirector.spin;
+                Score.instance.swap = gameDirector.swap;
 
                 //[Player]のStateChange
                 other.GetComponent<PlayerController>().GetHeart();
