@@ -21,7 +21,7 @@ public class TitleDilector : MonoBehaviour {
     IEnumerator starCreate()
     {
         while (true) {
-            Vector3 pos = new Vector3(Random.Range(-6.0f, 6.0f), Random.Range(-4.0f, 8.0f), 0);
+            Vector3 pos = new Vector3(Random.Range(-9.0f, 9.0f), Random.Range(-2.0f, 5.0f), 0);
 
             Quaternion q = new Quaternion();
 

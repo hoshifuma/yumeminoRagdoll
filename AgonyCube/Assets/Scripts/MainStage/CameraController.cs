@@ -46,7 +46,7 @@ namespace AgonyCubeMainStage {
             var horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
             var vertical = CrossPlatformInputManager.GetAxis("Vertical");
 
-            if (Mathf.Abs(horizontal) < 0.1f && Mathf.Abs(vertical) < 0.1f) {
+            if (!(Mathf.Abs(horizontal) > 0f && Mathf.Abs(vertical) > 0f)) {
                 if (Input.GetMouseButtonDown(0)) {
                     LastRotation = newAngle;
                     LastMousePosition = Input.mousePosition;
