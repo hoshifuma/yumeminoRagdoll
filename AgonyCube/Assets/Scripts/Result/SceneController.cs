@@ -39,22 +39,30 @@ namespace AgonyCube.Result
                 star.SetActive(false);
             }
 
+            var clear = PlayerPrefs.GetInt(Score.instance.stageName, 1);
 
+            if(clear == 0) {
+               var clearStageNo = PlayerPrefs.GetInt("clearStageNo", 0);
+                clearStageNo += 1;
+                PlayerPrefs.SetInt("clearStageNo", clearStageNo);
+            }
             //swapとspinの判定
             if (swapmin < swap && spinmin < spin) {
                 stars[0].SetActive(true);
-                PlayerPrefs.SetInt(StageState.GetStageName(), 1);
+                PlayerPrefs.SetInt(Score.instance.stageName, 1);
             }
-            else if (swapmin < swap || spinmin < swap) {
+            else if (swapmin < swap || spinmin < spin) {
                 stars[1].SetActive(true);
                 stars[0].SetActive(true);
-                PlayerPrefs.SetInt(StageState.GetStageName(), 2);
+                PlayerPrefs.SetInt(Score.instance.stageName, 2);
+                
             }
-            else if (swapmin <= swap || spinmin <= spin) {
+            else if (swapmin >= swap || spinmin >= spin) {
                 stars[2].SetActive(true);
                 stars[1].SetActive(true);
                 stars[0].SetActive(true);
-                PlayerPrefs.SetInt(StageState.GetStageName(), 3);
+                PlayerPrefs.SetInt(Score.instance.stageName, 3);
+               
             }
 
 

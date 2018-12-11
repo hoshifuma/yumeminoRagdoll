@@ -6,6 +6,7 @@ public class Score
 {
     public readonly static Score instance = new Score();
 
+    public string stageName;
     public int spin;
     public int swap;
 }
