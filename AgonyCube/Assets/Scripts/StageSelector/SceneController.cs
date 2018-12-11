@@ -35,26 +35,30 @@ namespace AgonyCube.StageSelector
             }
         }
 
-        // 『RETURN』ボタンを押したら実行する
+        // 『もどる』ボタンを押したら実行する
         public void OnClickReturnButton() {
-            SceneManager.LoadScene("Title");
+            LoadScene.nextScene = "Title";
+            SceneManager.LoadScene("NowLoading");
         }
 
-        // 『ABC』ボタンを押したら実行されます。
+        // 『Tutorial1』ボタンを押したら実行されます。
         public void OnClickABCButton() {
-            SceneManager.LoadScene("Tutorial01");
+            LoadScene.nextScene = "Tutorial01";
+            SceneManager.LoadScene("NowLoading");
         }
 
-        // 『DEF』ボタンを押したら実行されます。
+        // 『Tutorial2』ボタンを押したら実行されます。
         public void OnClickDEFButton()
         {
-            SceneManager.LoadScene("Story1-1");
+            LoadScene.nextScene = "Story1-1";
+            SceneManager.LoadScene("NowLoading");
         }
 
         // 『ステージ２』ボタンを押したら実行されます。
         public void OnClickEventButton()
         {
-            SceneManager.LoadScene("Story2-1");
+            LoadScene.nextScene = "Story2-1";
+            SceneManager.LoadScene("NowLoading");
         }
     }
 }
