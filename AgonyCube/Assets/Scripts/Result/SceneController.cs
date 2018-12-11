@@ -8,7 +8,7 @@ namespace AgonyCube.Result
 {
     public class SceneController : MonoBehaviour
     {
-        
+
         public int starValue = 3;
         // 「Star」を左から順番に指定します。
         public GameObject[] stars = new GameObject[3];
@@ -28,32 +28,35 @@ namespace AgonyCube.Result
             //Mainシーンから読み込むスピン数
             //int spin_num = (MainSceneのスクリプトのクラス名).spin;
 
-            swap = 6;
+            swap = Score.instance.swap;
             swapmin = 3;
-            spin = 2;
+            spin = Score.instance.spin;
             spinmin = 1;
 
 
             // 「Star」を全部非表示に設定
-            foreach (var star in stars)
-            {
+            foreach (var star in stars) {
                 star.SetActive(false);
             }
 
-            for (int index = 0; index < starValue; index++) {
-                stars[index].SetActive(true);
-                //swapとspinの判定
-                if (swapmin + 2 < swap || spinmin + 2 < spin) {
-                    stars[0].SetActive(true);
 
-                }
-                else if (swapmin < swap || spinmin < swap) {
-                    stars[1].SetActive(true);
-                }
-                else if (swapmin == swap || spinmin == spin) {
-                    stars[2].SetActive(true);
-                }
-                }
+            //swapとspinの判定
+            if (swapmin < swap && spinmin < spin) {
+                stars[0].SetActive(true);
+                PlayerPrefs.SetInt(StageState.GetStageName(), 1);
+            }
+            else if (swapmin < swap || spinmin < swap) {
+                stars[1].SetActive(true);
+                stars[0].SetActive(true);
+                PlayerPrefs.SetInt(StageState.GetStageName(), 2);
+            }
+            else if (swapmin <= swap || spinmin <= spin) {
+                stars[2].SetActive(true);
+                stars[1].SetActive(true);
+                stars[0].SetActive(true);
+                PlayerPrefs.SetInt(StageState.GetStageName(), 3);
+            }
+
 
         }
 
