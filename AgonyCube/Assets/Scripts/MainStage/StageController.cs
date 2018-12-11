@@ -23,6 +23,8 @@ namespace AgonyCube.MainStage {
         public Vector3Int doorGrid;
         //playerControllerを指定
         public PlayerController player;
+
+        public GameDirector gameDirector;
         //ワールド座標をグリッドポイントに変換
         public Vector3Int WorldPointToGrid(Vector3 position) {
             return new Vector3Int(
@@ -352,6 +354,7 @@ namespace AgonyCube.MainStage {
                             Vector3.right, 180);
                     }
                 }
+                gameDirector.spin += 1;
             }
 
         }
@@ -366,6 +369,7 @@ namespace AgonyCube.MainStage {
                             Vector3.up, 180);
                     }
                 }
+                gameDirector.spin += 1;
             }
         }
         //Z軸の回転
@@ -379,6 +383,7 @@ namespace AgonyCube.MainStage {
                             Vector3.forward, 180);
                     }
                 }
+                gameDirector.spin += 1;
             }
         }
     }

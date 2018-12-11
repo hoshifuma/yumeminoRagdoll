@@ -24,6 +24,9 @@ namespace AgonyCube.MainStage {
         public GameObject arrows;
         public RectTransform arrowsPosi;
 
+        public int spin;
+        public int swap;
+
         GameState currentState = null;
         public PlayerController player;
 
@@ -322,6 +325,7 @@ namespace AgonyCube.MainStage {
                                     choice2.transform.position = pos1;
                                     choice2 = null;
                                     stage.UpdateGridData();
+                                    swap += 1;
                                     return true;
                                 }
                             }
