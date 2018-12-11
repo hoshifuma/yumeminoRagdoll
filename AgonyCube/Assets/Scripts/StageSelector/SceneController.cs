@@ -9,12 +9,36 @@ namespace AgonyCube.StageSelector
         public int clearStageNo = -1;
         public Transform stageRoot;
         public Transform[] stageButtons;
+        public GameObject content;
+        public string[] stageName;
 
         private void Start()
         {
+            stageName = new string[content.transform.childCount];
+            int i = 0;
+            foreach(Transform child in content.transform) {
+                stageName[i] = child.gameObject.name;
+
+                Debug.Log(stageName[i]);
+                var starNum = PlayerPrefs.GetInt(stageName[i], 0);
+                Debug.Log(PlayerPrefs.GetInt(stageName[i], 0));
+                i += 1;
+                int index = 0;
+                foreach(Transform star in child.transform) {
+
+                    if (index < starNum) {
+                        star.gameObject.SetActive(true);
+                    }
+                    index += 1;
+                }
+                
+            }
             // 以下はデバッグ用の仮セーブ
             // ゲームクリア―した時にそのステージ番号までを保存する
-            PlayerPrefs.SetInt("clearStageNo", 3);
+            if (PlayerPrefs.GetInt("clearStageNo", 0) == 0) {
+                PlayerPrefs.SetInt("clearStageNo", 2);
+            }
+            //PlayerPrefs.SetInt("clearStageNo", 3);
 
             // 現在のクリアーステージ番号をロードする。
             clearStageNo = PlayerPrefs.GetInt("clearStageNo", 0);
@@ -43,13 +67,18 @@ namespace AgonyCube.StageSelector
 
         // 『Tutorial1』ボタンを押したら実行されます。
         public void OnClickABCButton() {
-            LoadScene.nextScene = "Tutorial01";
+            Score.instance.stageName = stageName[0];
+            Debug.Log(stageName[0]);
+            LoadScene.nextScene = stageName[0];
             SceneManager.LoadScene("NowLoading");
         }
 
         // 『Tutorial2』ボタンを押したら実行されます。
         public void OnClickDEFButton()
         {
+            Score.instance.stageName = stageName[1];
+            Debug.Log(stageName[1]);
+            LoadScene.nextScene = stageName[1];
             LoadScene.nextScene = "Story1-1";
             SceneManager.LoadScene("NowLoading");
         }
@@ -57,6 +86,8 @@ namespace AgonyCube.StageSelector
         // 『ステージ２』ボタンを押したら実行されます。
         public void OnClickEventButton()
         {
+            Score.instance.stageName = stageName[2];
+            Debug.Log(stageName[2]);
             LoadScene.nextScene = "Story2-1";
             SceneManager.LoadScene("NowLoading");
         }
