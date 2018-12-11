@@ -21,6 +21,8 @@ namespace AgonyCube.MainStage {
         public StageController stage;
         //ハサミを持っているかを判定
         public bool scissors = false;
+        //SpinStateの矢印
+        public GameObject arrows;
 
         GameState currentState = null;
         public PlayerController player;
@@ -155,6 +157,11 @@ namespace AgonyCube.MainStage {
                 startMousePosi = Input.mousePosition;
                 startMousePosi = Camera.main.ScreenToViewportPoint(startMousePosi);
                 wall = gameDirector.CheckWallClick();
+
+                //arrowsの表示
+                gameDirector.arrows.SetActive(true);
+
+                
             }
 
             public override void Update() {

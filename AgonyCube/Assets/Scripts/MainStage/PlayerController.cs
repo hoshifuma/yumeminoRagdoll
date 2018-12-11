@@ -108,7 +108,7 @@ namespace AgonyCube.MainStage {
                     float distance = Mathf.Abs(target.x - transform.position.x);
                     distance += Mathf.Abs(target.z - transform.position.z);
 
-                    if (distance <= 0.01) {
+                    if (distance <= 0.05) {
                         Vector3 pos = target;
                         pos.y = transform.position.y;
                         transform.position = pos;
@@ -402,12 +402,13 @@ namespace AgonyCube.MainStage {
                 nexttarget = target;
                 nexttarget.y = transform.position.y;
                 transform.LookAt(nexttarget);
-
+             
                 StartCoroutine(OnDoorEnter());
             }
         }
         private IEnumerator OnDoorEnter() {
-           
+
+            playerState = PlayerState.Cut;
 
             animator.SetTrigger(cutId);
 
@@ -417,15 +418,15 @@ namespace AgonyCube.MainStage {
                 var info = doorAnimator.GetCurrentAnimatorStateInfo(0);
                 var info1 = animator.GetCurrentAnimatorStateInfo(0);
                 if (info.normalizedTime > 1.0f && info1.normalizedTime > 1.0f) {
-                    SetPlayerTarget(gridPoint);
+                    
                     break;
                 }
                 yield return null;
             }
             stage.doorGrid = new Vector3Int(10, 10, 10);
-            
 
-         
+            SetPlayerTarget(gridPoint);
+
         }
 
         //指定した階段の前と上った先を返す　0が上った先1が前
