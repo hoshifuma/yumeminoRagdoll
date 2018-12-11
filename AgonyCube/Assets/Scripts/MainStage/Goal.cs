@@ -14,6 +14,9 @@ namespace AgonyCube.MainStage
         GameObject player;
         [SerializeField]
         GameObject playerGoal;
+
+        [SerializeField]
+        ZoomCamera zoomCamera;
         //遷移するストーリー名を指定します。
         [SerializeField]
         string nextScene = "Story1-2";
@@ -43,6 +46,7 @@ namespace AgonyCube.MainStage
                 Vector3 goalPosition = player.transform.position;
                 Quaternion q = new Quaternion(0, 180, 0, 0);
 
+                zoomCamera.StartGoalMotion();
                 //生成した後にコルーチンを呼び出します。
                 Instantiate(playerGoal, goalPosition, q);
                 StartCoroutine(EnterGoal());

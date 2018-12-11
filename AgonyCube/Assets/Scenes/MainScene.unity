@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -951,8 +951,8 @@ Transform:
   - {fileID: 1972502962}
   - {fileID: 1840791007}
   - {fileID: 1805296201}
-  - {fileID: 1951694623}
   - {fileID: 1347833143}
+  - {fileID: 1951694623}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1598,6 +1598,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8476cb0e832ef0642b94b0fdfb7fa063, type: 3}
+      propertyPath: m_TagString
+      value: Finish
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8476cb0e832ef0642b94b0fdfb7fa063, type: 3}
   m_IsPrefabAsset: 0
@@ -2227,6 +2231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1068177087}
   - component: {fileID: 1068177088}
+  - component: {fileID: 1068177089}
   m_Layer: 0
   m_Name: CameraRoot
   m_TagString: Untagged
@@ -2264,10 +2269,23 @@ MonoBehaviour:
   RotationSpeed: {x: 0.2, y: 0.3}
   MaxXRotation: 90
   angleSecond: 10
-  errorRange: 20
+  errorRange: 5
   Cube:
     serializedVersion: 2
     m_Bits: 1024
+--- !u!114 &1068177089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1068177086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cd0753c0c8e7694785b8d4d7a44d0bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startFov: 60
+  endFov: 30
 --- !u!4 &1068967690 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4703492584454834, guid: f30bc2a1361100f43bcbb46d67ddfb84,
@@ -2589,7 +2607,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: 3ba43fcc53f08774da5fc216cc8ffb81, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2300004, guid: 3ba43fcc53f08774da5fc216cc8ffb81, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -3594,7 +3612,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 781194855}
-  playerGoal: {fileID: 781194855}
+  playerGoal: {fileID: 1699271621523598, guid: 0927497212c4e7341a8a75d74f56cc0a, type: 2}
+  zoomCamera: {fileID: 1068177089}
   nextScene: Story1-2
   gameDirector: {fileID: 870156729}
 --- !u!1001 &1847399894
@@ -3634,7 +3653,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4166635827563268, guid: 7f1c89086e8bf5147a37df74fa102cd0, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 114905105606287392, guid: 7f1c89086e8bf5147a37df74fa102cd0,
         type: 2}

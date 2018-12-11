@@ -20,11 +20,12 @@ namespace AgonyCube.MainStage {
         public StageController stage;
         //ハサミを持っているかを判定
         public bool scissors = false;
-        //SpinStateの矢印
+        //SpinSelectStateの矢印
         public GameObject arrows;
         public RectTransform arrowsPosi;
-
+        //spin回数を一時的に保存
         public int spin;
+        //swap回数を一時的に保存
         public int swap;
 
         GameState currentState = null;
@@ -37,6 +38,7 @@ namespace AgonyCube.MainStage {
                 this.gameDirector = gameDirector;
             }
         }
+
         //通常状態
         private class IdleState : MainScene {
             //クリックされている時間を保存する変数
@@ -61,7 +63,7 @@ namespace AgonyCube.MainStage {
                         tapTime += Time.deltaTime;
                         if (tapTime > 1) {
                             //ボタンが押され続けて一定時間経過された場合
-                            gameDirector.ChangeState(new SpinState(gameDirector));
+                            gameDirector.ChangeState(new SpinSelectState(gameDirector));
                         }
                     }
                 }
@@ -69,19 +71,19 @@ namespace AgonyCube.MainStage {
                 if (Input.GetMouseButtonUp(0)) {
                     //tapTimeが一定値を超える前にマウスのボタンが離された場合
                     if (gameDirector.choice1 != null) {
-                        gameDirector.ChangeState(new SwapState(gameDirector));
+                        gameDirector.ChangeState(new SwapSelectState(gameDirector));
                     }
                 }
             }
         }
 
         //Swapモード
-        private class SwapState : MainScene {
+        private class SwapSelectState : MainScene {
             //クリック開始時のマウス位置を保存する変数
             Vector3 startMousePosi;
             //マウスを離す直前のマウス位置を保存する変数
             Vector3 lastMousePosi;
-            public SwapState(GameDirector gameDirector) : base(gameDirector) {
+            public SwapSelectState(GameDirector gameDirector) : base(gameDirector) {
 
             }
             public override void Start() {
@@ -141,18 +143,39 @@ namespace AgonyCube.MainStage {
             }
         }
 
+        //Swap中のState
+        private class SwapState : MainScene {
+            public SwapState(GameDirector gameDirector) : base(gameDirector) {
+
+            }
+
+            public override void Start() {
+                
+            }
+
+            public override void Update() {
+                
+            }
+
+            public override void Exsit() {
+                
+            }
+        }
+
 
         //Spinモード
-        private class SpinState : MainScene {
-            //SpinState開始時のマウス位置を保存する変数
+        private class SpinSelectState : MainScene {
+            
+            public SpinSelectState(GameDirector gameDirector) : base(gameDirector) {
+
+            }
+
+            //SpinSelectState開始時のマウス位置を保存する変数
             Vector3 startMousePosi;
             //マウスを離す直前のマウス位置を保存する変数
             Vector3 lastMousePosi;
             //クリックされているBlockの面を保存
             GameObject wall;
-            public SpinState(GameDirector gameDirector) : base(gameDirector) {
-
-            }
 
             public override void Start() {
                 gameDirector.player.GetComponent<PlayerController>().playerState = PlayerController.PlayerState.None;
