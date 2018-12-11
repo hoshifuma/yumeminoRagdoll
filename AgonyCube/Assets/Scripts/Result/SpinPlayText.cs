@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System;
 public class SpinPlayText : MonoBehaviour {
 
     private Text targetText3;
@@ -10,7 +10,7 @@ public class SpinPlayText : MonoBehaviour {
     void spin()
     {
         this.targetText3 = this.GetComponent<Text>();
-        string resultSpinPlay = StageState.GetSpinPlay();
+        string resultSpinPlay = Convert.ToString(Score.instance.spin);
         this.targetText3.text = resultSpinPlay;
     }
     // Use this for initialization

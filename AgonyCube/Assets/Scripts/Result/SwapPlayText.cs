@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System;
 public class SwapPlayText : MonoBehaviour {
 
     private Text targetText2;
@@ -10,7 +10,7 @@ public class SwapPlayText : MonoBehaviour {
     void swap()
     {
         this.targetText2 = this.GetComponent<Text>();
-        string resultSwapPlay = StageState.GetSwapPlay();
+        string resultSwapPlay = Convert.ToString(Score.instance.swap);
         this.targetText2.text = resultSwapPlay;
     }
     // Use this for initialization
