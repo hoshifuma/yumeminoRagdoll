@@ -1418,7 +1418,6 @@ GameObject:
   - component: {fileID: 680938792}
   - component: {fileID: 680938791}
   - component: {fileID: 680938798}
-  - component: {fileID: 680938778}
   - component: {fileID: 680938782}
   - component: {fileID: 680938799}
   - component: {fileID: 680938800}
@@ -1500,7 +1499,6 @@ MonoBehaviour:
   - {fileID: 680938799}
   - {fileID: 680938800}
   - {fileID: 680938782}
-  - {fileID: 680938778}
   - {fileID: 680938777}
   - {fileID: 680938784}
   - {fileID: 680938789}
@@ -1549,7 +1547,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 680938774}
   selectedCommands:
-  - {fileID: 680938778}
+  - {fileID: 680938777}
   variables: []
   description: 
   stepPause: 1
@@ -1601,34 +1599,6 @@ MonoBehaviour:
   stopVoiceover: 1
   waitForVO: 0
   setSayDialog: {fileID: 0}
---- !u!114 &680938778
-MonoBehaviour:
-  m_ObjectHideFlags: 2
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 680938771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f608b8c9fb3044200aac956492d8d586, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 30
-  indentLevel: 0
-  conversationText:
-    stringRef: {fileID: 0}
-    stringVal: "Narration:{flash = 1}\u2015\u2015\u2015\u3068\u3042\u308B\u5C11\u5973\u306E\u62BC\u5165\u308C\u306E\u4E2D\u2015\u2015\u2015{duration}\n\n{size=80}\u3053\u308C\u306F\u904A\u3070\u308C\u306A\u304F\u306A\u3063\u305F\u304A\u3082\u3061\u3083\u305F\u3061\u306E{/size}{color=blue}{/b}\u7269\u8A9E"
-  clearPrevious:
-    booleanRef: {fileID: 0}
-    booleanVal: 1
-  waitForInput:
-    booleanRef: {fileID: 0}
-    booleanVal: 1
-  waitForSeconds:
-    floatRef: {fileID: 0}
-    floatVal: 0
-  fadeWhenDone:
-    booleanRef: {fileID: 0}
-    booleanVal: 1
 --- !u!114 &680938779
 MonoBehaviour:
   m_ObjectHideFlags: 2
