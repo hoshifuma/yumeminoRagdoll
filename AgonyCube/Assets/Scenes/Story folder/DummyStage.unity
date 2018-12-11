@@ -136,6 +136,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 1
   Gravity: 9
+  scissors: {fileID: 0}
+  scissorsAnimator: {fileID: 0}
+  doorAnimator: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   mainCamera: {fileID: 1480449936}
   stage: {fileID: 50675304}
@@ -175,6 +178,7 @@ MonoBehaviour:
   door: {fileID: 997228588}
   doorGrid: {x: 0, y: 0, z: 0}
   player: {fileID: 28621229}
+  gameDirector: {fileID: 0}
 --- !u!4 &50675305
 Transform:
   m_ObjectHideFlags: 0
@@ -773,9 +777,12 @@ MonoBehaviour:
   choice1: {fileID: 0}
   choice2: {fileID: 0}
   mainCamera: {fileID: 1480449936}
-  menuPanel: {fileID: 0}
   stage: {fileID: 50675304}
   scissors: 0
+  arrows: {fileID: 0}
+  arrowsPosi: {fileID: 0}
+  spin: 0
+  swap: 0
   player: {fileID: 28621229}
 --- !u!4 &200097428 stripped
 Transform:
@@ -1829,6 +1836,75 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400012, guid: c4584d8207a937a44a491cd37b6f8cc5,
     type: 3}
   m_PrefabInternal: {fileID: 873381706}
+--- !u!1 &935563846
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 935563847}
+  - component: {fileID: 935563849}
+  - component: {fileID: 935563848}
+  m_Layer: 5
+  m_Name: swap now
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &935563847
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 935563846}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1241872587}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 705, y: -490}
+  m_SizeDelta: {x: -1190, y: -920}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &935563848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 935563846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 2361cf327d7329a42b419783d211decb, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &935563849
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 935563846}
+  m_CullTransparentMesh: 0
 --- !u!4 &958802622 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4620081532550004, guid: 7c99411ac12496b4088875e00989a5ea,
@@ -2300,6 +2376,7 @@ RectTransform:
   - {fileID: 1745174144}
   - {fileID: 1039552547}
   - {fileID: 732538374}
+  - {fileID: 935563847}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2334,7 +2411,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78eed431f155a6b409eaef1a6f9086bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 28621227}
+  playerGoal: {fileID: 1392858068}
   nextScene: Story1-2
+  gameDirector: {fileID: 176184602}
 --- !u!114 &1258432529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2517,6 +2597,11 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c99411ac12496b4088875e00989a5ea, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1392858068 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1777930225597014, guid: 637fb7845ac56df4496500c10a2c83ae,
+    type: 2}
+  m_PrefabInternal: {fileID: 262408437}
 --- !u!4 &1465373494 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4736335527154670, guid: 1869220f4f54cd1438ffdb38f9896c6a,
@@ -2586,7 +2671,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startFov: 60
-  endFov: 60
+  endFov: 20
 --- !u!1001 &1541550341
 Prefab:
   m_ObjectHideFlags: 0

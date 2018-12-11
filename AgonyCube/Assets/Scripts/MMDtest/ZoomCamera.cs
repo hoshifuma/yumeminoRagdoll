@@ -17,10 +17,10 @@ public class ZoomCamera : MonoBehaviour
     {
         goal = GameObject.FindGameObjectWithTag("Finish").transform;
     }
-
+    //テスト用
     private void Start()
     {
-        StartGoalMotion();
+        //StartGoalMotion();
     }
 
     /// <summary>
@@ -47,4 +47,5 @@ public class ZoomCamera : MonoBehaviour
         }
 
     }
+
 }
