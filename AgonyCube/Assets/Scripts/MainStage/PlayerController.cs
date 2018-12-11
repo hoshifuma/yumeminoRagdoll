@@ -12,7 +12,9 @@ namespace AgonyCube.MainStage {
         //重力
         public float Gravity;
         Vector3 moveDirection;
+        public GameObject scissors;
         private Animator animator;
+        public Animator scissorsAnimator;
 
         public Animator doorAnimator;
 
@@ -23,6 +25,8 @@ namespace AgonyCube.MainStage {
         static readonly int openId = Animator.StringToHash("OpenTrigger");
 
         static readonly int cutId = Animator.StringToHash("Cut");
+
+        static readonly int scissorsId = Animator.StringToHash("CutTrigger");
 
         public GameObject mainCamera;
         // StageControllerを指定
@@ -57,6 +61,7 @@ namespace AgonyCube.MainStage {
         void Start() {
             Controller = GetComponent<CharacterController>();
             animator = GetComponent<Animator>();
+
             // グリッド座標からワールド座標に変換して設定
             var position = stage.GridToWorldPoint(gridPoint);
             transform.position = new Vector3(position.x, position.y - 1, position.z);
@@ -407,9 +412,13 @@ namespace AgonyCube.MainStage {
             }
         }
         private IEnumerator OnDoorEnter() {
-
+            var mesh = scissors.GetComponentsInChildren<MeshRenderer>();
+           
+            foreach (var child in mesh) {
+                child.enabled = true;
+            }
             playerState = PlayerState.Cut;
-
+            scissorsAnimator.SetTrigger(scissorsId);
             animator.SetTrigger(cutId);
 
             doorAnimator.SetTrigger(openId);
@@ -417,16 +426,19 @@ namespace AgonyCube.MainStage {
             while (true) {
                 var info = doorAnimator.GetCurrentAnimatorStateInfo(0);
                 var info1 = animator.GetCurrentAnimatorStateInfo(0);
-                if (info.normalizedTime > 1.0f && info1.normalizedTime > 1.0f) {
+                var info2 = scissorsAnimator.GetCurrentAnimatorStateInfo(0);
+                if (info.normalizedTime > 1.0f && info1.normalizedTime > 1.0f && info2.normalizedTime > 1.0f) {
                     
                     break;
                 }
                 yield return null;
             }
             stage.doorGrid = new Vector3Int(10, 10, 10);
-
+            
             SetPlayerTarget(gridPoint);
-
+            foreach (var child in mesh) {
+                child.enabled = false;
+            }
         }
 
         //指定した階段の前と上った先を返す　0が上った先1が前

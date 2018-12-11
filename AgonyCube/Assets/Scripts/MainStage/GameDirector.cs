@@ -16,13 +16,13 @@ namespace AgonyCube.MainStage {
         //カメラを保存
         public GameObject mainCamera;
 
-        public GameObject menuPanel;
         //StageControllerを指定
         public StageController stage;
         //ハサミを持っているかを判定
         public bool scissors = false;
         //SpinStateの矢印
         public GameObject arrows;
+        public RectTransform arrowsPosi;
 
         GameState currentState = null;
         public PlayerController player;
@@ -160,8 +160,10 @@ namespace AgonyCube.MainStage {
 
                 //arrowsの表示
                 gameDirector.arrows.SetActive(true);
+                gameDirector.arrowsPosi.position = RectTransformUtility.WorldToScreenPoint(Camera.main, wall.transform.position);
 
-                
+             
+
             }
 
             public override void Update() {
@@ -220,6 +222,7 @@ namespace AgonyCube.MainStage {
             }
 
             public override void Exsit() {
+                gameDirector.arrows.SetActive(false);
                 gameDirector.choice1 = null;
                 gameDirector.stage.UpdateGridData();
             }
