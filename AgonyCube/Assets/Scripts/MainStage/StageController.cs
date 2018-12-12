@@ -94,9 +94,9 @@ namespace AgonyCube.MainStage {
             if (gridY == gridHeight - 1) {
 
                 foreach (Transform child in block.transform) {
-                    if (child.transform.position.y > block.transform.position.y) {
+                    if (child.transform.position.y - block.transform.position.y > 0.5) {
                         // child.gameObject.SetActive(true);
-                        if (child.transform.tag != "Step") {
+                        if (child.transform.tag == "Untagged") {
                             child.tag = "UpAndDown";
                         
                             child.GetComponent<BoxCollider>().enabled = true;
@@ -109,9 +109,9 @@ namespace AgonyCube.MainStage {
             else if (gridY == 0) {
 
                 foreach (Transform child in block.transform) {
-                    if (child.transform.position.y < block.transform.position.y) {
+                    if (child.transform.position.y - block.transform.position.y < -0.5) {
                         //  child.gameObject.SetActive(true);
-                        if (child.transform.tag != "Step") {
+                        if (child.transform.tag == "Untagged") {
                             child.tag = "UpAndDown";
                         
                             child.GetComponent<BoxCollider>().enabled = true;
@@ -125,9 +125,9 @@ namespace AgonyCube.MainStage {
             if (gridX == gridWidth - 1) {
 
                 foreach (Transform child in block.transform) {
-                    if (child.transform.position.x > block.transform.position.x) {
+                    if (child.transform.position.x - block.transform.position.x > 0.5) {
 
-                        if (child.transform.tag != "Step") {//child.gameObject.SetActive(true);
+                        if (child.transform.tag == "Untagged") {//child.gameObject.SetActive(true);
                             child.tag = "RightAndLeft";
                             child.GetComponent<BoxCollider>().enabled = true;
                             // child.GetComponent<MeshRenderer>().enabled = true;
@@ -137,9 +137,9 @@ namespace AgonyCube.MainStage {
             }
             else if (gridX == 0) {
                 foreach (Transform child in block.transform) {
-                    if (child.transform.position.x < block.transform.position.x) {
+                    if (child.transform.position.x - block.transform.position.x < -0.5) {
                         //child.gameObject.SetActive(true);
-                        if (child.transform.tag != "Step") {
+                        if (child.transform.tag == "Untagged") {
                             child.tag = "RightAndLeft";
                             child.GetComponent<BoxCollider>().enabled = true;
                             //child.GetComponent<MeshRenderer>().enabled = true;
@@ -150,9 +150,9 @@ namespace AgonyCube.MainStage {
             //Z軸で端の壁にtag,layer,colliderを付与
             if (gridZ == gridLength - 1) {
                 foreach (Transform child in block.transform) {
-                    if (child.transform.position.z > block.transform.position.z) {
+                    if (child.transform.position.z - block.transform.position.z > 0.5) {
                         // child.gameObject.SetActive(true);
-                        if (child.transform.tag != "Step") {
+                        if (child.transform.tag == "Untagged") {
                             child.tag = "FrontAndBehind";
                             child.GetComponent<BoxCollider>().enabled = true;
                             // child.GetComponent<MeshRenderer>().enabled = true;
@@ -162,9 +162,9 @@ namespace AgonyCube.MainStage {
             }
             else if (gridZ == 0) {
                 foreach (Transform child in block.transform) {
-                    if (child.transform.position.z < block.transform.position.z) {
+                    if (child.transform.position.z - block.transform.position.z < -0.5) {
                         // child.gameObject.SetActive(true);
-                        if (child.transform.tag != "Step") {
+                        if (child.transform.tag == "Untagged") {
                             child.tag = "FrontAndBehind";
                             child.GetComponent<BoxCollider>().enabled = true;
                             //child.GetComponent<MeshRenderer>().enabled = true;
@@ -291,17 +291,24 @@ namespace AgonyCube.MainStage {
         //gridDataの更新
         public void UpdateGridData() {
             foreach (Transform child in transform) {
+                var posi = child.transform.position;
+                posi.y = Mathf.RoundToInt(posi.y);
+                posi.x = Mathf.RoundToInt(posi.x);
+                posi.z = Mathf.RoundToInt(posi.z);
+                child.transform.position = posi;
                 var gridPoint = WorldPointToGrid(child.position);
-
+                
 
                 SetGrid(gridPoint, child.GetComponent<Block>());
                 var grid = GetGrid(gridPoint);
                 grid.movableFlag = false;
                 foreach (Transform wall in child.transform) {
-                    if(wall.transform.tag != "Step") {
+                    if(wall.tag != "Step") {
                         wall.GetComponent<BoxCollider>().enabled = false;
+                        wall.tag = "Untagged";
                     }
-       
+                    
+                  
                     //wall.GetComponent<MeshRenderer>().enabled = false;
                     //wall.gameObject.SetActive(false);
                 }
@@ -344,17 +351,20 @@ namespace AgonyCube.MainStage {
         //X軸の回転
         public void XSpinBlock(GameObject block) {
             var grid = WorldPointToGrid(block.transform.position);
-
-            if(player.gridPoint.x != grid.x) {
-
+            
+            if (player.gridPoint.x != grid.x) {
+                gameDirector.spinBlock = new Block[gridHeight * gridLength];
                 for (var gridY = 0; gridY < gridHeight; gridY++) {
                     for (var gridZ = 0; gridZ < gridLength; gridZ++) {
-                        GetGrid(grid.x, gridY, gridZ).transform.RotateAround
-                            (new Vector3(block.transform.position.x, (gridHeight * gridSize / 2) - 1, (gridLength * gridSize / 2) - 1),
-                            Vector3.right, 180);
+                       gameDirector.spinBlock[gridY * gridLength + gridZ] =  GetGrid(grid.x, gridY, gridZ);
                     }
                 }
-                gameDirector.spin += 1;
+                gameDirector.spinCenter = new Vector3(block.transform.position.x, (gridHeight * gridSize / 2) - 1, (gridLength * gridSize / 2) - 1);
+                gameDirector.spinRote = Vector3.right;
+
+            }
+            else {
+                gameDirector.spinBlock = new Block[0];
             }
 
         }
@@ -362,28 +372,34 @@ namespace AgonyCube.MainStage {
         public void YSpinBlock(GameObject block) {
             var grid = WorldPointToGrid(block.transform.position);
             if (player.gridPoint.y != grid.y) {
+                gameDirector.spinBlock = new Block[gridLength * gridWidth];
                 for (var gridZ = 0; gridZ < gridLength; gridZ++) {
                     for (var gridX = 0; gridX < gridWidth; gridX++) {
-                        GetGrid(gridX, grid.y, gridZ).transform.RotateAround
-                            (new Vector3((gridWidth * gridSize / 2) - 1, block.transform.position.y, (gridLength * gridSize / 2) - 1),
-                            Vector3.up, 180);
+                        gameDirector.spinBlock[gridZ * gridWidth + gridX] = GetGrid(gridX, grid.y, gridZ);
                     }
                 }
-                gameDirector.spin += 1;
+                gameDirector.spinCenter = new Vector3((gridWidth * gridSize / 2) - 1, block.transform.position.y, (gridLength * gridSize / 2) - 1);
+                gameDirector.spinRote = Vector3.up;
+            }
+            else {
+                gameDirector.spinBlock = new Block[0];
             }
         }
         //Z軸の回転
         public void ZSpinBlock(GameObject block) {
             var grid = WorldPointToGrid(block.transform.position);
             if (player.gridPoint.z != grid.z) {
+                gameDirector.spinBlock = new Block[gridHeight * gridWidth];
                 for (var gridY = 0; gridY < gridHeight; gridY++) {
                     for (var gridX = 0; gridX < gridWidth; gridX++) {
-                        GetGrid(gridX, gridY, grid.z).transform.RotateAround
-                            (new Vector3((gridWidth * gridSize / 2) - 1, (gridHeight * gridSize / 2) - 1, block.transform.position.z),
-                            Vector3.forward, 180);
+                        gameDirector.spinBlock[gridY * gridWidth + gridX] = GetGrid(gridX, gridY, grid.z);
                     }
                 }
-                gameDirector.spin += 1;
+                gameDirector.spinCenter = new Vector3((gridWidth * gridSize / 2) - 1, (gridHeight * gridSize / 2) - 1, block.transform.position.z);
+                gameDirector.spinRote = Vector3.forward;
+            }
+            else {
+                gameDirector.spinBlock = new Block[0];
             }
         }
     }
