@@ -143,7 +143,7 @@ MonoBehaviour:
   mainCamera: {fileID: 1480449936}
   stage: {fileID: 50675304}
   director: {fileID: 176184602}
-  gridPoint: {x: 0, y: 0, z: 0}
+  gridPoint: {x: 2, y: 1, z: 0}
   locomotionSpeed: 1
   playerState: 0
 --- !u!1 &50675303
@@ -783,6 +783,11 @@ MonoBehaviour:
   arrowsPosi: {fileID: 0}
   spin: 0
   swap: 0
+  spinBlock: []
+  spinCenter: {x: 0, y: 0, z: 0}
+  spinRote: {x: 0, y: 0, z: 0}
+  spinDirection: 0
+  spinRad: 0
   player: {fileID: 28621229}
 --- !u!4 &200097428 stripped
 Transform:
@@ -1316,7 +1321,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &728781319
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1772,7 +1777,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &897386592
 Transform:
   m_ObjectHideFlags: 0
@@ -1821,15 +1826,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 979bb734df1ee3949a04198679c16bd4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fa9b0c9fa4075a84890f84357defc42a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 13, y: 12}
+  m_Size: {x: 3.2, y: 3.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &897386594
@@ -1841,7 +1846,7 @@ Animator:
   m_GameObject: {fileID: 897386591}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ecd3e67d8bd09464ca014b040baeafb6, type: 2}
+  m_Controller: {fileID: 9100000, guid: feccb58fe47f4d34f9b2e51c7f6ce1cb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2437,6 +2442,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 28621227}
   playerGoal: {fileID: 1248983657859754, guid: 23dd3273e99c18946b528f1f2aefe970, type: 2}
+  heartEffect: {fileID: 897386591}
   zoomCamera: {fileID: 1480449939}
   nextScene: Story1-2
   gameDirector: {fileID: 176184602}
