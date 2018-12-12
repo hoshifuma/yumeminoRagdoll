@@ -103,56 +103,7 @@ namespace AgonyCubeMainStage {
                       
                     }
 
-                    if (Input.GetMouseButtonUp(0)) {
-                        
-                        if (newAngle.y > 360) {
-                            
-                            while(newAngle.y > 360) {
-                                newAngle.y -= 360;
-                            }
-                        }
-                        else if (newAngle.y < 0) {
-                            
-                            while (newAngle.y < 0) {
-                                newAngle.y += 360;
-                            }
-                        }
-
-                        Debug.Log(newAngle.y);
-                        if (45 <= newAngle.y && newAngle.y < 135) {
-                            nextAngle = 90;
-                            angleFlame = nextAngle - newAngle.y;
-                            angleFlame /= angleSecond;
-                        }
-                        else if (135 <= newAngle.y && newAngle.y < 225) {
-                            nextAngle = 180;
-                            angleFlame = nextAngle - newAngle.y;
-                            angleFlame /= angleSecond;
-                        }
-                        else if (225 <= newAngle.y && newAngle.y < 315) {
-                            nextAngle = 270;
-                            angleFlame = nextAngle - newAngle.y;
-                            angleFlame /= angleSecond;
-                        }
-                        else {
-                            nextAngle = 0;
-                            if(newAngle.y > 45) {
-                                newAngle.y -= 360;
-                            }
-                            angleFlame = nextAngle - newAngle.y;
-                            angleFlame /= angleSecond;
-                        }
-                        // }
-                    }
-                    if(Mathf.Abs(newAngle.y - nextAngle) < 0.5) {
-                        newAngle.y = nextAngle;
-                        angleFlame = 0;
-                    }
-                    else {
-                        newAngle.y += angleFlame;
-                    }
-
-                    transform.localEulerAngles = newAngle;
+                    
                 }
             }
             else {
@@ -160,6 +111,57 @@ namespace AgonyCubeMainStage {
                 // horizontal -1.0f～1.0f
                 HitCheck = 0;
             }
+
+            if (Input.GetMouseButtonUp(0)) {
+
+                if (newAngle.y > 360) {
+
+                    while (newAngle.y > 360) {
+                        newAngle.y -= 360;
+                    }
+                }
+                else if (newAngle.y < 0) {
+
+                    while (newAngle.y < 0) {
+                        newAngle.y += 360;
+                    }
+                }
+
+                Debug.Log(newAngle.y);
+                if (45 <= newAngle.y && newAngle.y < 135) {
+                    nextAngle = 90;
+                    angleFlame = nextAngle - newAngle.y;
+                    angleFlame /= angleSecond;
+                }
+                else if (135 <= newAngle.y && newAngle.y < 225) {
+                    nextAngle = 180;
+                    angleFlame = nextAngle - newAngle.y;
+                    angleFlame /= angleSecond;
+                }
+                else if (225 <= newAngle.y && newAngle.y < 315) {
+                    nextAngle = 270;
+                    angleFlame = nextAngle - newAngle.y;
+                    angleFlame /= angleSecond;
+                }
+                else {
+                    nextAngle = 0;
+                    if (newAngle.y > 45) {
+                        newAngle.y -= 360;
+                    }
+                    angleFlame = nextAngle - newAngle.y;
+                    angleFlame /= angleSecond;
+                }
+                // }
+            }
+            if (Mathf.Abs(newAngle.y - nextAngle) < 0.5) {
+                newAngle.y = nextAngle;
+                angleFlame = 0;
+            }
+            else {
+                newAngle.y += angleFlame;
+            }
+
+            transform.localEulerAngles = newAngle;
         }
 
         

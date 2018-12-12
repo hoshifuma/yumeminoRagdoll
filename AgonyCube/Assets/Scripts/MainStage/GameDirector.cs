@@ -15,7 +15,7 @@ namespace AgonyCube.MainStage {
         public GameObject choice2;
         //カメラを保存
         public GameObject mainCamera;
-
+        
         //StageControllerを指定
         public StageController stage;
         //ハサミを持っているかを判定
@@ -39,6 +39,13 @@ namespace AgonyCube.MainStage {
         //1フレームでspinする角度
         [SerializeField]
         int spinRad = 0;
+        //マテリアル
+        [SerializeField]
+        Material normal;
+        [SerializeField]
+        Material select1;
+        [SerializeField]
+        Material select2;
 
         GameState currentState = null;
         public PlayerController player;
@@ -115,7 +122,18 @@ namespace AgonyCube.MainStage {
                         gameDirector.choice1 = gameDirector.CheckBlockClick();
                         if (gameDirector.choice1 != null) {
                             //Blockがクリックされていた場合選択状態に変更
-                            gameDirector.choice1.GetComponent<LineRenderer>().enabled = true;
+                           
+                            foreach(Transform child in gameDirector.choice1.transform) {
+                                Debug.Log(gameDirector.choice1.GetComponent<Block>().floor);
+                                if(gameDirector.choice1.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
+                                    Debug.Log(child);
+                                    
+                                    var mats = child.GetComponent<MeshRenderer>().materials;
+                                    mats[0] = gameDirector.select1;
+                                    child.GetComponent<MeshRenderer>().materials = mats;
+                                }
+                            }
+                           
                         }
                     }
                     else {
@@ -149,7 +167,16 @@ namespace AgonyCube.MainStage {
             public override void Exsit() {
                 gameDirector.stage.UnInvisibleBlock();
                 if (gameDirector.choice1 != null) {
-                    gameDirector.choice1.GetComponent<LineRenderer>().enabled = false;
+                    foreach (Transform child in gameDirector.choice1.transform) {
+                        Debug.Log(gameDirector.choice1.GetComponent<Block>().floor);
+                        if (gameDirector.choice1.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
+                            Debug.Log(child);
+
+                            var mats = child.GetComponent<MeshRenderer>().materials;
+                            mats[0] = gameDirector.normal;
+                            child.GetComponent<MeshRenderer>().materials = mats;
+                        }
+                    }
                     gameDirector.choice1 = null;
                 }
             }
