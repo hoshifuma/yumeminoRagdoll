@@ -588,7 +588,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   blockNumber: 0
-  block: {fileID: 1343848537176090}
   floor: {fileID: 1876276447016080}
   movableFlag: 0
 --- !u!120 &120529331329870576
