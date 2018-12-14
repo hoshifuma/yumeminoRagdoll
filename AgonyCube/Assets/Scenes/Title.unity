@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -728,6 +728,7 @@ GameObject:
   m_Component:
   - component: {fileID: 499687866}
   - component: {fileID: 499687865}
+  - component: {fileID: 499687867}
   m_Layer: 0
   m_Name: TitleDilector
   m_TagString: Untagged
@@ -760,6 +761,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &499687867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 499687864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60e8ba6831dd5974f90d7546c58409f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tapEffect: {fileID: 1846902469661812, guid: 635f8f20da4c76d40b0e1de601fc5da1, type: 2}
 --- !u!1 &506397792
 GameObject:
   m_ObjectHideFlags: 0
@@ -2174,7 +2187,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: a21c88b6a4541cd41a3631e3d80718d2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d6da1d653ca8c24284658cb4f11d83e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
