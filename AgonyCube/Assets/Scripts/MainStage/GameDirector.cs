@@ -127,7 +127,7 @@ namespace AgonyCube.MainStage {
                                 Debug.Log(gameDirector.choice1.GetComponent<Block>().floor);
                                 if(gameDirector.choice1.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
                                     Debug.Log(child);
-                                    
+
                                     var mats = child.GetComponent<MeshRenderer>().materials;
                                     mats[0] = gameDirector.select1;
                                     child.GetComponent<MeshRenderer>().materials = mats;
@@ -501,7 +501,16 @@ namespace AgonyCube.MainStage {
                     choice2 = hit.transform.gameObject;
                     //選択されたものが同じものだった場合選択状態を解除し変数を初期状態に変更
                     if (choice1 == choice2) {
-                        choice1.GetComponent<LineRenderer>().enabled = false;
+                        foreach (Transform child in choice1.transform) {
+                            Debug.Log(choice1.GetComponent<Block>().floor);
+                            if (choice1.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
+                                Debug.Log(child);
+
+                                var mats = child.GetComponent<MeshRenderer>().materials;
+                                mats[0] = normal;
+                                child.GetComponent<MeshRenderer>().materials = mats;
+                            }
+                        }
                         choice1 = null;
                         choice2 = null;
                     }
