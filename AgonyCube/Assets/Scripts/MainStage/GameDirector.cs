@@ -124,9 +124,7 @@ namespace AgonyCube.MainStage {
                             //Blockがクリックされていた場合選択状態に変更
                            
                             foreach(Transform child in gameDirector.choice1.transform) {
-                                Debug.Log(gameDirector.choice1.GetComponent<Block>().floor);
                                 if(gameDirector.choice1.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
-                                    Debug.Log(child);
 
                                     var mats = child.GetComponent<MeshRenderer>().materials;
                                     mats[0] = gameDirector.select1;
@@ -168,9 +166,7 @@ namespace AgonyCube.MainStage {
                 gameDirector.stage.UnInvisibleBlock();
                 if (gameDirector.choice1 != null) {
                     foreach (Transform child in gameDirector.choice1.transform) {
-                        Debug.Log(gameDirector.choice1.GetComponent<Block>().floor);
                         if (gameDirector.choice1.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
-                            Debug.Log(child);
 
                             var mats = child.GetComponent<MeshRenderer>().materials;
                             mats[0] = gameDirector.normal;
@@ -246,7 +242,6 @@ namespace AgonyCube.MainStage {
                     var mousePosiAbsoluteValue = new Vector2(Mathf.Abs(mousePosi.x), Mathf.Abs(mousePosi.y));
                     if (mousePosiAbsoluteValue.x > 0.1 || mousePosiAbsoluteValue.y > 0.1) {
                         //マウス入力があった場合
-                        Debug.Log(mousePosi);
                         if (mousePosiAbsoluteValue.x < mousePosiAbsoluteValue.y) {
                             //マウス入力の差が上下の場合
                            
@@ -417,6 +412,7 @@ namespace AgonyCube.MainStage {
             }
 
             public override void Exsit() {
+                gameDirector.spinBlock = null;
                 gameDirector.spin += 1;
                 gameDirector.stage.UpdateGridData();
             }

@@ -269,9 +269,12 @@ namespace AgonyCube.MainStage {
                             nextGrid.y -= 1;
                             var nextBlock = stage.GetGrid(nextGrid);
                             if (nextBlock != null && nextBlock.BlockId == 3) {
-                                Debug.Log(nextBlock);
                                 //移動先のしたのBlockが階段の場合
+
                                 var block = GetStepFrontAndBack(nextBlock);
+                                Debug.Log(currentBlock.blockNumber);
+                               
+
                                 if (currentBlock.blockNumber == block[0].blockNumber) {
                                     CheckCut(dx, -1, dz);
                                 }
@@ -285,7 +288,7 @@ namespace AgonyCube.MainStage {
                                 nextGrid.y -= 1;
                                 var nextBlock = stage.GetGrid(nextGrid);
                                 if (nextBlock != null && nextBlock.BlockId == 3) {
-                                    Debug.Log(nextBlock);
+                               
                                     //移動先のしたのBlockが階段の場合
                                     var block1 = GetStepFrontAndBack(nextBlock);
                                     if (currentBlock.blockNumber == block1[0].blockNumber) {
@@ -443,67 +446,60 @@ namespace AgonyCube.MainStage {
 
         //指定した階段の前と上った先を返す　0が上った先1が前
         public Block[] GetStepFrontAndBack(Block stepBlock) {
+            Block[] block = new Block[2];
             //階段のあるgridを保存
             var grid = stage.WorldPointToGrid(stepBlock.transform.position);
             //階段の角度を保存
             var rad = stepBlock.transform.localEulerAngles;
-            if (rad.x == 0) {
+            Debug.Log(rad);
+            if (Mathf.Floor(rad.x) == 0) {
                 //階段が上向きの時
-                if (rad.y == 0) {
-                    
-                    Block[] block = new Block[2];
+                if (Mathf.Floor(rad.y) == 0) {
+                   
+
                     block[0] = stage.GetGrid(grid.x, grid.y + 1, grid.z + 1);
                     block[1] = stage.GetGrid(grid.x, grid.y, grid.z - 1);
-                    return block;
+                   
                 }
-                else if (rad.y == 90) {
-                    Block[] block = new Block[2];
+                else if (Mathf.Floor(rad.y) == 90) {
+                   
+
                     block[0] = stage.GetGrid(grid.x + 1, grid.y + 1, grid.z);
                     block[1] = stage.GetGrid(grid.x - 1, grid.y, grid.z);
-                    return block;
 
                 }
-                else if (rad.y == 180) {
-                    Block[] block = new Block[2];
+                else if (Mathf.Floor(rad.y) == 180) {
+                   
+
                     block[0] = stage.GetGrid(grid.x, grid.y + 1, grid.z - 1);
                     block[1] = stage.GetGrid(grid.x, grid.y, grid.z + 1);
-                    return block;
                 }
                 else {
-                    Block[] block = new Block[2];
                     block[0] = stage.GetGrid(grid.x - 1, grid.y + 1, grid.z);
                     block[1] = stage.GetGrid(grid.x + 1, grid.y, grid.z);
-                    return block;
                 }
             }
             else {
                 //階段がひっくり返っているとき
-                if (rad.y == 0) {
-                    Block[] block = new Block[2];
+                if (Mathf.Floor(rad.y) == 0) {
                     block[0] = stage.GetGrid(grid.x, grid.y + 1, grid.z - 1);
                     block[1] = stage.GetGrid(grid.x, grid.y, grid.z + 1);
-                    return block;
                 }
-                else if (rad.y == 90) {
-                    Block[] block = new Block[2];
+                else if (Mathf.Floor(rad.y) == 90) {
                     block[0] = stage.GetGrid(grid.x - 1, grid.y + 1, grid.z);
                     block[1] = stage.GetGrid(grid.x + 1, grid.y, grid.z);
-                    return block;
-
                 }
-                else if (rad.y == 180) {
-                    Block[] block = new Block[2];
+                else if (Mathf.Floor(rad.y) == 180) {
                     block[0] = stage.GetGrid(grid.x, grid.y + 1, grid.z + 1);
                     block[1] = stage.GetGrid(grid.x, grid.y, grid.z - 1);
-                    return block;
                 }
                 else {
-                    Block[] block = new Block[2];
                     block[0] = stage.GetGrid(grid.x + 1, grid.y + 1, grid.z);
                     block[1] = stage.GetGrid(grid.x - 1, grid.y, grid.z);
-                    return block;
                 }
             }
+          
+            return block;
         }
         
         
