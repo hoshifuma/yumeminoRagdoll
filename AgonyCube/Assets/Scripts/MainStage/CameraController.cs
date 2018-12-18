@@ -127,7 +127,6 @@ namespace AgonyCubeMainStage {
                     }
                 }
 
-                Debug.Log(newAngle.y);
                 if (45 <= newAngle.y && newAngle.y < 135) {
                     nextAngle = 90;
                     angleFlame = nextAngle - newAngle.y;
