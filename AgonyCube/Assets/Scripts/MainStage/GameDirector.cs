@@ -119,11 +119,12 @@ namespace AgonyCube.MainStage {
                     startMousePosi = Input.mousePosition;
                     startMousePosi = Camera.main.ScreenToViewportPoint(startMousePosi);
                     if (gameDirector.choice1 == null) {
-                        gameDirector.choice1 = gameDirector.CheckBlockClick();
+                        gameDirector.choice1 = gameDirector.SwapCheckBlockClick();
                         if (gameDirector.choice1 != null) {
                             //Blockがクリックされていた場合選択状態に変更
                            
                             foreach(Transform child in gameDirector.choice1.transform) {
+                                //指定されたBlockのマテリアルを選択状態に変更
                                 if(gameDirector.choice1.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
 
                                     var mats = child.GetComponent<MeshRenderer>().materials;
@@ -136,8 +137,8 @@ namespace AgonyCube.MainStage {
                     }
                     else {
                         if (gameDirector.SwapCube()) {
-                            //Swapが成功した場合
-                            gameDirector.ChangeState(new IdleState(gameDirector));
+                            //２つ目のBlockが選択された場合
+                            gameDirector.ChangeState(new SpinState(gameDirector));
                         }
                     }
                 }
@@ -466,6 +467,15 @@ namespace AgonyCube.MainStage {
 
             RaycastHit hit;
             if (Physics.Raycast(mouseray, out hit, 10.0f, cube)) {
+                    return hit.transform.gameObject;
+            }
+            return null;
+        }
+        private GameObject SwapCheckBlockClick() {
+            Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            RaycastHit hit;
+            if (Physics.Raycast(mouseray, out hit, 10.0f, cube)) {
                 if (player.gridPoint != stage.WorldPointToGrid(hit.transform.gameObject.transform.position)) {
                     //PlayerがいないblockのBlockを返す
                     return hit.transform.gameObject;
@@ -473,7 +483,6 @@ namespace AgonyCube.MainStage {
             }
             return null;
         }
-
         private GameObject CheckWallClick() {
             Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -483,7 +492,7 @@ namespace AgonyCube.MainStage {
             }
             return null;
         }
-        //キューブのSwap機能用の関数 Swapできた場合trueを返す
+        //2つ目にせんたくされたBlockがchoice1とswapできた場合選択されたBlockをchoice2に保存しtrueを返す
         private bool SwapCube() {
             Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -511,23 +520,34 @@ namespace AgonyCube.MainStage {
                         choice2 = null;
                     }
                     else {
-                        //選択された2つのキューブが隣り合っていた場合positionの交換をし選択状態の解除、変数の初期化
-                        for (int index = 0; index < 4; index++) {
-                            if (choice1.GetComponent<Block>().adjacentBlock[index] != null) {
 
-                                if (choice1.GetComponent<Block>().adjacentBlock[index].blockNumber == choice2.GetComponent<Block>().blockNumber) {
-                                    Vector3 pos1 = choice1.transform.position;
-                                    Vector3 pos2 = choice2.transform.position;
-                                    choice1.transform.position = pos2;
-                                    choice2.transform.position = pos1;
-                                    choice2 = null;
-                                    stage.UpdateGridData();
-                                    swap += 1;
-                                    return true;
-                                }
+                        foreach (Transform child in choice2.transform) {
+                            //指定されたBlockのマテリアルを選択状態に変更
+                            if (choice2.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
+
+                                var mats = child.GetComponent<MeshRenderer>().materials;
+                                mats[0] = select2;
+                                child.GetComponent<MeshRenderer>().materials = mats;
                             }
                         }
-                        choice2 = null;
+                        return true;
+                    //    //選択された2つのキューブが隣り合っていた場合positionの交換をし選択状態の解除、変数の初期化
+                    //    for (int index = 0; index < 4; index++) {
+                    //        if (choice1.GetComponent<Block>().adjacentBlock[index] != null) {
+
+                    //            if (choice1.GetComponent<Block>().adjacentBlock[index].blockNumber == choice2.GetComponent<Block>().blockNumber) {
+                    //                Vector3 pos1 = choice1.transform.position;
+                    //                Vector3 pos2 = choice2.transform.position;
+                    //                choice1.transform.position = pos2;
+                    //                choice2.transform.position = pos1;
+                    //                choice2 = null;
+                    //                stage.UpdateGridData();
+                    //                swap += 1;
+                    //                return true;
+                    //            }
+                    //        }
+                    //    }
+                    //    choice2 = null;
                     }
                 }
             }
