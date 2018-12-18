@@ -15,7 +15,7 @@ namespace AgonyCube.MainStage {
         public GameObject choice2;
         //カメラを保存
         public GameObject mainCamera;
-        
+
         //StageControllerを指定
         public StageController stage;
         //ハサミを持っているかを判定
@@ -47,6 +47,14 @@ namespace AgonyCube.MainStage {
         [SerializeField]
         Material select2;
 
+        //animator
+        private Animator choice1Animator;
+        private Animator choice2Animator;
+
+        // アニメーションID
+        static readonly int BigId = Animator.StringToHash("Big");
+
+        static readonly int SmallId = Animator.StringToHash("Small");
         GameState currentState = null;
         public PlayerController player;
 
@@ -115,67 +123,64 @@ namespace AgonyCube.MainStage {
 
             public override void Update() {
                 if (Input.GetMouseButtonDown(0)) {
-                    //クリック開始時のマウスポジションを保存
-                    startMousePosi = Input.mousePosition;
-                    startMousePosi = Camera.main.ScreenToViewportPoint(startMousePosi);
+                    ////クリック開始時のマウスポジションを保存
+                    //startMousePosi = Input.mousePosition;
+                    //startMousePosi = Camera.main.ScreenToViewportPoint(startMousePosi);
                     if (gameDirector.choice1 == null) {
                         gameDirector.choice1 = gameDirector.SwapCheckBlockClick();
                         if (gameDirector.choice1 != null) {
                             //Blockがクリックされていた場合選択状態に変更
-                           
-                            foreach(Transform child in gameDirector.choice1.transform) {
+
+                            foreach (Transform child in gameDirector.choice1.transform) {
                                 //指定されたBlockのマテリアルを選択状態に変更
-                                if(gameDirector.choice1.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
+                                if (gameDirector.choice1.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
 
                                     var mats = child.GetComponent<MeshRenderer>().materials;
                                     mats[0] = gameDirector.select1;
                                     child.GetComponent<MeshRenderer>().materials = mats;
                                 }
                             }
-                           
-                        }
-                    }
-                    else {
-                        if (gameDirector.SwapCube()) {
-                            //２つ目のBlockが選択された場合
-                            gameDirector.ChangeState(new SpinState(gameDirector));
-                        }
-                    }
-                }
-                else if (Input.GetMouseButton(0)) {
-                    //最新のマウスポジションを保存
-                    lastMousePosi = Input.mousePosition;
 
-                    lastMousePosi = Camera.main.ScreenToViewportPoint(lastMousePosi);
-                }
-                else if (Input.GetMouseButtonUp(0)) {
-                    //マウス入力の差を求める
-                    var mousePosi = lastMousePosi - startMousePosi;
-
-                    mousePosi = new Vector2(Mathf.Abs(mousePosi.x), Mathf.Abs(mousePosi.y));
-                    Debug.Log(mousePosi);
-                    if (gameDirector.choice1 == null) {
-                        if (mousePosi.x < 0.01 && mousePosi.y < 0.01) {
-                            //マウスの入力がクリック時から変更がない場合
+                        }
+                        else {
+                            gameDirector.choice1 = null;
                             gameDirector.ChangeState(new IdleState(gameDirector));
                         }
                     }
+                    else if (gameDirector.SwapCube()) {
+                        //２つ目のBlockが選択された場合
+                        gameDirector.ChangeState(new SwapState(gameDirector));
+                    }else {
+                        gameDirector.choice1 = null;
+                        gameDirector.ChangeState(new IdleState(gameDirector));
+                    }
+
                 }
+                //else if (Input.GetMouseButton(0)) {
+                //    //最新のマウスポジションを保存
+                //    lastMousePosi = Input.mousePosition;
+
+                //    lastMousePosi = Camera.main.ScreenToViewportPoint(lastMousePosi);
+                //}
+                //else if (Input.GetMouseButtonUp(0)) {
+                //    //マウス入力の差を求める
+                //    var mousePosi = lastMousePosi - startMousePosi;
+
+                //    mousePosi = new Vector2(Mathf.Abs(mousePosi.x), Mathf.Abs(mousePosi.y));
+                //    Debug.Log(mousePosi);
+                //    if (gameDirector.choice1 == null) {
+                //        if (mousePosi.x < 0.01 && mousePosi.y < 0.01) {
+                //            //マウスの入力がクリック時から変更がない場合
+                //            gameDirector.choice1 = null;
+                //            gameDirector.ChangeState(new IdleState(gameDirector));
+                //        }
+                //    }
+                //}
             }
 
             public override void Exsit() {
                 gameDirector.stage.UnInvisibleBlock();
-                if (gameDirector.choice1 != null) {
-                    foreach (Transform child in gameDirector.choice1.transform) {
-                        if (gameDirector.choice1.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
 
-                            var mats = child.GetComponent<MeshRenderer>().materials;
-                            mats[0] = gameDirector.normal;
-                            child.GetComponent<MeshRenderer>().materials = mats;
-                        }
-                    }
-                    gameDirector.choice1 = null;
-                }
             }
         }
 
@@ -186,15 +191,34 @@ namespace AgonyCube.MainStage {
             }
 
             public override void Start() {
+                gameDirector.choice1Animator = gameDirector.choice1.GetComponent<Animator>();
+                gameDirector.choice2Animator = gameDirector.choice2.GetComponent<Animator>();
+
+                gameDirector.StartCoroutine(gameDirector.SmallBlock());
 
             }
 
             public override void Update() {
-
+               
             }
 
             public override void Exsit() {
+                foreach (Transform child in gameDirector.choice1.transform) {
+                    if (gameDirector.choice1.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
 
+                        var mats = child.GetComponent<MeshRenderer>().materials;
+                        mats[0] = gameDirector.normal;
+                        child.GetComponent<MeshRenderer>().materials = mats;
+                    }
+                }
+                foreach (Transform child in gameDirector.choice2.transform) {
+                    if (gameDirector.choice2.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
+
+                        var mats = child.GetComponent<MeshRenderer>().materials;
+                        mats[0] = gameDirector.normal;
+                        child.GetComponent<MeshRenderer>().materials = mats;
+                    }
+                }
             }
         }
 
@@ -245,7 +269,7 @@ namespace AgonyCube.MainStage {
                         //マウス入力があった場合
                         if (mousePosiAbsoluteValue.x < mousePosiAbsoluteValue.y) {
                             //マウス入力の差が上下の場合
-                           
+
                             if (wall.tag == "RightAndLeft") {
                                 gameDirector.stage.ZSpinBlock(gameDirector.choice1);
                                 if (Mathf.Floor(gameDirector.mainCamera.transform.localEulerAngles.y) == 270) {
@@ -269,7 +293,7 @@ namespace AgonyCube.MainStage {
                             }
                             else if (wall.tag == "FrontAndBehind") {
                                 gameDirector.stage.XSpinBlock(gameDirector.choice1);
-                               
+
                                 if (Mathf.Floor(gameDirector.mainCamera.transform.localEulerAngles.y) == 0) {
                                     if (mousePosi.y > 0) {
 
@@ -314,7 +338,7 @@ namespace AgonyCube.MainStage {
                         else if (mousePosiAbsoluteValue.x > mousePosiAbsoluteValue.y) {
                             //マウス入力の差が左右の場合
 
-                            
+
 
 
                             if (wall.tag == "RightAndLeft") {
@@ -381,7 +405,7 @@ namespace AgonyCube.MainStage {
             public override void Exsit() {
                 gameDirector.arrows.SetActive(false);
                 gameDirector.choice1 = null;
-                
+
             }
         }
         //Spin中のステート
@@ -394,7 +418,7 @@ namespace AgonyCube.MainStage {
 
             public override void Start() {
                 roteFrame = 180 / gameDirector.spinRad;
-              
+
             }
 
             public override void Update() {
@@ -402,13 +426,13 @@ namespace AgonyCube.MainStage {
 
                     foreach (Block child in gameDirector.spinBlock) {
                         child.transform.RotateAround
-                        (gameDirector.spinCenter,gameDirector.spinRote, gameDirector.spinDirection * gameDirector.spinRad);
+                        (gameDirector.spinCenter, gameDirector.spinRote, gameDirector.spinDirection * gameDirector.spinRad);
                     }
                     roteFrame -= 1;
                 }
                 else {
                     gameDirector.ChangeState(new IdleState(gameDirector));
-               
+
                 }
             }
 
@@ -460,6 +484,57 @@ namespace AgonyCube.MainStage {
             }
         }
 
+        private IEnumerator BigBlock() {
+            choice1Animator.SetBool(BigId, true);
+            choice2Animator.SetBool(BigId, true);
+
+            yield return new WaitForSeconds(0.5f);
+
+            while (true) {
+                var info = choice1Animator.GetCurrentAnimatorStateInfo(0);
+                var info1 = choice2Animator.GetCurrentAnimatorStateInfo(0);
+                if (info.normalizedTime > 1.0f && info1.normalizedTime > 1.0f) {
+                  
+                    break;
+                }
+                yield return null;
+            }
+          
+            choice1Animator.SetBool(BigId, false);
+            choice2Animator.SetBool(BigId, false);
+
+            ChangeState(new IdleState(this));
+        }
+
+        private IEnumerator SmallBlock() {
+            choice1Animator.SetBool(SmallId, true);
+            choice2Animator.SetBool(SmallId, true);
+
+            yield return new WaitForSeconds(0.5f);
+
+            while (true) {
+                var info = choice1Animator.GetCurrentAnimatorStateInfo(0);
+                var info1 = choice2Animator.GetCurrentAnimatorStateInfo(0);
+
+                Debug.Log(choice2Animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+                if (info.normalizedTime > 1.0f && info1.normalizedTime > 1.0f) {
+                    break;
+                }
+                yield return null;
+            }
+            choice1Animator.SetBool(SmallId, false);
+            choice2Animator.SetBool(SmallId, false);
+
+            Vector3 pos1 = choice1.transform.position;
+            Vector3 pos2 = choice2.transform.position;
+            choice1.transform.position = pos2;
+            choice2.transform.position = pos1;
+            stage.UpdateGridData();
+            swap += 1;
+
+            yield return StartCoroutine(BigBlock());
+
+        }
 
         //クリックされたものがBlockの場合クリックされたBlockを返す
         private GameObject CheckBlockClick() {
@@ -467,10 +542,11 @@ namespace AgonyCube.MainStage {
 
             RaycastHit hit;
             if (Physics.Raycast(mouseray, out hit, 10.0f, cube)) {
-                    return hit.transform.gameObject;
+                return hit.transform.gameObject;
             }
             return null;
         }
+
         private GameObject SwapCheckBlockClick() {
             Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -483,6 +559,7 @@ namespace AgonyCube.MainStage {
             }
             return null;
         }
+
         private GameObject CheckWallClick() {
             Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -520,37 +597,38 @@ namespace AgonyCube.MainStage {
                         choice2 = null;
                     }
                     else {
+                        for (int index = 0; index < 4; index++) {
+                            if (choice1.GetComponent<Block>().adjacentBlock[index] != null) {
+                                if (choice1.GetComponent<Block>().adjacentBlock[index].blockNumber == choice2.GetComponent<Block>().blockNumber) {
+                                    foreach (Transform child in choice2.transform) {
+                                        //指定されたBlockのマテリアルを選択状態に変更
+                                        if (choice2.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
 
-                        foreach (Transform child in choice2.transform) {
-                            //指定されたBlockのマテリアルを選択状態に変更
-                            if (choice2.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
-
-                                var mats = child.GetComponent<MeshRenderer>().materials;
-                                mats[0] = select2;
-                                child.GetComponent<MeshRenderer>().materials = mats;
+                                            var mats = child.GetComponent<MeshRenderer>().materials;
+                                            mats[0] = select2;
+                                            child.GetComponent<MeshRenderer>().materials = mats;
+                                        }
+                                        return true;
+                                    }
+                                }
                             }
                         }
-                        return true;
-                    //    //選択された2つのキューブが隣り合っていた場合positionの交換をし選択状態の解除、変数の初期化
-                    //    for (int index = 0; index < 4; index++) {
-                    //        if (choice1.GetComponent<Block>().adjacentBlock[index] != null) {
+                    
+                       
+                        //選択された2つのキューブが隣り合っていた場合positionの交換をし選択状態の解除、変数の初期化
+                       
+                         
 
-                    //            if (choice1.GetComponent<Block>().adjacentBlock[index].blockNumber == choice2.GetComponent<Block>().blockNumber) {
-                    //                Vector3 pos1 = choice1.transform.position;
-                    //                Vector3 pos2 = choice2.transform.position;
-                    //                choice1.transform.position = pos2;
-                    //                choice2.transform.position = pos1;
-                    //                choice2 = null;
-                    //                stage.UpdateGridData();
-                    //                swap += 1;
-                    //                return true;
-                    //            }
-                    //        }
-                    //    }
-                    //    choice2 = null;
+                              
+                                   
+                                    
+                            
+                        
+                        
                     }
                 }
             }
+            choice2 = null;
             return false;
         }
 
@@ -564,14 +642,6 @@ namespace AgonyCube.MainStage {
             ChangeState(new IdleState(this));
         }
 
-        //public void ChangePauseState() {
-        //    ChangeState(new PauseState(this));
-        //    menuPanel.SetActive(true);
-        //}
 
-        //public void ExsitPausseState() {
-        //    ChangeState(new IdleState(this));
-        //    menuPanel.SetActive(false);
-        //}
     }
 }

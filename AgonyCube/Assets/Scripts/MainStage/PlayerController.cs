@@ -414,6 +414,7 @@ namespace AgonyCube.MainStage {
                 StartCoroutine(OnDoorEnter());
             }
         }
+
         private IEnumerator OnDoorEnter() {
             var mesh = scissors.GetComponentsInChildren<MeshRenderer>();
            
@@ -425,6 +426,7 @@ namespace AgonyCube.MainStage {
             animator.SetTrigger(cutId);
 
             doorAnimator.SetTrigger(openId);
+            yield return new WaitForSeconds(1);
 
             while (true) {
                 var info = doorAnimator.GetCurrentAnimatorStateInfo(0);
