@@ -9,6 +9,6 @@ public class Skip : MonoBehaviour {
 	
 	public void SkipButton()
     {
-        SceneManager.LoadScene("Tutorial03");
+        SceneManager.LoadScene("MainScene");
 	}
  }

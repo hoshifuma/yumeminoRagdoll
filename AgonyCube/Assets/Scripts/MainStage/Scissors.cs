@@ -13,6 +13,8 @@ namespace AgonyCube.MainStage {
                 transform.parent = other.transform;
                 other.transform.GetComponent<PlayerController>().scissors = gameObject;
                 var mesh = GetComponentsInChildren<MeshRenderer>();
+                transform.localPosition = new Vector3(0, 0, 0);
+                transform.localRotation = new Quaternion(0, 0, 0, 0);
                 foreach(var child in mesh) {
                     child.enabled = false;
                 }
