@@ -69,9 +69,14 @@ namespace AgonyCube.Result
         }
 
         // 『はい』ボタンを押したら実行されます。
-        public void OnClickTAPButton()
+        public void OnClickNextButton()
         {
-            SceneManager.LoadScene("NextStage");
+            SceneManager.LoadScene("MainScene");
+        }
+
+        public void OnClickSelectButton()
+        {
+            SceneManager.LoadScene("StageSelector");
         }
 
         // Update is called once per frame
