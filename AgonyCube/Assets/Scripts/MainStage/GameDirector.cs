@@ -124,8 +124,8 @@ namespace AgonyCube.MainStage {
             public override void Update() {
                 if (Input.GetMouseButtonDown(0)) {
                     ////クリック開始時のマウスポジションを保存
-                    //startMousePosi = Input.mousePosition;
-                    //startMousePosi = Camera.main.ScreenToViewportPoint(startMousePosi);
+                    startMousePosi = Input.mousePosition;
+                    startMousePosi = Camera.main.ScreenToViewportPoint(startMousePosi);
                     if (gameDirector.choice1 == null) {
                         gameDirector.choice1 = gameDirector.SwapCheckBlockClick();
                         if (gameDirector.choice1 != null) {
@@ -142,40 +142,48 @@ namespace AgonyCube.MainStage {
                             }
 
                         }
-                        else {
-                            gameDirector.choice1 = null;
-                            gameDirector.ChangeState(new IdleState(gameDirector));
-                        }
+                        //else {
+                        //    gameDirector.choice1 = null;
+                        //    gameDirector.ChangeState(new IdleState(gameDirector));
+                        //}
                     }
                     else if (gameDirector.SwapCube()) {
                         //２つ目のBlockが選択された場合
                         gameDirector.ChangeState(new SwapState(gameDirector));
-                    }else {
-                        gameDirector.choice1 = null;
-                        gameDirector.ChangeState(new IdleState(gameDirector));
-                    }
+                    }//else {
+                    //    foreach (Transform child in gameDirector.choice1.transform) {
+                    //        if (gameDirector.choice1.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
+
+                    //            var mats = child.GetComponent<MeshRenderer>().materials;
+                    //            mats[0] = gameDirector.normal;
+                    //            child.GetComponent<MeshRenderer>().materials = mats;
+                    //        }
+                    //    }
+                    //    gameDirector.choice1 = null;
+                    //    gameDirector.ChangeState(new IdleState(gameDirector));
+                    //}
 
                 }
-                //else if (Input.GetMouseButton(0)) {
-                //    //最新のマウスポジションを保存
-                //    lastMousePosi = Input.mousePosition;
+                else if (Input.GetMouseButton(0)) {
+                    //最新のマウスポジションを保存
+                    lastMousePosi = Input.mousePosition;
 
-                //    lastMousePosi = Camera.main.ScreenToViewportPoint(lastMousePosi);
-                //}
-                //else if (Input.GetMouseButtonUp(0)) {
-                //    //マウス入力の差を求める
-                //    var mousePosi = lastMousePosi - startMousePosi;
+                    lastMousePosi = Camera.main.ScreenToViewportPoint(lastMousePosi);
+                }
+                else if (Input.GetMouseButtonUp(0)) {
+                    //マウス入力の差を求める
+                    var mousePosi = lastMousePosi - startMousePosi;
 
-                //    mousePosi = new Vector2(Mathf.Abs(mousePosi.x), Mathf.Abs(mousePosi.y));
-                //    Debug.Log(mousePosi);
-                //    if (gameDirector.choice1 == null) {
-                //        if (mousePosi.x < 0.01 && mousePosi.y < 0.01) {
-                //            //マウスの入力がクリック時から変更がない場合
-                //            gameDirector.choice1 = null;
-                //            gameDirector.ChangeState(new IdleState(gameDirector));
-                //        }
-                //    }
-                //}
+                    mousePosi = new Vector2(Mathf.Abs(mousePosi.x), Mathf.Abs(mousePosi.y));
+                    Debug.Log(mousePosi);
+                    if (gameDirector.choice1 == null) {
+                        if (mousePosi.x < 0.01 && mousePosi.y < 0.01) {
+                            //マウスの入力がクリック時から変更がない場合
+                            
+                            gameDirector.ChangeState(new IdleState(gameDirector));
+                        }
+                    }
+                }
             }
 
             public override void Exsit() {
@@ -199,7 +207,7 @@ namespace AgonyCube.MainStage {
             }
 
             public override void Update() {
-               
+
             }
 
             public override void Exsit() {
@@ -219,6 +227,8 @@ namespace AgonyCube.MainStage {
                         child.GetComponent<MeshRenderer>().materials = mats;
                     }
                 }
+
+                gameDirector.stage.UpdateGridData();
             }
         }
 
@@ -494,12 +504,12 @@ namespace AgonyCube.MainStage {
                 var info = choice1Animator.GetCurrentAnimatorStateInfo(0);
                 var info1 = choice2Animator.GetCurrentAnimatorStateInfo(0);
                 if (info.normalizedTime > 1.0f && info1.normalizedTime > 1.0f) {
-                  
+
                     break;
                 }
                 yield return null;
             }
-          
+
             choice1Animator.SetBool(BigId, false);
             choice2Animator.SetBool(BigId, false);
 
@@ -613,18 +623,18 @@ namespace AgonyCube.MainStage {
                                 }
                             }
                         }
-                    
-                       
-                        //選択された2つのキューブが隣り合っていた場合positionの交換をし選択状態の解除、変数の初期化
-                       
-                         
 
-                              
-                                   
-                                    
-                            
-                        
-                        
+
+                        //選択された2つのキューブが隣り合っていた場合positionの交換をし選択状態の解除、変数の初期化
+
+
+
+
+
+
+
+
+
                     }
                 }
             }
