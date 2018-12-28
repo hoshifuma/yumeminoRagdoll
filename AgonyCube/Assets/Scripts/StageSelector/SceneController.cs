@@ -70,8 +70,7 @@ namespace AgonyCube.StageSelector
         // 『ステージ1』ボタンを押したら実行されます。
         public void OnClickABCButton() {
             Score.instance.stageName = stageName[0];
-            Debug.Log(stageName[0]);
-            LoadScene.nextScene = stageName[0];
+            Score.instance.stageNum = 0;
             LoadScene.nextScene = "Story1-1";
             SceneManager.LoadScene("NowLoading");
         }

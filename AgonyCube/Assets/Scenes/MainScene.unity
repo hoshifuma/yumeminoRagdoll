@@ -1508,6 +1508,8 @@ MonoBehaviour:
   choice1: {fileID: 0}
   choice2: {fileID: 0}
   mainCamera: {fileID: 1068177086}
+  stagePrefs:
+  - {fileID: 1009488027798112, guid: 6ef0e007517643944819de2c73a2f0f8, type: 2}
   stage: {fileID: 1972502963}
   scissors: 0
   arrows: {fileID: 1301516801}
@@ -2440,7 +2442,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1301516802
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2529,6 +2531,10 @@ Prefab:
     - target: {fileID: 2300004, guid: 3ba43fcc53f08774da5fc216cc8ffb81, type: 3}
       propertyPath: m_ReceiveShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: 3ba43fcc53f08774da5fc216cc8ffb81, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ba43fcc53f08774da5fc216cc8ffb81, type: 3}
@@ -3566,6 +3572,10 @@ Prefab:
         type: 2}
       propertyPath: m_Center.y
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1427167243503556, guid: 7f1c89086e8bf5147a37df74fa102cd0, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114237464161460478, guid: 7f1c89086e8bf5147a37df74fa102cd0, type: 2}

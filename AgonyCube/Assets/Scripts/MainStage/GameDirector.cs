@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
-namespace AgonyCube.MainStage {
-    public class GameDirector : MonoBehaviour {
+namespace AgonyCube.MainStage
+{
+    public class GameDirector : MonoBehaviour
+    {
         //Blockのレイヤーマスク
         public LayerMask cube;
         //キューブの周りにある壁に付与するレイヤーマスク
@@ -15,7 +17,9 @@ namespace AgonyCube.MainStage {
         public GameObject choice2;
         //カメラを保存
         public GameObject mainCamera;
-
+        //stageのプレファブを保存
+        [SerializeField]
+        GameObject[] stagePrefs;
         //StageControllerを指定
         public StageController stage;
         //ハサミを持っているかを判定
@@ -58,26 +62,32 @@ namespace AgonyCube.MainStage {
         GameState currentState = null;
         public PlayerController player;
 
-        private class MainScene : GameState {
+        private class MainScene : GameState
+        {
             protected GameDirector gameDirector;
 
-            public MainScene(GameDirector gameDirector) {
+            public MainScene(GameDirector gameDirector)
+            {
                 this.gameDirector = gameDirector;
             }
         }
 
         //通常状態
-        private class IdleState : MainScene {
+        private class IdleState : MainScene
+        {
             //クリックされている時間を保存する変数
             float tapTime = 0;
-            public IdleState(GameDirector gameDirector) : base(gameDirector) {
+            public IdleState(GameDirector gameDirector) : base(gameDirector)
+            {
 
             }
-            public override void Start() {
+            public override void Start()
+            {
                 gameDirector.player.GetComponent<PlayerController>().playerState = PlayerController.PlayerState.Idle;
             }
 
-            public override void Update() {
+            public override void Update()
+            {
                 if (Input.GetMouseButtonDown(0)) {
                     //マウスがクリックされた時にクリックされたBlockを保存
                     gameDirector.choice1 = gameDirector.CheckBlockClick();
@@ -105,15 +115,18 @@ namespace AgonyCube.MainStage {
         }
 
         //Swapモード
-        private class SwapSelectState : MainScene {
+        private class SwapSelectState : MainScene
+        {
             //クリック開始時のマウス位置を保存する変数
             Vector3 startMousePosi;
             //マウスを離す直前のマウス位置を保存する変数
             Vector3 lastMousePosi;
-            public SwapSelectState(GameDirector gameDirector) : base(gameDirector) {
+            public SwapSelectState(GameDirector gameDirector) : base(gameDirector)
+            {
 
             }
-            public override void Start() {
+            public override void Start()
+            {
                 gameDirector.player.GetComponent<PlayerController>().playerState = PlayerController.PlayerState.None;
                 //Swapする段以外のBlockを非表示
                 gameDirector.stage.InvisibleBlock(gameDirector.choice1);
@@ -121,7 +134,8 @@ namespace AgonyCube.MainStage {
 
             }
 
-            public override void Update() {
+            public override void Update()
+            {
                 if (Input.GetMouseButtonDown(0)) {
                     ////クリック開始時のマウスポジションを保存
                     startMousePosi = Input.mousePosition;
@@ -179,26 +193,30 @@ namespace AgonyCube.MainStage {
                     if (gameDirector.choice1 == null) {
                         if (mousePosi.x < 0.01 && mousePosi.y < 0.01) {
                             //マウスの入力がクリック時から変更がない場合
-                            
+
                             gameDirector.ChangeState(new IdleState(gameDirector));
                         }
                     }
                 }
             }
 
-            public override void Exsit() {
+            public override void Exsit()
+            {
                 gameDirector.stage.UnInvisibleBlock();
 
             }
         }
 
         //Swap中のState
-        private class SwapState : MainScene {
-            public SwapState(GameDirector gameDirector) : base(gameDirector) {
+        private class SwapState : MainScene
+        {
+            public SwapState(GameDirector gameDirector) : base(gameDirector)
+            {
 
             }
 
-            public override void Start() {
+            public override void Start()
+            {
                 gameDirector.choice1Animator = gameDirector.choice1.GetComponent<Animator>();
                 gameDirector.choice2Animator = gameDirector.choice2.GetComponent<Animator>();
 
@@ -206,11 +224,13 @@ namespace AgonyCube.MainStage {
 
             }
 
-            public override void Update() {
+            public override void Update()
+            {
 
             }
 
-            public override void Exsit() {
+            public override void Exsit()
+            {
                 foreach (Transform child in gameDirector.choice1.transform) {
                     if (gameDirector.choice1.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
 
@@ -234,9 +254,11 @@ namespace AgonyCube.MainStage {
 
 
         //Spinモード
-        private class SpinSelectState : MainScene {
+        private class SpinSelectState : MainScene
+        {
 
-            public SpinSelectState(GameDirector gameDirector) : base(gameDirector) {
+            public SpinSelectState(GameDirector gameDirector) : base(gameDirector)
+            {
 
             }
 
@@ -247,7 +269,8 @@ namespace AgonyCube.MainStage {
             //クリックされているBlockの面を保存
             GameObject wall;
 
-            public override void Start() {
+            public override void Start()
+            {
                 gameDirector.player.GetComponent<PlayerController>().playerState = PlayerController.PlayerState.None;
                 //初期のマウスポジションを保存
                 startMousePosi = Input.mousePosition;
@@ -262,7 +285,8 @@ namespace AgonyCube.MainStage {
 
             }
 
-            public override void Update() {
+            public override void Update()
+            {
                 if (Input.GetMouseButton(0)) {
 
                     //最新のマウスポジションを保存
@@ -412,26 +436,31 @@ namespace AgonyCube.MainStage {
                 }
             }
 
-            public override void Exsit() {
+            public override void Exsit()
+            {
                 gameDirector.arrows.SetActive(false);
                 gameDirector.choice1 = null;
 
             }
         }
         //Spin中のステート
-        private class SpinState : MainScene {
-            public SpinState(GameDirector gameDirector) : base(gameDirector) {
+        private class SpinState : MainScene
+        {
+            public SpinState(GameDirector gameDirector) : base(gameDirector)
+            {
 
             }
 
             int roteFrame = 0;
 
-            public override void Start() {
+            public override void Start()
+            {
                 roteFrame = 180 / gameDirector.spinRad;
 
             }
 
-            public override void Update() {
+            public override void Update()
+            {
                 if (roteFrame > 0) {
 
                     foreach (Block child in gameDirector.spinBlock) {
@@ -446,7 +475,8 @@ namespace AgonyCube.MainStage {
                 }
             }
 
-            public override void Exsit() {
+            public override void Exsit()
+            {
                 gameDirector.spinBlock = null;
                 gameDirector.spin += 1;
                 gameDirector.stage.UpdateGridData();
@@ -454,47 +484,69 @@ namespace AgonyCube.MainStage {
         }
 
         //キャラクターが動いている状態
-        private class PlayerMoveState : MainScene {
-            public PlayerMoveState(GameDirector gameDirector) : base(gameDirector) {
+        private class PlayerMoveState : MainScene
+        {
+            public PlayerMoveState(GameDirector gameDirector) : base(gameDirector)
+            {
 
             }
 
 
         }
 
-        private class PauseState : MainScene {
-            public PauseState(GameDirector gameDirector) : base(gameDirector) {
+        private class PauseState : MainScene
+        {
+            public PauseState(GameDirector gameDirector) : base(gameDirector)
+            {
 
             }
 
-            public override void Start() {
+            public override void Start()
+            {
                 gameDirector.player.playerState = PlayerController.PlayerState.None;
             }
         }
 
-        void ChangeState(GameState newState) {
+        void ChangeState(GameState newState)
+        {
             if (currentState != null) {
                 currentState.Exsit();
             }
             currentState = newState;
             currentState.Start();
         }
+        private void Awake()
+        {
+            //var stageClone = Instantiate(stagePrefs[Score.instance.stageNum]);
+            ////stage = stageClone.GetComponent<StageController>();
+            //foreach (GameObject child in stageClone.transform) {
+            //    if (child.tag == "Stage") {
+            //        stage = child.GetComponent<StageController>();
+            //    }
+            //    if (child.tag == "Player") {
+            //        player = child.GetComponent<PlayerController>();
+            //    }
+            //}
+        }
 
         // Use this for initialization
-        void Start() {
+        void Start()
+        {
             ChangeState(new IdleState(this));
         }
 
 
 
         // Update is called once per frame
-        void Update() {
+        void Update()
+        {
             if (currentState != null) {
                 currentState.Update();
             }
         }
 
-        private IEnumerator BigBlock() {
+        private IEnumerator BigBlock()
+        {
             choice1Animator.SetBool(BigId, true);
             choice2Animator.SetBool(BigId, true);
 
@@ -516,7 +568,8 @@ namespace AgonyCube.MainStage {
             ChangeState(new IdleState(this));
         }
 
-        private IEnumerator SmallBlock() {
+        private IEnumerator SmallBlock()
+        {
             choice1Animator.SetBool(SmallId, true);
             choice2Animator.SetBool(SmallId, true);
 
@@ -547,7 +600,8 @@ namespace AgonyCube.MainStage {
         }
 
         //クリックされたものがBlockの場合クリックされたBlockを返す
-        private GameObject CheckBlockClick() {
+        private GameObject CheckBlockClick()
+        {
             Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             RaycastHit hit;
@@ -557,7 +611,8 @@ namespace AgonyCube.MainStage {
             return null;
         }
 
-        private GameObject SwapCheckBlockClick() {
+        private GameObject SwapCheckBlockClick()
+        {
             Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             RaycastHit hit;
@@ -570,7 +625,8 @@ namespace AgonyCube.MainStage {
             return null;
         }
 
-        private GameObject CheckWallClick() {
+        private GameObject CheckWallClick()
+        {
             Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             RaycastHit hit;
@@ -580,7 +636,8 @@ namespace AgonyCube.MainStage {
             return null;
         }
         //2つ目にせんたくされたBlockがchoice1とswapできた場合選択されたBlockをchoice2に保存しtrueを返す
-        private bool SwapCube() {
+        private bool SwapCube()
+        {
             Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             RaycastHit hit;
@@ -642,12 +699,14 @@ namespace AgonyCube.MainStage {
             return false;
         }
 
-        public void ChangeMoveState() {
+        public void ChangeMoveState()
+        {
             player.playerState = PlayerController.PlayerState.Locmotion;
             ChangeState(new PlayerMoveState(this));
         }
 
-        public void ChangeIdleState() {
+        public void ChangeIdleState()
+        {
             player.playerState = PlayerController.PlayerState.Idle;
             ChangeState(new IdleState(this));
         }

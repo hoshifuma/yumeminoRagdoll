@@ -15,6 +15,7 @@ TagManager:
   - UpAndDown
   - RightAndLeft
   - FrontAndBehind
+  - Stage
   layers:
   - Default
   - TransparentFX
