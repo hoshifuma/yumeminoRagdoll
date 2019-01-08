@@ -11,7 +11,7 @@ public class StageNameText : MonoBehaviour {
     void stag()
     {
         this.targetText1 = this.GetComponent<Text>();
-        string resultStageName = Data.instance.stageName;
+        string resultStageName = Data.instance.stageName[Data.instance.stageNum];
         this.targetText1.text = resultStageName;
     }
 
