@@ -569,7 +569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a0bbe22c246e4c78ad8e9816cbae9d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeDuration: 0.25
+  fadeDuration: 0.2
   continueButton: {fileID: 186916963}
   dialogCanvas: {fileID: 96996408}
   nameText: {fileID: 2084814270}
@@ -747,7 +747,7 @@ MonoBehaviour:
   targetAudioSource: {fileID: 0}
   audioMode: 0
   beepSounds:
-  - {fileID: 8300000, guid: 14a396b1562834718b2d52b9c4639264, type: 3}
+  - {fileID: 8300000, guid: f637c5ce9d10e45c7855ed89bfc6b97e, type: 3}
   soundEffect: {fileID: 0}
   inputSound: {fileID: 8300000, guid: 14a396b1562834718b2d52b9c4639264, type: 3}
 --- !u!114 &96996411
@@ -768,7 +768,7 @@ MonoBehaviour:
   punctuationPause: 0.2
   hiddenTextColor: {r: 1, g: 1, b: 1, a: 0}
   writeWholeWords: 0
-  forceRichText: 1
+  forceRichText: 0
   instantComplete: 1
 --- !u!114 &96996412
 MonoBehaviour:
@@ -1850,8 +1850,8 @@ GameObject:
   - component: {fileID: 680938774}
   - component: {fileID: 680938773}
   - component: {fileID: 680938783}
-  - component: {fileID: 680938772}
   - component: {fileID: 680938777}
+  - component: {fileID: 680938778}
   m_Layer: 0
   m_Name: Flowchart
   m_TagString: Untagged
@@ -1859,32 +1859,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &680938772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 680938771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: 9
-  indentLevel: 0
-  storyText: "\u308F\u305F\u3057\u306F\u3000\u30D2\u30E1\u3000\r\n\u3086\u3081\u307F\u3061\u3083\u3093\u304C\u3000\u3082\u3063\u3066\u3044\u308B\u3000\u304A\u306B\u3093\u304E\u3087\u3046\r\n\u304A\u304A\u304D\u306A\u3000\u30EA\u30DC\u30F3\u306B\u3000\n\u30DC\u30BF\u30F3\u306E\u3000\u3072\u3068\u307F\u3092\u3000\u3057\u3066\u3044\u308B\u306E\r\n\r\n\u3080\u304B\u3057\u3000\u3086\u3081\u307F\u3061\u3083\u3093\u306F\u3000\u308F\u305F\u3057\u3068\r\n\u307E\u3044\u306B\u3061\u306E\u3088\u3046\u306B\u3000\u3042\u305D\u3093\u3067\u304F\u308C\u305F\r\n\r\n\u3067\u3082\u3000\u3086\u3081\u307F\u3061\u3083\u3093\u306F\u3000\u304A\u304A\u304D\u304F\u306A\u3063\u3066\r\n\u308F\u305F\u3057\u306F\u3000\u304A\u3057\u3044\u308C\u306B\u3000\u3057\u307E\u308F\u308C\u3061\u3083\u3063\u305F"
-  description: 
-  character: {fileID: 683968348}
-  portrait: {fileID: 0}
-  voiceOverClip: {fileID: 0}
-  showAlways: 1
-  showCount: 1
-  extendPrevious: 0
-  fadeWhenDone: 1
-  waitForClick: 1
-  stopVoiceover: 1
-  waitForVO: 1
-  setSayDialog: {fileID: 0}
 --- !u!114 &680938773
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -1913,8 +1887,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 69
-    y: 68
+    x: 72
+    y: 72
     width: 120
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -1924,7 +1898,7 @@ MonoBehaviour:
   description: 
   eventHandler: {fileID: 680938773}
   commandList:
-  - {fileID: 680938772}
+  - {fileID: 680938778}
   - {fileID: 680938777}
   - {fileID: 680938783}
 --- !u!114 &680938775
@@ -1954,7 +1928,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 680938774}
   selectedCommands:
-  - {fileID: 680938772}
+  - {fileID: 680938778}
   variables: []
   description: 
   stepPause: 1
@@ -1982,7 +1956,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &680938777
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 680938771}
@@ -2005,6 +1979,32 @@ MonoBehaviour:
   waitForClick: 1
   stopVoiceover: 1
   waitForVO: 0
+  setSayDialog: {fileID: 0}
+--- !u!114 &680938778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 680938771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec422cd568a9c4a31ad7c36d0572b9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemId: 11
+  indentLevel: 0
+  storyText: "\u308F\u305F\u3057\u306F\u3000\u30D2\u30E1\n\u3086\u3081\u307F\u3061\u3083\u3093\u304C\u3000\u3082\u3063\u3066\u3044\u308B\u3000\u304A\u306B\u3093\u304E\u3087\u3046\r\n\u304A\u304A\u304D\u306A\u3000\u30EA\u30DC\u30F3\u306B\u3000\n\u30DC\u30BF\u30F3\u306E\u3000\u3072\u3068\u307F\u3092\u3000\u3057\u3066\u3044\u308B\u306E\r\n\r\n\u3080\u304B\u3057\u3000\u3086\u3081\u307F\u3061\u3083\u3093\u306F\u3000\u308F\u305F\u3057\u3068\r\n\u307E\u3044\u306B\u3061\u306E\u3088\u3046\u306B\u3000\u3042\u305D\u3093\u3067\u304F\u308C\u305F\r\n\r\n\u3067\u3082\u3000\u3086\u3081\u307F\u3061\u3083\u3093\u306F\u3000\u304A\u304A\u304D\u304F\u306A\u3063\u3066\r\n\u308F\u305F\u3057\u306F\u3000\u304A\u3057\u3044\u308C\u306B\u3000\u3057\u307E\u308F\u308C\u3061\u3083\u3063\u305F"
+  description: 
+  character: {fileID: 683968348}
+  portrait: {fileID: 0}
+  voiceOverClip: {fileID: 0}
+  showAlways: 1
+  showCount: 1
+  extendPrevious: 0
+  fadeWhenDone: 1
+  waitForClick: 1
+  stopVoiceover: 1
+  waitForVO: 1
   setSayDialog: {fileID: 0}
 --- !u!114 &680938783
 MonoBehaviour:
@@ -2924,6 +2924,7 @@ GameObject:
   - component: {fileID: 1045381442}
   - component: {fileID: 1045381441}
   - component: {fileID: 1045381440}
+  - component: {fileID: 1045381443}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2991,6 +2992,101 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1045381443
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1045381439}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 751352c9e878bc84eadf3518b775c33c, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1080569528
 GameObject:
   m_ObjectHideFlags: 0

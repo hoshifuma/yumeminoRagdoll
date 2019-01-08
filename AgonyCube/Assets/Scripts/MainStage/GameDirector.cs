@@ -50,7 +50,12 @@ namespace AgonyCube.MainStage
         Material select1;
         [SerializeField]
         Material select2;
-
+        //扉を保存
+        public GameObject door;
+        //ハートを保存
+        public GameObject hert;
+        //鋏を保存
+        public GameObject scissorsObject;
         //animator
         private Animator choice1Animator;
         private Animator choice2Animator;
@@ -519,6 +524,12 @@ namespace AgonyCube.MainStage
         {
             var stageClone = Instantiate(stagePrefs[Data.instance.stageNum]);
             stage = stageClone.GetComponent<StageController>();
+            player.stage = stage;
+            stage.player = player;
+            stage.gameDirector = this;
+            stage.door = door;
+            stage.scissors = scissorsObject;
+            stage.hert = hert;
             //foreach (GameObject child in stageClone.transform) {
             //    if (child.tag == "Stage") {
             //        stage = child.GetComponent<StageController>();

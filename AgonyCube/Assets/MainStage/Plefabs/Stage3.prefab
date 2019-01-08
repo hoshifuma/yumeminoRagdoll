@@ -1385,6 +1385,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4879914106891552}
+  - component: {fileID: 114612868363221284}
   m_Layer: 0
   m_Name: Stage3
   m_TagString: Untagged
@@ -9992,6 +9993,27 @@ MonoBehaviour:
   blockNumber: 0
   floor: {fileID: 1335785281605714}
   movableFlag: 0
+--- !u!114 &114612868363221284
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1645778087523620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a86908c0ca63307469b0c26c0387df92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridData: []
+  gridSize: 2
+  door: {fileID: 0}
+  doorGrid: {x: 9999, y: 0, z: 0}
+  hert: {fileID: 0}
+  hertGrid: {x: 3, y: 0, z: 3}
+  scissors: {fileID: 0}
+  scissorsGrid: {x: 9999, y: 0, z: 0}
+  player: {fileID: 0}
+  gameDirector: {fileID: 0}
 --- !u!114 &114616328097654454
 MonoBehaviour:
   m_ObjectHideFlags: 1
