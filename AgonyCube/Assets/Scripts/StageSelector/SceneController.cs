@@ -17,7 +17,7 @@ namespace AgonyCube.StageSelector
             stageName = new string[content.transform.childCount];
             int i = 0;
             foreach(Transform child in content.transform) {
-                stageName[i] = child.gameObject.name;
+               Data.instance.stageName[i] = child.gameObject.name;
 
                 Debug.Log(stageName[i]);
                 var starNum = PlayerPrefs.GetInt(stageName[i], 0);
@@ -69,8 +69,9 @@ namespace AgonyCube.StageSelector
 
         // 『ステージ1』ボタンを押したら実行されます。
         public void OnClickStage01() {
-            Data.instance.stageName = stageName[0];
             Data.instance.stageNum = 0;
+            Data.instance.swapMin = 1;
+            Data.instance.spinMin = 0;
             LoadScene.nextScene = "Tutorial01";
             SceneManager.LoadScene("NowLoading");
         }
@@ -78,8 +79,9 @@ namespace AgonyCube.StageSelector
         // 『ステージ2』ボタンを押したら実行されます。
         public void OnClickStage02()
         {
-            Data.instance.stageName = stageName[1];
             Data.instance.stageNum = 1;
+            Data.instance.swapMin = 2;
+            Data.instance.spinMin = 0;
             LoadScene.nextScene = "MainScene";
             SceneManager.LoadScene("NowLoading");
         }
@@ -87,71 +89,79 @@ namespace AgonyCube.StageSelector
         // 『ステージ3』ボタンを押したら実行されます。
         public void OnClickStage03()
         {
-            Data.instance.stageName = stageName[2];
             Data.instance.stageNum = 2;
+            Data.instance.swapMin = 3;
+            Data.instance.spinMin = 0;
             LoadScene.nextScene = "MainScene";
             SceneManager.LoadScene("NowLoading");
         }
 
-        // 『ステージ1』ボタンを押したら実行されます。
+        // 『ステージ4』ボタンを押したら実行されます。
         public void OnClickStage04()
         {
-            Data.instance.stageName = stageName[3];
             Data.instance.stageNum = 3;
+            Data.instance.swapMin = 2;
+            Data.instance.spinMin = 0;
             LoadScene.nextScene = "MainScene";
             SceneManager.LoadScene("NowLoading");
         }
 
-        // 『ステージ1』ボタンを押したら実行されます。
+        // 『ステージ5』ボタンを押したら実行されます。
         public void OnClickStage05()
         {
-            Data.instance.stageName = stageName[4];
             Data.instance.stageNum = 4;
+            Data.instance.swapMin = 0;
+            Data.instance.spinMin = 1;
             LoadScene.nextScene = "MainScene";
             SceneManager.LoadScene("NowLoading");
         }
 
-        // 『ステージ1』ボタンを押したら実行されます。
+        // 『ステージ6』ボタンを押したら実行されます。
         public void OnClickStage06()
         {
-            Data.instance.stageName = stageName[5];
             Data.instance.stageNum = 5;
+            Data.instance.swapMin = 0;
+            Data.instance.spinMin = 2;
             LoadScene.nextScene = "MainScene";
             SceneManager.LoadScene("NowLoading");
         }
 
-        // 『ステージ1』ボタンを押したら実行されます。
+        // 『ステージ7』ボタンを押したら実行されます。
         public void OnClickStage07()
         {
-            Data.instance.stageName = stageName[6];
             Data.instance.stageNum = 6;
+            Data.instance.swapMin = 0;
+            Data.instance.spinMin = 1;
             LoadScene.nextScene = "MainScene";
             SceneManager.LoadScene("NowLoading");
         }
 
-        // 『ステージ1』ボタンを押したら実行されます。
+        // 『ステージ8』ボタンを押したら実行されます。
         public void OnClickStage08()
         {
-            Data.instance.stageName = stageName[7];
             Data.instance.stageNum = 7;
+            Data.instance.swapMin = 0;
+            Data.instance.spinMin = 1;
             LoadScene.nextScene = "MainScene";
             SceneManager.LoadScene("NowLoading");
         }
 
-        // 『ステージ1』ボタンを押したら実行されます。
+        // 『ステージ9』ボタンを押したら実行されます。
         public void OnClickStage09()
         {
-            Data.instance.stageName = stageName[8];
             Data.instance.stageNum = 8;
+            Data.instance.swapMin = 1;
+            Data.instance.spinMin = 1;
             LoadScene.nextScene = "MainScene";
             SceneManager.LoadScene("NowLoading");
         }
 
-        // 『ステージ1』ボタンを押したら実行されます。
+        // 『ステージ10』ボタンを押したら実行されます。
         public void OnClickStage10()
         {
-            Data.instance.stageName = stageName[9];
             Data.instance.stageNum = 9;
+            Data.instance.swapMin = 1;
+            Data.instance.spinMin = 1;
             LoadScene.nextScene = "MainScene";
             SceneManager.LoadScene("NowLoading");
         }
