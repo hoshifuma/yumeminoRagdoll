@@ -2004,7 +2004,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b025183de176deb43a34e4887e9f9ed5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swapMin: {fileID: 0}
+  swapMin: {fileID: 1982785226}
 --- !u!114 &1727243992
 MonoBehaviour:
   m_ObjectHideFlags: 0

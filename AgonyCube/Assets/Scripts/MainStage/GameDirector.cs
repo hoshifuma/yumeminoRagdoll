@@ -616,7 +616,7 @@ namespace AgonyCube.MainStage
             Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             RaycastHit hit;
-            if (Physics.Raycast(mouseray, out hit, 10.0f, cube)) {
+            if (Physics.Raycast(mouseray, out hit, 30.0f, cube)) {
                 return hit.transform.gameObject;
             }
             return null;
@@ -627,7 +627,7 @@ namespace AgonyCube.MainStage
             Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             RaycastHit hit;
-            if (Physics.Raycast(mouseray, out hit, 10.0f, cube)) {
+            if (Physics.Raycast(mouseray, out hit, 30.0f, cube)) {
                 if (player.gridPoint != stage.WorldPointToGrid(hit.transform.gameObject.transform.position)) {
                     //PlayerがいないblockのBlockを返す
                     return hit.transform.gameObject;
@@ -641,7 +641,7 @@ namespace AgonyCube.MainStage
             Ray mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             RaycastHit hit;
-            if (Physics.Raycast(mouseray, out hit, 10.0f, wall)) {
+            if (Physics.Raycast(mouseray, out hit, 30.0f, wall)) {
                 return hit.transform.gameObject;
             }
             return null;
@@ -655,7 +655,7 @@ namespace AgonyCube.MainStage
 
 
             //rayがキューブに当たった際に起動
-            if (Physics.Raycast(mouseray, out hit, 10.0f, cube)) {
+            if (Physics.Raycast(mouseray, out hit, 30.0f, cube)) {
                 //rayが当たったキューブがplayerのいるキューブじゃないことを確認
                 if (player.gridPoint != stage.WorldPointToGrid(hit.transform.gameObject.transform.position)) {
                     choice2 = hit.transform.gameObject;
@@ -664,7 +664,6 @@ namespace AgonyCube.MainStage
                         foreach (Transform child in choice1.transform) {
                             Debug.Log(choice1.GetComponent<Block>().floor);
                             if (choice1.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
-                                Debug.Log(child);
 
                                 var mats = child.GetComponent<MeshRenderer>().materials;
                                 mats[0] = normal;

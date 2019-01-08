@@ -52,7 +52,7 @@ namespace AgonyCubeMainStage {
                     LastMousePosition = Input.mousePosition;
                     // Cubeと交差している場合
                     Ray Mouseray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                    if (Physics.Raycast(Mouseray, 10.0f, Cube) == true) {
+                    if (Physics.Raycast(Mouseray, 30.0f, Cube) == true) {
                         HitCheck = 0;
                     }
                     else {
