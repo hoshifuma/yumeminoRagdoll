@@ -8,7 +8,7 @@ public class Data
     //playerの初期位置を保存
     public Vector3Int playerGrid;
     //プレイするステージの名前を保存
-    public string stageName;
+    public string[] stageName;
     //プレイするステージの番号を保存
     public int stageNum;
     //スピンした回数を保存
