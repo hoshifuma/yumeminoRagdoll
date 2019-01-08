@@ -313,6 +313,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &400888010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 400888011}
+  m_Layer: 0
+  m_Name: HertRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400888011
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 400888010}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1840791007}
+  m_Father: {fileID: 420417739}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &420417738
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,9 +371,9 @@ Transform:
   - {fileID: 1068177087}
   - {fileID: 870156730}
   - {fileID: 1805296201}
-  - {fileID: 1840791007}
   - {fileID: 1347833143}
   - {fileID: 1951694623}
+  - {fileID: 400888011}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -791,31 +820,31 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 420417739}
+    m_TransformParent: {fileID: 400888011}
     m_Modifications:
     - target: {fileID: 400000, guid: 8476cb0e832ef0642b94b0fdfb7fa063, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 8476cb0e832ef0642b94b0fdfb7fa063, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 8476cb0e832ef0642b94b0fdfb7fa063, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 8476cb0e832ef0642b94b0fdfb7fa063, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 8476cb0e832ef0642b94b0fdfb7fa063, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 8476cb0e832ef0642b94b0fdfb7fa063, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 8476cb0e832ef0642b94b0fdfb7fa063, type: 3}
       propertyPath: m_LocalRotation.w
@@ -823,7 +852,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 8476cb0e832ef0642b94b0fdfb7fa063, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 8476cb0e832ef0642b94b0fdfb7fa063, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -904,7 +933,7 @@ MonoBehaviour:
   select1: {fileID: 2100000, guid: f77fe1527a8f8464997435c8d026233f, type: 2}
   select2: {fileID: 2100000, guid: 8b9d8c25551ce19428df6967b68b2bfa, type: 2}
   door: {fileID: 1805296200}
-  hert: {fileID: 1840791006}
+  hert: {fileID: 400888010}
   scissorsObject: {fileID: 1347833142}
   player: {fileID: 781194856}
 --- !u!4 &870156730
@@ -1607,7 +1636,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: 3ba43fcc53f08774da5fc216cc8ffb81, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2300004, guid: 3ba43fcc53f08774da5fc216cc8ffb81, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2294,7 +2323,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4166635827563268, guid: 7f1c89086e8bf5147a37df74fa102cd0, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114905105606287392, guid: 7f1c89086e8bf5147a37df74fa102cd0,
         type: 2}
