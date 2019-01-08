@@ -530,6 +530,7 @@ namespace AgonyCube.MainStage
             stage.door = door;
             stage.scissors = scissorsObject;
             stage.hert = hert;
+            stage.cameraRoot = mainCamera;
             //foreach (GameObject child in stageClone.transform) {
             //    if (child.tag == "Stage") {
             //        stage = child.GetComponent<StageController>();
