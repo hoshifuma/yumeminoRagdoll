@@ -68,29 +68,91 @@ namespace AgonyCube.StageSelector
         }
 
         // 『ステージ1』ボタンを押したら実行されます。
-        public void OnClickABCButton() {
+        public void OnClickStage01() {
             Data.instance.stageName = stageName[0];
             Data.instance.stageNum = 0;
-            LoadScene.nextScene = "Story1-1";
+            LoadScene.nextScene = "Tutorial01";
             SceneManager.LoadScene("NowLoading");
         }
 
         // 『ステージ2』ボタンを押したら実行されます。
-        public void OnClickDEFButton()
+        public void OnClickStage02()
         {
             Data.instance.stageName = stageName[1];
-            Debug.Log(stageName[1]);
-            LoadScene.nextScene = stageName[1];
-            LoadScene.nextScene = "tutorial01";
+            Data.instance.stageNum = 1;
+            LoadScene.nextScene = "MainScene";
             SceneManager.LoadScene("NowLoading");
         }
 
         // 『ステージ3』ボタンを押したら実行されます。
-        public void OnClickEventButton()
+        public void OnClickStage03()
         {
             Data.instance.stageName = stageName[2];
-            Debug.Log(stageName[2]);
-            LoadScene.nextScene = "Story2-1";
+            Data.instance.stageNum = 2;
+            LoadScene.nextScene = "MainScene";
+            SceneManager.LoadScene("NowLoading");
+        }
+
+        // 『ステージ1』ボタンを押したら実行されます。
+        public void OnClickStage04()
+        {
+            Data.instance.stageName = stageName[3];
+            Data.instance.stageNum = 3;
+            LoadScene.nextScene = "MainScene";
+            SceneManager.LoadScene("NowLoading");
+        }
+
+        // 『ステージ1』ボタンを押したら実行されます。
+        public void OnClickStage05()
+        {
+            Data.instance.stageName = stageName[4];
+            Data.instance.stageNum = 4;
+            LoadScene.nextScene = "MainScene";
+            SceneManager.LoadScene("NowLoading");
+        }
+
+        // 『ステージ1』ボタンを押したら実行されます。
+        public void OnClickStage06()
+        {
+            Data.instance.stageName = stageName[5];
+            Data.instance.stageNum = 5;
+            LoadScene.nextScene = "MainScene";
+            SceneManager.LoadScene("NowLoading");
+        }
+
+        // 『ステージ1』ボタンを押したら実行されます。
+        public void OnClickStage07()
+        {
+            Data.instance.stageName = stageName[6];
+            Data.instance.stageNum = 6;
+            LoadScene.nextScene = "MainScene";
+            SceneManager.LoadScene("NowLoading");
+        }
+
+        // 『ステージ1』ボタンを押したら実行されます。
+        public void OnClickStage08()
+        {
+            Data.instance.stageName = stageName[7];
+            Data.instance.stageNum = 7;
+            LoadScene.nextScene = "MainScene";
+            SceneManager.LoadScene("NowLoading");
+        }
+
+        // 『ステージ1』ボタンを押したら実行されます。
+        public void OnClickStage09()
+        {
+            Data.instance.stageName = stageName[8];
+            Data.instance.stageNum = 8;
+            LoadScene.nextScene = "MainScene";
+            SceneManager.LoadScene("NowLoading");
+        }
+
+        // 『ステージ1』ボタンを押したら実行されます。
+        public void OnClickStage10()
+        {
+            Data.instance.stageName = stageName[9];
+            Data.instance.stageNum = 9;
+            LoadScene.nextScene = "MainScene";
             SceneManager.LoadScene("NowLoading");
         }
     }
