@@ -36,28 +36,28 @@ namespace AgonyCube.Result
                 star.SetActive(false);
             }
 
-            var clear = PlayerPrefs.GetInt(Data.instance.stageName, 0);
+            var clear = PlayerPrefs.GetInt(Data.instance.stageName[Data.instance.stageNum], 0);
             
             //swapとspinの判定
             if (swapMin < swap && spinMin < spin) {
                 stars[0].SetActive(true);
                 if (1 > clear) {
-                    PlayerPrefs.SetInt(Data.instance.stageName, 1);
+                    PlayerPrefs.SetInt(Data.instance.stageName[Data.instance.stageNum], 1);
                 }
             }
             else if (swapMin < swap || spinMin < spin) {
                 stars[1].SetActive(true);
                 stars[0].SetActive(true);
                 if (2 > clear) {
-                    PlayerPrefs.SetInt(Data.instance.stageName, 2);
+                    PlayerPrefs.SetInt(Data.instance.stageName[Data.instance.stageNum], 2);
                 }
             }
-            else if (swapMin >= swap || spinMin >= spin) {
+            else if (swapMin >= swap && spinMin >= spin) {
                 stars[2].SetActive(true);
                 stars[1].SetActive(true);
                 stars[0].SetActive(true);
                 if (3 > clear) {
-                    PlayerPrefs.SetInt(Data.instance.stageName, 3);
+                    PlayerPrefs.SetInt(Data.instance.stageName[Data.instance.stageNum], 3);
                 }
             }
 
@@ -68,6 +68,7 @@ namespace AgonyCube.Result
         public void OnClickNextButton()
         {
             SceneManager.LoadScene("MainScene");
+            Data.instance.stageNum++;
         }
 
         public void OnClickSelectButton()

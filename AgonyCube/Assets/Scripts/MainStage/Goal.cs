@@ -17,9 +17,7 @@ namespace AgonyCube.MainStage
 
         [SerializeField]
         ZoomCamera zoomCamera;
-        //遷移するストーリー名を指定します。
-        [SerializeField]
-        string nextScene = "Story1-2";
+       
 
         public GameDirector gameDirector;
         //Playerタグを持つオブジェクトが衝突した際の処理を表します。
@@ -58,7 +56,7 @@ namespace AgonyCube.MainStage
         {
             //３秒後に
             yield return new WaitForSeconds(3.0f);
-            SceneManager.LoadScene(nextScene);
+            SceneManager.LoadScene("Result");
         }
 
     }
