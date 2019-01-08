@@ -61,7 +61,7 @@ namespace AgonyCube.MainStage {
         void Start() {
             Controller = GetComponent<CharacterController>();
             animator = GetComponent<Animator>();
-
+            gridPoint = Data.instance.playerGrid;
             // グリッド座標からワールド座標に変換して設定
             var position = stage.GridToWorldPoint(gridPoint);
             transform.position = new Vector3(position.x, position.y - 1, position.z);

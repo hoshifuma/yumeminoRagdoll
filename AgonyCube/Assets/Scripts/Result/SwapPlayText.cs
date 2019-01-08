@@ -10,7 +10,7 @@ public class SwapPlayText : MonoBehaviour {
     void swap()
     {
         this.targetText2 = this.GetComponent<Text>();
-        string resultSwapPlay = Convert.ToString(Score.instance.swap);
+        string resultSwapPlay = Convert.ToString(Data.instance.swap);
         this.targetText2.text = resultSwapPlay;
     }
     // Use this for initialization

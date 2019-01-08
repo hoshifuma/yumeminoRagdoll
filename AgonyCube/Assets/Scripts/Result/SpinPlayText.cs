@@ -10,7 +10,7 @@ public class SpinPlayText : MonoBehaviour {
     void spin()
     {
         this.targetText3 = this.GetComponent<Text>();
-        string resultSpinPlay = Convert.ToString(Score.instance.spin);
+        string resultSpinPlay = Convert.ToString(Data.instance.spin);
         this.targetText3.text = resultSpinPlay;
     }
     // Use this for initialization
