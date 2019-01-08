@@ -21,12 +21,14 @@ namespace AgonyCube.MainStage {
         public GameObject door;
         //ドアのある場所を保存
         public Vector3Int doorGrid;
+        public float doorRad;
         //ハートを保存
         public GameObject hert;
         //ハートのある場所を保存
         public Vector3Int hertGrid;
         //鋏を保存
         public GameObject scissors;
+        public GameObject cameraRoot;
         //鋏のある場所を保存
         public Vector3Int scissorsGrid;
         //playerControllerを指定
@@ -94,10 +96,11 @@ namespace AgonyCube.MainStage {
                     CalcurateAdgency(gridX, blockHeight - 1, gridZ);
                 }
             }
-
+            cameraRoot.transform.position = new Vector3(gridWidth / 2, gridHeight / 2, gridLength / 2);
             scissors.transform.position = GridToWorldPoint(scissorsGrid);
             door.transform.position = GridToWorldPoint(doorGrid);
             hert.transform.position = GridToWorldPoint(hertGrid);
+            door.transform.rotation = new Quaternion(0, doorRad,0,0);
         }
 
         //外側の壁にtagを付与
