@@ -69,8 +69,8 @@ namespace AgonyCube.StageSelector
 
         // 『ステージ1』ボタンを押したら実行されます。
         public void OnClickABCButton() {
-            Score.instance.stageName = stageName[0];
-            Score.instance.stageNum = 0;
+            Data.instance.stageName = stageName[0];
+            Data.instance.stageNum = 0;
             LoadScene.nextScene = "Story1-1";
             SceneManager.LoadScene("NowLoading");
         }
@@ -78,7 +78,7 @@ namespace AgonyCube.StageSelector
         // 『ステージ2』ボタンを押したら実行されます。
         public void OnClickDEFButton()
         {
-            Score.instance.stageName = stageName[1];
+            Data.instance.stageName = stageName[1];
             Debug.Log(stageName[1]);
             LoadScene.nextScene = stageName[1];
             LoadScene.nextScene = "tutorial01";
@@ -88,7 +88,7 @@ namespace AgonyCube.StageSelector
         // 『ステージ3』ボタンを押したら実行されます。
         public void OnClickEventButton()
         {
-            Score.instance.stageName = stageName[2];
+            Data.instance.stageName = stageName[2];
             Debug.Log(stageName[2]);
             LoadScene.nextScene = "Story2-1";
             SceneManager.LoadScene("NowLoading");

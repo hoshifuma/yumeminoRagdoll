@@ -27,8 +27,8 @@ namespace AgonyCube.MainStage
         {
             if (other.gameObject.CompareTag("Player")) {
                 Debug.Log("ゴール");
-                Score.instance.spin = gameDirector.spin;
-                Score.instance.swap = gameDirector.swap;
+                Data.instance.spin = gameDirector.spin;
+                Data.instance.swap = gameDirector.swap;
 
                 //[Player]のStateChange
                 other.GetComponent<PlayerController>().GetHeart();

@@ -517,8 +517,8 @@ namespace AgonyCube.MainStage
         }
         private void Awake()
         {
-            //var stageClone = Instantiate(stagePrefs[Score.instance.stageNum]);
-            ////stage = stageClone.GetComponent<StageController>();
+            var stageClone = Instantiate(stagePrefs[Data.instance.stageNum]);
+            stage = stageClone.GetComponent<StageController>();
             //foreach (GameObject child in stageClone.transform) {
             //    if (child.tag == "Stage") {
             //        stage = child.GetComponent<StageController>();
