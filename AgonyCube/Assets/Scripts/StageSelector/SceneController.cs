@@ -14,19 +14,20 @@ namespace AgonyCube.StageSelector
 
         private void Start()
         {
-            stageName = new string[content.transform.childCount];
+            Data.instance.stageName = new string[content.transform.childCount];
             int i = 0;
             foreach(Transform child in content.transform) {
+                Debug.Log( child.gameObject.name);
                Data.instance.stageName[i] = child.gameObject.name;
 
-                Debug.Log(stageName[i]);
-                var starNum = PlayerPrefs.GetInt(stageName[i], 0);
-                Debug.Log(PlayerPrefs.GetInt(stageName[i], 0));
+                Debug.Log(Data.instance.stageName[i]);
+                var starNum = PlayerPrefs.GetInt(Data.instance.stageName[i], 0);
+               
                 i += 1;
                 int index = 0;
                 foreach(Transform star in child.transform) {
 
-                    if (index < starNum) {
+                    if (index <= starNum) {
                         star.gameObject.SetActive(true);
                     }
                     index += 1;
@@ -36,7 +37,7 @@ namespace AgonyCube.StageSelector
             
             
             if (PlayerPrefs.GetInt("clearStageNo", 0) == 0) {
-                PlayerPrefs.SetInt("clearStageNo", 2);
+                PlayerPrefs.SetInt("clearStageNo", 1);
             }
             // 以下はデバッグ用の仮セーブ
             // ゲームクリア―した時にそのステージ番号までを保存する

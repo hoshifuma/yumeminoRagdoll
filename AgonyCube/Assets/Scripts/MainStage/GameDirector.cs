@@ -194,7 +194,6 @@ namespace AgonyCube.MainStage
                     var mousePosi = lastMousePosi - startMousePosi;
 
                     mousePosi = new Vector2(Mathf.Abs(mousePosi.x), Mathf.Abs(mousePosi.y));
-                    Debug.Log(mousePosi);
                     if (gameDirector.choice1 == null) {
                         if (mousePosi.x < 0.01 && mousePosi.y < 0.01) {
                             //マウスの入力がクリック時から変更がない場合

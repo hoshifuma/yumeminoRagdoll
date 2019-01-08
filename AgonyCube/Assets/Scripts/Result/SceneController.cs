@@ -35,7 +35,11 @@ namespace AgonyCube.Result
             foreach (var star in stars) {
                 star.SetActive(false);
             }
-
+            Debug.Log(PlayerPrefs.GetInt("clearStageNo", 0));
+            Debug.Log(Data.instance.stageNum);
+            if(PlayerPrefs.GetInt("clearStageNo", 0) <= Data.instance.stageNum + 1) {
+                PlayerPrefs.SetInt("clearStageNo", Data.instance.stageNum + 2);
+            }
             var clear = PlayerPrefs.GetInt(Data.instance.stageName[Data.instance.stageNum], 0);
             
             //swapとspinの判定

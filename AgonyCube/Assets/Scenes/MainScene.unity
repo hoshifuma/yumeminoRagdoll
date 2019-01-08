@@ -918,6 +918,13 @@ MonoBehaviour:
   - {fileID: 1670450254921820, guid: c57294241e3c480419b3df93af170ef3, type: 2}
   - {fileID: 1726599945504392, guid: 4052f518ede2fcf46a3afe39c0a6be11, type: 2}
   - {fileID: 1645778087523620, guid: 43eb57e1f4c629345ae0945241c6875f, type: 2}
+  - {fileID: 1538402535284710, guid: 1873f13ae64e2c640a0ee8487767cf70, type: 2}
+  - {fileID: 1639863612433596, guid: 0f39787890cf63a4aa64ff09eb45ee67, type: 2}
+  - {fileID: 1999486401760482, guid: 8fc5fe4b4d29e7d479c78d42d48961d3, type: 2}
+  - {fileID: 1437996915802292, guid: 97a52c280a2bf66478c69067a0411bd2, type: 2}
+  - {fileID: 1117021799977108, guid: 5adf4724c2a3732439122999c67cb8fc, type: 2}
+  - {fileID: 1051473261561672, guid: c8e4be343d1abdc4a9b9f56d81cd3478, type: 2}
+  - {fileID: 1766317763011394, guid: ddae3cfffcf12c840885d934d9c9864b, type: 2}
   stage: {fileID: 0}
   scissors: 0
   arrows: {fileID: 1301516801}
@@ -2284,7 +2291,6 @@ MonoBehaviour:
   player: {fileID: 781194855}
   playerGoal: {fileID: 1699271621523598, guid: 0927497212c4e7341a8a75d74f56cc0a, type: 2}
   zoomCamera: {fileID: 1068177089}
-  nextScene: Story1-2
   gameDirector: {fileID: 870156729}
 --- !u!1001 &1847399894
 Prefab:
