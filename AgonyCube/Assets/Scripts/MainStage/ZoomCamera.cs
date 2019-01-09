@@ -13,7 +13,7 @@ namespace AgonyCube.MainStage {
         private Camera mainCamera;
 
         private void Awake() {
-            goal = GameObject.FindGameObjectWithTag("Finish").transform;
+           
         }
         //テスト用
         private void Start() {
@@ -29,7 +29,7 @@ namespace AgonyCube.MainStage {
         }
 
         IEnumerator OnGoal() {
-
+            goal = GameObject.FindGameObjectWithTag("Finish").transform;
             float startTime = 0;
 
             Camera.main.transform.LookAt(goal);

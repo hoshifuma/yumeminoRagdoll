@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.UI;
 
 namespace AgonyCube.MainStage
 {
@@ -43,6 +44,8 @@ namespace AgonyCube.MainStage
         //1フレームでspinする角度
         [SerializeField]
         int spinRad = 0;
+        [SerializeField]
+        GameObject swapNow;
         //マテリアル
         [SerializeField]
         Material normal;
@@ -50,6 +53,24 @@ namespace AgonyCube.MainStage
         Material select1;
         [SerializeField]
         Material select2;
+        //数字のスプライト
+        [SerializeField]
+        Sprite[] spriteNumber;
+        //stage番号のimageオブジェクト
+        [SerializeField]
+        Image stageNum;
+        //swapした回数を表示するオブジェクト
+        [SerializeField]
+        Image swapNum;
+        //spinした回数を表示するオブジェクト
+        [SerializeField]
+        Image spinNum;
+        //ステージの最小swap数を表示
+        [SerializeField]
+        Image swapNumMin;
+        //ステージの最小spin数を表示
+        [SerializeField]
+        Image spinNumMin;
         //扉を保存
         public GameObject door;
         //ハートを保存
@@ -132,6 +153,7 @@ namespace AgonyCube.MainStage
             }
             public override void Start()
             {
+                gameDirector.swapNow.SetActive(true);
                 gameDirector.player.GetComponent<PlayerController>().playerState = PlayerController.PlayerState.None;
                 //Swapする段以外のBlockを非表示
                 gameDirector.stage.InvisibleBlock(gameDirector.choice1);
@@ -235,6 +257,7 @@ namespace AgonyCube.MainStage
 
             public override void Exsit()
             {
+                gameDirector.swapNow.SetActive(false);
                 foreach (Transform child in gameDirector.choice1.transform) {
                     if (gameDirector.choice1.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
 
@@ -275,6 +298,7 @@ namespace AgonyCube.MainStage
 
             public override void Start()
             {
+                
                 gameDirector.player.GetComponent<PlayerController>().playerState = PlayerController.PlayerState.None;
                 //初期のマウスポジションを保存
                 startMousePosi = Input.mousePosition;
@@ -483,6 +507,7 @@ namespace AgonyCube.MainStage
             {
                 gameDirector.spinBlock = null;
                 gameDirector.spin += 1;
+                gameDirector.spinNum.sprite = gameDirector.spriteNumber[gameDirector.spin];
                 gameDirector.stage.UpdateGridData();
             }
         }
@@ -530,6 +555,9 @@ namespace AgonyCube.MainStage
             stage.scissors = scissorsObject;
             stage.hert = hert;
             stage.cameraRoot = mainCamera;
+            stageNum.sprite = spriteNumber[Data.instance.stageNum + 1];
+            spinNumMin.sprite = spriteNumber[Data.instance.spinMin];
+            swapNumMin.sprite = spriteNumber[Data.instance.swapMin];
             //foreach (GameObject child in stageClone.transform) {
             //    if (child.tag == "Stage") {
             //        stage = child.GetComponent<StageController>();
@@ -543,6 +571,7 @@ namespace AgonyCube.MainStage
         // Use this for initialization
         void Start()
         {
+            
             ChangeState(new IdleState(this));
         }
 
@@ -605,7 +634,7 @@ namespace AgonyCube.MainStage
             choice2.transform.position = pos1;
             stage.UpdateGridData();
             swap += 1;
-
+            swapNum.sprite = spriteNumber[swap];
             yield return StartCoroutine(BigBlock());
 
         }
