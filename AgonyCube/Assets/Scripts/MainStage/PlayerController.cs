@@ -453,24 +453,25 @@ namespace AgonyCube.MainStage {
             var grid = stage.WorldPointToGrid(stepBlock.transform.position);
             //階段の角度を保存
             var rad = stepBlock.transform.localEulerAngles;
+            rad = new Vector3(Mathf.Round(rad.x), Mathf.Round(rad.y), rad.z);
             Debug.Log(rad);
-            if (Mathf.Floor(rad.x) == 0) {
+            if (rad.x == 0) {
                 //階段が上向きの時
-                if (Mathf.Floor(rad.y) == 0) {
+                if (rad.y == 0) {
                    
 
                     block[0] = stage.GetGrid(grid.x, grid.y + 1, grid.z + 1);
                     block[1] = stage.GetGrid(grid.x, grid.y, grid.z - 1);
                    
                 }
-                else if (Mathf.Floor(rad.y) == 90) {
+                else if (rad.y   == 90) {
                    
 
                     block[0] = stage.GetGrid(grid.x + 1, grid.y + 1, grid.z);
                     block[1] = stage.GetGrid(grid.x - 1, grid.y, grid.z);
 
                 }
-                else if (Mathf.Floor(rad.y) == 180) {
+                else if (rad.y == 180) {
                    
 
                     block[0] = stage.GetGrid(grid.x, grid.y + 1, grid.z - 1);
@@ -483,15 +484,15 @@ namespace AgonyCube.MainStage {
             }
             else {
                 //階段がひっくり返っているとき
-                if (Mathf.Floor(rad.y) == 0) {
+                if (rad.y == 0) {
                     block[0] = stage.GetGrid(grid.x, grid.y + 1, grid.z - 1);
                     block[1] = stage.GetGrid(grid.x, grid.y, grid.z + 1);
                 }
-                else if (Mathf.Floor(rad.y) == 90) {
+                else if (rad.y == 90) {
                     block[0] = stage.GetGrid(grid.x - 1, grid.y + 1, grid.z);
                     block[1] = stage.GetGrid(grid.x + 1, grid.y, grid.z);
                 }
-                else if (Mathf.Floor(rad.y) == 180) {
+                else if (rad.y == 180) {
                     block[0] = stage.GetGrid(grid.x, grid.y + 1, grid.z + 1);
                     block[1] = stage.GetGrid(grid.x, grid.y, grid.z - 1);
                 }
