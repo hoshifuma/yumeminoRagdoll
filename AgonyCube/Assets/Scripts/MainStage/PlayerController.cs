@@ -508,7 +508,7 @@ namespace AgonyCube.MainStage {
         
         //クリア演出内容
         private void GoalPerformance() {
-           
+            mainCamera.GetComponent<CameraController>().cameraMove = false;
             animator.SetTrigger("Goal");
             transform.rotation = Quaternion.Euler(0, 180, 0);
         }
