@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1382,6 +1382,30 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[7].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 1992735378733812, guid: 6a03ce25fe568d54e878440e2d6794ac, type: 2}
+      propertyPath: m_TagString
+      value: Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 114922393238282128, guid: 6a03ce25fe568d54e878440e2d6794ac,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114922393238282128, guid: 6a03ce25fe568d54e878440e2d6794ac,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 870156729}
+    - target: {fileID: 114922393238282128, guid: 6a03ce25fe568d54e878440e2d6794ac,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: ChangeMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 114922393238282128, guid: 6a03ce25fe568d54e878440e2d6794ac,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a03ce25fe568d54e878440e2d6794ac, type: 2}
   m_IsPrefabAsset: 0
@@ -1558,6 +1582,8 @@ MonoBehaviour:
   door: {fileID: 1805296200}
   hert: {fileID: 400888010}
   scissorsObject: {fileID: 1867736584}
+  menuPanel: {fileID: 2016502613}
+  menu: 0
   player: {fileID: 781194856}
 --- !u!4 &870156730
 Transform:
@@ -1856,7 +1882,7 @@ GameObject:
   - component: {fileID: 1056139934}
   m_Layer: 5
   m_Name: Menu Button
-  m_TagString: Untagged
+  m_TagString: Menu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1918,20 +1944,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2016502613}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 870156729}
+        m_MethodName: ChangeMenu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1056139929}
-        m_MethodName: SetActive
-        m_Mode: 6
+        m_MethodName: 
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2119,10 +2145,11 @@ MonoBehaviour:
   RotationSpeed: {x: 0.2, y: 0.3}
   MaxXRotation: 90
   angleSecond: 10
-  errorRange: 5
+  errorRange: 10
   Cube:
     serializedVersion: 2
     m_Bits: 1024
+  cameraMove: 1
 --- !u!114 &1068177089
 MonoBehaviour:
   m_ObjectHideFlags: 0
