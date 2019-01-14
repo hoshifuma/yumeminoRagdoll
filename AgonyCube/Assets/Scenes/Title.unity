@@ -167,7 +167,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: bd6ce987cfaf7a54f90803744c324702, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 029b611469f57d744be6b8435c8f29e0, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -471,7 +471,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 830.00006, y: -380}
+  m_AnchoredPosition: {x: 830, y: -380}
   m_SizeDelta: {x: 160, y: 265}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &204024298
@@ -767,7 +767,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 31e652f06efd2b44180439b3e10cd08f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bf7165baa82f9e4488665e298e4f7956, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1485,7 +1485,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: ccae4d6b45925d841ac707ce50a84d64, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1534,7 +1534,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 830.00006, y: -160}
+  m_AnchoredPosition: {x: 830, y: -160}
   m_SizeDelta: {x: 160, y: 266}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &581766608
@@ -1721,7 +1721,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 2884a4f1035e06846907bf565abd0f45, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4c04193bc3cdef040a15a804229669fe, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1930,7 +1930,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 042a50d77b197c140a09f16a2ed4ca1b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a3e9f240f87ee4343ba23a6f5dffb8e7, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1961,7 +1961,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &873620452
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2410,7 +2410,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 830.00006, y: 60}
+  m_AnchoredPosition: {x: 830, y: 60}
   m_SizeDelta: {x: 160, y: 266}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1084304838
@@ -2964,7 +2964,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 3360c98f27c20c04f91b99a8d1da744a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8e72323d33c4e514c8bfcef0e09465b7, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -3034,7 +3034,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 13441b54880066e4083ce8e80009a103, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b9b1b97020bcc2848b660f7c82d8161d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3714,10 +3714,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2a0e9257da2d4a4f8ba8cbfbdc2d8aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button1: {fileID: 2065405880}
-  button2: {fileID: 1084304836}
-  button3: {fileID: 581766606}
-  button4: {fileID: 204024296}
 --- !u!114 &1683423320
 MonoBehaviour:
   m_ObjectHideFlags: 0

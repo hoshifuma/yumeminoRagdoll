@@ -11596,13 +11596,13 @@ MonoBehaviour:
   gridData: []
   gridSize: 2
   door: {fileID: 0}
-  doorGrid: {x: 0, y: 0, z: 0}
+  doorGrid: {x: 9999, y: 0, z: 0}
   doorRad: 0
   hert: {fileID: 0}
   hertGrid: {x: 2, y: 0, z: 2}
   scissors: {fileID: 0}
   cameraRoot: {fileID: 0}
-  scissorsGrid: {x: 0, y: 0, z: 0}
+  scissorsGrid: {x: 9999, y: 0, z: 0}
   player: {fileID: 0}
   gameDirector: {fileID: 0}
 --- !u!114 &114123469906378748
