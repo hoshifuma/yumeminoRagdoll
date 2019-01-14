@@ -154,11 +154,11 @@ namespace AgonyCube.MainStage {
             else if (gridX == 0) {
                 foreach (Transform child in block.transform) {
                     if (child.transform.position.x - block.transform.position.x < -0.5) {
-                        //child.gameObject.SetActive(true);
+                       
                         if (child.transform.tag == "Untagged") {
                             child.tag = "RightAndLeft";
                             child.GetComponent<BoxCollider>().enabled = true;
-                            //child.GetComponent<MeshRenderer>().enabled = true;
+                           
                         }
                     }
                 }
