@@ -30,6 +30,10 @@ namespace AgonyCube.MainStage {
         public int spin = 0;
         //swap回数を一時的に保存
         public int swap = 0;
+        //ステージごとの最小スピン数
+        public int[] swapMin = { 1, 2, 3, 2, 0, 0, 0, 0, 1, 1 };
+        //ステージごとの最小スワップ数
+        public int[] spinMin = { 0, 0, 0, 0, 1, 2, 1, 1, 1, 1 };
         //spinするBlockを保存
         public Block[] spinBlock;
         //spinするときの中心点
@@ -525,37 +529,49 @@ namespace AgonyCube.MainStage {
 
         void ChangeState(GameState newState) {
             if (currentState != null) {
+                //ステートの終了時の動作を実行
                 currentState.Exsit();
             }
+            //新しいステートに移行
             currentState = newState;
+            //ステート開始時の動作を実行
             currentState.Start();
         }
         private void Awake() {
+            //ロードするステージの最小スピン回数を保存
+            Data.instance.spinMin = spinMin[Data.instance.stageNum];
+            //ロードするステージの最小スワップ回数を保存
+            Data.instance.swapMin = swapMin[Data.instance.stageNum];
+            //ステージを生成
             var stageClone = Instantiate(stagePrefs[Data.instance.stageNum]);
+            //生成したステージのスクリプトを保存
             stage = stageClone.GetComponent<StageController>();
+            //プレイヤーのスクリプトにステージのスクリプトを保存
             player.stage = stage;
+            //ステージのスクリプトにプレイヤーを保存
             stage.player = player;
+            //ステージのスクリプトにこのスクリプトを保存
             stage.gameDirector = this;
+            //ステージのスクリプトにドアのゲームオブジェクトを保存
             stage.door = door;
+            //ステージのスクリプトにハサミのゲームオブジェクトを保存
             stage.scissors = scissorsObject;
+            //ステージのスクリプトにハートのゲームオブジェクトを保存
             stage.hert = hert;
+            //ステージのスクリプトにカメラのオブジェクトを保存
             stage.cameraRoot = mainCamera;
+            //ステージの番号を表示するオブジェクトの画像を変更
             stageNum.sprite = spriteNumber[Data.instance.stageNum + 1];
+            //ステージの最小スピン数を表示するオブジェクトの画像を変更
             spinNumMin.sprite = spriteNumber[Data.instance.spinMin];
+            //ステージの最小スワップ数を表示するオブジェクトの画像を変更
             swapNumMin.sprite = spriteNumber[Data.instance.swapMin];
-            //foreach (GameObject child in stageClone.transform) {
-            //    if (child.tag == "Stage") {
-            //        stage = child.GetComponent<StageController>();
-            //    }
-            //    if (child.tag == "Player") {
-            //        player = child.GetComponent<PlayerController>();
-            //    }
-            //}
+            
         }
 
         // Use this for initialization
         void Start() {
-
+            //ゲーム開示時にIdleStateに変更
             ChangeState(new IdleState(this));
         }
 
@@ -600,7 +616,7 @@ namespace AgonyCube.MainStage {
                 var info = choice1Animator.GetCurrentAnimatorStateInfo(0);
                 var info1 = choice2Animator.GetCurrentAnimatorStateInfo(0);
 
-                Debug.Log(choice2Animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+
                 if (info.normalizedTime > 1.0f && info1.normalizedTime > 1.0f) {
                     break;
                 }
