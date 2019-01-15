@@ -4189,7 +4189,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 5d0b32d10801abb4ebfa7759ad021d6b, type: 2}
+  - {fileID: 2100000, guid: 9b8a7aa9332b0764db248d6d76b62c49, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7935,9 +7935,11 @@ MonoBehaviour:
   gridSize: 2
   door: {fileID: 0}
   doorGrid: {x: 9999, y: 0, z: 0}
+  doorRad: 0
   hert: {fileID: 0}
   hertGrid: {x: 0, y: 1, z: 2}
   scissors: {fileID: 0}
+  cameraRoot: {fileID: 0}
   scissorsGrid: {x: 9999, y: 0, z: 0}
   player: {fileID: 0}
   gameDirector: {fileID: 0}
