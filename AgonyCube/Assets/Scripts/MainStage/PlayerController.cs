@@ -392,27 +392,39 @@ namespace AgonyCube.MainStage {
         }
 
         private void CheckCut(int dx,int dy ,int dz) {
-            if (stage.doorGrid != new Vector3Int(gridPoint.x + dx, gridPoint.y + dy, gridPoint.z + dz)) {
-                //移動を確定する
-                gridPoint.x += dx;
-                gridPoint.z += dz;
-                gridPoint.y += dy;
-                SetPlayerTarget(gridPoint);
+            var doorBlock = stage.GetGrid(stage.doorGrid);
+            Block block = null;
 
-            }
-            else if (director.scissors) {
-                gridPoint.x += dx;
-                gridPoint.z += dz;
-                gridPoint.y += dy;
-                target = stage.GridToWorldPoint(gridPoint);
 
-                Vector3 nexttarget;
-                nexttarget = target;
-                nexttarget.y = transform.position.y;
-                transform.LookAt(nexttarget);
-             
-                StartCoroutine(OnDoorEnter());
+            if (doorBlock != null) {
+                 block = doorBlock.adjacentBlock[(int)(stage.doorRad / 90)];
             }
+                if (doorBlock == null ||
+                    !(stage.doorGrid == new Vector3Int(gridPoint.x + dx, gridPoint.y + dy, gridPoint.z + dz) &&
+                    block == stage.GetGrid(gridPoint.x, gridPoint.y, gridPoint.z) ||
+                    stage.doorGrid == new Vector3Int(gridPoint.x, gridPoint.y, gridPoint.z) &&
+                    block == stage.GetGrid(gridPoint.x + dx, gridPoint.y + dy, gridPoint.z + dz))) {
+                    //移動を確定する
+                    gridPoint.x += dx;
+                    gridPoint.z += dz;
+                    gridPoint.y += dy;
+                    SetPlayerTarget(gridPoint);
+
+                }
+                else if (director.scissors) {
+                    gridPoint.x += dx;
+                    gridPoint.z += dz;
+                    gridPoint.y += dy;
+                    target = stage.GridToWorldPoint(gridPoint);
+
+                    Vector3 nexttarget;
+                    nexttarget = target;
+                    nexttarget.y = transform.position.y;
+                    transform.LookAt(nexttarget);
+
+                    StartCoroutine(OnDoorEnter());
+                }
+            
         }
 
         private IEnumerator OnDoorEnter() {
