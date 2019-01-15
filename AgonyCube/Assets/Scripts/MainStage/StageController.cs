@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AgonyCube.MainStage {
-    public class StageController : MonoBehaviour {
+namespace AgonyCube.MainStage
+{
+    public class StageController : MonoBehaviour
+    {
         //グリッドのX軸のサイズ
         int gridWidth = 0;
         //グリッドのZ軸のサイズ   
         int gridLength = 0;
         //キューブのY軸のサイズ
         int gridHeight = 0;
-        
+
         //グリッドのY軸のサイズ
         int blockHeight = 0;
         //グリッドの状態を保存
@@ -36,25 +38,29 @@ namespace AgonyCube.MainStage {
 
         public GameDirector gameDirector;
         //ワールド座標をグリッドポイントに変換
-        public Vector3Int WorldPointToGrid(Vector3 position) {
+        public Vector3Int WorldPointToGrid(Vector3 position)
+        {
             return new Vector3Int(
                Mathf.RoundToInt(position.x / gridSize),
                Mathf.RoundToInt(position.y / gridSize),
                Mathf.RoundToInt(position.z / gridSize));
         }
         //グリッドポイントをワールド座標に変換
-        public Vector3 GridToWorldPoint(Vector3Int gridPoint) {
+        public Vector3 GridToWorldPoint(Vector3Int gridPoint)
+        {
             return new Vector3(
                 (gridPoint.x * gridSize),
                 (gridPoint.y * gridSize),
                 (gridPoint.z * gridSize));
         }
         //gridDataをset
-        public void SetGrid(Vector3Int gridPoint, Block value) {
+        public void SetGrid(Vector3Int gridPoint, Block value)
+        {
             gridData[(gridPoint.y * gridLength * gridWidth) + (gridPoint.z * gridWidth) + gridPoint.x] = value;
         }
         //指定したブロックの情報を取得
-        public Block GetGrid(Vector3Int gridPoint) {
+        public Block GetGrid(Vector3Int gridPoint)
+        {
             //指定した場所がgridDataの範囲外の場合NULLを返却
             if (gridPoint.x < 0 || gridPoint.x >= gridWidth ||
                 gridPoint.y < 0 || gridPoint.y >= blockHeight ||
@@ -66,7 +72,8 @@ namespace AgonyCube.MainStage {
             }
         }
         //指定したブロックの情報を取得
-        public Block GetGrid(int gridX, int gridY, int gridZ) {
+        public Block GetGrid(int gridX, int gridY, int gridZ)
+        {
             //指定した場所がgridDataの範囲外の場合NULLを返却
             if (gridX < 0 || gridX >= gridWidth ||
                 gridY < 0 || gridY >= blockHeight ||
@@ -78,15 +85,17 @@ namespace AgonyCube.MainStage {
             }
         }
         //キャラクターが移動可能か確認
-        public bool CheckMovableGrid(Vector3Int gridPoint) {
+        public bool CheckMovableGrid(Vector3Int gridPoint)
+        {
             var block = GetGrid(gridPoint);
             return (block != null && block.BlockId > 0);
         }
 
         // Use this for initialization
-        void Start() {
+        void Start()
+        {
 
-            
+
             CreateBlockNumber();
             GenerateGridData();
             RoopBlock();
@@ -100,11 +109,15 @@ namespace AgonyCube.MainStage {
             scissors.transform.position = GridToWorldPoint(scissorsGrid);
             door.transform.position = GridToWorldPoint(doorGrid);
             hert.transform.position = GridToWorldPoint(hertGrid);
-            door.transform.rotation = new Quaternion(0, doorRad,0,0);
+            Debug.Log(doorRad);
+            var rad = door.transform.localEulerAngles;
+            rad.y = doorRad;
+            door.transform.localEulerAngles = rad;
         }
 
         //外側の壁にtagを付与
-        private void GrantTagWall(int gridX, int gridY, int gridZ) {
+        private void GrantTagWall(int gridX, int gridY, int gridZ)
+        {
             var block = GetGrid(gridX, gridY, gridZ);
             //Y軸で端の壁にtag,layer,colliderを付与
             if (gridY == gridHeight - 1) {
@@ -114,10 +127,10 @@ namespace AgonyCube.MainStage {
                         // child.gameObject.SetActive(true);
                         if (child.transform.tag == "Untagged") {
                             child.tag = "UpAndDown";
-                        
+
                             child.GetComponent<BoxCollider>().enabled = true;
                         }
-                      
+
                         //child.GetComponent<MeshRenderer>().enabled = true;
                     }
                 }
@@ -129,7 +142,7 @@ namespace AgonyCube.MainStage {
                         //  child.gameObject.SetActive(true);
                         if (child.transform.tag == "Untagged") {
                             child.tag = "UpAndDown";
-                        
+
                             child.GetComponent<BoxCollider>().enabled = true;
                         }
 
@@ -154,11 +167,11 @@ namespace AgonyCube.MainStage {
             else if (gridX == 0) {
                 foreach (Transform child in block.transform) {
                     if (child.transform.position.x - block.transform.position.x < -0.5) {
-                       
+
                         if (child.transform.tag == "Untagged") {
                             child.tag = "RightAndLeft";
                             child.GetComponent<BoxCollider>().enabled = true;
-                           
+
                         }
                     }
                 }
@@ -191,7 +204,8 @@ namespace AgonyCube.MainStage {
         }
 
         //起動時にBlockにナンバーを付与
-        private void CreateBlockNumber() {
+        private void CreateBlockNumber()
+        {
             var index = 0;
             foreach (Transform child in transform) {
                 child.GetComponent<Block>().blockNumber = index;
@@ -199,7 +213,8 @@ namespace AgonyCube.MainStage {
             }
         }
         //Blockの個数分ループgriddataのupdate時に使用
-        public void RoopBlock() {
+        public void RoopBlock()
+        {
             //gridDataのすべてのグリッドをループ
             for (var gridY = 0; gridY < gridHeight; gridY++) {
                 for (var gridZ = 0; gridZ < gridLength; gridZ++) {
@@ -215,7 +230,8 @@ namespace AgonyCube.MainStage {
             }
         }
         //Blockに通れるか確認するflagを付与
-        public void GrantMovableFlag(int gridX, int gridY, int gridZ) {
+        public void GrantMovableFlag(int gridX, int gridY, int gridZ)
+        {
             var block = GetGrid(gridX, gridY, gridZ);
 
             if (block.BlockId == 1 || block.BlockId == 3) {
@@ -240,7 +256,8 @@ namespace AgonyCube.MainStage {
             }
         }
         //Blockに隣接情報を付与
-        private void CalcurateAdgency(int gridX, int gridY, int gridZ) {
+        private void CalcurateAdgency(int gridX, int gridY, int gridZ)
+        {
             var block = GetGrid(gridX, gridY, gridZ);
 
             // if (block.BlockId != 3) {
@@ -273,10 +290,11 @@ namespace AgonyCube.MainStage {
             else {
                 block.adjacentBlock[3] = null;
             }
-           
+
         }
         //gridDataの作成
-        public void GenerateGridData() {
+        public void GenerateGridData()
+        {
             int maxGridX = 0;
             int maxGridZ = 0;
             int maxGridY = 0;
@@ -305,7 +323,8 @@ namespace AgonyCube.MainStage {
             UpdateGridData();
         }
         //gridDataの更新
-        public void UpdateGridData() {
+        public void UpdateGridData()
+        {
             foreach (Transform child in transform) {
                 var posi = child.transform.position;
                 posi.y = Mathf.RoundToInt(posi.y);
@@ -313,33 +332,34 @@ namespace AgonyCube.MainStage {
                 posi.z = Mathf.RoundToInt(posi.z);
                 child.transform.position = posi;
                 var gridPoint = WorldPointToGrid(child.position);
-                
+
 
                 SetGrid(gridPoint, child.GetComponent<Block>());
                 var grid = GetGrid(gridPoint);
                 grid.movableFlag = false;
                 foreach (Transform wall in child.transform) {
-                    if(wall.tag != "Step") {
+                    if (wall.tag != "Step") {
                         wall.GetComponent<BoxCollider>().enabled = false;
                         wall.tag = "Untagged";
                     }
-                    
-                  
+
+
                     //wall.GetComponent<MeshRenderer>().enabled = false;
                     //wall.gameObject.SetActive(false);
                 }
                 if (grid.floor != null) {
                     grid.floor.GetComponent<BoxCollider>().enabled = true;
-                   // grid.floor.GetComponent<MeshRenderer>().enabled = true;
+                    // grid.floor.GetComponent<MeshRenderer>().enabled = true;
                     //grid.floor.SetActive(true);
                 }
             }
 
             RoopBlock();
         }
-        
+
         //選択された段以外のBlockを透明化
-        public void InvisibleBlock(GameObject Block) {
+        public void InvisibleBlock(GameObject Block)
+        {
             var posi = WorldPointToGrid(Block.transform.position);
 
             for (var gridY = 0; gridY < gridHeight; gridY++) {
@@ -353,7 +373,8 @@ namespace AgonyCube.MainStage {
             }
         }
         //すべてのBlockの透明化を解除
-        public void UnInvisibleBlock() {
+        public void UnInvisibleBlock()
+        {
 
             for (var gridY = 0; gridY < gridHeight; gridY++) {
                 for (var gridZ = 0; gridZ < gridLength; gridZ++) {
@@ -363,18 +384,20 @@ namespace AgonyCube.MainStage {
                 }
             }
         }
-        
+
         //X軸の回転
-        public void XSpinBlock(GameObject block) {
+        public void XSpinBlock(GameObject block)
+        {
             var grid = WorldPointToGrid(block.transform.position);
-            
+
             if (player.gridPoint.x != grid.x) {
                 gameDirector.spinBlock = new Block[gridHeight * gridLength];
                 for (var gridY = 0; gridY < gridHeight; gridY++) {
                     for (var gridZ = 0; gridZ < gridLength; gridZ++) {
-                       gameDirector.spinBlock[gridY * gridLength + gridZ] =  GetGrid(grid.x, gridY, gridZ);
+                        gameDirector.spinBlock[gridY * gridLength + gridZ] = GetGrid(grid.x, gridY, gridZ);
                     }
                 }
+                gameDirector.spin += 1;
                 gameDirector.spinCenter = new Vector3(block.transform.position.x, (gridHeight * gridSize / 2) - 1, (gridLength * gridSize / 2) - 1);
                 gameDirector.spinRote = Vector3.right;
 
@@ -385,7 +408,8 @@ namespace AgonyCube.MainStage {
 
         }
         //Y軸の回転
-        public void YSpinBlock(GameObject block) {
+        public void YSpinBlock(GameObject block)
+        {
             var grid = WorldPointToGrid(block.transform.position);
             if (player.gridPoint.y != grid.y) {
                 gameDirector.spinBlock = new Block[gridLength * gridWidth];
@@ -394,6 +418,7 @@ namespace AgonyCube.MainStage {
                         gameDirector.spinBlock[gridZ * gridWidth + gridX] = GetGrid(gridX, grid.y, gridZ);
                     }
                 }
+                gameDirector.spin += 1;
                 gameDirector.spinCenter = new Vector3((gridWidth * gridSize / 2) - 1, block.transform.position.y, (gridLength * gridSize / 2) - 1);
                 gameDirector.spinRote = Vector3.up;
             }
@@ -402,7 +427,8 @@ namespace AgonyCube.MainStage {
             }
         }
         //Z軸の回転
-        public void ZSpinBlock(GameObject block) {
+        public void ZSpinBlock(GameObject block)
+        {
             var grid = WorldPointToGrid(block.transform.position);
             if (player.gridPoint.z != grid.z) {
                 gameDirector.spinBlock = new Block[gridHeight * gridWidth];
@@ -411,6 +437,7 @@ namespace AgonyCube.MainStage {
                         gameDirector.spinBlock[gridY * gridWidth + gridX] = GetGrid(gridX, gridY, grid.z);
                     }
                 }
+                gameDirector.spin += 1;
                 gameDirector.spinCenter = new Vector3((gridWidth * gridSize / 2) - 1, (gridHeight * gridSize / 2) - 1, block.transform.position.z);
                 gameDirector.spinRote = Vector3.forward;
             }

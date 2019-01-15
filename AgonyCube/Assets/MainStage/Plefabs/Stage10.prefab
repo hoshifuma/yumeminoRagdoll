@@ -18382,7 +18382,7 @@ MonoBehaviour:
   gridData: []
   gridSize: 2
   door: {fileID: 0}
-  doorGrid: {x: 1, y: 2, z: 1}
+  doorGrid: {x: 0, y: 2, z: 1}
   doorRad: 90
   hert: {fileID: 0}
   hertGrid: {x: 0, y: 2, z: 1}
