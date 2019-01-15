@@ -11835,7 +11835,7 @@ MonoBehaviour:
   gridSize: 2
   door: {fileID: 0}
   doorGrid: {x: 1, y: 1, z: 2}
-  doorRad: 0
+  doorRad: 180
   hert: {fileID: 0}
   hertGrid: {x: 2, y: 1, z: 0}
   scissors: {fileID: 0}
