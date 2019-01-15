@@ -506,7 +506,7 @@ namespace AgonyCube.MainStage
 
             public override void Exsit() {
                 gameDirector.spinBlock = null;
-                gameDirector.spin += 1;
+                
                 gameDirector.spinNum.sprite = gameDirector.spriteNumber[gameDirector.spin];
                 gameDirector.stage.UpdateGridData();
             }
