@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityEngine.UI;
 
-namespace AgonyCube.MainStage {
-    public class GameDirector : MonoBehaviour {
+namespace AgonyCube.MainStage
+{
+    public class GameDirector : MonoBehaviour
+    {
         //Blockのレイヤーマスク
         public LayerMask cube;
         //キューブの周りにある壁に付与するレイヤーマスク
@@ -84,7 +86,14 @@ namespace AgonyCube.MainStage {
         private Animator choice2Animator;
         [SerializeField]
         GameObject menuPanel;
+        //menuを開いているか
         public bool menu;
+        //ステージの画像を表示
+        [SerializeField]
+        Image stageImage;
+        //stageImageに入れる画像を表示
+        [SerializeField]
+        Sprite[] stageSprite;
         // アニメーションID
         static readonly int BigId = Animator.StringToHash("Big");
 
@@ -92,7 +101,8 @@ namespace AgonyCube.MainStage {
         GameState currentState = null;
         public PlayerController player;
 
-        private class MainScene : GameState {
+        private class MainScene : GameState
+        {
             protected GameDirector gameDirector;
 
             public MainScene(GameDirector gameDirector) {
@@ -101,7 +111,8 @@ namespace AgonyCube.MainStage {
         }
 
         //通常状態
-        private class IdleState : MainScene {
+        private class IdleState : MainScene
+        {
             //クリックされている時間を保存する変数
             float tapTime = 0;
             //最後のchoice1を保存
@@ -155,7 +166,8 @@ namespace AgonyCube.MainStage {
         }
 
         //Swapモード
-        private class SwapSelectState : MainScene {
+        private class SwapSelectState : MainScene
+        {
             //クリック開始時のマウス位置を保存する変数
             Vector3 startMousePosi;
             //マウスを離す直前のマウス位置を保存する変数
@@ -193,7 +205,7 @@ namespace AgonyCube.MainStage {
                             }
 
                         }
-                        
+
                     }
                     else if (gameDirector.SwapCube()) {
                         //２つ目のBlockが選択された場合
@@ -230,7 +242,8 @@ namespace AgonyCube.MainStage {
         }
 
         //Swap中のState
-        private class SwapState : MainScene {
+        private class SwapState : MainScene
+        {
             public SwapState(GameDirector gameDirector) : base(gameDirector) {
 
             }
@@ -248,7 +261,7 @@ namespace AgonyCube.MainStage {
             }
 
             public override void Exsit() {
-                
+
                 foreach (Transform child in gameDirector.choice1.transform) {
                     if (gameDirector.choice1.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
 
@@ -272,7 +285,8 @@ namespace AgonyCube.MainStage {
 
 
         //Spinモード
-        private class SpinSelectState : MainScene {
+        private class SpinSelectState : MainScene
+        {
 
             public SpinSelectState(GameDirector gameDirector) : base(gameDirector) {
 
@@ -295,8 +309,12 @@ namespace AgonyCube.MainStage {
 
                 //arrowsの表示
                 gameDirector.arrows.SetActive(true);
-                gameDirector.arrowsPosi.position = RectTransformUtility.WorldToScreenPoint(Camera.main, wall.transform.position);
-
+                if (wall != null) {
+                    gameDirector.arrowsPosi.position = RectTransformUtility.WorldToScreenPoint(Camera.main, wall.transform.position);
+                }
+                else {
+                    gameDirector.ChangeState(new IdleState(gameDirector));
+                }
 
 
             }
@@ -458,7 +476,8 @@ namespace AgonyCube.MainStage {
             }
         }
         //Spin中のステート
-        private class SpinState : MainScene {
+        private class SpinState : MainScene
+        {
             public SpinState(GameDirector gameDirector) : base(gameDirector) {
 
             }
@@ -494,7 +513,8 @@ namespace AgonyCube.MainStage {
         }
 
         //キャラクターが動いている状態
-        private class PlayerMoveState : MainScene {
+        private class PlayerMoveState : MainScene
+        {
             public PlayerMoveState(GameDirector gameDirector) : base(gameDirector) {
 
             }
@@ -502,9 +522,10 @@ namespace AgonyCube.MainStage {
 
         }
 
-        
+
         //メニュー画面を開いている状態
-        private class MenuState : MainScene {
+        private class MenuState : MainScene
+        {
             public MenuState(GameDirector gameDirector) : base(gameDirector) {
 
             }
@@ -517,14 +538,21 @@ namespace AgonyCube.MainStage {
                 if (!gameDirector.menu) {
                     gameDirector.ChangeState(new IdleState(gameDirector));
                 }
-                        
-                  
+
+
             }
             public override void Exsit() {
                 gameDirector.mainCamera.GetComponent<CameraController>().cameraMove = true;
                 gameDirector.menuPanel.SetActive(false);
                 gameDirector.choice1 = null;
             }
+        }
+        private class Goal : MainScene
+        {
+            public Goal(GameDirector gameDirector) : base(gameDirector) {
+
+            }
+
         }
 
         void ChangeState(GameState newState) {
@@ -566,7 +594,21 @@ namespace AgonyCube.MainStage {
             spinNumMin.sprite = spriteNumber[Data.instance.spinMin];
             //ステージの最小スワップ数を表示するオブジェクトの画像を変更
             swapNumMin.sprite = spriteNumber[Data.instance.swapMin];
-            
+            //ステージの背景画像を変更
+            StageImageSelect();
+
+        }
+        //ステージの背景画像を変更
+        private void StageImageSelect() {
+            if (Data.instance.stageNum < 4) {
+                stageImage.sprite = stageSprite[0];
+            }
+            else if (Data.instance.stageNum < 8) {
+                stageImage.sprite = stageSprite[1];
+            }
+            else {
+                stageImage.sprite = stageSprite[2];
+            }
         }
 
         // Use this for initialization
@@ -746,6 +788,9 @@ namespace AgonyCube.MainStage {
             ChangeState(new IdleState(this));
         }
 
+        public void ChangeGoalState() {
+            ChangeState(new Goal(this));
+        }
         public void ChangeMenu() {
             menu = !menu;
         }

@@ -10,7 +10,7 @@ namespace AgonyCube.MainStage {
 
         Transform goal;
 
-        private Camera mainCamera;
+        private GameObject mainCamera;
 
         private void Awake() {
            
@@ -24,12 +24,18 @@ namespace AgonyCube.MainStage {
         /// ゴール時のカメラモーションを開始します。
         /// </summary>
         public void StartGoalMotion() {
+            mainCamera = gameObject;
+            mainCamera.GetComponent<CameraController>().cameraMove = false;
+            goal = GameObject.FindGameObjectWithTag("Finish").transform;
+            mainCamera.transform.position = goal.position;
             transform.localEulerAngles = new Vector3(30, 0, 0);
             StartCoroutine(OnGoal());
+            
         }
 
         IEnumerator OnGoal() {
-            goal = GameObject.FindGameObjectWithTag("Finish").transform;
+            
+            
             float startTime = 0;
 
             Camera.main.transform.LookAt(goal);

@@ -41,34 +41,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Result/NextStage.unity
     guid: 8ba982d7b0874ef46aebbecbec6a1592
-  - enabled: 1
-    path: Assets/Scenes/Story folder/Story1-1.unity
-    guid: d099cd8f598d708429af60d14f9af173
-  - enabled: 1
-    path: Assets/Scenes/Story folder/Story1-2.unity
-    guid: 03296ce365d237940bcc3c640716b64c
-  - enabled: 1
-    path: Assets/Scenes/Story folder/Story2-1.unity
-    guid: c6b68aa42d7e39f41b1411c6b4cb6185
-  - enabled: 1
-    path: Assets/Scenes/Story folder/Story2-2.unity
-    guid: 3b1073002bd8ade4293e331535212979
-  - enabled: 1
-    path: Assets/Scenes/Story folder/Story2-3.unity
-    guid: b14096231743c2c4aa1926a1b1e2f6fe
-  - enabled: 1
-    path: Assets/Scenes/Story folder/Story3-1.unity
-    guid: 5de0ef7149ede214c88f6966fd60d6ee
-  - enabled: 1
-    path: Assets/Scenes/Story folder/Story3-2.unity
-    guid: a2da9a6c4851dce4b868a6cdabaffc23
-  - enabled: 1
-    path: Assets/Scenes/Story folder/Story4-1.unity
-    guid: 9931344dd2af67a49a65e252d64fc6f5
-  - enabled: 1
-    path: Assets/Scenes/Story folder/Story4-2.unity
-    guid: 49576192f40d5e243971126a14766e5e
-  - enabled: 1
-    path: Assets/Scenes/Story folder/Ending.unity
-    guid: 71034b54132dc1444a32689bc60ca44a
   m_configObjects: {}
