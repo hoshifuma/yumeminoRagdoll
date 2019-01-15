@@ -27,7 +27,7 @@ namespace AgonyCube.MainStage
                 Debug.Log("ゴール");
                 Data.instance.spin = gameDirector.spin;
                 Data.instance.swap = gameDirector.swap;
-
+                gameDirector.ChangeGoalState();
                 //[Player]のStateChange
                 other.GetComponent<PlayerController>().GetHeart();
 
