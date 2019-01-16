@@ -398,7 +398,11 @@ namespace AgonyCube.MainStage {
 
             if (doorBlock != null) {
                  block = doorBlock.adjacentBlock[(int)(stage.doorRad / 90)];
+                var blockGrid = stage.WorldPointToGrid(block.transform.position);
+                blockGrid.y -= dy;
+                block = stage.GetGrid(blockGrid);
             }
+            
                 if (doorBlock == null ||
                     !(stage.doorGrid == new Vector3Int(gridPoint.x + dx, gridPoint.y + dy, gridPoint.z + dz) &&
                     block == stage.GetGrid(gridPoint.x, gridPoint.y, gridPoint.z) ||
@@ -409,6 +413,8 @@ namespace AgonyCube.MainStage {
                     gridPoint.z += dz;
                     gridPoint.y += dy;
                     SetPlayerTarget(gridPoint);
+
+                
 
                 }
                 else if (director.scissors) {
