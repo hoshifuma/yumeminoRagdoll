@@ -33,7 +33,7 @@ namespace AgonyCube.MainStage
         //swap回数を一時的に保存
         public int swap = 0;
         //ステージごとの最小スピン数
-        public int[] swapMin = { 1, 2, 3, 2, 0, 0, 0, 0, 1, 1 };
+        public int[] swapMin = { 1, 2, 3, 2, 0, 0, 0, 0, 1, 3 };
         //ステージごとの最小スワップ数
         public int[] spinMin = { 0, 0, 0, 0, 1, 2, 1, 1, 1, 1 };
         //spinするBlockを保存
@@ -100,7 +100,7 @@ namespace AgonyCube.MainStage
         static readonly int SmallId = Animator.StringToHash("Small");
         GameState currentState = null;
         public PlayerController player;
-
+        
         private class MainScene : GameState
         {
             protected GameDirector gameDirector;
@@ -554,7 +554,7 @@ namespace AgonyCube.MainStage
             }
 
         }
-
+        //ステートの変更
         void ChangeState(GameState newState) {
             if (currentState != null) {
                 //ステートの終了時の動作を実行

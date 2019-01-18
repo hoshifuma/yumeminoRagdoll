@@ -298,7 +298,7 @@ namespace AgonyCube.MainStage
             int maxGridX = 0;
             int maxGridZ = 0;
             int maxGridY = 0;
-
+            //stageに置かれているブロックのｘ、ｙ、ｚの最大グリッド座標を捜索
             foreach (Transform child in transform) {
                 var gridPoint = WorldPointToGrid(child.position);
 
@@ -312,19 +312,21 @@ namespace AgonyCube.MainStage
                     maxGridY = gridPoint.y;
                 }
             }
-
+            //０からスタートしているため１を足す
             gridWidth = maxGridX + 1;
             gridLength = maxGridZ + 1;
+            //上部に配置している天井移動用のオブジェクトを除いた最大値
             gridHeight = maxGridY;
-
+            //上部に配置している天井移動用のオブジェクトを含めた最大値
             blockHeight = maxGridY + 1;
             gridData = new Block[gridWidth * gridLength * blockHeight];
-
+            
             UpdateGridData();
         }
         //gridDataの更新
         public void UpdateGridData()
         {
+            //全てのブロックをグリッドデータに保存
             foreach (Transform child in transform) {
                 var posi = child.transform.position;
                 posi.y = Mathf.RoundToInt(posi.y);
@@ -333,24 +335,19 @@ namespace AgonyCube.MainStage
                 child.transform.position = posi;
                 var gridPoint = WorldPointToGrid(child.position);
 
-
                 SetGrid(gridPoint, child.GetComponent<Block>());
                 var grid = GetGrid(gridPoint);
                 grid.movableFlag = false;
+                //前の更新時にキューブの外側にあった壁のコライダー,tagを無くす
                 foreach (Transform wall in child.transform) {
                     if (wall.tag != "Step") {
                         wall.GetComponent<BoxCollider>().enabled = false;
                         wall.tag = "Untagged";
                     }
-
-
-                    //wall.GetComponent<MeshRenderer>().enabled = false;
-                    //wall.gameObject.SetActive(false);
                 }
                 if (grid.floor != null) {
                     grid.floor.GetComponent<BoxCollider>().enabled = true;
-                    // grid.floor.GetComponent<MeshRenderer>().enabled = true;
-                    //grid.floor.SetActive(true);
+                    
                 }
             }
 
