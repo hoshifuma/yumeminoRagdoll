@@ -91,16 +91,22 @@ namespace AgonyCube.MainStage
         //ステージの画像を表示
         [SerializeField]
         Image stageImage;
-        //stageImageに入れる画像を表示
+        //stageImageに入れる画像を保存
         [SerializeField]
         Sprite[] stageSprite;
         // アニメーションID
         static readonly int BigId = Animator.StringToHash("Big");
-
         static readonly int SmallId = Animator.StringToHash("Small");
+        //ゲームのステート管理
         GameState currentState = null;
+
         public PlayerController player;
-        
+
+        private AudioSource SE;
+        private AudioClip[] spinAudio;
+        private AudioClip[] swapAudio;
+        private AudioClip tapAudio;
+
         private class MainScene : GameState
         {
             protected GameDirector gameDirector;
@@ -278,7 +284,7 @@ namespace AgonyCube.MainStage
                         child.GetComponent<MeshRenderer>().materials = mats;
                     }
                 }
-
+                gameDirector.SwapNumUpdate();
                 gameDirector.stage.UpdateGridData();
             }
         }
@@ -506,10 +512,12 @@ namespace AgonyCube.MainStage
 
             public override void Exsit() {
                 gameDirector.spinBlock = null;
-                
-                gameDirector.spinNum.sprite = gameDirector.spriteNumber[gameDirector.spin];
+
+               gameDirector.SpinNumUpdate();
                 gameDirector.stage.UpdateGridData();
             }
+
+            
         }
 
         //キャラクターが動いている状態
@@ -644,7 +652,7 @@ namespace AgonyCube.MainStage
 
             choice1Animator.SetBool(BigId, false);
             choice2Animator.SetBool(BigId, false);
-
+            swap += 1;
             ChangeState(new IdleState(this));
         }
 
@@ -672,8 +680,8 @@ namespace AgonyCube.MainStage
             choice1.transform.position = pos2;
             choice2.transform.position = pos1;
             stage.UpdateGridData();
-            swap += 1;
-            swapNum.sprite = spriteNumber[swap];
+            
+           
             yield return StartCoroutine(BigBlock());
 
         }
@@ -759,23 +767,32 @@ namespace AgonyCube.MainStage
                                 }
                             }
                         }
-
-
-                        //選択された2つのキューブが隣り合っていた場合positionの交換をし選択状態の解除、変数の初期化
-
-
-
-
-
-
-
-
-
                     }
                 }
             }
             choice2 = null;
             return false;
+        }
+        //現在のspin回数を表示する
+        public void SpinNumUpdate() {
+            if (spin < 10){
+                spinNum.sprite = spriteNumber[spin];
+            }
+            else
+            {
+                spinNum.sprite = spriteNumber[11];
+            }
+        }
+
+        public void SwapNumUpdate() {
+            if (swap < 10)
+            {
+                swapNum.sprite = spriteNumber[swap];
+            }
+            else
+            {
+                swapNum.sprite = spriteNumber[11];
+            }
         }
 
         public void ChangeMoveState() {
