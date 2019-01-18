@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 namespace AgonyCube.StageSelector
 {
@@ -11,7 +12,7 @@ namespace AgonyCube.StageSelector
         public Transform[] stageButtons;
         public GameObject content;
         public string[] stageName;
-
+        
         private void Start()
         {
             Data.instance.stageName = new string[content.transform.childCount];
@@ -71,99 +72,91 @@ namespace AgonyCube.StageSelector
         // 『ステージ1』ボタンを押したら実行されます。
         public void OnClickStage01() {
             Data.instance.stageNum = 0;
-            Data.instance.swapMin = 1;
-            Data.instance.spinMin = 0;
+         
             LoadScene.nextScene = "Tutorial01";
-            SceneManager.LoadScene("NowLoading");
+            StartCoroutine("NextScene");
+
         }
 
         // 『ステージ2』ボタンを押したら実行されます。
         public void OnClickStage02()
         {
             Data.instance.stageNum = 1;
-            Data.instance.swapMin = 2;
-            Data.instance.spinMin = 0;
             LoadScene.nextScene = "MainScene";
-            SceneManager.LoadScene("NowLoading");
+            StartCoroutine("NextScene");
         }
 
         // 『ステージ3』ボタンを押したら実行されます。
         public void OnClickStage03()
         {
             Data.instance.stageNum = 2;
-            Data.instance.swapMin = 3;
-            Data.instance.spinMin = 0;
             LoadScene.nextScene = "MainScene";
-            SceneManager.LoadScene("NowLoading");
+            StartCoroutine("NextScene");
         }
 
         // 『ステージ4』ボタンを押したら実行されます。
         public void OnClickStage04()
         {
             Data.instance.stageNum = 3;
-            Data.instance.swapMin = 2;
-            Data.instance.spinMin = 0;
             LoadScene.nextScene = "MainScene";
-            SceneManager.LoadScene("NowLoading");
+            StartCoroutine("NextScene");
         }
 
         // 『ステージ5』ボタンを押したら実行されます。
         public void OnClickStage05()
         {
             Data.instance.stageNum = 4;
-            Data.instance.swapMin = 0;
-            Data.instance.spinMin = 1;
             LoadScene.nextScene = "MainScene";
-            SceneManager.LoadScene("NowLoading");
+            StartCoroutine("NextScene");
         }
 
         // 『ステージ6』ボタンを押したら実行されます。
         public void OnClickStage06()
         {
             Data.instance.stageNum = 5;
-            Data.instance.swapMin = 0;
-            Data.instance.spinMin = 2;
             LoadScene.nextScene = "MainScene";
-            SceneManager.LoadScene("NowLoading");
+            StartCoroutine("NextScene");
         }
 
         // 『ステージ7』ボタンを押したら実行されます。
         public void OnClickStage07()
         {
             Data.instance.stageNum = 6;
-            Data.instance.swapMin = 0;
-            Data.instance.spinMin = 1;
             LoadScene.nextScene = "MainScene";
-            SceneManager.LoadScene("NowLoading");
+            StartCoroutine("NextScene");
         }
 
         // 『ステージ8』ボタンを押したら実行されます。
         public void OnClickStage08()
         {
             Data.instance.stageNum = 7;
-            Data.instance.swapMin = 0;
-            Data.instance.spinMin = 1;
             LoadScene.nextScene = "MainScene";
-            SceneManager.LoadScene("NowLoading");
+            StartCoroutine("NextScene");
         }
 
         // 『ステージ9』ボタンを押したら実行されます。
         public void OnClickStage09()
         {
             Data.instance.stageNum = 8;
-            Data.instance.swapMin = 1;
-            Data.instance.spinMin = 1;
             LoadScene.nextScene = "MainScene";
-            SceneManager.LoadScene("NowLoading");
+            StartCoroutine("NextScene");
+
+
         }
 
         // 『ステージ10』ボタンを押したら実行されます。
         public void OnClickStage10()
         {
             Data.instance.stageNum = 9;
-            Data.instance.swapMin = 1;
-            Data.instance.spinMin = 1;
             LoadScene.nextScene = "MainScene";
+            StartCoroutine("NextScene");
+            
+        }
+
+        IEnumerator NextScene()
+        {
+            
+            yield return new WaitForSeconds(1);
             SceneManager.LoadScene("NowLoading");
         }
     }

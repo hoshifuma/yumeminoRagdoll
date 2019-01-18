@@ -139,7 +139,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243870249101215528, guid: 3cdced1b0e1ef274a9f983ec16b156d5,
     type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 09e4f3ffc620b2745a887d6bca0aa30e, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -806,10 +806,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1344200315}
   m_HandleRect: {fileID: 631139019}
   m_Direction: 0
-  m_MinValue: -40
-  m_MaxValue: 0
+  m_MinValue: -25
+  m_MaxValue: 5
   m_WholeNumbers: 0
-  m_Value: -20
+  m_Value: -10
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -2907,7 +2907,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243870249101215528, guid: 3cdced1b0e1ef274a9f983ec16b156d5,
     type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 298dc600c20147c47ba4a01028668bd2, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -4998,6 +4998,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1928804627}
   - component: {fileID: 1928804628}
+  - component: {fileID: 1928804629}
   m_Layer: 5
   m_Name: SE Slider
   m_TagString: Untagged
@@ -5071,9 +5072,32 @@ MonoBehaviour:
   m_Value: -10
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1928804629}
+        m_MethodName: SE
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1928804628}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Slider, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &1928804629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1928804626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f207b70b53c71be44a1ed2abf248a046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: 3cdced1b0e1ef274a9f983ec16b156d5, type: 2}
 --- !u!1 &1986927612
 GameObject:
   m_ObjectHideFlags: 0
