@@ -109,7 +109,7 @@ namespace AgonyCube.MainStage
             scissors.transform.position = GridToWorldPoint(scissorsGrid);
             door.transform.position = GridToWorldPoint(doorGrid);
             hert.transform.position = GridToWorldPoint(hertGrid);
-            Debug.Log(doorRad);
+    
             var rad = door.transform.localEulerAngles;
             rad.y = doorRad;
             door.transform.localEulerAngles = rad;

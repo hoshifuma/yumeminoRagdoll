@@ -28,6 +28,14 @@ namespace AgonyCube.MainStage {
 
         static readonly int scissorsId = Animator.StringToHash("CutTrigger");
 
+        //audio
+        //ハサミの切る音
+        [SerializeField]
+        private AudioSource scissorsSE;
+        //扉の開く音
+        [SerializeField]
+        private AudioSource doorSE;
+        //カメラ
         public GameObject mainCamera;
         // StageControllerを指定
         public StageController stage;
@@ -433,6 +441,7 @@ namespace AgonyCube.MainStage {
             
         }
 
+        
         private IEnumerator OnDoorEnter() {
             var mesh = scissors.GetComponentsInChildren<MeshRenderer>();
            

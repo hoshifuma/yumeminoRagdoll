@@ -4,10 +4,8 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityEngine.UI;
 
-namespace AgonyCube.MainStage
-{
-    public class GameDirector : MonoBehaviour
-    {
+namespace AgonyCube.MainStage {
+    public class GameDirector : MonoBehaviour {
         //Blockのレイヤーマスク
         public LayerMask cube;
         //キューブの周りにある壁に付与するレイヤーマスク
@@ -33,9 +31,9 @@ namespace AgonyCube.MainStage
         //swap回数を一時的に保存
         public int swap = 0;
         //ステージごとの最小スピン数
-        public int[] swapMin = { 1, 2, 3, 2, 0, 0, 0, 0, 1, 3 };
+        private readonly int[] swapMin = { 1, 2, 3, 2, 0, 0, 0, 0, 1, 3 };
         //ステージごとの最小スワップ数
-        public int[] spinMin = { 0, 0, 0, 0, 1, 2, 1, 1, 1, 1 };
+        private readonly int[] spinMin = { 0, 0, 0, 0, 1, 2, 1, 1, 1, 1 };
         //spinするBlockを保存
         public Block[] spinBlock;
         //spinするときの中心点
@@ -101,14 +99,20 @@ namespace AgonyCube.MainStage
         GameState currentState = null;
 
         public PlayerController player;
-
+        //seを再生
+        [SerializeField]
         private AudioSource SE;
+        //スピン用のオーディオを保存
+        [SerializeField]
         private AudioClip[] spinAudio;
+        //スワップようのオーディオを保存
+        [SerializeField]
         private AudioClip[] swapAudio;
+        //タップ時のオーディオを保存
+        [SerializeField]
         private AudioClip tapAudio;
 
-        private class MainScene : GameState
-        {
+        private class MainScene : GameState {
             protected GameDirector gameDirector;
 
             public MainScene(GameDirector gameDirector) {
@@ -117,8 +121,7 @@ namespace AgonyCube.MainStage
         }
 
         //通常状態
-        private class IdleState : MainScene
-        {
+        private class IdleState : MainScene {
             //クリックされている時間を保存する変数
             float tapTime = 0;
             //最後のchoice1を保存
@@ -140,6 +143,7 @@ namespace AgonyCube.MainStage
                     //マウスがクリックされた時にクリックされたBlockを保存
                     gameDirector.choice1 = gameDirector.CheckBlockClick();
                     if (gameDirector.choice1 != null) {
+                        gameDirector.SE.PlayOneShot(gameDirector.tapAudio);
                         lastBlock = gameDirector.choice1;
                     }
                 }
@@ -172,8 +176,7 @@ namespace AgonyCube.MainStage
         }
 
         //Swapモード
-        private class SwapSelectState : MainScene
-        {
+        private class SwapSelectState : MainScene {
             //クリック開始時のマウス位置を保存する変数
             Vector3 startMousePosi;
             //マウスを離す直前のマウス位置を保存する変数
@@ -194,21 +197,14 @@ namespace AgonyCube.MainStage
                 if (Input.GetMouseButtonDown(0)) {
                     ////クリック開始時のマウスポジションを保存
                     startMousePosi = Input.mousePosition;
+                    //ビューポート座標に変換
                     startMousePosi = Camera.main.ScreenToViewportPoint(startMousePosi);
                     if (gameDirector.choice1 == null) {
                         gameDirector.choice1 = gameDirector.SwapCheckBlockClick();
                         if (gameDirector.choice1 != null) {
                             //Blockがクリックされていた場合選択状態に変更
-
-                            foreach (Transform child in gameDirector.choice1.transform) {
-                                //指定されたBlockのマテリアルを選択状態に変更
-                                if (gameDirector.choice1.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
-
-                                    var mats = child.GetComponent<MeshRenderer>().materials;
-                                    mats[0] = gameDirector.select1;
-                                    child.GetComponent<MeshRenderer>().materials = mats;
-                                }
-                            }
+                            gameDirector.SelectBlock(gameDirector.choice1);
+                            
 
                         }
 
@@ -222,7 +218,7 @@ namespace AgonyCube.MainStage
                 else if (Input.GetMouseButton(0)) {
                     //最新のマウスポジションを保存
                     lastMousePosi = Input.mousePosition;
-
+                    //ビューポート座標に変換
                     lastMousePosi = Camera.main.ScreenToViewportPoint(lastMousePosi);
                 }
                 else if (Input.GetMouseButtonUp(0)) {
@@ -248,8 +244,7 @@ namespace AgonyCube.MainStage
         }
 
         //Swap中のState
-        private class SwapState : MainScene
-        {
+        private class SwapState : MainScene {
             public SwapState(GameDirector gameDirector) : base(gameDirector) {
 
             }
@@ -268,22 +263,9 @@ namespace AgonyCube.MainStage
 
             public override void Exsit() {
 
-                foreach (Transform child in gameDirector.choice1.transform) {
-                    if (gameDirector.choice1.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
-
-                        var mats = child.GetComponent<MeshRenderer>().materials;
-                        mats[0] = gameDirector.normal;
-                        child.GetComponent<MeshRenderer>().materials = mats;
-                    }
-                }
-                foreach (Transform child in gameDirector.choice2.transform) {
-                    if (gameDirector.choice2.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
-
-                        var mats = child.GetComponent<MeshRenderer>().materials;
-                        mats[0] = gameDirector.normal;
-                        child.GetComponent<MeshRenderer>().materials = mats;
-                    }
-                }
+                gameDirector.UnselectBlock(gameDirector.choice1);
+                gameDirector.UnselectBlock(gameDirector.choice2);
+               
                 gameDirector.SwapNumUpdate();
                 gameDirector.stage.UpdateGridData();
             }
@@ -291,8 +273,7 @@ namespace AgonyCube.MainStage
 
 
         //Spinモード
-        private class SpinSelectState : MainScene
-        {
+        private class SpinSelectState : MainScene {
 
             public SpinSelectState(GameDirector gameDirector) : base(gameDirector) {
 
@@ -333,145 +314,147 @@ namespace AgonyCube.MainStage
                     lastMousePosi = Camera.main.ScreenToViewportPoint(lastMousePosi);
                 }
 
-                if (Input.GetMouseButtonUp(0)) {
-                    //マウス入力の差を求める
-                    var mousePosi = lastMousePosi - startMousePosi;
 
-                    var mousePosiAbsoluteValue = new Vector2(Mathf.Abs(mousePosi.x), Mathf.Abs(mousePosi.y));
-                    if (mousePosiAbsoluteValue.x > 0.1 || mousePosiAbsoluteValue.y > 0.1) {
-                        //マウス入力があった場合
-                        if (mousePosiAbsoluteValue.x < mousePosiAbsoluteValue.y) {
-                            //マウス入力の差が上下の場合
+                //マウス入力の差を求める
+                var mousePosi = lastMousePosi - startMousePosi;
 
-                            if (wall.tag == "RightAndLeft") {
+                var mousePosiAbsoluteValue = new Vector2(Mathf.Abs(mousePosi.x), Mathf.Abs(mousePosi.y));
+                if (mousePosiAbsoluteValue.x > 0.1 || mousePosiAbsoluteValue.y > 0.1) {
+                    //マウス入力があった場合
+                    if (mousePosiAbsoluteValue.x < mousePosiAbsoluteValue.y) {
+                        //マウス入力の差が上下の場合
+
+                        if (wall.tag == "RightAndLeft") {
+                            gameDirector.stage.ZSpinBlock(gameDirector.choice1);
+                            if (Mathf.Floor(gameDirector.mainCamera.transform.localEulerAngles.y) == 270) {
+                                if (mousePosi.y > 0) {
+
+                                    gameDirector.spinDirection = 1;
+                                }
+                                else {
+                                    gameDirector.spinDirection = -1;
+                                }
+                            }
+                            else {
+                                if (mousePosi.y > 0) {
+
+                                    gameDirector.spinDirection = -1;
+                                }
+                                else {
+                                    gameDirector.spinDirection = 1;
+                                }
+                            }
+                        }
+                        else if (wall.tag == "FrontAndBehind") {
+                            gameDirector.stage.XSpinBlock(gameDirector.choice1);
+
+                            if (Mathf.Floor(gameDirector.mainCamera.transform.localEulerAngles.y) == 0) {
+                                if (mousePosi.y > 0) {
+
+                                    gameDirector.spinDirection = 1;
+                                }
+                                else {
+                                    gameDirector.spinDirection = -1;
+                                }
+                            }
+                            else {
+                                if (mousePosi.y > 0) {
+
+                                    gameDirector.spinDirection = -1;
+                                }
+                                else {
+                                    gameDirector.spinDirection = 1;
+                                }
+                            }
+                        }
+                        else if (wall.tag == "UpAndDown") {
+                            if (Mathf.Floor(gameDirector.mainCamera.transform.localEulerAngles.y) % 180 == 0) {
+                                gameDirector.stage.XSpinBlock(gameDirector.choice1);
+                                if (mousePosi.y > 0) {
+                                    gameDirector.spinDirection = 1;
+                                }
+                                else {
+                                    gameDirector.spinDirection = -1;
+                                }
+                            }
+                            else {
                                 gameDirector.stage.ZSpinBlock(gameDirector.choice1);
-                                if (Mathf.Floor(gameDirector.mainCamera.transform.localEulerAngles.y) == 270) {
-                                    if (mousePosi.y > 0) {
+                                if (mousePosi.y > 0) {
+                                    gameDirector.spinDirection = 1;
+                                }
+                                else {
+                                    gameDirector.spinDirection = -1;
+                                }
+                            }
+                        }
 
-                                        gameDirector.spinDirection = 1;
+                    }
+                    else if (mousePosiAbsoluteValue.x > mousePosiAbsoluteValue.y) {
+                        //マウス入力の差が左右の場合
+
+
+
+
+                        if (wall.tag == "RightAndLeft") {
+                            gameDirector.stage.YSpinBlock(gameDirector.choice1);
+                            if (mousePosi.x > 0) {
+                                gameDirector.spinDirection = -1;
+                            }
+                            else {
+                                gameDirector.spinDirection = 1;
+                            }
+                        }
+                        else if (wall.tag == "FrontAndBehind") {
+                            gameDirector.stage.YSpinBlock(gameDirector.choice1);
+                            if (mousePosi.x > 0) {
+                                gameDirector.spinDirection = -1;
+                            }
+                            else {
+                                gameDirector.spinDirection = 1;
+                            }
+                        }
+                        else if (wall.tag == "UpAndDown") {
+                            if (gameDirector.mainCamera.transform.localEulerAngles.y % 180 == 0) {
+                                gameDirector.stage.ZSpinBlock(gameDirector.choice1);
+                                if (Mathf.Floor(gameDirector.mainCamera.transform.localEulerAngles.y) == 0) {
+                                    if (mousePosi.x > 0) {
+
+                                        gameDirector.spinDirection = -1;
                                     }
                                     else {
-                                        gameDirector.spinDirection = -1;
+                                        gameDirector.spinDirection = 1;
                                     }
                                 }
                                 else {
-                                    if (mousePosi.y > 0) {
+                                    if (mousePosi.x > 0) {
 
-                                        gameDirector.spinDirection = -1;
+                                        gameDirector.spinDirection = 1;
                                     }
                                     else {
-                                        gameDirector.spinDirection = 1;
+                                        gameDirector.spinDirection = -1;
                                     }
                                 }
                             }
-                            else if (wall.tag == "FrontAndBehind") {
+                            else {
                                 gameDirector.stage.XSpinBlock(gameDirector.choice1);
 
-                                if (Mathf.Floor(gameDirector.mainCamera.transform.localEulerAngles.y) == 0) {
-                                    if (mousePosi.y > 0) {
-
-                                        gameDirector.spinDirection = 1;
-                                    }
-                                    else {
-                                        gameDirector.spinDirection = -1;
-                                    }
-                                }
-                                else {
-                                    if (mousePosi.y > 0) {
-
-                                        gameDirector.spinDirection = -1;
-                                    }
-                                    else {
-                                        gameDirector.spinDirection = 1;
-                                    }
-                                }
-                            }
-                            else if (wall.tag == "UpAndDown") {
-                                if (Mathf.Floor(gameDirector.mainCamera.transform.localEulerAngles.y) % 180 == 0) {
-                                    gameDirector.stage.XSpinBlock(gameDirector.choice1);
-                                    if (mousePosi.y > 0) {
-                                        gameDirector.spinDirection = 1;
-                                    }
-                                    else {
-                                        gameDirector.spinDirection = -1;
-                                    }
-                                }
-                                else {
-                                    gameDirector.stage.ZSpinBlock(gameDirector.choice1);
-                                    if (mousePosi.y > 0) {
-                                        gameDirector.spinDirection = 1;
-                                    }
-                                    else {
-                                        gameDirector.spinDirection = -1;
-                                    }
-                                }
-                            }
-
-                        }
-                        else if (mousePosiAbsoluteValue.x > mousePosiAbsoluteValue.y) {
-                            //マウス入力の差が左右の場合
-
-
-
-
-                            if (wall.tag == "RightAndLeft") {
-                                gameDirector.stage.YSpinBlock(gameDirector.choice1);
                                 if (mousePosi.x > 0) {
-                                    gameDirector.spinDirection = -1;
-                                }
-                                else {
                                     gameDirector.spinDirection = 1;
                                 }
-                            }
-                            else if (wall.tag == "FrontAndBehind") {
-                                gameDirector.stage.YSpinBlock(gameDirector.choice1);
-                                if (mousePosi.x > 0) {
+                                else {
                                     gameDirector.spinDirection = -1;
-                                }
-                                else {
-                                    gameDirector.spinDirection = 1;
-                                }
-                            }
-                            else if (wall.tag == "UpAndDown") {
-                                if (gameDirector.mainCamera.transform.localEulerAngles.y % 180 == 0) {
-                                    gameDirector.stage.ZSpinBlock(gameDirector.choice1);
-                                    if (Mathf.Floor(gameDirector.mainCamera.transform.localEulerAngles.y) == 0) {
-                                        if (mousePosi.x > 0) {
-
-                                            gameDirector.spinDirection = -1;
-                                        }
-                                        else {
-                                            gameDirector.spinDirection = 1;
-                                        }
-                                    }
-                                    else {
-                                        if (mousePosi.x > 0) {
-
-                                            gameDirector.spinDirection = 1;
-                                        }
-                                        else {
-                                            gameDirector.spinDirection = -1;
-                                        }
-                                    }
-                                }
-                                else {
-                                    gameDirector.stage.XSpinBlock(gameDirector.choice1);
-
-                                    if (mousePosi.x > 0) {
-                                        gameDirector.spinDirection = 1;
-                                    }
-                                    else {
-                                        gameDirector.spinDirection = -1;
-                                    }
                                 }
                             }
                         }
-                        gameDirector.ChangeState(new SpinState(gameDirector));
                     }
-                    else {
-                        gameDirector.ChangeState(new IdleState(gameDirector));
+                    //スピン開始音
+                    gameDirector.SE.PlayOneShot(gameDirector.spinAudio[0]);
+                    gameDirector.ChangeState(new SpinState(gameDirector));
+                }
+                if (Input.GetMouseButtonUp(0)) {
+                    gameDirector.ChangeState(new IdleState(gameDirector));
 
-                    }
+
                 }
             }
 
@@ -482,8 +465,7 @@ namespace AgonyCube.MainStage
             }
         }
         //Spin中のステート
-        private class SpinState : MainScene
-        {
+        private class SpinState : MainScene {
             public SpinState(GameDirector gameDirector) : base(gameDirector) {
 
             }
@@ -491,6 +473,7 @@ namespace AgonyCube.MainStage
             int roteFrame = 0;
 
             public override void Start() {
+
                 roteFrame = 180 / gameDirector.spinRad;
 
             }
@@ -505,6 +488,8 @@ namespace AgonyCube.MainStage
                     roteFrame -= 1;
                 }
                 else {
+                    //スピン終了音
+                    gameDirector.SE.PlayOneShot(gameDirector.spinAudio[1]);
                     gameDirector.ChangeState(new IdleState(gameDirector));
 
                 }
@@ -513,16 +498,17 @@ namespace AgonyCube.MainStage
             public override void Exsit() {
                 gameDirector.spinBlock = null;
 
-               gameDirector.SpinNumUpdate();
+                //スピン数の表示を更新
+                gameDirector.SpinNumUpdate();
+                //グリッド更新
                 gameDirector.stage.UpdateGridData();
             }
 
-            
+
         }
 
         //キャラクターが動いている状態
-        private class PlayerMoveState : MainScene
-        {
+        private class PlayerMoveState : MainScene {
             public PlayerMoveState(GameDirector gameDirector) : base(gameDirector) {
 
             }
@@ -532,8 +518,7 @@ namespace AgonyCube.MainStage
 
 
         //メニュー画面を開いている状態
-        private class MenuState : MainScene
-        {
+        private class MenuState : MainScene {
             public MenuState(GameDirector gameDirector) : base(gameDirector) {
 
             }
@@ -555,8 +540,7 @@ namespace AgonyCube.MainStage
                 gameDirector.choice1 = null;
             }
         }
-        private class Goal : MainScene
-        {
+        private class Goal : MainScene {
             public Goal(GameDirector gameDirector) : base(gameDirector) {
 
             }
@@ -649,10 +633,14 @@ namespace AgonyCube.MainStage
                 }
                 yield return null;
             }
-
+            //スワップ成功音
+            SE.PlayOneShot(swapAudio[2]);
+            //アニメーションを終了
             choice1Animator.SetBool(BigId, false);
             choice2Animator.SetBool(BigId, false);
+            //スワップ回数をプラス
             swap += 1;
+            //ステートを変更
             ChangeState(new IdleState(this));
         }
 
@@ -680,8 +668,8 @@ namespace AgonyCube.MainStage
             choice1.transform.position = pos2;
             choice2.transform.position = pos1;
             stage.UpdateGridData();
-            
-           
+
+
             yield return StartCoroutine(BigBlock());
 
         }
@@ -708,10 +696,15 @@ namespace AgonyCube.MainStage
             RaycastHit hit;
             if (Physics.Raycast(mouseray, out hit, 30.0f, cube)) {
                 if (player.gridPoint != stage.WorldPointToGrid(hit.transform.gameObject.transform.position)) {
+                    //Block選択音を再生
+                    SE.PlayOneShot(swapAudio[0]);
                     //PlayerがいないblockのBlockを返す
                     return hit.transform.gameObject;
                 }
+                //選択不可音
+                SE.PlayOneShot(swapAudio[1]);
             }
+
             return null;
         }
 
@@ -755,6 +748,8 @@ namespace AgonyCube.MainStage
                             if (choice1.GetComponent<Block>().adjacentBlock[index] != null) {
                                 if (choice1.GetComponent<Block>().adjacentBlock[index].blockNumber == choice2.GetComponent<Block>().blockNumber) {
                                     foreach (Transform child in choice2.transform) {
+                                        //Block選択音を再生
+                                        SE.PlayOneShot(swapAudio[0]);
                                         //指定されたBlockのマテリアルを選択状態に変更
                                         if (choice2.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
 
@@ -769,28 +764,52 @@ namespace AgonyCube.MainStage
                         }
                     }
                 }
+                //Block選択ができなかった時の音
+                SE.PlayOneShot(swapAudio[1]);
             }
             choice2 = null;
+
             return false;
+        }
+        //指定されたBlockのマテリアルを選択状態に変更
+        public void SelectBlock(GameObject block) {
+            foreach (Transform child in block.transform) {
+                
+                if (block.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
+
+                    var mats = child.GetComponent<MeshRenderer>().materials;
+                    mats[0] = select1;
+                    child.GetComponent<MeshRenderer>().materials = mats;
+                }
+            }
+        }
+
+        public void UnselectBlock(GameObject block) {
+            foreach (Transform child in block.transform) {
+
+                if (block.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
+
+                    var mats = child.GetComponent<MeshRenderer>().materials;
+                    mats[0] = normal;
+                    child.GetComponent<MeshRenderer>().materials = mats;
+                }
+            }
         }
         //現在のspin回数を表示する
         public void SpinNumUpdate() {
-            if (spin < 10){
+            if (spin < 10) {
                 spinNum.sprite = spriteNumber[spin];
             }
-            else
-            {
+            else {
                 spinNum.sprite = spriteNumber[11];
             }
         }
 
         public void SwapNumUpdate() {
-            if (swap < 10)
-            {
+            if (swap < 10) {
                 swapNum.sprite = spriteNumber[swap];
             }
-            else
-            {
+            else {
                 swapNum.sprite = spriteNumber[11];
             }
         }
@@ -811,5 +830,7 @@ namespace AgonyCube.MainStage
         public void ChangeMenu() {
             menu = !menu;
         }
+
+
     }
 }
