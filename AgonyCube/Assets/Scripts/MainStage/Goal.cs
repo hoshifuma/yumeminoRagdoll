@@ -56,6 +56,7 @@ namespace AgonyCube.MainStage
         {
             //３秒後に
             yield return new WaitForSeconds(3.0f);
+
             SceneManager.LoadScene("Result");
         }
 
