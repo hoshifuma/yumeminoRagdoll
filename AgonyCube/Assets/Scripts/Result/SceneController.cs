@@ -13,8 +13,7 @@ namespace AgonyCube.Result
         // 「Star」を左から順番に指定します。
         public GameObject[] stars = new GameObject[3];
 
-        
-
+       
 
         // Use this for initialization
         void Start()
@@ -31,17 +30,20 @@ namespace AgonyCube.Result
            int spinMin = Data.instance.spinMin;
 
 
-            // 「Star」を全部非表示に設定
-            foreach (var star in stars) {
-                star.SetActive(false);
-            }
+            
             Debug.Log(PlayerPrefs.GetInt("clearStageNo", 0));
             Debug.Log(Data.instance.stageNum);
             if(PlayerPrefs.GetInt("clearStageNo", 0) <= Data.instance.stageNum + 1) {
                 PlayerPrefs.SetInt("clearStageNo", Data.instance.stageNum + 2);
             }
+            if(Data.instance.stageName == null)
+            {
+                Data.instance.stageName = new string[1];
+                Data.instance.stageName[Data.instance.stageNum] = "test";
+                PlayerPrefs.SetInt(Data.instance.stageName[Data.instance.stageNum], 2);
+            }
             var clear = PlayerPrefs.GetInt(Data.instance.stageName[Data.instance.stageNum], 0);
-            
+           
             //swapとspinの判定
             if (swapMin < swap && spinMin < spin) {
                 stars[0].SetActive(true);
