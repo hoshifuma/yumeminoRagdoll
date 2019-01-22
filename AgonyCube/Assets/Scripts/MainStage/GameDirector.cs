@@ -62,11 +62,19 @@ namespace AgonyCube.MainStage {
         [SerializeField]
         Image stageNum;
         //swapした回数を表示するオブジェクト
+        //一桁目
         [SerializeField]
-        Image swapNum;
+        Image swapNumR;
+        //二桁目
+        [SerializeField]
+        Image swapNumL;
         //spinした回数を表示するオブジェクト
+        //一桁目
         [SerializeField]
-        Image spinNum;
+        Image spinNumR;
+        //二桁目
+        [SerializeField]
+        Image spinNumL;
         //ステージの最小swap数を表示
         [SerializeField]
         Image swapNumMin;
@@ -731,34 +739,19 @@ namespace AgonyCube.MainStage {
                     choice2 = hit.transform.gameObject;
                     //選択されたものが同じものだった場合選択状態を解除し変数を初期状態に変更
                     if (choice1 == choice2) {
-                        foreach (Transform child in choice1.transform) {
-                            Debug.Log(choice1.GetComponent<Block>().floor);
-                            if (choice1.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
-
-                                var mats = child.GetComponent<MeshRenderer>().materials;
-                                mats[0] = normal;
-                                child.GetComponent<MeshRenderer>().materials = mats;
-                            }
-                        }
+                        UnselectBlock(choice1);
                         choice1 = null;
                         choice2 = null;
                     }
                     else {
                         for (int index = 0; index < 4; index++) {
                             if (choice1.GetComponent<Block>().adjacentBlock[index] != null) {
-                                if (choice1.GetComponent<Block>().adjacentBlock[index].blockNumber == choice2.GetComponent<Block>().blockNumber) {
-                                    foreach (Transform child in choice2.transform) {
-                                        //Block選択音を再生
-                                        SE.PlayOneShot(swapAudio[0]);
-                                        //指定されたBlockのマテリアルを選択状態に変更
-                                        if (choice2.GetComponent<Block>().floor != child.gameObject && child.tag != "Step") {
-
-                                            var mats = child.GetComponent<MeshRenderer>().materials;
-                                            mats[0] = select2;
-                                            child.GetComponent<MeshRenderer>().materials = mats;
-                                        }
-                                        return true;
-                                    }
+                                if (choice1.GetComponent<Block>().adjacentBlock[index].blockNumber == choice2.GetComponent<Block>().blockNumber)
+                                {
+                                    selectBlock2();
+                                    //Block選択音を再生
+                                    SE.PlayOneShot(swapAudio[0]);
+                                    return true;
                                 }
                             }
                         }
@@ -771,6 +764,22 @@ namespace AgonyCube.MainStage {
 
             return false;
         }
+
+        private void selectBlock2() {
+            foreach (Transform child in choice2.transform)
+            {
+
+
+                //指定されたBlockのマテリアルを選択状態に変更
+                if (choice2.GetComponent<Block>().floor != child.gameObject && child.tag != "Step")
+                {
+                    var mats = child.GetComponent<MeshRenderer>().materials;
+                    mats[0] = select2;
+                    child.GetComponent<MeshRenderer>().materials = mats;
+                }
+            }
+        }
+
         //指定されたBlockのマテリアルを選択状態に変更
         public void SelectBlock(GameObject block) {
             foreach (Transform child in block.transform) {
@@ -783,7 +792,7 @@ namespace AgonyCube.MainStage {
                 }
             }
         }
-
+        //指定されたBlockのマテリアルを非選択状態に変更
         public void UnselectBlock(GameObject block) {
             foreach (Transform child in block.transform) {
 
@@ -798,19 +807,21 @@ namespace AgonyCube.MainStage {
         //現在のspin回数を表示する
         public void SpinNumUpdate() {
             if (spin < 10) {
-                spinNum.sprite = spriteNumber[spin];
+                spinNumR.sprite = spriteNumber[spin];
             }
             else {
-                spinNum.sprite = spriteNumber[11];
+                spinNumR.sprite = spriteNumber[11];
+                spinNumL.sprite = spriteNumber[9];
             }
         }
-
+        //現在のswap回数を表示する
         public void SwapNumUpdate() {
             if (swap < 10) {
-                swapNum.sprite = spriteNumber[swap];
+                swapNumR.sprite = spriteNumber[swap];
             }
             else {
-                swapNum.sprite = spriteNumber[11];
+                swapNumR.sprite = spriteNumber[11];
+                swapNumL.sprite = spriteNumber[9];
             }
         }
 
