@@ -2145,31 +2145,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1427167243503556, guid: 7f1c89086e8bf5147a37df74fa102cd0,
     type: 2}
   m_PrefabInternal: {fileID: 1847399894}
---- !u!114 &781194856
+--- !u!114 &781194856 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 781194855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 114516187667900002, guid: 7f1c89086e8bf5147a37df74fa102cd0,
+    type: 2}
+  m_PrefabInternal: {fileID: 1847399894}
   m_Script: {fileID: 11500000, guid: ac4536d82d13a9b45b64b804e6013ea7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 1
-  Gravity: 9
-  scissors: {fileID: 0}
-  scissorsAnimator: {fileID: 1347833144}
-  doorAnimator: {fileID: 2050275794}
-  target: {x: 0, y: 0, z: 0}
-  scissorsSE: {fileID: 1347833149}
-  doorSE: {fileID: 1212565471}
-  mainCamera: {fileID: 1068177086}
-  stage: {fileID: 0}
-  director: {fileID: 870156729}
-  gridPoint: {x: 0, y: 0, z: 0}
-  locomotionSpeed: 1
-  playerState: 0
 --- !u!1001 &836457390
 Prefab:
   m_ObjectHideFlags: 0
@@ -3033,6 +3014,11 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1181163874}
   m_CullTransparentMesh: 0
+--- !u!1 &1183503690 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1457269043810138, guid: 7f1c89086e8bf5147a37df74fa102cd0,
+    type: 2}
+  m_PrefabInternal: {fileID: 1847399894}
 --- !u!1 &1212565470 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100006, guid: e4daf059fa31acc448264c8b465e60c6,
@@ -3540,6 +3526,7 @@ MonoBehaviour:
   director: {fileID: 870156729}
   scissorsIcon: {fileID: 1782564569}
   invisibkeScissorsIcon: {fileID: 1729108943}
+  scissors2D: {fileID: 1183503690}
 --- !u!54 &1347833148
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4711,38 +4698,41 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 114905105606287392, guid: 7f1c89086e8bf5147a37df74fa102cd0,
+    - target: {fileID: 114516187667900002, guid: 7f1c89086e8bf5147a37df74fa102cd0,
+        type: 2}
+      propertyPath: scissorsAnimator
+      value: 
+      objectReference: {fileID: 1347833144}
+    - target: {fileID: 114516187667900002, guid: 7f1c89086e8bf5147a37df74fa102cd0,
+        type: 2}
+      propertyPath: doorAnimator
+      value: 
+      objectReference: {fileID: 2050275794}
+    - target: {fileID: 114516187667900002, guid: 7f1c89086e8bf5147a37df74fa102cd0,
+        type: 2}
+      propertyPath: scissorsSE
+      value: 
+      objectReference: {fileID: 1347833149}
+    - target: {fileID: 114516187667900002, guid: 7f1c89086e8bf5147a37df74fa102cd0,
+        type: 2}
+      propertyPath: doorSE
+      value: 
+      objectReference: {fileID: 1212565471}
+    - target: {fileID: 114516187667900002, guid: 7f1c89086e8bf5147a37df74fa102cd0,
         type: 2}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1068177086}
-    - target: {fileID: 114905105606287392, guid: 7f1c89086e8bf5147a37df74fa102cd0,
+    - target: {fileID: 114516187667900002, guid: 7f1c89086e8bf5147a37df74fa102cd0,
         type: 2}
-      propertyPath: stage
+      propertyPath: director
       value: 
+      objectReference: {fileID: 870156729}
+    - target: {fileID: 4754160536246714, guid: 7f1c89086e8bf5147a37df74fa102cd0, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 95042195611823602, guid: 7f1c89086e8bf5147a37df74fa102cd0,
-        type: 2}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 5ad30e6c9152baf4db963fa019996c5c, type: 2}
-    - target: {fileID: 143000046531257908, guid: 7f1c89086e8bf5147a37df74fa102cd0,
-        type: 2}
-      propertyPath: m_Radius
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 143000046531257908, guid: 7f1c89086e8bf5147a37df74fa102cd0,
-        type: 2}
-      propertyPath: m_Center.y
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1427167243503556, guid: 7f1c89086e8bf5147a37df74fa102cd0, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114237464161460478, guid: 7f1c89086e8bf5147a37df74fa102cd0, type: 2}
-    - {fileID: 114905105606287392, guid: 7f1c89086e8bf5147a37df74fa102cd0, type: 2}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f1c89086e8bf5147a37df74fa102cd0, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &1867736584

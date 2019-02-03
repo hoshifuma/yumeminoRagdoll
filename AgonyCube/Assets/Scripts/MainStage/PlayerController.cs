@@ -436,30 +436,51 @@ namespace AgonyCube.MainStage {
                     nexttarget.y = transform.position.y;
                     transform.LookAt(nexttarget);
 
-                    StartCoroutine(OnDoorEnter());
+                    StartCoroutine(OnScissorsEnter());
                 }
             
         }
 
-        
-        private IEnumerator OnDoorEnter() {
+        private IEnumerator OnScissorsEnter() {
             var mesh = scissors.GetComponentsInChildren<MeshRenderer>();
-           
             foreach (var child in mesh) {
                 child.enabled = true;
             }
             playerState = PlayerState.Cut;
             scissorsAnimator.SetTrigger(scissorsId);
             animator.SetTrigger(cutId);
+            
+            yield return new WaitForSeconds(0.5f);
+            scissorsSE.PlayOneShot(scissorsSE.clip);
+            while (true) {
+              
+                var info1 = animator.GetCurrentAnimatorStateInfo(0);
+                var info2 = scissorsAnimator.GetCurrentAnimatorStateInfo(0);
+                if (info1.normalizedTime > 1.0f && info2.normalizedTime > 1.0f) {
 
+                    break;
+                }
+                yield return null;
+            }
+
+            foreach (var child in mesh) {
+                child.enabled = false;
+            }
+            StartCoroutine(OnDoorEnter());
+        }
+
+        private IEnumerator OnDoorEnter() {
+
+
+
+            doorSE.PlayOneShot(doorSE.clip);
             doorAnimator.SetTrigger(openId);
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(1f);
 
             while (true) {
                 var info = doorAnimator.GetCurrentAnimatorStateInfo(0);
-                var info1 = animator.GetCurrentAnimatorStateInfo(0);
-                var info2 = scissorsAnimator.GetCurrentAnimatorStateInfo(0);
-                if (info.normalizedTime > 1.0f && info1.normalizedTime > 1.0f && info2.normalizedTime > 1.0f) {
+             
+                if (info.normalizedTime > 1.0f) {
                     
                     break;
                 }
@@ -468,9 +489,7 @@ namespace AgonyCube.MainStage {
             stage.doorGrid = new Vector3Int(10, 10, 10);
             
             SetPlayerTarget(gridPoint);
-            foreach (var child in mesh) {
-                child.enabled = false;
-            }
+           
         }
 
         //指定した階段の前と上った先を返す　0が上った先1が前

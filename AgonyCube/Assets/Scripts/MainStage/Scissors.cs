@@ -6,9 +6,17 @@ namespace AgonyCube.MainStage {
         public GameDirector director;
         public GameObject scissorsIcon;
         public GameObject invisibkeScissorsIcon;
-
+        public GameObject scissors2D;
+       
         private void OnTriggerEnter(Collider other) {
             if(other.tag == "Player") {
+                scissors2D.transform.LookAt(director.mainCamera.transform);
+                var rotate = scissors2D.transform.rotation;
+                rotate.x = 0;
+                rotate.z = 0;
+                scissors2D.transform.rotation = rotate;
+                scissors2D.SetActive(true);
+                StartCoroutine(Scissors2DInvisible());
                 director.scissors = true;
                 transform.parent = other.transform;
                 other.transform.GetComponent<PlayerController>().scissors = gameObject;
@@ -22,6 +30,11 @@ namespace AgonyCube.MainStage {
                 scissorsIcon.SetActive(true);
                 invisibkeScissorsIcon.SetActive(false);
             }
+        }
+
+       private IEnumerator Scissors2DInvisible() {
+            yield return new WaitForSeconds(1.3f);
+            scissors2D.SetActive(false);
         }
     }
 }
