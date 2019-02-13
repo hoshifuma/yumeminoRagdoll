@@ -1546,6 +1546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35b5357b0e9e43f4f8a19cc5c70ae3e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextStage: {fileID: 1703480559}
   starValue: 3
   stars:
   - {fileID: 1734904275}

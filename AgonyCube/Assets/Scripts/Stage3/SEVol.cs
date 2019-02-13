@@ -11,6 +11,6 @@ public class SEVol : MonoBehaviour {
 
     public void SE(Slider slider)
     {
-        mixer.SetFloat("SE", slider.value);
+        mixer.SetFloat("SEVol", slider.value);
     }
 }
