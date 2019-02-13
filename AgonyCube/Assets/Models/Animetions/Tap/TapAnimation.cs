@@ -7,7 +7,8 @@ public class TapAnimation : MonoBehaviour {
     //生成するタップエフェクトのprefabをしてします。
     [SerializeField]
     GameObject tapEffect;
-
+    [SerializeField]
+    GameObject cameraRoot;
 
     // Update is called once per frame
     void Update()
@@ -16,12 +17,16 @@ public class TapAnimation : MonoBehaviour {
         if (Input.GetMouseButtonDown(0)) {
             // 変数"position"にマウスの位置座標を取得します。
             var position = Input.mousePosition;
+
             // Z軸の修正
-            position.z = 10f;
+            //ステージ中心点とメインカメラの中央に生成するように変更　19/2/14 hf
+            position.z = (cameraRoot.transform.localPosition.z - Camera.main.transform.localPosition.z) / 2;
             // マウスの位置座標をスクリーン座標からワールド座標に変換します。
             var tapPosition = Camera.main.ScreenToWorldPoint(position);
             // 指定したタップエフェクトのprefabを生成します。
-            var tapEffectObject = Instantiate(tapEffect, tapPosition, tapEffect.transform.rotation);
+            //ステージのの中心点からのカメラの向きに応じてエフェクトの角度を変更するように変更　19/2/14 hf
+            var tapEffectObject = Instantiate(tapEffect, tapPosition, cameraRoot.transform.localRotation);
+
             // 生成したprefabを1.5秒後に削除します。
             Destroy(tapEffectObject, 1.5f);
         }
