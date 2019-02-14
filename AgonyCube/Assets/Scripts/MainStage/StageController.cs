@@ -105,7 +105,7 @@ namespace AgonyCube.MainStage
                     CalcurateAdgency(gridX, blockHeight - 1, gridZ);
                 }
             }
-            cameraRoot.transform.position = new Vector3(gridWidth / 2 + 1, gridHeight / 2 + 1, gridLength / 2 + 1);
+            cameraRoot.transform.position = new Vector3((gridWidth + 1) / 2, gridHeight / 2 + 1, gridLength / 2 + 1);
             scissors.transform.position = GridToWorldPoint(scissorsGrid);
             door.transform.position = GridToWorldPoint(doorGrid);
             hert.transform.position = GridToWorldPoint(hertGrid);

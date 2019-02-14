@@ -221,6 +221,11 @@ namespace AgonyCube.MainStage {
                         //２つ目のBlockが選択された場合
                         gameDirector.ChangeState(new SwapState(gameDirector));
                     }
+                    else {
+                        gameDirector.UnselectBlock(gameDirector.choice1);
+                        gameDirector.choice1 = null;
+                        gameDirector.ChangeState(new IdleState(gameDirector));
+                    }
 
                 }
                 else if (Input.GetMouseButton(0)) {
@@ -838,6 +843,7 @@ namespace AgonyCube.MainStage {
         public void ChangeGoalState() {
             ChangeState(new Goal(this));
         }
+
         public void ChangeMenu() {
             menu = !menu;
         }
