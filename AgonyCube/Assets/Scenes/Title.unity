@@ -367,7 +367,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -1305,6 +1305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tapEffect: {fileID: 1846902469661812, guid: 635f8f20da4c76d40b0e1de601fc5da1, type: 2}
+  cameraRoot: {fileID: 0}
 --- !u!1 &506397792
 GameObject:
   m_ObjectHideFlags: 0
